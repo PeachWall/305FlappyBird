@@ -1,5 +1,5 @@
 Fitter report for bird_top_entity_12
-Wed May 08 09:10:18 2024
+Wed May 08 11:31:16 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Fitter Summary                                                                ;
 +---------------------------------+---------------------------------------------+
-; Fitter Status                   ; Successful - Wed May 08 09:10:18 2024       ;
+; Fitter Status                   ; Successful - Wed May 08 11:31:16 2024       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; bird_top_entity_12                          ;
 ; Top-level Entity Name           ; bird_top_entity_12                          ;
@@ -166,10 +166,10 @@ refer to the applicable agreement for further details.
 ;     Processor 6            ;   0.4%      ;
 ;     Processor 7            ;   0.4%      ;
 ;     Processor 8            ;   0.4%      ;
-;     Processor 9            ;   0.4%      ;
-;     Processor 10           ;   0.4%      ;
-;     Processor 11           ;   0.4%      ;
-;     Processor 12           ;   0.4%      ;
+;     Processor 9            ;   0.3%      ;
+;     Processor 10           ;   0.3%      ;
+;     Processor 11           ;   0.3%      ;
+;     Processor 12           ;   0.3%      ;
 ;     Processors 13-14       ;   0.3%      ;
 +----------------------------+-------------+
 
@@ -1186,7 +1186,7 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 ;    |bird:c|                               ; 6.2 (6.2)            ; 6.4 (6.4)                        ; 0.2 (0.2)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 16 (16)             ; 0 (0)                     ; 0 (0)         ; 0                 ; 0     ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird:c                                                                                  ; bird               ; work         ;
 ;    |bird_sprite_rom_12:s_rom|             ; 0.0 (0.0)            ; 0.0 (0.0)                        ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 0 (0)               ; 0 (0)                     ; 0 (0)         ; 3328              ; 1     ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom                                                                ; bird_sprite_rom_12 ; work         ;
 ;       |altsyncram:altsyncram_component|   ; 0.0 (0.0)            ; 0.0 (0.0)                        ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 0 (0)               ; 0 (0)                     ; 0 (0)         ; 3328              ; 1     ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component                                ; altsyncram         ; work         ;
-;          |altsyncram_7pg1:auto_generated| ; 0.0 (0.0)            ; 0.0 (0.0)                        ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 0 (0)               ; 0 (0)                     ; 0 (0)         ; 3328              ; 1     ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated ; altsyncram_7pg1    ; work         ;
+;          |altsyncram_0pg1:auto_generated| ; 0.0 (0.0)            ; 0.0 (0.0)                        ; 0.0 (0.0)                                         ; 0.0 (0.0)                        ; 0.0 (0.0)            ; 0 (0)               ; 0 (0)                     ; 0 (0)         ; 3328              ; 1     ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated ; altsyncram_0pg1    ; work         ;
 +-------------------------------------------+----------------------+----------------------------------+---------------------------------------------------+----------------------------------+----------------------+---------------------+---------------------------+---------------+-------------------+-------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -1295,7 +1295,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+-------------+-------+------------------+-----------------+----------------------+-----------------+-----------------+----------+------------------------+------------------------+
 ; Name                                                                                               ; Type ; Mode ; Clock Mode   ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Port A Input Registers ; Port A Output Registers ; Port B Input Registers ; Port B Output Registers ; Size ; Implementation Port A Depth ; Implementation Port A Width ; Implementation Port B Depth ; Implementation Port B Width ; Implementation Bits ; M10K blocks ; MLABs ; MIF              ; Location        ; Mixed Width RDW Mode ; Port A RDW Mode ; Port B RDW Mode ; ECC Mode ; ECC Pipeline Registers ; Fits in MLABs          ;
 +----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+-------------+-------+------------------+-----------------+----------------------+-----------------+-----------------+----------+------------------------+------------------------+
-; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; Single Clock ; 256          ; 16           ; --           ; --           ; yes                    ; no                      ; --                     ; --                      ; 4096 ; 256                         ; 13                          ; --                          ; --                          ; 3328                ; 1           ; 0     ; bird_data_v2.mif ; M10K_X22_Y36_N0 ; Don't care           ; New data        ; New data        ; Off      ; No                     ; No - Unsupported Depth ;
+; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; Single Clock ; 256          ; 16           ; --           ; --           ; yes                    ; no                      ; --                     ; --                      ; 4096 ; 256                         ; 13                          ; --                          ; --                          ; 3328                ; 1           ; 0     ; bird_data_v2.mif ; M10K_X22_Y36_N0 ; Don't care           ; New data        ; New data        ; Off      ; No                     ; No - Unsupported Depth ;
 +----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+-------------+-------+------------------+-----------------+----------------------+-----------------+-----------------+----------+------------------------+------------------------+
 Note: Fitter may spread logical memories into multiple blocks to improve timing. The actual required RAM blocks can be found in the Fitter Resource Usage section.
 
@@ -1534,25 +1534,25 @@ This will disable optimization of problematic paths and expose them for further 
 ; VGA_SYNC_12:VGA|h_count[4]                         ; VGA_SYNC_12:VGA|pixel_column[4]                                                                                          ; 0.730             ;
 ; VGA_SYNC_12:VGA|video_on_h                         ; VGA_SYNC_12:VGA|red_out[3]                                                                                               ; 0.659             ;
 ; VGA_SYNC_12:VGA|h_count[5]                         ; VGA_SYNC_12:VGA|horiz_sync                                                                                               ; 0.645             ;
-; VGA_SYNC_12:VGA|pixel_column[8]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.640             ;
-; VGA_SYNC_12:VGA|pixel_column[2]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.627             ;
-; VGA_SYNC_12:VGA|pixel_column[3]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.626             ;
-; VGA_SYNC_12:VGA|pixel_column[4]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.625             ;
-; VGA_SYNC_12:VGA|pixel_column[9]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.614             ;
-; VGA_SYNC_12:VGA|pixel_column[1]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.606             ;
-; VGA_SYNC_12:VGA|pixel_row[1]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.606             ;
-; VGA_SYNC_12:VGA|pixel_row[5]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.586             ;
-; VGA_SYNC_12:VGA|pixel_row[4]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.559             ;
-; VGA_SYNC_12:VGA|pixel_column[6]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.556             ;
-; VGA_SYNC_12:VGA|pixel_row[7]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.555             ;
-; VGA_SYNC_12:VGA|pixel_row[3]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.554             ;
+; VGA_SYNC_12:VGA|pixel_column[8]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.640             ;
+; VGA_SYNC_12:VGA|pixel_column[2]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.627             ;
+; VGA_SYNC_12:VGA|pixel_column[3]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.626             ;
+; VGA_SYNC_12:VGA|pixel_column[4]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.625             ;
+; VGA_SYNC_12:VGA|pixel_column[9]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.614             ;
+; VGA_SYNC_12:VGA|pixel_column[1]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.606             ;
+; VGA_SYNC_12:VGA|pixel_row[1]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.606             ;
+; VGA_SYNC_12:VGA|pixel_row[5]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.586             ;
+; VGA_SYNC_12:VGA|pixel_row[4]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.559             ;
+; VGA_SYNC_12:VGA|pixel_column[6]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.556             ;
+; VGA_SYNC_12:VGA|pixel_row[7]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.555             ;
+; VGA_SYNC_12:VGA|pixel_row[3]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.554             ;
 ; VGA_SYNC_12:VGA|h_count[1]                         ; VGA_SYNC_12:VGA|pixel_column[1]                                                                                          ; 0.525             ;
-; VGA_SYNC_12:VGA|pixel_row[2]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.518             ;
-; VGA_SYNC_12:VGA|pixel_column[7]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.516             ;
-; VGA_SYNC_12:VGA|pixel_row[6]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.492             ;
-; VGA_SYNC_12:VGA|pixel_row[8]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.447             ;
+; VGA_SYNC_12:VGA|pixel_row[2]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.518             ;
+; VGA_SYNC_12:VGA|pixel_column[7]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.516             ;
+; VGA_SYNC_12:VGA|pixel_row[6]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.492             ;
+; VGA_SYNC_12:VGA|pixel_row[8]                       ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.447             ;
 ; VGA_SYNC_12:VGA|h_count[0]                         ; VGA_SYNC_12:VGA|horiz_sync                                                                                               ; 0.438             ;
-; VGA_SYNC_12:VGA|pixel_column[5]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.412             ;
+; VGA_SYNC_12:VGA|pixel_column[5]                    ; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ram_block1a12~porta_address_reg0 ; 0.412             ;
 ; VGA_SYNC_12:VGA|video_on_v                         ; VGA_SYNC_12:VGA|red_out[3]                                                                                               ; 0.395             ;
 ; Clock_Divider:CLOCK_25mhz|clk_out                  ; VGA_SYNC_12:VGA|h_count[1]                                                                                               ; 0.199             ;
 ; VGA_SYNC_12:VGA|vert_sync                          ; VGA_SYNC_12:VGA|vert_sync_out                                                                                            ; 0.084             ;
@@ -1759,7 +1759,7 @@ Warning (15705): Ignored locations or region assignments to the following nodes
 Info (11798): Fitter preparation operations ending: elapsed time is 00:00:03
 Info (170189): Fitter placement preparation operations beginning
 Info (14951): The Fitter is using Advanced Physical Optimization.
-Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:04
+Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:03
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
 Info (170192): Fitter placement operations ending: elapsed time is 00:00:01
@@ -1769,19 +1769,19 @@ Info (170195): Router estimated average interconnect usage is 0% of the availabl
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
-Info (11888): Total time spent on timing analysis during the Fitter is 0.32 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.31 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:02
+Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:01
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Info (144001): Generated suppressed messages file C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/output_files/bird_top_entity_12.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 177 warnings
-    Info: Peak virtual memory: 7316 megabytes
-    Info: Processing ended: Wed May 08 09:10:18 2024
+    Info: Peak virtual memory: 7341 megabytes
+    Info: Processing ended: Wed May 08 11:31:16 2024
     Info: Elapsed time: 00:00:17
-    Info: Total CPU time (on all processors): 00:00:15
+    Info: Total CPU time (on all processors): 00:00:11
 
 
 +----------------------------+

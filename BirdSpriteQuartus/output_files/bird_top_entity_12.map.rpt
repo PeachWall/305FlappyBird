@@ -1,5 +1,5 @@
 Analysis & Synthesis report for bird_top_entity_12
-Wed May 08 09:10:00 2024
+Wed May 08 11:30:58 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -18,7 +18,7 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
  10. Removed Registers Triggering Further Register Optimizations
  11. General Register Statistics
  12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Source assignments for bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated
+ 13. Source assignments for bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated
  14. Parameter Settings for User Entity Instance: bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component
  15. altsyncram Parameter Settings by Entity Instance
  16. Port Connectivity Checks: "bird:c"
@@ -51,7 +51,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed May 08 09:10:00 2024       ;
+; Analysis & Synthesis Status     ; Successful - Wed May 08 11:30:58 2024       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; bird_top_entity_12                          ;
 ; Top-level Entity Name           ; bird_top_entity_12                          ;
@@ -175,29 +175,30 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                            ;
-+----------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path       ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                  ; Library ;
-+----------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------+---------+
-; ../vhd and data/display_controller.vhd ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd      ;         ;
-; ../vhd and data/background.vhd         ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/background.vhd              ;         ;
-; ../vhd and data/vga_sync_12.vhd        ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd             ;         ;
-; ../vhd and data/clock_divider.vhd      ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd           ;         ;
-; ../vhd and data/bird_top_entity_12.vhd ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd      ;         ;
-; ../vhd and data/bird_sprite_rom_12.vhd ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd      ;         ;
-; ../vhd and data/bird.vhd               ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd                    ;         ;
-; altsyncram.tdf                         ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf         ;         ;
-; stratix_ram_block.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc  ;         ;
-; lpm_mux.inc                            ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_mux.inc            ;         ;
-; lpm_decode.inc                         ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_decode.inc         ;         ;
-; aglobal181.inc                         ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc         ;         ;
-; a_rdenreg.inc                          ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/a_rdenreg.inc          ;         ;
-; altrom.inc                             ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altrom.inc             ;         ;
-; altram.inc                             ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altram.inc             ;         ;
-; altdpram.inc                           ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altdpram.inc           ;         ;
-; db/altsyncram_7pg1.tdf                 ; yes             ; Auto-Generated Megafunction  ; C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_7pg1.tdf ;         ;
-+----------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                ;
++----------------------------------------+-----------------+----------------------------------+-------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path       ; Used in Netlist ; File Type                        ; File Name with Absolute Path                                                  ; Library ;
++----------------------------------------+-----------------+----------------------------------+-------------------------------------------------------------------------------+---------+
+; ../vhd and data/display_controller.vhd ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd      ;         ;
+; ../vhd and data/background.vhd         ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/background.vhd              ;         ;
+; ../vhd and data/bird_data_v2.mif       ; yes             ; User Memory Initialization File  ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_data_v2.mif            ;         ;
+; ../vhd and data/vga_sync_12.vhd        ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd             ;         ;
+; ../vhd and data/clock_divider.vhd      ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd           ;         ;
+; ../vhd and data/bird_top_entity_12.vhd ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd      ;         ;
+; ../vhd and data/bird_sprite_rom_12.vhd ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd      ;         ;
+; ../vhd and data/bird.vhd               ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd                    ;         ;
+; altsyncram.tdf                         ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf         ;         ;
+; stratix_ram_block.inc                  ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc  ;         ;
+; lpm_mux.inc                            ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_mux.inc            ;         ;
+; lpm_decode.inc                         ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_decode.inc         ;         ;
+; aglobal181.inc                         ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc         ;         ;
+; a_rdenreg.inc                          ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/a_rdenreg.inc          ;         ;
+; altrom.inc                             ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altrom.inc             ;         ;
+; altram.inc                             ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altram.inc             ;         ;
+; altdpram.inc                           ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altdpram.inc           ;         ;
+; db/altsyncram_0pg1.tdf                 ; yes             ; Auto-Generated Megafunction      ; C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf ;         ;
++----------------------------------------+-----------------+----------------------------------+-------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------------------------------+
@@ -240,7 +241,7 @@ refer to the applicable agreement for further details.
 ;    |bird:c|                               ; 16 (16)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird:c                                                                                  ; bird               ; work         ;
 ;    |bird_sprite_rom_12:s_rom|             ; 0 (0)               ; 0 (0)                     ; 3328              ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom                                                                ; bird_sprite_rom_12 ; work         ;
 ;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 3328              ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component                                ; altsyncram         ; work         ;
-;          |altsyncram_7pg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 3328              ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated ; altsyncram_7pg1    ; work         ;
+;          |altsyncram_0pg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 3328              ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated ; altsyncram_0pg1    ; work         ;
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -250,7 +251,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+------------------+
 ; Name                                                                                               ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF              ;
 +----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+------------------+
-; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 256          ; 16           ; --           ; --           ; 4096 ; bird_data_v2.mif ;
+; bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 256          ; 16           ; --           ; --           ; 4096 ; bird_data_v2.mif ;
 +----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+------------------+
 
 
@@ -301,7 +302,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +----------------------------------------------------------------------------------------------------------------+
-; Source assignments for bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated ;
+; Source assignments for bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated ;
 +---------------------------------+--------------------+------+--------------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                               ;
 +---------------------------------+--------------------+------+--------------------------------------------------+
@@ -322,7 +323,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; WIDTH_BYTEENA                      ; 1                    ; Untyped                                   ;
 ; OPERATION_MODE                     ; ROM                  ; Untyped                                   ;
 ; WIDTH_A                            ; 16                   ; Signed Integer                            ;
-; WIDTHAD_A                          ; 19                   ; Signed Integer                            ;
+; WIDTHAD_A                          ; 21                   ; Signed Integer                            ;
 ; NUMWORDS_A                         ; 256                  ; Signed Integer                            ;
 ; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                   ;
 ; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                   ;
@@ -365,7 +366,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                   ;
 ; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                   ;
 ; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                   ;
-; CBXI_PARAMETER                     ; altsyncram_7pg1      ; Untyped                                   ;
+; CBXI_PARAMETER                     ; altsyncram_0pg1      ; Untyped                                   ;
 +------------------------------------+----------------------+-------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -463,7 +464,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed May 08 09:09:54 2024
+    Info: Processing started: Wed May 08 11:30:52 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off bird_top_entity_12 -c bird_top_entity_12
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
@@ -492,6 +493,7 @@ Info (12127): Elaborating entity "bird_top_entity_12" for the top level hierarch
 Warning (10036): Verilog HDL or VHDL warning at bird_top_entity_12.vhd(92): object "rom_addr" assigned a value but never read File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 92
 Info (12128): Elaborating entity "Clock_Divider" for hierarchy "Clock_Divider:CLOCK_25mhz" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 98
 Info (12128): Elaborating entity "bird_sprite_rom_12" for hierarchy "bird_sprite_rom_12:s_rom" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 106
+Warning (272007): Not using extra address lines in altsyncram megafunction design -- 256 memory words in side A specified but total number of address lines is 21 File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd Line: 50
 Info (12128): Elaborating entity "altsyncram" for hierarchy "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd Line: 50
 Info (12130): Elaborated megafunction instantiation "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd Line: 50
 Info (12133): Instantiated megafunction "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd Line: 50
@@ -506,13 +508,13 @@ Info (12133): Instantiated megafunction "bird_sprite_rom_12:s_rom|altsyncram:alt
     Info (12134): Parameter "operation_mode" = "ROM"
     Info (12134): Parameter "outdata_aclr_a" = "NONE"
     Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
-    Info (12134): Parameter "widthad_a" = "19"
+    Info (12134): Parameter "widthad_a" = "21"
     Info (12134): Parameter "width_a" = "16"
     Info (12134): Parameter "width_byteena_a" = "1"
-Warning (287001): Assertion warning: Not using extra address lines in altsyncram megafunction design -- 256 memory words in side A specified but total number of address lines is 19 File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_7pg1.tdf Line: 378
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_7pg1.tdf
-    Info (12023): Found entity 1: altsyncram_7pg1 File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_7pg1.tdf Line: 27
-Info (12128): Elaborating entity "altsyncram_7pg1" for hierarchy "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated" File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
+Warning (287001): Assertion warning: Not using extra address lines in altsyncram megafunction design -- 256 memory words in side A specified but total number of address lines is 21 File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf Line: 378
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_0pg1.tdf
+    Info (12023): Found entity 1: altsyncram_0pg1 File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf Line: 27
+Info (12128): Elaborating entity "altsyncram_0pg1" for hierarchy "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated" File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
 Info (12128): Elaborating entity "bird" for hierarchy "bird:c" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 115
 Warning (10541): VHDL Signal Declaration warning at bird.vhd(14): used implicit default value for signal "rom_addr_out" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd Line: 14
 Warning (10492): VHDL Process Statement warning at bird.vhd(53): signal "x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd Line: 53
@@ -522,9 +524,9 @@ Info (12128): Elaborating entity "display_controller" for hierarchy "display_con
 Info (12128): Elaborating entity "VGA_SYNC_12" for hierarchy "VGA_SYNC_12:VGA" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 156
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following RAM node(s):
-        Warning (14320): Synthesized away node "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|q_a[13]" File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_7pg1.tdf Line: 307
-        Warning (14320): Synthesized away node "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|q_a[14]" File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_7pg1.tdf Line: 328
-        Warning (14320): Synthesized away node "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_7pg1:auto_generated|q_a[15]" File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_7pg1.tdf Line: 349
+        Warning (14320): Synthesized away node "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|q_a[13]" File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf Line: 307
+        Warning (14320): Synthesized away node "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|q_a[14]" File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf Line: 328
+        Warning (14320): Synthesized away node "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|q_a[15]" File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf Line: 349
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 2 registers lost all their fanouts during netlist optimizations.
 Warning (20013): Ignored 24 assignments for entity "DE0_CV_Default" -- entity does not exist in design
@@ -559,10 +561,10 @@ Info (21057): Implemented 214 device resources after synthesis - the final resou
     Info (21059): Implemented 24 output pins
     Info (21061): Implemented 166 logic cells
     Info (21064): Implemented 13 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 36 warnings
-    Info: Peak virtual memory: 4918 megabytes
-    Info: Processing ended: Wed May 08 09:10:00 2024
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 37 warnings
+    Info: Peak virtual memory: 4903 megabytes
+    Info: Processing ended: Wed May 08 11:30:58 2024
     Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Total CPU time (on all processors): 00:00:04
 
 
