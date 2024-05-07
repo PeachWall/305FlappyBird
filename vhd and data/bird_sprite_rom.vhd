@@ -11,12 +11,12 @@ entity bird_sprite_rom is
   (
     row, col     : in std_logic_vector(3 downto 0);
     clock        : in std_logic;
-    pixel_output : out std_logic_vector(3 downto 0)
+    pixel_output : out std_logic_vector(12 downto 0)
   );
 end bird_sprite_rom;
 architecture SYN of bird_sprite_rom is
 
-  signal rom_data    : std_logic_vector (3 downto 0);
+  signal rom_data    : std_logic_vector (12 downto 0);
   signal rom_address : std_logic_vector (7 downto 0);
 
   component altsyncram
@@ -61,8 +61,8 @@ begin
   operation_mode         => "ROM",
   outdata_aclr_a         => "NONE",
   outdata_reg_a          => "UNREGISTERED",
-  widthad_a              => 8,
-  width_a                => 4,
+  widthad_a              => 16,
+  width_a                => 16,
   width_byteena_a        => 1
   )
   port map

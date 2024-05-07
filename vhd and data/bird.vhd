@@ -10,10 +10,10 @@ entity bird is
     clk                     : in std_logic;
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     v_sync                  : in std_logic;
-    rgba                    : in std_logic_vector(3 downto 0);
+    rgba                    : in std_logic_vector(12 downto 0);
     rom_addr_out            : out std_logic_vector (3 downto 0);
     x_pos, y_pos            : in std_logic_vector(9 downto 0);
-    red, green, blue        : out std_logic;
+    red, green, blue        : out std_logic_vector(3 downto 0);
     sprite_row, sprite_col  : out std_logic_vector(3 downto 0)
   );
 end entity bird;
@@ -26,16 +26,21 @@ architecture rtl of bird is
   signal sprite_on              : std_logic;
   signal rom_address, rom_pixel : std_logic_vector (9 downto 0);
   signal prev_row               : std_logic_vector(9 downto 0);
+
+  signal vec_sprite_on : std_logic_vector(3 downto 0);
 begin
 
   sprite_on <= '1' when (('0' & pixel_column >= x_pos) and ('0' & pixel_column < x_pos + size * scale) -- x_pos - size <= pixel_column <= x_pos + size
     and ('0' & pixel_row >= y_pos) and ('0' & pixel_row < y_pos + size * scale)) else -- y_pos - size <= pixel_row <= y_pos + size
     '0';
 
-  red   <= rgba(3) and sprite_on;
-  green <= rgba(2) and sprite_on;
-  blue  <= rgba(1) and sprite_on;
+  vec_sprite_on <= (others => sprite_on);
 
+  red   <= rgba(11 downto 8) and vec_sprite_on;
+  green <= rgba(7 downto 4) and vec_sprite_on;
+  blue  <= rgba(3 downto 0) and vec_sprite_on;
+
+  -- Get the pixel coordinates in terms of the row and column address
   address : process (sprite_on, pixel_column, pixel_row, v_sync)
     variable col_d, row_d   : unsigned(9 downto 0) := (others => '0');
     variable counter        : integer range 0 to scale;
@@ -43,11 +48,14 @@ begin
 
   begin
     if (sprite_on = '1') then
-      temp_c := unsigned(pixel_column - x_pos);
+      temp_c := unsigned(pixel_column - x_pos); -- Gets the pixels from 0 - size * scale
       temp_r := unsigned(pixel_row - y_pos);
-      col_d  := shift_right(temp_c, scale - 1);
-      row_d  := shift_right(temp_r, scale - 1);
+    else
+      temp_c := (others => '0');
+      temp_r := (others => '0');
     end if;
+    col_d := shift_right(temp_c, scale - 1); -- divide be powers of 2 to change size
+    row_d := shift_right(temp_r, scale - 1);
 
     sprite_row <= std_logic_vector(row_d(3 downto 0));
     sprite_col <= std_logic_vector(col_d(3 downto 0));
