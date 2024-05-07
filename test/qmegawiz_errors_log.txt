@@ -1,0 +1,11 @@
+
+
+C:/Users/lachl/OneDrive/Desktop/2024/CompSys305/miniproject/test/pll.vhd
+
+May 07 03PM:31:11>: Megafunction PLL Intel FPGA IP v18.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
+
+C:/Users/lachl/OneDrive/Desktop/2024/CompSys305/miniproject/test/pll.vhd
+
+May 07 03PM:32:00>: Megafunction PLL Intel FPGA IP v18.1 is not listed in any 
+wizard.lst file in the specified library path(s).Wizard launch aborted
