@@ -5,8 +5,10 @@ use  IEEE.STD_LOGIC_ARITH.all;
 use  IEEE.STD_LOGIC_UNSIGNED.all;
 
 ENTITY VGA_SYNC IS
-	PORT(	clock_25Mhz, red, green, blue		: IN	STD_LOGIC;
-			red_out, green_out, blue_out, horiz_sync_out, vert_sync_out	: OUT	STD_LOGIC;
+	PORT(	clock_25Mhz		                : IN STD_LOGIC;
+			red, green,blue                 : IN STD_LOGIC_VECTOR (3 downto 0);
+			horiz_sync_out, vert_sync_out	: OUT STD_LOGIC;
+			red_out, green_out,blue_out     : OUT STD_LOGIC_VECTOR (3 downto 0);
 			pixel_row, pixel_column: OUT STD_LOGIC_VECTOR(9 DOWNTO 0));
 END VGA_SYNC;
 
@@ -19,8 +21,6 @@ BEGIN
 
 -- video_on is high only when RGB data is displayed
 video_on <= video_on_H AND video_on_V;
-
-
 
 PROCESS
 BEGIN
@@ -79,9 +79,10 @@ BEGIN
 	END IF;
 
 -- Put all video signals through DFFs to elminate any delays that cause a blurry image
-		red_out <= red AND video_on;
-		green_out <= green AND video_on;
-		blue_out <= blue AND video_on;
+	
+		red_out <= red when video_on = '1' else '0';
+		green_out <= green when video_on = '1' else '0';
+		blue_out <= blue when video_on = '1' else '0';
 		horiz_sync_out <= horiz_sync;
 		vert_sync_out <= vert_sync;
 
