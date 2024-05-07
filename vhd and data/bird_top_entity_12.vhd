@@ -39,6 +39,7 @@ architecture beh of bird_top_entity_12 is
       rom_addr_out            : out std_logic_vector (3 downto 0);
       x_pos, y_pos            : in std_logic_vector(9 downto 0);
       red, green, blue        : out std_logic_vector(3 downto 0);
+      alpha                   : out std_logic;
       sprite_row, sprite_col  : out std_logic_vector(3 downto 0)
     );
   end component;
@@ -61,13 +62,37 @@ architecture beh of bird_top_entity_12 is
     );
   end component;
 
-  signal CLOCK_25, s_v_sync                   : std_logic;
-  signal s_pixel_row                          : std_logic_vector(9 downto 0);
-  signal s_pixel_column                       : std_logic_vector(9 downto 0);
-  signal s_red, s_green, s_blue               : std_logic_vector(3 downto 0);
+  component background is
+    port
+    (
+      red, green, blue : out std_logic_vector(3 downto 0)
+    );
+  end component;
+
+  component display_controller is
+    port
+    (
+      bg_r, bg_g, bg_b       : in std_logic_vector(3 downto 0);
+      bird_r, bird_g, bird_b : in std_logic_vector(3 downto 0);
+      bird_a                 : std_logic;
+      -- pipe_r, pipe_g, pipe_b : in std_logic_vector(3 downto 0); -- to be added when we have pipe
+      r_out, g_out, b_out : out std_logic_vector(3 downto 0)
+    );
+  end component;
+
+  signal CLOCK_25, s_v_sync : std_logic;
+
+  signal s_pixel_row            : std_logic_vector(9 downto 0);
+  signal s_pixel_column         : std_logic_vector(9 downto 0);
+  signal s_red, s_green, s_blue : std_logic_vector(3 downto 0);
+  signal s_alpha                : std_logic;
+
+  signal bg_red, bg_green, bg_blue            : std_logic_vector(3 downto 0);
   signal M                                    : std_logic_vector(15 downto 0);
   signal rom_addr, s_sprite_row, s_sprite_col : std_logic_vector(3 downto 0);
   signal s_rgba                               : std_logic_vector(12 downto 0);
+
+  signal s_red_out, s_green_out, s_blue_out : std_logic_vector(3 downto 0);
 begin
 
   CLOCK_25mhz : Clock_Divider
@@ -101,8 +126,31 @@ begin
   red          => s_red,
   green        => s_green,
   blue         => s_blue,
+  alpha        => s_alpha,
   sprite_row   => s_sprite_row,
   sprite_col   => s_sprite_col
+  );
+
+  BG : background
+  port
+  map(
+  red   => bg_red,
+  green => bg_green,
+  blue  => bg_blue
+  );
+  DISPLAY : display_controller
+  port
+  map(
+  bg_r   => bg_red,
+  bg_g   => bg_green,
+  bg_b   => bg_blue,
+  bird_r => s_red,
+  bird_g => s_green,
+  bird_b => s_blue,
+  bird_a => s_alpha,
+  r_out  => s_red_out,
+  g_out  => s_green_out,
+  b_out  => s_blue_out
   );
 
   VGA : VGA_SYNC_12
@@ -110,9 +158,9 @@ begin
   map
   (
   clock_25Mhz    => CLOCK_25,
-  red            => s_red,
-  green          => s_green,
-  blue           => s_blue,
+  red            => s_red_out,
+  green          => s_green_out,
+  blue           => s_blue_out,
   red_out        => VGA_R,
   green_out      => VGA_G,
   blue_out       => VGA_B,

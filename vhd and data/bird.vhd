@@ -14,6 +14,7 @@ entity bird is
     rom_addr_out            : out std_logic_vector (3 downto 0);
     x_pos, y_pos            : in std_logic_vector(9 downto 0);
     red, green, blue        : out std_logic_vector(3 downto 0);
+    alpha                   : out std_logic;
     sprite_row, sprite_col  : out std_logic_vector(3 downto 0)
   );
 end entity bird;
@@ -39,6 +40,7 @@ begin
   red   <= rgba(11 downto 8) and vec_sprite_on;
   green <= rgba(7 downto 4) and vec_sprite_on;
   blue  <= rgba(3 downto 0) and vec_sprite_on;
+  alpha <= rgba(12);
 
   -- Get the pixel coordinates in terms of the row and column address
   address : process (sprite_on, pixel_column, pixel_row, v_sync)

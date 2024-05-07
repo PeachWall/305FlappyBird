@@ -1,15 +1,15 @@
-Fitter Status : Successful - Wed May 08 00:28:10 2024
+Fitter Status : Successful - Wed May 08 09:10:18 2024
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : bird_top_entity_12
 Top-level Entity Name : bird_top_entity_12
 Family : Cyclone V
 Device : 5CEBA4F23C7
 Timing Models : Final
-Logic utilization (in ALMs) : 63 / 18,480 ( < 1 % )
-Total registers : 97
+Logic utilization (in ALMs) : 64 / 18,480 ( < 1 % )
+Total registers : 96
 Total pins : 35 / 224 ( 16 % )
 Total virtual pins : 0
-Total block memory bits : 3,072 / 3,153,920 ( < 1 % )
+Total block memory bits : 3,328 / 3,153,920 ( < 1 % )
 Total RAM Blocks : 1 / 308 ( < 1 % )
 Total DSP Blocks : 0 / 66 ( 0 % )
 Total HSSI RX PCSs : 0
