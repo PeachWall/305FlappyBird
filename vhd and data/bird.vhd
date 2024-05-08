@@ -11,7 +11,6 @@ entity bird is
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     v_sync                  : in std_logic;
     rgba                    : in std_logic_vector(12 downto 0);
-    rom_addr_out            : out std_logic_vector (3 downto 0);
     x_pos, y_pos            : in std_logic_vector(9 downto 0);
     red, green, blue        : out std_logic_vector(3 downto 0);
     alpha                   : out std_logic;

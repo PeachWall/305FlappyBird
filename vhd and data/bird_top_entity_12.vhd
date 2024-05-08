@@ -36,7 +36,6 @@ architecture beh of bird_top_entity_12 is
       pixel_row, pixel_column : in std_logic_vector(9 downto 0);
       v_sync                  : in std_logic;
       rgba                    : in std_logic_vector(12 downto 0);
-      rom_addr_out            : out std_logic_vector (3 downto 0);
       x_pos, y_pos            : in std_logic_vector(9 downto 0);
       red, green, blue        : out std_logic_vector(3 downto 0);
       alpha                   : out std_logic;
@@ -99,10 +98,10 @@ architecture beh of bird_top_entity_12 is
   signal s_red, s_green, s_blue : std_logic_vector(3 downto 0);
   signal s_alpha                : std_logic;
 
-  signal bg_red, bg_green, bg_blue            : std_logic_vector(3 downto 0);
-  signal M                                    : std_logic_vector(15 downto 0);
-  signal rom_addr, s_sprite_row, s_sprite_col : std_logic_vector(3 downto 0);
-  signal s_rgba                               : std_logic_vector(12 downto 0);
+  signal bg_red, bg_green, bg_blue  : std_logic_vector(3 downto 0);
+  signal M                          : std_logic_vector(15 downto 0);
+  signal s_sprite_row, s_sprite_col : std_logic_vector(3 downto 0);
+  signal s_rgba                     : std_logic_vector(12 downto 0);
 
   signal pipes_red, pipes_green, pipes_blue : std_logic_vector(3 downto 0);
   signal s_pipe_on                          : std_logic;
@@ -135,7 +134,6 @@ begin
   pixel_column => s_pixel_column,
   v_sync       => s_v_sync,
   rgba         => s_rgba,
-  rom_addr_out => rom_addr,
   x_pos        => CONV_STD_LOGIC_VECTOR(150, 10),
   y_pos        => CONV_STD_LOGIC_VECTOR(150, 10),
   red          => s_red,
