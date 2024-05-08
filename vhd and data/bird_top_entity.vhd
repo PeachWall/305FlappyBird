@@ -58,10 +58,20 @@ architecture beh of bird_top_entity is
     );
   end component;
 
+  component pipes is
+    port
+    (
+      v_sync                       : in std_logic;
+      pixel_row, pixel_column      : in std_logic_vector(9 downto 0);
+      red_out, green_out, blue_out : out std_logic_vector(3 downto 0)
+    );
+  end component;
+
   signal CLOCK_25                                     : std_logic;
   signal s_pixel_row                                  : std_logic_vector(9 downto 0);
   signal s_pixel_column                               : std_logic_vector(9 downto 0);
   signal s_v_sync, s_red, s_green, s_blue             : std_logic;
+  signal pipes_red, pipes_green, pipes_blue           : std_logic_vector(3 downto 0);
   signal M                                            : std_logic_vector(15 downto 0);
   signal rom_addr, s_rgba, s_sprite_row, s_sprite_col : std_logic_vector(3 downto 0);
 begin
@@ -99,6 +109,17 @@ begin
   blue         => s_blue,
   sprite_row   => s_sprite_row,
   sprite_col   => s_sprite_col
+  );
+
+  MY_PIPES : pipes
+  port
+  map(
+  v_sync       => s_v_sync,
+  pixel_row    => s_pixel_row,
+  pixel_column => s_pixel_column,
+  red_out      => pipes_red,
+  green_out    => pipes_green,
+  blue_out     => pipes_blue
   );
 
   VGA : VGA_SYNC

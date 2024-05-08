@@ -69,6 +69,16 @@ architecture beh of bird_top_entity_12 is
     );
   end component;
 
+  component pipes is
+    port
+    (
+      v_sync                       : in std_logic;
+      pixel_row, pixel_column      : in std_logic_vector(9 downto 0);
+      red_out, green_out, blue_out : out std_logic_vector(3 downto 0);
+      pipe_on                      : out std_logic
+    );
+  end component;
+
   component display_controller is
     port
     (
@@ -138,6 +148,7 @@ begin
   green => bg_green,
   blue  => bg_blue
   );
+
   DISPLAY : display_controller
   port
   map(
