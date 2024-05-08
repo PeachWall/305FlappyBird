@@ -19,8 +19,8 @@ entity bird is
 end entity bird;
 
 architecture rtl of bird is
-  constant size  : integer := 16;
-  constant scale : integer := 2;
+  constant scale : integer              := 2;
+  constant size  : unsigned(7 downto 0) := shift_left("00010000", scale - 1); -- 16 * 2^(scale - 1)
 
   signal pixel_rgba             : std_logic_vector(3 downto 0);
   signal sprite_on              : std_logic;
@@ -30,8 +30,8 @@ architecture rtl of bird is
   signal vec_sprite_on : std_logic_vector(3 downto 0);
 begin
 
-  sprite_on <= '1' when (('0' & pixel_column >= x_pos) and ('0' & pixel_column < x_pos + size * scale) -- x_pos - size <= pixel_column <= x_pos + size
-    and ('0' & pixel_row >= y_pos) and ('0' & pixel_row < y_pos + size * scale)) else -- y_pos - size <= pixel_row <= y_pos + size
+  sprite_on <= '1' when (('0' & pixel_column >= x_pos) and ('0' & pixel_column < x_pos + to_integer(size)) -- x_pos - size <= pixel_column <= x_pos + size
+    and ('0' & pixel_row >= y_pos) and ('0' & pixel_row < y_pos + to_integer(size))) else -- y_pos - size <= pixel_row <= y_pos + size
     '0';
 
   vec_sprite_on <= (others => sprite_on);

@@ -1,5 +1,5 @@
 Timing Analyzer report for bird_top_entity_12
-Wed May 08 21:54:17 2024
+Thu May 09 08:10:00 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -97,24 +97,24 @@ refer to the applicable agreement for further details.
 ; Number detected on machine ; 20          ;
 ; Maximum allowed            ; 14          ;
 ;                            ;             ;
-; Average used               ; 1.38        ;
+; Average used               ; 1.52        ;
 ; Maximum used               ; 14          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   3.5%      ;
-;     Processor 3            ;   3.4%      ;
-;     Processor 4            ;   3.3%      ;
-;     Processor 5            ;   2.9%      ;
-;     Processor 6            ;   2.8%      ;
-;     Processor 7            ;   2.8%      ;
-;     Processor 8            ;   2.8%      ;
-;     Processor 9            ;   2.8%      ;
-;     Processor 10           ;   2.8%      ;
-;     Processor 11           ;   2.8%      ;
-;     Processor 12           ;   2.8%      ;
-;     Processor 13           ;   2.8%      ;
-;     Processor 14           ;   2.8%      ;
+;     Processor 2            ;   4.8%      ;
+;     Processor 3            ;   4.6%      ;
+;     Processor 4            ;   4.5%      ;
+;     Processor 5            ;   4.0%      ;
+;     Processor 6            ;   3.9%      ;
+;     Processor 7            ;   3.9%      ;
+;     Processor 8            ;   3.9%      ;
+;     Processor 9            ;   3.8%      ;
+;     Processor 10           ;   3.7%      ;
+;     Processor 11           ;   3.7%      ;
+;     Processor 12           ;   3.7%      ;
+;     Processor 13           ;   3.7%      ;
+;     Processor 14           ;   3.7%      ;
 +----------------------------+-------------+
 
 
@@ -675,7 +675,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed May 08 21:54:13 2024
+    Info: Processing started: Thu May 09 08:09:56 2024
 Info: Command: quartus_sta bird_top_entity_12 -c bird_top_entity_12
 Info: qsta_default_script.tcl version: #1
 Warning (20013): Ignored 24 assignments for entity "DE0_CV_Default" -- entity does not exist in design
@@ -818,8 +818,8 @@ Info (332146): Worst-case minimum pulse width slack is -2.174
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 31 warnings
-    Info: Peak virtual memory: 5218 megabytes
-    Info: Processing ended: Wed May 08 21:54:17 2024
+    Info: Peak virtual memory: 5217 megabytes
+    Info: Processing ended: Thu May 09 08:10:00 2024
     Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:02
 
