@@ -11,7 +11,6 @@ entity bird is
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     v_sync                  : in std_logic;
     rgba                    : in std_logic_vector(12 downto 0);
-    rom_addr_out            : out std_logic_vector (3 downto 0);
     x_pos, y_pos            : in std_logic_vector(9 downto 0);
     red, green, blue        : out std_logic_vector(3 downto 0);
     alpha                   : out std_logic;
@@ -50,7 +49,7 @@ begin
 
   begin
     if (sprite_on = '1') then
-      temp_c := unsigned(pixel_column - x_pos); -- Gets the pixels from 0 - size * scale
+      temp_c := unsigned(pixel_column - x_pos); -- Gets the pixels from 0 - size
       temp_r := unsigned(pixel_row - y_pos);
     else
       temp_c := (others => '0');

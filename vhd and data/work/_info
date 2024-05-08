@@ -4,7 +4,7 @@ K3
 cModel Technology
 Z0 dC:\Users\juane\Desktop\305FlappyBird\vhd and data
 Ebird
-Z1 w1715080868
+Z1 w1715132278
 Z2 DPx4 ieee 15 std_logic_arith 0 22 4`Y?g_lkdn;7UL9IiJck01
 Z3 DPx4 ieee 18 std_logic_unsigned 0 22 RYmj;=TK`k=k>D@Cz`zoB3
 Z4 DPx4 ieee 9 math_real 0 22 :iME`dTX54_U49lJNF5JI3
@@ -16,15 +16,15 @@ Z9 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd
 Z10 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd
 l0
 L7
-V1DhYGmD_O@8Q@L9bLW?9Q3
+V3A5f>Z;KC]5Wg74Y?lZET1
 Z11 OV;C;10.1d;51
 32
-Z12 !s108 1715081281.128000
+Z12 !s108 1715143265.913000
 Z13 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd|
 Z14 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd|
 Z15 o-work work -O0
 Z16 tExplicit 1
-!s100 c4DVX]H:IPb8>6Y?9@m<^0
+!s100 Fb;`d<GMGYc6;e<mK7UzM0
 !i10b 1
 Artl
 R2
@@ -33,10 +33,11 @@ R4
 R5
 R6
 R7
-DEx4 work 4 bird 0 22 1DhYGmD_O@8Q@L9bLW?9Q3
-l31
-L21
-VTI3^6aa1kk0TYh581enXO3
+DEx4 work 4 bird 0 22 3A5f>Z;KC]5Wg74Y?lZET1
+l32
+L22
+V:M367>WQd`m=5=Y`h:Q9:1
+!s100 <FMFI>^hJW<>3l>8J0U2;3
 R11
 32
 R12
@@ -44,7 +45,6 @@ R13
 R14
 R15
 R16
-!s100 Ea_]NjmDQjB<LLe8QEhNL3
 !i10b 1
 Ebird_sprite_rom
 w1715076819
@@ -68,7 +68,7 @@ R16
 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom.vhd|
 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom.vhd|
 Ebird_sprite_rom_12
-Z17 w1715082270
+Z17 w1715142627
 R3
 R2
 R6
@@ -79,58 +79,58 @@ Z19 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd
 l0
 L9
 V7cALdUEej1WLl?:c>8eY91
-!s100 @T::B]3KC>b1YiV4Shg?X0
 R11
 32
-!i10b 1
-Z20 !s108 1715082312.295000
+Z20 !s108 1715143153.364000
 Z21 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd|
 Z22 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd|
 R15
 R16
+!s100 @T::B]3KC>b1YiV4Shg?X0
+!i10b 1
 Asyn
 R3
 R2
 R6
 R7
-Z23 DEx4 work 18 bird_sprite_rom_12 0 22 7cALdUEej1WLl?:c>8eY91
+DEx4 work 18 bird_sprite_rom_12 0 22 7cALdUEej1WLl?:c>8eY91
 l48
 L17
-Z24 Vb^S4hnb`83Ljdh5NT]V1?0
-Z25 !s100 RH[A4^KW@a;JQfiIzghi41
+Vi]J3J]jH[[Po]6JUaF9M20
 R11
 32
-!i10b 1
 R20
 R21
 R22
 R15
 R16
+!s100 6294@ID;M17CGI<U>W:j?3
+!i10b 1
 Ebird_top_entity
-Z26 w1715065047
-Z27 DPx4 ieee 16 std_logic_signed 0 22 E>OLoMaBGQ?hbGgOoNXM^1
+Z23 w1715065047
+Z24 DPx4 ieee 16 std_logic_signed 0 22 E>OLoMaBGQ?hbGgOoNXM^1
 R2
 R4
 R5
 R6
 R7
 R8
-Z28 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity.vhd
-Z29 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity.vhd
+Z25 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity.vhd
+Z26 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity.vhd
 l0
 L8
 V7iVYo`4Obn60^Z87mTgfS1
 R11
 32
-Z30 !s108 1715082274.136000
-Z31 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity.vhd|
-Z32 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity.vhd|
+Z27 !s108 1715082274.136000
+Z28 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity.vhd|
+Z29 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity.vhd|
 R15
 R16
 !s100 Y2;@f2AJQ3[>XJkUiV8cl0
 !i10b 1
 Abeh
-R27
+R24
 R2
 R4
 R5
@@ -142,72 +142,72 @@ L18
 VoHca7_0PAA1oFO@YHUUDY2
 R11
 32
-R30
-R31
-R32
+R27
+R28
+R29
 R15
 R16
 !s100 3[LOb:288mJLlX7`@mKN<3
 !i10b 1
 Ebird_top_entity_12
-Z33 w1715080028
-R27
+Z30 w1715143249
+R24
 R2
 R4
 R5
 R6
 R7
 R8
-Z34 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd
-Z35 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd
+Z31 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd
+Z32 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd
 l0
 L8
 VcYibYndCU]RlbceK0oTBZ1
+!s100 ;6XDB_f_`T=P@ZgCESRkD2
 R11
 32
-Z36 !s108 1715081285.351000
-Z37 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd|
-Z38 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd|
+!i10b 1
+Z33 !s108 1715143269.538000
+Z34 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd|
+Z35 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd|
 R15
 R16
-!s100 ;6XDB_f_`T=P@ZgCESRkD2
-!i10b 1
 Abeh
-R27
+R24
 R2
 R4
 R5
 R6
 R7
-DEx4 work 18 bird_top_entity_12 0 22 cYibYndCU]RlbceK0oTBZ1
-l71
+Z36 DEx4 work 18 bird_top_entity_12 0 22 cYibYndCU]RlbceK0oTBZ1
+l110
 L19
-V]EjaGCT];J09DK4HR9F=O2
+Vla40V:C?SlQYUnaSQczV^2
+!s100 VSKKcPM2OmDUcXLVDEFQ^2
 R11
 32
-R36
-R37
-R38
+!i10b 1
+R33
+R34
+R35
 R15
 R16
-!s100 <6RS3^U7N8ch=mmAn;T=`3
-!i10b 1
 Eclock_divider
-Z39 w1714777718
+Z37 w1714777718
 R5
 R6
 R7
 R8
-Z40 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd
-Z41 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd
+Z38 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd
+Z39 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd
 l0
 L5
 Vm=MK_M2E7JWQcOhnePE7=1
 R11
 32
-Z42 !s108 1715081286.265000
-Z43 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd|
-Z44 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd|
+Z40 !s108 1715142590.832000
+Z41 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd|
+Z42 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd|
 R15
 R16
 !s100 ZDY[_5bZ[lA9[dHlh0kR71
@@ -222,30 +222,112 @@ L14
 VQ7^ZLFmm7jQf];a8OP[GR2
 R11
 32
+R40
+R41
 R42
-R43
-R44
 R15
 R16
 !s100 3YMIAeM@9NoVk]jUAFNDf3
 !i10b 1
-Et_disp
-Z45 w1715080015
+Edisplay_controller
+Z43 w1715139065
 R4
 R5
 R6
 R7
 R8
-Z46 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_disp.vhd
-Z47 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/t_disp.vhd
+Z44 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd
+Z45 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd
+l0
+L6
+V=;VIELfiW^1Vn@1>BW:`f3
+R11
+32
+Z46 !s108 1715142591.905000
+Z47 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd|
+Z48 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd|
+R15
+R16
+!s100 mDcS3f_dzG2A;VbjLakDT2
+!i10b 1
+Abeh
+R4
+R5
+R6
+R7
+DEx4 work 18 display_controller 0 22 =;VIELfiW^1Vn@1>BW:`f3
+l31
+L18
+VeU?FD;0kQM==JY^Qb8zMB0
+R11
+32
+R46
+R47
+R48
+R15
+R16
+!s100 F@XW06ZdC5z29OHGZ@Q3U1
+!i10b 1
+Epipes
+Z49 w1715141943
+R2
+R24
+R4
+R5
+R6
+R7
+R8
+Z50 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd
+Z51 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd
+l0
+L8
+V70IaaK^6a[HgC@m]zh]]D1
+R11
+32
+Z52 !s108 1715142593.044000
+Z53 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd|
+Z54 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd|
+R15
+R16
+!s100 oHY<iZ1[Mo>Ld4XAlCNc>0
+!i10b 1
+Artl
+R2
+R24
+R4
+R5
+R6
+R7
+DEx4 work 5 pipes 0 22 70IaaK^6a[HgC@m]zh]]D1
+l37
+L18
+VHk_kUMm7WLTgMVX8HO=[z3
+R11
+32
+R52
+R53
+R54
+R15
+R16
+!s100 ;aCe;@acZieCH5ODRjXf^2
+!i10b 1
+Et_disp
+Z55 w1715080015
+R4
+R5
+R6
+R7
+R8
+Z56 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_disp.vhd
+Z57 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/t_disp.vhd
 l0
 L6
 VC:VWame4_VQ>]JIV0IzDE1
 R11
 32
-Z48 !s108 1715081286.996000
-Z49 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_disp.vhd|
-Z50 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_disp.vhd|
+Z58 !s108 1715081286.996000
+Z59 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_disp.vhd|
+Z60 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_disp.vhd|
 R15
 R16
 !s100 916Ef3;gQnm[C5bkPRc5n0
@@ -261,15 +343,15 @@ L9
 V>W6]?4DPnJe3i>4OTTIA10
 R11
 32
-R48
-R49
-R50
+R58
+R59
+R60
 R15
 R16
 !s100 LG8bbH<N@GY2z_Okg:R]g2
 !i10b 1
 Et_sprite
-Z51 w1715082116
+Z61 w1715082116
 R4
 R2
 R3
@@ -277,16 +359,16 @@ R5
 R6
 R7
 R8
-Z52 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_sprite.vhd
-Z53 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/t_sprite.vhd
+Z62 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_sprite.vhd
+Z63 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/t_sprite.vhd
 l0
 L7
 V]F2lZl=P:cm5@AY6NafSc2
 R11
 32
-Z54 !s108 1715082129.715000
-Z55 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_sprite.vhd|
-Z56 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_sprite.vhd|
+Z64 !s108 1715082129.715000
+Z65 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_sprite.vhd|
+Z66 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/t_sprite.vhd|
 R15
 R16
 !s100 c0D08Yf_@o7EATT^@ZfiS3
@@ -304,39 +386,78 @@ L10
 VnHnc=A8I5=MXggA19hZ:J2
 R11
 32
-R54
-R55
-R56
+R64
+R65
+R66
 R15
 R16
 !s100 Fo;@]o9ez[@f78EHDogdR1
 !i10b 1
+Etestbench
+Z67 w1715142565
+R4
+R5
+R6
+R7
+R8
+Z68 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/testbench.vhd
+Z69 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/testbench.vhd
+l0
+L6
+VfhnB3SZMPV?nT7LZc2h191
+R11
+32
+Z70 !s108 1715143150.277000
+Z71 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/testbench.vhd|
+Z72 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/testbench.vhd|
+R15
+R16
+!s100 ]em_<XL<9ggo1i58;dQ5m1
+!i10b 1
+Artl
+R4
+R5
+R6
+R7
+DEx4 work 9 testbench 0 22 fhnB3SZMPV?nT7LZc2h191
+l25
+L9
+Va^[8c]AO[GJe@A8?YSE_N3
+R11
+32
+R70
+R71
+R72
+R15
+R16
+!s100 [24S`fYWiV5SQ^;54;C]52
+!i10b 1
 Evga_sync_12
-Z57 w1715078411
-Z58 DPx8 synopsys 10 attributes 0 22 J^T`lPA_8_J<l8kQiVE]>2
-Z59 DPx4 ieee 14 std_logic_misc 0 22 >dU:RInm^_6_mBJ^<6QGY2
+R1
+Z73 DPx8 synopsys 10 attributes 0 22 J^T`lPA_8_J<l8kQiVE]>2
+Z74 DPx4 ieee 14 std_logic_misc 0 22 >dU:RInm^_6_mBJ^<6QGY2
 R3
 R2
 R6
 R7
 R8
-Z60 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd
-Z61 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd
+Z75 8C:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd
+Z76 FC:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd
 l0
 L7
 VXk=?SfAA27kFOJT;L`@fU3
 R11
 32
-Z62 !s108 1715081287.647000
-Z63 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd|
-Z64 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd|
+Z77 !s108 1715142598.822000
+Z78 !s90 -reportprogress|300|-work|work|C:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd|
+Z79 !s107 C:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd|
 R15
 R16
 !s100 7OK1TYcah09lO[a]=67AS1
 !i10b 1
 Aa
-R58
-R59
+R73
+R74
 R3
 R2
 R6
@@ -347,9 +468,9 @@ L18
 V;M`WSbDbP06O0P>nRa9a21
 R11
 32
-R62
-R63
-R64
+R77
+R78
+R79
 R15
 R16
 !s100 ]ZOYVi8c]_5Tl52`TUW_02
