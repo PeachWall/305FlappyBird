@@ -1,5 +1,5 @@
 Analysis & Synthesis report for bird_top_entity_12
-Thu May 09 08:09:13 2024
+Thu May 09 08:30:56 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -52,7 +52,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu May 09 08:09:13 2024       ;
+; Analysis & Synthesis Status     ; Successful - Thu May 09 08:30:56 2024       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; bird_top_entity_12                          ;
 ; Top-level Entity Name           ; bird_top_entity_12                          ;
@@ -172,7 +172,8 @@ refer to the applicable agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-14        ;   0.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processors 3-14        ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -209,14 +210,14 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-----------------------------------+
 ; Resource                                    ; Usage                             ;
 +---------------------------------------------+-----------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 149                               ;
+; Estimate of Logic utilization (ALMs needed) ; 150                               ;
 ;                                             ;                                   ;
-; Combinational ALUT usage for logic          ; 249                               ;
+; Combinational ALUT usage for logic          ; 252                               ;
 ;     -- 7 input functions                    ; 1                                 ;
 ;     -- 6 input functions                    ; 43                                ;
 ;     -- 5 input functions                    ; 50                                ;
 ;     -- 4 input functions                    ; 35                                ;
-;     -- <=3 input functions                  ; 120                               ;
+;     -- <=3 input functions                  ; 123                               ;
 ;                                             ;                                   ;
 ; Dedicated logic registers                   ; 139                               ;
 ;                                             ;                                   ;
@@ -228,8 +229,8 @@ refer to the applicable agreement for further details.
 ;                                             ;                                   ;
 ; Maximum fan-out node                        ; Clock_Divider:CLOCK_25mhz|clk_out ;
 ; Maximum fan-out                             ; 78                                ;
-; Total fan-out                               ; 1421                              ;
-; Average fan-out                             ; 3.02                              ;
+; Total fan-out                               ; 1426                              ;
+; Average fan-out                             ; 3.01                              ;
 +---------------------------------------------+-----------------------------------+
 
 
@@ -238,7 +239,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                         ; Entity Name        ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |bird_top_entity_12                       ; 249 (0)             ; 139 (0)                   ; 3328              ; 0          ; 35   ; 0            ; |bird_top_entity_12                                                                                         ; bird_top_entity_12 ; work         ;
+; |bird_top_entity_12                       ; 252 (0)             ; 139 (0)                   ; 3328              ; 0          ; 35   ; 0            ; |bird_top_entity_12                                                                                         ; bird_top_entity_12 ; work         ;
 ;    |Clock_Divider:CLOCK_25mhz|            ; 43 (43)             ; 34 (34)                   ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|Clock_Divider:CLOCK_25mhz                                                               ; Clock_Divider      ; work         ;
 ;    |VGA_SYNC_12:VGA|                      ; 56 (56)             ; 57 (57)                   ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|VGA_SYNC_12:VGA                                                                         ; VGA_SYNC_12        ; work         ;
 ;    |bird:sprite|                          ; 16 (16)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird:sprite                                                                             ; bird               ; work         ;
@@ -247,7 +248,7 @@ refer to the applicable agreement for further details.
 ;          |altsyncram_0pg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 3328              ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated ; altsyncram_0pg1    ; work         ;
 ;    |collision:COLLISION_DETECTOR|         ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|collision:COLLISION_DETECTOR                                                            ; collision          ; work         ;
 ;    |display_controller:DISPLAY|           ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|display_controller:DISPLAY                                                              ; display_controller ; work         ;
-;    |pipes:MY_PIPES|                       ; 132 (130)           ; 48 (40)                   ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|pipes:MY_PIPES                                                                          ; pipes              ; work         ;
+;    |pipes:MY_PIPES|                       ; 135 (133)           ; 48 (40)                   ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|pipes:MY_PIPES                                                                          ; pipes              ; work         ;
 ;       |random_gen:RNG|                    ; 2 (2)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|pipes:MY_PIPES|random_gen:RNG                                                           ; random_gen         ; work         ;
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -297,25 +298,25 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; pipes:MY_PIPES|pipe2_y_pos[5]           ; 4       ;
 ; pipes:MY_PIPES|pipe2_y_pos[3]           ; 2       ;
 ; pipes:MY_PIPES|pipe2_x_pos[2]           ; 3       ;
-; pipes:MY_PIPES|pipe2_x_pos[4]           ; 7       ;
+; pipes:MY_PIPES|pipe2_x_pos[4]           ; 4       ;
 ; pipes:MY_PIPES|pipe2_x_pos[3]           ; 4       ;
 ; pipes:MY_PIPES|pipe2_x_pos[1]           ; 3       ;
 ; pipes:MY_PIPES|pipe2_x_pos[7]           ; 8       ;
-; pipes:MY_PIPES|pipe2_x_pos[5]           ; 6       ;
-; pipes:MY_PIPES|pipe2_x_pos[9]           ; 6       ;
-; pipes:MY_PIPES|pipe2_x_pos[8]           ; 6       ;
+; pipes:MY_PIPES|pipe2_x_pos[5]           ; 10      ;
+; pipes:MY_PIPES|pipe2_x_pos[9]           ; 7       ;
+; pipes:MY_PIPES|pipe2_x_pos[8]           ; 7       ;
 ; pipes:MY_PIPES|pipe1_y_pos[8]           ; 4       ;
 ; pipes:MY_PIPES|pipe1_y_pos[6]           ; 8       ;
 ; pipes:MY_PIPES|pipe1_y_pos[5]           ; 4       ;
 ; pipes:MY_PIPES|pipe1_y_pos[3]           ; 2       ;
 ; pipes:MY_PIPES|pipe1_x_pos[2]           ; 3       ;
-; pipes:MY_PIPES|pipe1_x_pos[4]           ; 7       ;
+; pipes:MY_PIPES|pipe1_x_pos[4]           ; 4       ;
 ; pipes:MY_PIPES|pipe1_x_pos[3]           ; 4       ;
 ; pipes:MY_PIPES|pipe1_x_pos[1]           ; 3       ;
 ; pipes:MY_PIPES|pipe1_x_pos[0]           ; 3       ;
-; pipes:MY_PIPES|pipe1_x_pos[5]           ; 6       ;
-; pipes:MY_PIPES|pipe1_x_pos[6]           ; 7       ;
-; pipes:MY_PIPES|pipe1_x_pos[9]           ; 6       ;
+; pipes:MY_PIPES|pipe1_x_pos[5]           ; 10      ;
+; pipes:MY_PIPES|pipe1_x_pos[6]           ; 8       ;
+; pipes:MY_PIPES|pipe1_x_pos[9]           ; 7       ;
 ; pipes:MY_PIPES|random_gen:RNG|s_Q[0]    ; 2       ;
 ; Total number of inverted registers = 25 ;         ;
 +-----------------------------------------+---------+
@@ -472,15 +473,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     ENA SCLR          ; 10                          ;
 ;     SCLR              ; 41                          ;
 ;     plain             ; 51                          ;
-; arriav_lcell_comb     ; 250                         ;
+; arriav_lcell_comb     ; 253                         ;
 ;     arith             ; 83                          ;
 ;         1 data inputs ; 83                          ;
 ;     extend            ; 1                           ;
 ;         7 data inputs ; 1                           ;
-;     normal            ; 166                         ;
+;     normal            ; 169                         ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 21                          ;
-;         2 data inputs ; 6                           ;
+;         1 data inputs ; 22                          ;
+;         2 data inputs ; 8                           ;
 ;         3 data inputs ; 10                          ;
 ;         4 data inputs ; 35                          ;
 ;         5 data inputs ; 50                          ;
@@ -489,7 +490,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; stratixv_ram_block    ; 13                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 6.60                        ;
-; Average LUT depth     ; 3.88                        ;
+; Average LUT depth     ; 3.87                        ;
 +-----------------------+-----------------------------+
 
 
@@ -508,7 +509,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Thu May 09 08:09:04 2024
+    Info: Processing started: Thu May 09 08:30:46 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off bird_top_entity_12 -c bird_top_entity_12
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
@@ -572,7 +573,7 @@ Warning (10492): VHDL Process Statement warning at bird.vhd(52): signal "x_pos" 
 Warning (10492): VHDL Process Statement warning at bird.vhd(53): signal "y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd Line: 53
 Info (12128): Elaborating entity "background" for hierarchy "background:BG" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 156
 Info (12128): Elaborating entity "pipes" for hierarchy "pipes:MY_PIPES" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 164
-Info (12128): Elaborating entity "random_gen" for hierarchy "pipes:MY_PIPES|random_gen:RNG" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 96
+Info (12128): Elaborating entity "random_gen" for hierarchy "pipes:MY_PIPES|random_gen:RNG" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 97
 Info (12128): Elaborating entity "collision" for hierarchy "collision:COLLISION_DETECTOR" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 177
 Info (12128): Elaborating entity "display_controller" for hierarchy "display_controller:DISPLAY" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 185
 Info (12128): Elaborating entity "VGA_SYNC_12" for hierarchy "VGA_SYNC_12:VGA" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 204
@@ -630,15 +631,15 @@ Warning (21074): Design contains 10 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[7]" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 15
     Warning (15610): No output dependent on input pin "SW[8]" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 15
     Warning (15610): No output dependent on input pin "SW[9]" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 15
-Info (21057): Implemented 370 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 373 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 11 input pins
     Info (21059): Implemented 24 output pins
-    Info (21061): Implemented 322 logic cells
+    Info (21061): Implemented 325 logic cells
     Info (21064): Implemented 13 RAM segments
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 56 warnings
-    Info: Peak virtual memory: 4923 megabytes
-    Info: Processing ended: Thu May 09 08:09:13 2024
-    Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Peak virtual memory: 4945 megabytes
+    Info: Processing ended: Thu May 09 08:30:56 2024
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:06
 
 
