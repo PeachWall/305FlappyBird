@@ -22,7 +22,7 @@ architecture beh of display_controller is
   begin
     if (set1 = '1') then
       return color1;
-    elsif (set1 = '1') then
+    elsif (set2 = '1') then
       return color2;
     else
       return color3;

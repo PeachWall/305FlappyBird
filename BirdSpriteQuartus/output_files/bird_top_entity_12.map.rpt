@@ -1,5 +1,5 @@
 Analysis & Synthesis report for bird_top_entity_12
-Wed May 08 11:30:58 2024
+Wed May 08 15:12:07 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -15,17 +15,16 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis RAM Summary
   9. Registers Removed During Synthesis
- 10. Removed Registers Triggering Further Register Optimizations
- 11. General Register Statistics
- 12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Source assignments for bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated
- 14. Parameter Settings for User Entity Instance: bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component
- 15. altsyncram Parameter Settings by Entity Instance
- 16. Port Connectivity Checks: "bird:c"
- 17. Port Connectivity Checks: "Clock_Divider:CLOCK_25mhz"
- 18. Post-Synthesis Netlist Statistics for Top Partition
- 19. Elapsed Time Per Partition
- 20. Analysis & Synthesis Messages
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Source assignments for bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated
+ 13. Parameter Settings for User Entity Instance: bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component
+ 14. altsyncram Parameter Settings by Entity Instance
+ 15. Port Connectivity Checks: "bird:c"
+ 16. Port Connectivity Checks: "Clock_Divider:CLOCK_25mhz"
+ 17. Post-Synthesis Netlist Statistics for Top Partition
+ 18. Elapsed Time Per Partition
+ 19. Analysis & Synthesis Messages
 
 
 
@@ -51,13 +50,13 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed May 08 11:30:58 2024       ;
+; Analysis & Synthesis Status     ; Successful - Wed May 08 15:12:07 2024       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; bird_top_entity_12                          ;
 ; Top-level Entity Name           ; bird_top_entity_12                          ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 89                                          ;
+; Total registers                 ; 90                                          ;
 ; Total pins                      ; 35                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 3,328                                       ;
@@ -171,34 +170,35 @@ refer to the applicable agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-14        ;   0.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processors 3-14        ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                ;
-+----------------------------------------+-----------------+----------------------------------+-------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path       ; Used in Netlist ; File Type                        ; File Name with Absolute Path                                                  ; Library ;
-+----------------------------------------+-----------------+----------------------------------+-------------------------------------------------------------------------------+---------+
-; ../vhd and data/display_controller.vhd ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd      ;         ;
-; ../vhd and data/background.vhd         ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/background.vhd              ;         ;
-; ../vhd and data/bird_data_v2.mif       ; yes             ; User Memory Initialization File  ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_data_v2.mif            ;         ;
-; ../vhd and data/vga_sync_12.vhd        ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd             ;         ;
-; ../vhd and data/clock_divider.vhd      ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd           ;         ;
-; ../vhd and data/bird_top_entity_12.vhd ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd      ;         ;
-; ../vhd and data/bird_sprite_rom_12.vhd ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd      ;         ;
-; ../vhd and data/bird.vhd               ; yes             ; User VHDL File                   ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd                    ;         ;
-; altsyncram.tdf                         ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf         ;         ;
-; stratix_ram_block.inc                  ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc  ;         ;
-; lpm_mux.inc                            ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_mux.inc            ;         ;
-; lpm_decode.inc                         ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_decode.inc         ;         ;
-; aglobal181.inc                         ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc         ;         ;
-; a_rdenreg.inc                          ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/a_rdenreg.inc          ;         ;
-; altrom.inc                             ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altrom.inc             ;         ;
-; altram.inc                             ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altram.inc             ;         ;
-; altdpram.inc                           ; yes             ; Megafunction                     ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altdpram.inc           ;         ;
-; db/altsyncram_0pg1.tdf                 ; yes             ; Auto-Generated Megafunction      ; C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf ;         ;
-+----------------------------------------+-----------------+----------------------------------+-------------------------------------------------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                            ;
++----------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path       ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                  ; Library ;
++----------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------+---------+
+; ../vhd and data/pipes.vhd              ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd                   ;         ;
+; ../vhd and data/display_controller.vhd ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd      ;         ;
+; ../vhd and data/background.vhd         ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/background.vhd              ;         ;
+; ../vhd and data/vga_sync_12.vhd        ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/vga_sync_12.vhd             ;         ;
+; ../vhd and data/clock_divider.vhd      ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/clock_divider.vhd           ;         ;
+; ../vhd and data/bird_top_entity_12.vhd ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd      ;         ;
+; ../vhd and data/bird_sprite_rom_12.vhd ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd      ;         ;
+; ../vhd and data/bird.vhd               ; yes             ; User VHDL File               ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd                    ;         ;
+; altsyncram.tdf                         ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf         ;         ;
+; stratix_ram_block.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc  ;         ;
+; lpm_mux.inc                            ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_mux.inc            ;         ;
+; lpm_decode.inc                         ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_decode.inc         ;         ;
+; aglobal181.inc                         ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc         ;         ;
+; a_rdenreg.inc                          ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/a_rdenreg.inc          ;         ;
+; altrom.inc                             ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altrom.inc             ;         ;
+; altram.inc                             ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altram.inc             ;         ;
+; altdpram.inc                           ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altdpram.inc           ;         ;
+; db/altsyncram_0pg1.tdf                 ; yes             ; Auto-Generated Megafunction  ; C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf ;         ;
++----------------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------------------------------+
@@ -208,14 +208,14 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-----------------------------------+
 ; Estimate of Logic utilization (ALMs needed) ; 70                                ;
 ;                                             ;                                   ;
-; Combinational ALUT usage for logic          ; 111                               ;
+; Combinational ALUT usage for logic          ; 116                               ;
 ;     -- 7 input functions                    ; 1                                 ;
-;     -- 6 input functions                    ; 25                                ;
-;     -- 5 input functions                    ; 16                                ;
-;     -- 4 input functions                    ; 10                                ;
-;     -- <=3 input functions                  ; 59                                ;
+;     -- 6 input functions                    ; 20                                ;
+;     -- 5 input functions                    ; 17                                ;
+;     -- 4 input functions                    ; 16                                ;
+;     -- <=3 input functions                  ; 62                                ;
 ;                                             ;                                   ;
-; Dedicated logic registers                   ; 89                                ;
+; Dedicated logic registers                   ; 90                                ;
 ;                                             ;                                   ;
 ; I/O pins                                    ; 35                                ;
 ; Total MLAB memory bits                      ; 0                                 ;
@@ -224,9 +224,9 @@ refer to the applicable agreement for further details.
 ; Total DSP Blocks                            ; 0                                 ;
 ;                                             ;                                   ;
 ; Maximum fan-out node                        ; Clock_Divider:CLOCK_25mhz|clk_out ;
-; Maximum fan-out                             ; 68                                ;
-; Total fan-out                               ; 830                               ;
-; Average fan-out                             ; 2.93                              ;
+; Maximum fan-out                             ; 69                                ;
+; Total fan-out                               ; 839                               ;
+; Average fan-out                             ; 2.90                              ;
 +---------------------------------------------+-----------------------------------+
 
 
@@ -235,13 +235,14 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                         ; Entity Name        ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |bird_top_entity_12                       ; 111 (0)             ; 89 (0)                    ; 3328              ; 0          ; 35   ; 0            ; |bird_top_entity_12                                                                                         ; bird_top_entity_12 ; work         ;
+; |bird_top_entity_12                       ; 116 (0)             ; 90 (0)                    ; 3328              ; 0          ; 35   ; 0            ; |bird_top_entity_12                                                                                         ; bird_top_entity_12 ; work         ;
 ;    |Clock_Divider:CLOCK_25mhz|            ; 43 (43)             ; 34 (34)                   ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|Clock_Divider:CLOCK_25mhz                                                               ; Clock_Divider      ; work         ;
-;    |VGA_SYNC_12:VGA|                      ; 52 (52)             ; 55 (55)                   ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|VGA_SYNC_12:VGA                                                                         ; VGA_SYNC_12        ; work         ;
-;    |bird:c|                               ; 16 (16)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird:c                                                                                  ; bird               ; work         ;
+;    |VGA_SYNC_12:VGA|                      ; 52 (52)             ; 56 (56)                   ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|VGA_SYNC_12:VGA                                                                         ; VGA_SYNC_12        ; work         ;
+;    |bird:c|                               ; 17 (17)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird:c                                                                                  ; bird               ; work         ;
 ;    |bird_sprite_rom_12:s_rom|             ; 0 (0)               ; 0 (0)                     ; 3328              ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom                                                                ; bird_sprite_rom_12 ; work         ;
 ;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 3328              ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component                                ; altsyncram         ; work         ;
 ;          |altsyncram_0pg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 3328              ; 0          ; 0    ; 0            ; |bird_top_entity_12|bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated ; altsyncram_0pg1    ; work         ;
+;    |pipes:MY_PIPES|                       ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |bird_top_entity_12|pipes:MY_PIPES                                                                          ; pipes              ; work         ;
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -262,19 +263,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------------+----------------------------------------+
 ; VGA_SYNC_12:VGA|pixel_row[9]          ; Stuck at GND due to stuck port data_in ;
 ; VGA_SYNC_12:VGA|pixel_column[0]       ; Lost fanout                            ;
-; VGA_SYNC_12:VGA|pixel_row[0]          ; Lost fanout                            ;
-; Total Number of Removed Registers = 3 ;                                        ;
+; Total Number of Removed Registers = 2 ;                                        ;
 +---------------------------------------+----------------------------------------+
-
-
-+---------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                       ;
-+------------------------------+---------------------------+----------------------------------------+
-; Register name                ; Reason for Removal        ; Registers Removed due to This Register ;
-+------------------------------+---------------------------+----------------------------------------+
-; VGA_SYNC_12:VGA|pixel_row[9] ; Stuck at GND              ; VGA_SYNC_12:VGA|pixel_row[0]           ;
-;                              ; due to stuck port data_in ;                                        ;
-+------------------------------+---------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -282,12 +272,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 89    ;
+; Total registers                              ; 90    ;
 ; Number of registers using Synchronous Clear  ; 51    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 27    ;
+; Number of registers using Clock Enable       ; 28    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -397,15 +387,19 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Port         ; Type   ; Severity ; Details                                                                             ;
 +--------------+--------+----------+-------------------------------------------------------------------------------------+
 ; rom_addr_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; x_pos[9..4]  ; Input  ; Info     ; Stuck at GND                                                                        ;
-; x_pos[3]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; x_pos[2]     ; Input  ; Info     ; Stuck at GND                                                                        ;
-; x_pos[1]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; x_pos[2..1]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; x_pos[9..8]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; x_pos[6..5]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; x_pos[7]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; x_pos[4]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; x_pos[3]     ; Input  ; Info     ; Stuck at GND                                                                        ;
 ; x_pos[0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
-; y_pos[9..4]  ; Input  ; Info     ; Stuck at GND                                                                        ;
-; y_pos[3]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; y_pos[2]     ; Input  ; Info     ; Stuck at GND                                                                        ;
-; y_pos[1]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; y_pos[2..1]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; y_pos[9..8]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; y_pos[6..5]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; y_pos[7]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; y_pos[4]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; y_pos[3]     ; Input  ; Info     ; Stuck at GND                                                                        ;
 ; y_pos[0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
 +--------------+--------+----------+-------------------------------------------------------------------------------------+
 
@@ -425,27 +419,27 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 89                          ;
-;     ENA               ; 17                          ;
+; arriav_ff             ; 90                          ;
+;     ENA               ; 18                          ;
 ;     ENA SCLR          ; 10                          ;
 ;     SCLR              ; 41                          ;
 ;     plain             ; 21                          ;
-; arriav_lcell_comb     ; 111                         ;
+; arriav_lcell_comb     ; 116                         ;
 ;     arith             ; 52                          ;
 ;         1 data inputs ; 52                          ;
 ;     extend            ; 1                           ;
 ;         7 data inputs ; 1                           ;
-;     normal            ; 58                          ;
-;         2 data inputs ; 1                           ;
-;         3 data inputs ; 6                           ;
-;         4 data inputs ; 10                          ;
-;         5 data inputs ; 16                          ;
-;         6 data inputs ; 25                          ;
+;     normal            ; 63                          ;
+;         2 data inputs ; 3                           ;
+;         3 data inputs ; 7                           ;
+;         4 data inputs ; 16                          ;
+;         5 data inputs ; 17                          ;
+;         6 data inputs ; 20                          ;
 ; boundary_port         ; 35                          ;
 ; stratixv_ram_block    ; 13                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 6.60                        ;
-; Average LUT depth     ; 3.28                        ;
+; Average LUT depth     ; 3.27                        ;
 +-----------------------+-----------------------------+
 
 
@@ -464,12 +458,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed May 08 11:30:52 2024
+    Info: Processing started: Wed May 08 15:12:01 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off bird_top_entity_12 -c bird_top_entity_12
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juane/desktop/305flappybird/vhd and data/pipes.vhd
+    Info (12022): Found design unit 1: pipes-rtl File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 18
+    Info (12023): Found entity 1: pipes File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file /users/juane/desktop/305flappybird/vhd and data/display_controller.vhd
-    Info (12022): Found design unit 1: display_controller-beh File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd Line: 17
+    Info (12022): Found design unit 1: display_controller-beh File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd Line: 18
     Info (12023): Found entity 1: display_controller File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/display_controller.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file /users/juane/desktop/305flappybird/vhd and data/background.vhd
     Info (12022): Found design unit 1: background-beh File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/background.vhd Line: 14
@@ -490,10 +487,9 @@ Info (12021): Found 2 design units, including 1 entities, in source file /users/
     Info (12022): Found design unit 1: bird-rtl File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd Line: 22
     Info (12023): Found entity 1: bird File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd Line: 7
 Info (12127): Elaborating entity "bird_top_entity_12" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at bird_top_entity_12.vhd(92): object "rom_addr" assigned a value but never read File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 92
-Info (12128): Elaborating entity "Clock_Divider" for hierarchy "Clock_Divider:CLOCK_25mhz" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 98
-Info (12128): Elaborating entity "bird_sprite_rom_12" for hierarchy "bird_sprite_rom_12:s_rom" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 106
-Warning (272007): Not using extra address lines in altsyncram megafunction design -- 256 memory words in side A specified but total number of address lines is 21 File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd Line: 50
+Warning (10036): Verilog HDL or VHDL warning at bird_top_entity_12.vhd(103): object "rom_addr" assigned a value but never read File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 103
+Info (12128): Elaborating entity "Clock_Divider" for hierarchy "Clock_Divider:CLOCK_25mhz" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 112
+Info (12128): Elaborating entity "bird_sprite_rom_12" for hierarchy "bird_sprite_rom_12:s_rom" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 120
 Info (12128): Elaborating entity "altsyncram" for hierarchy "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd Line: 50
 Info (12130): Elaborated megafunction instantiation "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd Line: 50
 Info (12133): Instantiated megafunction "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_sprite_rom_12.vhd Line: 50
@@ -515,20 +511,25 @@ Warning (287001): Assertion warning: Not using extra address lines in altsyncram
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_0pg1.tdf
     Info (12023): Found entity 1: altsyncram_0pg1 File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_0pg1" for hierarchy "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated" File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Info (12128): Elaborating entity "bird" for hierarchy "bird:c" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 115
+Info (12128): Elaborating entity "bird" for hierarchy "bird:c" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 129
 Warning (10541): VHDL Signal Declaration warning at bird.vhd(14): used implicit default value for signal "rom_addr_out" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd Line: 14
 Warning (10492): VHDL Process Statement warning at bird.vhd(53): signal "x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd Line: 53
 Warning (10492): VHDL Process Statement warning at bird.vhd(54): signal "y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird.vhd Line: 54
-Info (12128): Elaborating entity "background" for hierarchy "background:BG" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 134
-Info (12128): Elaborating entity "display_controller" for hierarchy "display_controller:DISPLAY" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 141
-Info (12128): Elaborating entity "VGA_SYNC_12" for hierarchy "VGA_SYNC_12:VGA" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 156
+Info (12128): Elaborating entity "background" for hierarchy "background:BG" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 148
+Info (12128): Elaborating entity "pipes" for hierarchy "pipes:MY_PIPES" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 156
+Warning (10540): VHDL Signal Declaration warning at pipes.vhd(30): used explicit default value for signal "pipe1_y_pos" because signal was never assigned a value File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 30
+Warning (10540): VHDL Signal Declaration warning at pipes.vhd(30): used explicit default value for signal "pipe2_y_pos" because signal was never assigned a value File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 30
+Warning (10540): VHDL Signal Declaration warning at pipes.vhd(31): used explicit default value for signal "pipe1_x_pos" because signal was never assigned a value File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 31
+Warning (10540): VHDL Signal Declaration warning at pipes.vhd(31): used explicit default value for signal "pipe2_x_pos" because signal was never assigned a value File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 31
+Info (12128): Elaborating entity "display_controller" for hierarchy "display_controller:DISPLAY" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 168
+Info (12128): Elaborating entity "VGA_SYNC_12" for hierarchy "VGA_SYNC_12:VGA" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/bird_top_entity_12.vhd Line: 187
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following RAM node(s):
         Warning (14320): Synthesized away node "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|q_a[13]" File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf Line: 307
         Warning (14320): Synthesized away node "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|q_a[14]" File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf Line: 328
         Warning (14320): Synthesized away node "bird_sprite_rom_12:s_rom|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|q_a[15]" File: C:/Users/juane/Desktop/305FlappyBird/BirdSpriteQuartus/db/altsyncram_0pg1.tdf Line: 349
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 2 registers lost all their fanouts during netlist optimizations.
+Info (17049): 1 registers lost all their fanouts during netlist optimizations.
 Warning (20013): Ignored 24 assignments for entity "DE0_CV_Default" -- entity does not exist in design
     Warning (20014): Assignment for entity set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -entity DE0_CV_Default -section_id Top was ignored
     Warning (20014): Assignment for entity set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -entity DE0_CV_Default -section_id Top was ignored
@@ -556,14 +557,14 @@ Warning (20013): Ignored 24 assignments for entity "DE0_CV_Default" -- entity do
     Warning (20014): Assignment for entity set_global_assignment -name PARTITION_ENABLE_STRICT_PRESERVATION OFF -entity DE0_CV_Default -section_id Top was ignored
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 214 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 220 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 11 input pins
     Info (21059): Implemented 24 output pins
-    Info (21061): Implemented 166 logic cells
+    Info (21061): Implemented 172 logic cells
     Info (21064): Implemented 13 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 37 warnings
-    Info: Peak virtual memory: 4903 megabytes
-    Info: Processing ended: Wed May 08 11:30:58 2024
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 40 warnings
+    Info: Peak virtual memory: 4924 megabytes
+    Info: Processing ended: Wed May 08 15:12:07 2024
     Info: Elapsed time: 00:00:06
     Info: Total CPU time (on all processors): 00:00:04
 

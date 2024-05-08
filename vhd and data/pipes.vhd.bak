@@ -19,7 +19,7 @@ architecture rtl of pipes is
   constant screen_height : integer := 479;
   constant screen_width  : integer := 639;
   constant size          : integer := 16;
-  constant gap_size      : integer := 64;
+  constant gap_size      : integer := 32;
   constant scale         : integer := 1;
 
   -- Top and Bottom pipes
@@ -29,33 +29,26 @@ architecture rtl of pipes is
   -- x and y position for pipes
   signal pipe1_y_pos, pipe2_y_pos : std_logic_vector(9 downto 0) := conv_std_logic_vector(200, 10);
   signal pipe1_x_pos, pipe2_x_pos : std_logic_vector(9 downto 0) := conv_std_logic_vector(480, 10);
-
-  signal s_pipe_on : std_logic;
 begin
 
   -- Output either top or bottom pipe is being drawn
-  s_pipe_on <= pipe1_bottom_on or pipe1_top_on or pipe2_bottom_on or pipe2_top_on;
-  pipe_on   <= s_pipe_on;
+  pipe_on <= pipe1_bottom_on or pipe1_top_on or pipe2_bottom_on or pipe2_top_on;
 
   -- Pipe1 : TOP AND BOTTOM
   pipe1_top_on <= '1' when (pixel_column >= pipe1_x_pos) and (pixel_column < pipe1_x_pos + size)
-    and (pixel_row >= 0) and (pixel_row < pipe1_y_pos - gap_size) else
-    '0';
+    and (pixel_row >= 0) and (pixel_row < pipe1_y_pos - gap_size);
 
   pipe1_bottom_on <= '1' when (pixel_column >= pipe1_x_pos) and (pixel_column < pipe1_x_pos + size)
-    and (pixel_row >= pipe1_y_pos + gap_size) and (pixel_row < screen_height) else
-    '0';
+    and (pixel_row >= pipe1_y_pos + gap_size) and (pixel_row < screen_height);
 
   -- Pipe2 : TOP AND BOTTOM
   pipe2_top_on <= '1' when (pixel_column >= pipe2_x_pos) and (pixel_column < pipe2_x_pos + size)
-    and (pixel_row >= 0) and (pixel_row < pipe2_y_pos - gap_size) else
-    '0';
+    and (pixel_row >= 0) and (pixel_row < pipe2_y_pos - gap_size);
 
   pipe2_bottom_on <= '1' when (pixel_column >= pipe2_x_pos) and (pixel_column < pipe2_x_pos + size)
-    and (pixel_row >= pipe2_y_pos + gap_size) and (pixel_row < screen_height) else
-    '0';
+    and (pixel_row >= pipe2_y_pos + gap_size) and (pixel_row < screen_height);
 
-  red_out   <= (others => s_pipe_on);
+  red_out   <= (others => pipe_on);
   green_out <= (others => '0');
-  blue_out  <= (others => s_pipe_on);
+  blue_out  <= (others => pipe_on);
 end architecture;
