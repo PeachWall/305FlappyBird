@@ -17,12 +17,12 @@ end entity display_controller;
 
 architecture beh of display_controller is
 
-  -- COLOR INPUT (C = COLOR WHETHER ITS R, G, OR B) => "XCCC" WHERE X IF IT IS ON
-  function get_color(color1, color2, color3 : std_logic_vector(4 downto 0)) return std_logic_vector is
+  function get_color(color1, color2, color3 : std_logic_vector(3 downto 0);
+    set1, set2                                : std_logic) return std_logic_vector is
   begin
-    if (color1(4) = '1') then
+    if (set1 = '1') then
       return color1;
-    elsif (color2(4) = '1') then
+    elsif (set2 = '1') then
       return color2;
     else
       return color3;
@@ -41,7 +41,7 @@ begin
   --   pipe_r when pipe_on = '1' else
   --   bg_r;
 
-  r_out <= get_color(bird_a & bird_r, pipe_on & pipe_r, bg_r);
-  g_out <= get_color(bird_a & bird_g, pipe_on & pipe_g, bg_g);
-  b_out <= get_color(bird_a & bird_b, pipe_on & pipe_b, bg_b);
+  r_out <= get_color(bird_r, pipe_r, bg_r, bird_a, pipe_on);
+  g_out <= get_color(bird_g, pipe_g, bg_g, bird_a, pipe_on);
+  b_out <= get_color(bird_b, pipe_b, bg_b, bird_a, pipe_on);
 end architecture;
