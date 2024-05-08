@@ -14,7 +14,7 @@ VGA_B[2] <= VGA_SYNC_12:VGA.blue_out[2]
 VGA_B[3] <= VGA_SYNC_12:VGA.blue_out[3]
 h_sync_out <= VGA_SYNC_12:VGA.horiz_sync_out
 v_sync_out <= VGA_SYNC_12:VGA.vert_sync_out
-LEDR[0] <= pipes:MY_PIPES.pipe_on
+LEDR[0] <= collision:COLLISION_DETECTOR.pipe_collided
 LEDR[1] <= <GND>
 LEDR[2] <= <GND>
 LEDR[3] <= <GND>
@@ -742,6 +742,12 @@ Q[4] <= s_Q[4].DB_MAX_OUTPUT_PORT_TYPE
 Q[5] <= s_Q[5].DB_MAX_OUTPUT_PORT_TYPE
 Q[6] <= s_Q[6].DB_MAX_OUTPUT_PORT_TYPE
 Q[7] <= s_Q[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|bird_top_entity_12|collision:COLLISION_DETECTOR
+bird_on => pipe_collided.IN0
+pipe_on => pipe_collided.IN1
+pipe_collided <= pipe_collided.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |bird_top_entity_12|display_controller:DISPLAY

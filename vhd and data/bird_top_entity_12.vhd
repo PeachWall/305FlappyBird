@@ -68,6 +68,14 @@ architecture beh of bird_top_entity_12 is
     );
   end component;
 
+  component collision is
+    port
+    (
+      bird_on, pipe_on : in std_logic;
+      pipe_collided    : out std_logic
+    );
+  end component;
+
   component pipes is
     port
     (
@@ -93,10 +101,10 @@ architecture beh of bird_top_entity_12 is
 
   signal CLOCK_25, s_v_sync : std_logic;
 
-  signal s_pixel_row            : std_logic_vector(9 downto 0);
-  signal s_pixel_column         : std_logic_vector(9 downto 0);
-  signal s_red, s_green, s_blue : std_logic_vector(3 downto 0);
-  signal s_alpha                : std_logic;
+  signal s_pixel_row                     : std_logic_vector(9 downto 0);
+  signal s_pixel_column                  : std_logic_vector(9 downto 0);
+  signal bird_red, bird_green, bird_blue : std_logic_vector(3 downto 0);
+  signal bird_alpha                      : std_logic;
 
   signal bg_red, bg_green, bg_blue  : std_logic_vector(3 downto 0);
   signal M                          : std_logic_vector(15 downto 0);
@@ -107,6 +115,7 @@ architecture beh of bird_top_entity_12 is
   signal s_pipe_on                          : std_logic;
 
   signal s_red_out, s_green_out, s_blue_out : std_logic_vector(3 downto 0);
+  signal pipe_collided                      : std_logic;
 begin
 
   CLOCK_25mhz : Clock_Divider
@@ -136,10 +145,10 @@ begin
   rgba         => s_rgba,
   x_pos        => CONV_STD_LOGIC_VECTOR(150, 10),
   y_pos        => CONV_STD_LOGIC_VECTOR(150, 10),
-  red          => s_red,
-  green        => s_green,
-  blue         => s_blue,
-  alpha        => s_alpha,
+  red          => bird_red,
+  green        => bird_green,
+  blue         => bird_blue,
+  alpha        => bird_alpha,
   sprite_row   => s_sprite_row,
   sprite_col   => s_sprite_col
   );
@@ -165,16 +174,24 @@ begin
   pipe_on      => s_pipe_on
   );
 
+  COLLISION_DETECTOR : collision
+  port
+  map(
+  bird_on       => bird_alpha,
+  pipe_on       => s_pipe_on,
+  pipe_collided => pipe_collided
+  );
+
   DISPLAY : display_controller
   port
   map(
   bg_r    => bg_red,
   bg_g    => bg_green,
   bg_b    => bg_blue,
-  bird_r  => s_red,
-  bird_g  => s_green,
-  bird_b  => s_blue,
-  bird_a  => s_alpha,
+  bird_r  => bird_red,
+  bird_g  => bird_green,
+  bird_b  => bird_blue,
+  bird_a  => bird_alpha,
   pipe_r  => pipes_red,
   pipe_g  => pipes_green,
   pipe_b  => pipes_blue,
@@ -202,6 +219,6 @@ begin
   );
 
   v_sync_out <= s_v_sync;
-  LEDR(0)    <= s_pipe_on;
+  LEDR(0)    <= pipe_collided;
 
 end beh; -- beh
