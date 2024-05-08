@@ -36,7 +36,6 @@ architecture beh of bird_top_entity_12 is
       pixel_row, pixel_column : in std_logic_vector(9 downto 0);
       v_sync                  : in std_logic;
       rgba                    : in std_logic_vector(12 downto 0);
-      rom_addr_out            : out std_logic_vector (3 downto 0);
       x_pos, y_pos            : in std_logic_vector(9 downto 0);
       red, green, blue        : out std_logic_vector(3 downto 0);
       alpha                   : out std_logic;
@@ -69,14 +68,26 @@ architecture beh of bird_top_entity_12 is
     );
   end component;
 
+  component pipes is
+    port
+    (
+      clk                          : in std_logic;
+      v_sync                       : in std_logic;
+      pixel_row, pixel_column      : in std_logic_vector(9 downto 0);
+      red_out, green_out, blue_out : out std_logic_vector(3 downto 0);
+      pipe_on                      : out std_logic
+    );
+  end component;
+
   component display_controller is
     port
     (
       bg_r, bg_g, bg_b       : in std_logic_vector(3 downto 0);
       bird_r, bird_g, bird_b : in std_logic_vector(3 downto 0);
       bird_a                 : std_logic;
-      -- pipe_r, pipe_g, pipe_b : in std_logic_vector(3 downto 0); -- to be added when we have pipe
-      r_out, g_out, b_out : out std_logic_vector(3 downto 0)
+      pipe_r, pipe_g, pipe_b : in std_logic_vector(3 downto 0); -- to be added when we have pipe
+      pipe_on                : std_logic;
+      r_out, g_out, b_out    : out std_logic_vector(3 downto 0)
     );
   end component;
 
@@ -87,10 +98,13 @@ architecture beh of bird_top_entity_12 is
   signal s_red, s_green, s_blue : std_logic_vector(3 downto 0);
   signal s_alpha                : std_logic;
 
-  signal bg_red, bg_green, bg_blue            : std_logic_vector(3 downto 0);
-  signal M                                    : std_logic_vector(15 downto 0);
-  signal rom_addr, s_sprite_row, s_sprite_col : std_logic_vector(3 downto 0);
-  signal s_rgba                               : std_logic_vector(12 downto 0);
+  signal bg_red, bg_green, bg_blue  : std_logic_vector(3 downto 0);
+  signal M                          : std_logic_vector(15 downto 0);
+  signal s_sprite_row, s_sprite_col : std_logic_vector(3 downto 0);
+  signal s_rgba                     : std_logic_vector(12 downto 0);
+
+  signal pipes_red, pipes_green, pipes_blue : std_logic_vector(3 downto 0);
+  signal s_pipe_on                          : std_logic;
 
   signal s_red_out, s_green_out, s_blue_out : std_logic_vector(3 downto 0);
 begin
@@ -112,7 +126,7 @@ begin
   pixel_output => s_rgba
   );
 
-  c : bird
+  sprite : bird
   port
   map(
   clk          => CLOCK_25,
@@ -120,9 +134,8 @@ begin
   pixel_column => s_pixel_column,
   v_sync       => s_v_sync,
   rgba         => s_rgba,
-  rom_addr_out => rom_addr,
-  x_pos        => CONV_STD_LOGIC_VECTOR(10, 10),
-  y_pos        => CONV_STD_LOGIC_VECTOR(10, 10),
+  x_pos        => CONV_STD_LOGIC_VECTOR(150, 10),
+  y_pos        => CONV_STD_LOGIC_VECTOR(150, 10),
   red          => s_red,
   green        => s_green,
   blue         => s_blue,
@@ -138,19 +151,37 @@ begin
   green => bg_green,
   blue  => bg_blue
   );
+
+  MY_PIPES : pipes
+  port
+  map(
+  clk          => CLOCK_25,
+  v_sync       => s_v_sync,
+  pixel_row    => s_pixel_row,
+  pixel_column => s_pixel_column,
+  red_out      => pipes_red,
+  green_out    => pipes_green,
+  blue_out     => pipes_blue,
+  pipe_on      => s_pipe_on
+  );
+
   DISPLAY : display_controller
   port
   map(
-  bg_r   => bg_red,
-  bg_g   => bg_green,
-  bg_b   => bg_blue,
-  bird_r => s_red,
-  bird_g => s_green,
-  bird_b => s_blue,
-  bird_a => s_alpha,
-  r_out  => s_red_out,
-  g_out  => s_green_out,
-  b_out  => s_blue_out
+  bg_r    => bg_red,
+  bg_g    => bg_green,
+  bg_b    => bg_blue,
+  bird_r  => s_red,
+  bird_g  => s_green,
+  bird_b  => s_blue,
+  bird_a  => s_alpha,
+  pipe_r  => pipes_red,
+  pipe_g  => pipes_green,
+  pipe_b  => pipes_blue,
+  pipe_on => s_pipe_on,
+  r_out   => s_red_out,
+  g_out   => s_green_out,
+  b_out   => s_blue_out
   );
 
   VGA : VGA_SYNC_12
@@ -171,6 +202,6 @@ begin
   );
 
   v_sync_out <= s_v_sync;
-  LEDR       <= SW;
+  LEDR(0)    <= s_pipe_on;
 
 end beh; -- beh
