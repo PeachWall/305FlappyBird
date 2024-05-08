@@ -72,6 +72,7 @@ architecture beh of bird_top_entity_12 is
   component pipes is
     port
     (
+      clk                          : in std_logic;
       v_sync                       : in std_logic;
       pixel_row, pixel_column      : in std_logic_vector(9 downto 0);
       red_out, green_out, blue_out : out std_logic_vector(3 downto 0);
@@ -126,7 +127,7 @@ begin
   pixel_output => s_rgba
   );
 
-  c : bird
+  sprite : bird
   port
   map(
   clk          => CLOCK_25,
@@ -156,6 +157,7 @@ begin
   MY_PIPES : pipes
   port
   map(
+  clk          => CLOCK_25,
   v_sync       => s_v_sync,
   pixel_row    => s_pixel_row,
   pixel_column => s_pixel_column,
@@ -202,6 +204,6 @@ begin
   );
 
   v_sync_out <= s_v_sync;
-  LEDR       <= SW;
+  LEDR(0)    <= s_pipe_on;
 
 end beh; -- beh

@@ -1,5 +1,5 @@
 Timing Analyzer report for bird_top_entity_12
-Wed May 08 15:31:46 2024
+Wed May 08 18:30:50 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -50,11 +50,9 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
  42. Report RSKM
  43. Unconstrained Paths Summary
  44. Clock Status Summary
- 45. Unconstrained Input Ports
+ 45. Unconstrained Output Ports
  46. Unconstrained Output Ports
- 47. Unconstrained Input Ports
- 48. Unconstrained Output Ports
- 49. Timing Analyzer Messages
+ 47. Timing Analyzer Messages
 
 
 
@@ -99,22 +97,24 @@ refer to the applicable agreement for further details.
 ; Number detected on machine ; 20          ;
 ; Maximum allowed            ; 14          ;
 ;                            ;             ;
-; Average used               ; 1.25        ;
+; Average used               ; 1.33        ;
 ; Maximum used               ; 14          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   2.5%      ;
-;     Processor 3            ;   2.3%      ;
-;     Processor 4            ;   2.3%      ;
-;     Processor 5            ;   2.1%      ;
-;     Processor 6            ;   2.0%      ;
-;     Processor 7            ;   2.0%      ;
-;     Processor 8            ;   2.0%      ;
-;     Processor 9            ;   2.0%      ;
-;     Processor 10           ;   2.0%      ;
-;     Processor 11           ;   2.0%      ;
-;     Processors 12-14       ;   1.3%      ;
+;     Processor 2            ;   3.1%      ;
+;     Processor 3            ;   2.9%      ;
+;     Processor 4            ;   2.8%      ;
+;     Processor 5            ;   2.5%      ;
+;     Processor 6            ;   2.5%      ;
+;     Processor 7            ;   2.5%      ;
+;     Processor 8            ;   2.4%      ;
+;     Processor 9            ;   2.4%      ;
+;     Processor 10           ;   2.4%      ;
+;     Processor 11           ;   2.4%      ;
+;     Processor 12           ;   2.4%      ;
+;     Processor 13           ;   2.4%      ;
+;     Processor 14           ;   2.3%      ;
 +----------------------------+-------------+
 
 
@@ -125,6 +125,7 @@ refer to the applicable agreement for further details.
 +-----------------------------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------------------------------+
 ; CLOCK_50                          ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { CLOCK_50 }                          ;
 ; Clock_Divider:CLOCK_25mhz|clk_out ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { Clock_Divider:CLOCK_25mhz|clk_out } ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { VGA_SYNC_12:VGA|vert_sync_out }     ;
 +-----------------------------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------------------------------------+
 
 
@@ -133,8 +134,9 @@ refer to the applicable agreement for further details.
 +------------+-----------------+-----------------------------------+------+
 ; Fmax       ; Restricted Fmax ; Clock Name                        ; Note ;
 +------------+-----------------+-----------------------------------+------+
-; 158.4 MHz  ; 158.4 MHz       ; CLOCK_50                          ;      ;
-; 211.06 MHz ; 211.06 MHz      ; Clock_Divider:CLOCK_25mhz|clk_out ;      ;
+; 155.04 MHz ; 155.04 MHz      ; CLOCK_50                          ;      ;
+; 167.31 MHz ; 167.31 MHz      ; Clock_Divider:CLOCK_25mhz|clk_out ;      ;
+; 222.47 MHz ; 222.47 MHz      ; VGA_SYNC_12:VGA|vert_sync_out     ;      ;
 +------------+-----------------+-----------------------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -150,8 +152,9 @@ HTML report is unavailable in plain text report export.
 +-----------------------------------+--------+---------------+
 ; Clock                             ; Slack  ; End Point TNS ;
 +-----------------------------------+--------+---------------+
-; CLOCK_50                          ; -5.313 ; -171.328      ;
-; Clock_Divider:CLOCK_25mhz|clk_out ; -3.738 ; -189.834      ;
+; CLOCK_50                          ; -5.450 ; -176.114      ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; -4.977 ; -282.112      ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; -3.904 ; -178.975      ;
 +-----------------------------------+--------+---------------+
 
 
@@ -160,8 +163,9 @@ HTML report is unavailable in plain text report export.
 +-----------------------------------+-------+---------------+
 ; Clock                             ; Slack ; End Point TNS ;
 +-----------------------------------+-------+---------------+
-; CLOCK_50                          ; 0.439 ; 0.000         ;
-; Clock_Divider:CLOCK_25mhz|clk_out ; 0.759 ; 0.000         ;
+; CLOCK_50                          ; 0.440 ; 0.000         ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; 0.577 ; 0.000         ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; 0.624 ; 0.000         ;
 +-----------------------------------+-------+---------------+
 
 
@@ -182,8 +186,9 @@ No paths to report.
 +-----------------------------------+--------+---------------+
 ; Clock                             ; Slack  ; End Point TNS ;
 +-----------------------------------+--------+---------------+
-; Clock_Divider:CLOCK_25mhz|clk_out ; -2.636 ; -86.031       ;
-; CLOCK_50                          ; -0.538 ; -26.394       ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; -2.636 ; -107.185      ;
+; CLOCK_50                          ; -0.643 ; -26.564       ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; -0.538 ; -45.557       ;
 +-----------------------------------+--------+---------------+
 
 
@@ -198,8 +203,9 @@ No synchronizer chains to report.
 +------------+-----------------+-----------------------------------+------+
 ; Fmax       ; Restricted Fmax ; Clock Name                        ; Note ;
 +------------+-----------------+-----------------------------------+------+
-; 154.01 MHz ; 154.01 MHz      ; CLOCK_50                          ;      ;
-; 210.79 MHz ; 210.79 MHz      ; Clock_Divider:CLOCK_25mhz|clk_out ;      ;
+; 151.15 MHz ; 151.15 MHz      ; CLOCK_50                          ;      ;
+; 166.25 MHz ; 166.25 MHz      ; Clock_Divider:CLOCK_25mhz|clk_out ;      ;
+; 221.58 MHz ; 221.58 MHz      ; VGA_SYNC_12:VGA|vert_sync_out     ;      ;
 +------------+-----------------+-----------------------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -209,8 +215,9 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-----------------------------------+--------+---------------+
 ; Clock                             ; Slack  ; End Point TNS ;
 +-----------------------------------+--------+---------------+
-; CLOCK_50                          ; -5.493 ; -178.279      ;
-; Clock_Divider:CLOCK_25mhz|clk_out ; -3.744 ; -189.800      ;
+; CLOCK_50                          ; -5.616 ; -181.914      ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; -5.015 ; -275.149      ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; -4.012 ; -180.497      ;
 +-----------------------------------+--------+---------------+
 
 
@@ -220,7 +227,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 ; Clock                             ; Slack ; End Point TNS ;
 +-----------------------------------+-------+---------------+
 ; CLOCK_50                          ; 0.448 ; 0.000         ;
-; Clock_Divider:CLOCK_25mhz|clk_out ; 0.749 ; 0.000         ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; 0.608 ; 0.000         ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; 0.658 ; 0.000         ;
 +-----------------------------------+-------+---------------+
 
 
@@ -241,8 +249,9 @@ No paths to report.
 +-----------------------------------+--------+---------------+
 ; Clock                             ; Slack  ; End Point TNS ;
 +-----------------------------------+--------+---------------+
-; Clock_Divider:CLOCK_25mhz|clk_out ; -2.636 ; -85.859       ;
-; CLOCK_50                          ; -0.538 ; -27.767       ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; -2.636 ; -106.265      ;
+; CLOCK_50                          ; -0.670 ; -27.846       ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; -0.538 ; -44.936       ;
 +-----------------------------------+--------+---------------+
 
 
@@ -257,8 +266,9 @@ No synchronizer chains to report.
 +-----------------------------------+--------+---------------+
 ; Clock                             ; Slack  ; End Point TNS ;
 +-----------------------------------+--------+---------------+
-; CLOCK_50                          ; -1.989 ; -62.686       ;
-; Clock_Divider:CLOCK_25mhz|clk_out ; -1.476 ; -72.889       ;
+; CLOCK_50                          ; -2.041 ; -64.397       ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; -1.978 ; -111.578      ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; -1.744 ; -73.045       ;
 +-----------------------------------+--------+---------------+
 
 
@@ -267,8 +277,9 @@ No synchronizer chains to report.
 +-----------------------------------+-------+---------------+
 ; Clock                             ; Slack ; End Point TNS ;
 +-----------------------------------+-------+---------------+
-; CLOCK_50                          ; 0.197 ; 0.000         ;
-; Clock_Divider:CLOCK_25mhz|clk_out ; 0.282 ; 0.000         ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; 0.174 ; 0.000         ;
+; CLOCK_50                          ; 0.199 ; 0.000         ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; 0.241 ; 0.000         ;
 +-----------------------------------+-------+---------------+
 
 
@@ -289,8 +300,9 @@ No paths to report.
 +-----------------------------------+--------+---------------+
 ; Clock                             ; Slack  ; End Point TNS ;
 +-----------------------------------+--------+---------------+
-; Clock_Divider:CLOCK_25mhz|clk_out ; -2.174 ; -30.992       ;
-; CLOCK_50                          ; -0.464 ; -3.534        ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; -2.174 ; -31.052       ;
+; CLOCK_50                          ; -0.575 ; -3.757        ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; 0.020  ; 0.000         ;
 +-----------------------------------+--------+---------------+
 
 
@@ -305,8 +317,9 @@ No synchronizer chains to report.
 +-----------------------------------+--------+---------------+
 ; Clock                             ; Slack  ; End Point TNS ;
 +-----------------------------------+--------+---------------+
-; CLOCK_50                          ; -1.818 ; -57.384       ;
-; Clock_Divider:CLOCK_25mhz|clk_out ; -1.362 ; -64.555       ;
+; CLOCK_50                          ; -1.848 ; -58.508       ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; -1.791 ; -96.133       ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; -1.540 ; -64.827       ;
 +-----------------------------------+--------+---------------+
 
 
@@ -315,8 +328,9 @@ No synchronizer chains to report.
 +-----------------------------------+-------+---------------+
 ; Clock                             ; Slack ; End Point TNS ;
 +-----------------------------------+-------+---------------+
+; VGA_SYNC_12:VGA|vert_sync_out     ; 0.136 ; 0.000         ;
 ; CLOCK_50                          ; 0.187 ; 0.000         ;
-; Clock_Divider:CLOCK_25mhz|clk_out ; 0.258 ; 0.000         ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; 0.201 ; 0.000         ;
 +-----------------------------------+-------+---------------+
 
 
@@ -337,8 +351,9 @@ No paths to report.
 +-----------------------------------+--------+---------------+
 ; Clock                             ; Slack  ; End Point TNS ;
 +-----------------------------------+--------+---------------+
-; Clock_Divider:CLOCK_25mhz|clk_out ; -2.174 ; -30.906       ;
-; CLOCK_50                          ; -0.458 ; -3.601        ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; -2.174 ; -30.976       ;
+; CLOCK_50                          ; -0.547 ; -3.772        ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; 0.054  ; 0.000         ;
 +-----------------------------------+--------+---------------+
 
 
@@ -353,12 +368,14 @@ No synchronizer chains to report.
 +------------------------------------+----------+-------+----------+---------+---------------------+
 ; Clock                              ; Setup    ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +------------------------------------+----------+-------+----------+---------+---------------------+
-; Worst-case Slack                   ; -5.493   ; 0.187 ; N/A      ; N/A     ; -2.636              ;
-;  CLOCK_50                          ; -5.493   ; 0.187 ; N/A      ; N/A     ; -0.538              ;
-;  Clock_Divider:CLOCK_25mhz|clk_out ; -3.744   ; 0.258 ; N/A      ; N/A     ; -2.636              ;
-; Design-wide TNS                    ; -368.079 ; 0.0   ; 0.0      ; 0.0     ; -113.626            ;
-;  CLOCK_50                          ; -178.279 ; 0.000 ; N/A      ; N/A     ; -27.767             ;
-;  Clock_Divider:CLOCK_25mhz|clk_out ; -189.834 ; 0.000 ; N/A      ; N/A     ; -86.031             ;
+; Worst-case Slack                   ; -5.616   ; 0.136 ; N/A      ; N/A     ; -2.636              ;
+;  CLOCK_50                          ; -5.616   ; 0.187 ; N/A      ; N/A     ; -0.670              ;
+;  Clock_Divider:CLOCK_25mhz|clk_out ; -5.015   ; 0.201 ; N/A      ; N/A     ; -2.636              ;
+;  VGA_SYNC_12:VGA|vert_sync_out     ; -4.012   ; 0.136 ; N/A      ; N/A     ; -0.538              ;
+; Design-wide TNS                    ; -637.56  ; 0.0   ; 0.0      ; 0.0     ; -179.306            ;
+;  CLOCK_50                          ; -181.914 ; 0.000 ; N/A      ; N/A     ; -27.846             ;
+;  Clock_Divider:CLOCK_25mhz|clk_out ; -282.112 ; 0.000 ; N/A      ; N/A     ; -107.185            ;
+;  VGA_SYNC_12:VGA|vert_sync_out     ; -180.497 ; 0.000 ; N/A      ; N/A     ; -45.557             ;
 +------------------------------------+----------+-------+----------+---------+---------------------+
 
 
@@ -547,7 +564,10 @@ No synchronizer chains to report.
 ; From Clock                        ; To Clock                          ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +-----------------------------------+-----------------------------------+----------+----------+----------+----------+
 ; CLOCK_50                          ; CLOCK_50                          ; 17954    ; 0        ; 0        ; 0        ;
-; Clock_Divider:CLOCK_25mhz|clk_out ; Clock_Divider:CLOCK_25mhz|clk_out ; 1334     ; 0        ; 0        ; 0        ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; Clock_Divider:CLOCK_25mhz|clk_out ; 2566     ; 0        ; 0        ; 0        ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; Clock_Divider:CLOCK_25mhz|clk_out ; 1420     ; 0        ; 0        ; 0        ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; VGA_SYNC_12:VGA|vert_sync_out     ; 90       ; 0        ; 0        ; 0        ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; VGA_SYNC_12:VGA|vert_sync_out     ; 619      ; 0        ; 0        ; 0        ;
 +-----------------------------------+-----------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -558,7 +578,10 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 ; From Clock                        ; To Clock                          ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +-----------------------------------+-----------------------------------+----------+----------+----------+----------+
 ; CLOCK_50                          ; CLOCK_50                          ; 17954    ; 0        ; 0        ; 0        ;
-; Clock_Divider:CLOCK_25mhz|clk_out ; Clock_Divider:CLOCK_25mhz|clk_out ; 1334     ; 0        ; 0        ; 0        ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; Clock_Divider:CLOCK_25mhz|clk_out ; 2566     ; 0        ; 0        ; 0        ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; Clock_Divider:CLOCK_25mhz|clk_out ; 1420     ; 0        ; 0        ; 0        ;
+; Clock_Divider:CLOCK_25mhz|clk_out ; VGA_SYNC_12:VGA|vert_sync_out     ; 90       ; 0        ; 0        ; 0        ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; VGA_SYNC_12:VGA|vert_sync_out     ; 619      ; 0        ; 0        ; 0        ;
 +-----------------------------------+-----------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -582,10 +605,10 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
-; Unconstrained Input Ports       ; 10    ; 10   ;
-; Unconstrained Input Port Paths  ; 10    ; 10   ;
-; Unconstrained Output Ports      ; 24    ; 24   ;
-; Unconstrained Output Port Paths ; 24    ; 24   ;
+; Unconstrained Input Ports       ; 0     ; 0    ;
+; Unconstrained Input Port Paths  ; 0     ; 0    ;
+; Unconstrained Output Ports      ; 15    ; 15   ;
+; Unconstrained Output Port Paths ; 95    ; 95   ;
 +---------------------------------+-------+------+
 
 
@@ -596,25 +619,8 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +-----------------------------------+-----------------------------------+------+-------------+
 ; CLOCK_50                          ; CLOCK_50                          ; Base ; Constrained ;
 ; Clock_Divider:CLOCK_25mhz|clk_out ; Clock_Divider:CLOCK_25mhz|clk_out ; Base ; Constrained ;
+; VGA_SYNC_12:VGA|vert_sync_out     ; VGA_SYNC_12:VGA|vert_sync_out     ; Base ; Constrained ;
 +-----------------------------------+-----------------------------------+------+-------------+
-
-
-+---------------------------------------------------------------------------------------------------+
-; Unconstrained Input Ports                                                                         ;
-+------------+--------------------------------------------------------------------------------------+
-; Input Port ; Comment                                                                              ;
-+------------+--------------------------------------------------------------------------------------+
-; SW[0]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[1]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[2]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[3]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[4]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[5]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[6]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[7]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[8]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[9]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+------------+--------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------+
@@ -623,15 +629,6 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; Output Port ; Comment                                                                               ;
 +-------------+---------------------------------------------------------------------------------------+
 ; LEDR[0]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[1]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[2]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[3]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[4]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[5]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[8]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[9]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; VGA_B[0]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; VGA_B[1]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; VGA_B[2]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -649,39 +646,12 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +-------------+---------------------------------------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------+
-; Unconstrained Input Ports                                                                         ;
-+------------+--------------------------------------------------------------------------------------+
-; Input Port ; Comment                                                                              ;
-+------------+--------------------------------------------------------------------------------------+
-; SW[0]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[1]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[2]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[3]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[4]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[5]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[6]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[7]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[8]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; SW[9]      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+------------+--------------------------------------------------------------------------------------+
-
-
 +-----------------------------------------------------------------------------------------------------+
 ; Unconstrained Output Ports                                                                          ;
 +-------------+---------------------------------------------------------------------------------------+
 ; Output Port ; Comment                                                                               ;
 +-------------+---------------------------------------------------------------------------------------+
 ; LEDR[0]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[1]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[2]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[3]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[4]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[5]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[8]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[9]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; VGA_B[0]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; VGA_B[1]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; VGA_B[2]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -705,7 +675,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed May 08 15:31:43 2024
+    Info: Processing started: Wed May 08 18:30:46 2024
 Info: Command: quartus_sta bird_top_entity_12 -c bird_top_entity_12
 Info: qsta_default_script.tcl version: #1
 Warning (20013): Ignored 24 assignments for entity "DE0_CV_Default" -- entity does not exist in design
@@ -742,102 +712,115 @@ Info (332142): No user constrained base clocks found in the design. Calling "der
 Info (332105): Deriving Clocks
     Info (332105): create_clock -period 1.000 -name Clock_Divider:CLOCK_25mhz|clk_out Clock_Divider:CLOCK_25mhz|clk_out
     Info (332105): create_clock -period 1.000 -name CLOCK_50 CLOCK_50
+    Info (332105): create_clock -period 1.000 -name VGA_SYNC_12:VGA|vert_sync_out VGA_SYNC_12:VGA|vert_sync_out
 Info (332143): No user constrained clock uncertainty found in the design. Calling "derive_clock_uncertainty"
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1100mV 85C Model
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -5.313
+Info (332146): Worst-case setup slack is -5.450
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -5.313            -171.328 CLOCK_50 
-    Info (332119):    -3.738            -189.834 Clock_Divider:CLOCK_25mhz|clk_out 
-Info (332146): Worst-case hold slack is 0.439
+    Info (332119):    -5.450            -176.114 CLOCK_50 
+    Info (332119):    -4.977            -282.112 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):    -3.904            -178.975 VGA_SYNC_12:VGA|vert_sync_out 
+Info (332146): Worst-case hold slack is 0.440
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.439               0.000 CLOCK_50 
-    Info (332119):     0.759               0.000 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):     0.440               0.000 CLOCK_50 
+    Info (332119):     0.577               0.000 VGA_SYNC_12:VGA|vert_sync_out 
+    Info (332119):     0.624               0.000 Clock_Divider:CLOCK_25mhz|clk_out 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.636
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.636             -86.031 Clock_Divider:CLOCK_25mhz|clk_out 
-    Info (332119):    -0.538             -26.394 CLOCK_50 
+    Info (332119):    -2.636            -107.185 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):    -0.643             -26.564 CLOCK_50 
+    Info (332119):    -0.538             -45.557 VGA_SYNC_12:VGA|vert_sync_out 
 Info: Analyzing Slow 1100mV 0C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -5.493
+Info (332146): Worst-case setup slack is -5.616
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -5.493            -178.279 CLOCK_50 
-    Info (332119):    -3.744            -189.800 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):    -5.616            -181.914 CLOCK_50 
+    Info (332119):    -5.015            -275.149 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):    -4.012            -180.497 VGA_SYNC_12:VGA|vert_sync_out 
 Info (332146): Worst-case hold slack is 0.448
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     0.448               0.000 CLOCK_50 
-    Info (332119):     0.749               0.000 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):     0.608               0.000 VGA_SYNC_12:VGA|vert_sync_out 
+    Info (332119):     0.658               0.000 Clock_Divider:CLOCK_25mhz|clk_out 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.636
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.636             -85.859 Clock_Divider:CLOCK_25mhz|clk_out 
-    Info (332119):    -0.538             -27.767 CLOCK_50 
+    Info (332119):    -2.636            -106.265 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):    -0.670             -27.846 CLOCK_50 
+    Info (332119):    -0.538             -44.936 VGA_SYNC_12:VGA|vert_sync_out 
 Info: Analyzing Fast 1100mV 85C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -1.989
+Info (332146): Worst-case setup slack is -2.041
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -1.989             -62.686 CLOCK_50 
-    Info (332119):    -1.476             -72.889 Clock_Divider:CLOCK_25mhz|clk_out 
-Info (332146): Worst-case hold slack is 0.197
+    Info (332119):    -2.041             -64.397 CLOCK_50 
+    Info (332119):    -1.978            -111.578 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):    -1.744             -73.045 VGA_SYNC_12:VGA|vert_sync_out 
+Info (332146): Worst-case hold slack is 0.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.197               0.000 CLOCK_50 
-    Info (332119):     0.282               0.000 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):     0.174               0.000 VGA_SYNC_12:VGA|vert_sync_out 
+    Info (332119):     0.199               0.000 CLOCK_50 
+    Info (332119):     0.241               0.000 Clock_Divider:CLOCK_25mhz|clk_out 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.174             -30.992 Clock_Divider:CLOCK_25mhz|clk_out 
-    Info (332119):    -0.464              -3.534 CLOCK_50 
+    Info (332119):    -2.174             -31.052 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):    -0.575              -3.757 CLOCK_50 
+    Info (332119):     0.020               0.000 VGA_SYNC_12:VGA|vert_sync_out 
 Info: Analyzing Fast 1100mV 0C Model
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -1.818
+Info (332146): Worst-case setup slack is -1.848
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -1.818             -57.384 CLOCK_50 
-    Info (332119):    -1.362             -64.555 Clock_Divider:CLOCK_25mhz|clk_out 
-Info (332146): Worst-case hold slack is 0.187
+    Info (332119):    -1.848             -58.508 CLOCK_50 
+    Info (332119):    -1.791             -96.133 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):    -1.540             -64.827 VGA_SYNC_12:VGA|vert_sync_out 
+Info (332146): Worst-case hold slack is 0.136
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
+    Info (332119):     0.136               0.000 VGA_SYNC_12:VGA|vert_sync_out 
     Info (332119):     0.187               0.000 CLOCK_50 
-    Info (332119):     0.258               0.000 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):     0.201               0.000 Clock_Divider:CLOCK_25mhz|clk_out 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.174             -30.906 Clock_Divider:CLOCK_25mhz|clk_out 
-    Info (332119):    -0.458              -3.601 CLOCK_50 
+    Info (332119):    -2.174             -30.976 Clock_Divider:CLOCK_25mhz|clk_out 
+    Info (332119):    -0.547              -3.772 CLOCK_50 
+    Info (332119):     0.054               0.000 VGA_SYNC_12:VGA|vert_sync_out 
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 31 warnings
-    Info: Peak virtual memory: 5189 megabytes
-    Info: Processing ended: Wed May 08 15:31:46 2024
-    Info: Elapsed time: 00:00:03
+    Info: Peak virtual memory: 5218 megabytes
+    Info: Processing ended: Wed May 08 18:30:50 2024
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:01
 
 

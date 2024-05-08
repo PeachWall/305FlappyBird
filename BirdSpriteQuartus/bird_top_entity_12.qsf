@@ -261,6 +261,7 @@ set_location_assignment PIN_H8 -to h_sync_out
 set_location_assignment PIN_G8 -to v_sync_out
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name VHDL_FILE "../vhd and data/random_gen.vhd"
 set_global_assignment -name VHDL_FILE "../vhd and data/pipes.vhd"
 set_global_assignment -name VHDL_FILE "../vhd and data/display_controller.vhd"
 set_global_assignment -name VHDL_FILE "../vhd and data/background.vhd"
