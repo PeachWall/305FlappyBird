@@ -4,7 +4,7 @@ CLOCK_50 => pll:inst.refclk
 PS2_DAT <> MOUSE:inst7.mouse_data
 PS2_CLK <> MOUSE:inst7.mouse_clk
 VGA_VS <= V_SYNC.DB_MAX_OUTPUT_PORT_TYPE
-LEDR[0] <= collision:inst3.collided
+LEDR[0] <= collided.DB_MAX_OUTPUT_PORT_TYPE
 VGA_B[0] <= VGA_SYNC_12:inst13.blue_out[0]
 VGA_B[1] <= VGA_SYNC_12:inst13.blue_out[1]
 VGA_B[2] <= VGA_SYNC_12:inst13.blue_out[2]
@@ -895,6 +895,16 @@ vert_sync => \Move_Ball:y_velocity[9].CLK
 vert_sync => \Move_Ball:hold.CLK
 mouse => Move_Ball.IN1
 mouse => hold.OUTPUTSELECT
+collided => move_y.OUTPUTSELECT
+collided => move_y.OUTPUTSELECT
+collided => move_y.OUTPUTSELECT
+collided => move_y.OUTPUTSELECT
+collided => move_y.OUTPUTSELECT
+collided => move_y.OUTPUTSELECT
+collided => move_y.OUTPUTSELECT
+collided => move_y.OUTPUTSELECT
+collided => move_y.OUTPUTSELECT
+collided => move_y.OUTPUTSELECT
 move_x[0] <= <GND>
 move_x[1] <= <GND>
 move_x[2] <= <GND>
@@ -905,16 +915,16 @@ move_x[6] <= <VCC>
 move_x[7] <= <GND>
 move_x[8] <= <GND>
 move_x[9] <= <GND>
-move_y[0] <= ball_y_pos[0].DB_MAX_OUTPUT_PORT_TYPE
-move_y[1] <= ball_y_pos[1].DB_MAX_OUTPUT_PORT_TYPE
-move_y[2] <= ball_y_pos[2].DB_MAX_OUTPUT_PORT_TYPE
-move_y[3] <= ball_y_pos[3].DB_MAX_OUTPUT_PORT_TYPE
-move_y[4] <= ball_y_pos[4].DB_MAX_OUTPUT_PORT_TYPE
-move_y[5] <= ball_y_pos[5].DB_MAX_OUTPUT_PORT_TYPE
-move_y[6] <= ball_y_pos[6].DB_MAX_OUTPUT_PORT_TYPE
-move_y[7] <= ball_y_pos[7].DB_MAX_OUTPUT_PORT_TYPE
-move_y[8] <= ball_y_pos[8].DB_MAX_OUTPUT_PORT_TYPE
-move_y[9] <= ball_y_pos[9].DB_MAX_OUTPUT_PORT_TYPE
+move_y[0] <= move_y.DB_MAX_OUTPUT_PORT_TYPE
+move_y[1] <= move_y.DB_MAX_OUTPUT_PORT_TYPE
+move_y[2] <= move_y.DB_MAX_OUTPUT_PORT_TYPE
+move_y[3] <= move_y.DB_MAX_OUTPUT_PORT_TYPE
+move_y[4] <= move_y.DB_MAX_OUTPUT_PORT_TYPE
+move_y[5] <= move_y.DB_MAX_OUTPUT_PORT_TYPE
+move_y[6] <= move_y.DB_MAX_OUTPUT_PORT_TYPE
+move_y[7] <= move_y.DB_MAX_OUTPUT_PORT_TYPE
+move_y[8] <= move_y.DB_MAX_OUTPUT_PORT_TYPE
+move_y[9] <= move_y.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |FlappyBird_305|MOUSE:inst7
@@ -1074,26 +1084,16 @@ mouse_cursor_column[8] <= cursor_column[8].DB_MAX_OUTPUT_PORT_TYPE
 mouse_cursor_column[9] <= cursor_column[9].DB_MAX_OUTPUT_PORT_TYPE
 
 
+|FlappyBird_305|collision:inst3
+bird_on => collided.IN0
+bird_on => collided.IN0
+pipe_on => collided.IN1
+floor_on => collided.IN1
+collided <= collided.DB_MAX_OUTPUT_PORT_TYPE
+
+
 |FlappyBird_305|pipes:inst22
 clk => random_gen:RNG.clk
-v_sync => pipe2_y_pos[0].CLK
-v_sync => pipe2_y_pos[1].CLK
-v_sync => pipe2_y_pos[2].CLK
-v_sync => pipe2_y_pos[3].CLK
-v_sync => pipe2_y_pos[4].CLK
-v_sync => pipe2_y_pos[5].CLK
-v_sync => pipe2_y_pos[6].CLK
-v_sync => pipe2_y_pos[7].CLK
-v_sync => pipe2_y_pos[8].CLK
-v_sync => pipe1_y_pos[0].CLK
-v_sync => pipe1_y_pos[1].CLK
-v_sync => pipe1_y_pos[2].CLK
-v_sync => pipe1_y_pos[3].CLK
-v_sync => pipe1_y_pos[4].CLK
-v_sync => pipe1_y_pos[5].CLK
-v_sync => pipe1_y_pos[6].CLK
-v_sync => pipe1_y_pos[7].CLK
-v_sync => pipe1_y_pos[8].CLK
 v_sync => pipe2_x_pos[0].CLK
 v_sync => pipe2_x_pos[1].CLK
 v_sync => pipe2_x_pos[2].CLK
@@ -1116,6 +1116,24 @@ v_sync => pipe1_x_pos[7].CLK
 v_sync => pipe1_x_pos[8].CLK
 v_sync => pipe1_x_pos[9].CLK
 v_sync => pipe1_x_pos[10].CLK
+v_sync => \PER_FRAME:y_pos2[0].CLK
+v_sync => \PER_FRAME:y_pos2[1].CLK
+v_sync => \PER_FRAME:y_pos2[2].CLK
+v_sync => \PER_FRAME:y_pos2[3].CLK
+v_sync => \PER_FRAME:y_pos2[4].CLK
+v_sync => \PER_FRAME:y_pos2[5].CLK
+v_sync => \PER_FRAME:y_pos2[6].CLK
+v_sync => \PER_FRAME:y_pos2[7].CLK
+v_sync => \PER_FRAME:y_pos2[8].CLK
+v_sync => \PER_FRAME:y_pos1[0].CLK
+v_sync => \PER_FRAME:y_pos1[1].CLK
+v_sync => \PER_FRAME:y_pos1[2].CLK
+v_sync => \PER_FRAME:y_pos1[3].CLK
+v_sync => \PER_FRAME:y_pos1[4].CLK
+v_sync => \PER_FRAME:y_pos1[5].CLK
+v_sync => \PER_FRAME:y_pos1[6].CLK
+v_sync => \PER_FRAME:y_pos1[7].CLK
+v_sync => \PER_FRAME:y_pos1[8].CLK
 pixel_row[0] => LessThan0.IN20
 pixel_row[0] => LessThan1.IN14
 pixel_row[0] => LessThan4.IN20
@@ -1310,13 +1328,5 @@ blue[0] <= <VCC>
 blue[1] <= <VCC>
 blue[2] <= <VCC>
 blue[3] <= <VCC>
-
-
-|FlappyBird_305|collision:inst3
-bird_on => collided.IN0
-bird_on => collided.IN0
-pipe_on => collided.IN1
-floor_on => collided.IN1
-collided <= collided.DB_MAX_OUTPUT_PORT_TYPE
 
 
