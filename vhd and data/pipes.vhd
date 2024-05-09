@@ -26,7 +26,7 @@ architecture rtl of pipes is
   end component;
   constant screen_height : integer := 479;
   constant screen_width  : integer := 639;
-  constant half_width    : integer := 239;
+  constant half_height   : integer := 239;
   constant gap_size      : integer := 64;
   constant x_speed       : integer := 1;
   constant distance      : integer := 319;
@@ -39,7 +39,7 @@ architecture rtl of pipes is
   signal pipe2_top_on, pipe2_bottom_on : std_logic;
 
   -- x and y position for pipes
-  signal pipe1_y_pos, pipe2_y_pos : integer range 120 to 360 := 360;
+  signal pipe1_y_pos, pipe2_y_pos : integer range 120 to 360 := 240;
 
   signal pipe1_x_pos : std_logic_vector(10 downto 0) := conv_std_logic_vector(screen_width, 11);
   signal pipe2_x_pos : std_logic_vector(10 downto 0) := conv_std_logic_vector(screen_width + distance, 11);
@@ -76,6 +76,7 @@ begin
   blue_out  <= (others => s_pipe_on);
 
   PER_FRAME : process (v_sync)
+    variable y_pos1, y_pos2 : integer range -480 to 480;
 
   begin
     if (rising_edge(v_sync)) then
@@ -83,15 +84,31 @@ begin
       pipe2_x_pos <= pipe2_x_pos - x_speed;
 
       if (pipe1_x_pos =- to_integer(size) * scale) then
-        pipe1_y_pos <= to_integer(random_num) + half_width;
+        y_pos1 := to_integer(random_num) + half_height;
         pipe1_x_pos <= conv_std_logic_vector(screen_width, 11);
+
+        if (y_pos1 > half_height + 100) then
+          y_pos1 := half_height + 100;
+        elsif (y_pos1 < half_height - 100) then
+          y_pos1 := half_height - 100;
+        end if;
       end if;
 
       if (pipe2_x_pos =- to_integer(size) * scale) then
-        pipe2_y_pos <= to_integer(random_num) + half_width;
+        y_pos2 := to_integer(random_num) + half_height;
+
+        if (y_pos2 > half_height + 100) then
+          y_pos2 := half_height + 100;
+        elsif (y_pos2 < half_height - 100) then
+          y_pos2 := half_height - 100;
+        end if;
+
         pipe2_x_pos <= conv_std_logic_vector(screen_width, 11);
       end if;
     end if;
+
+    pipe1_y_pos <= y_pos1;
+    pipe2_y_pos <= y_pos2;
   end process;
 
   RNG : random_gen
