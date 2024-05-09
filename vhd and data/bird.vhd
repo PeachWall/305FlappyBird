@@ -7,14 +7,13 @@ use IEEE.STD_LOGIC_UNSIGNED.all;
 entity bird is
   port
   (
-    clk                     : in std_logic;
+	 clk                     : in std_logic;
+	 rgba                    : in std_logic_vector(12 downto 0);
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-    v_sync                  : in std_logic;
-    rgba                    : in std_logic_vector(12 downto 0);
     x_pos, y_pos            : in std_logic_vector(9 downto 0);
+	 sprite_row, sprite_col  : out std_logic_vector(3 downto 0);
     red, green, blue        : out std_logic_vector(3 downto 0);
-    alpha                   : out std_logic;
-    sprite_row, sprite_col  : out std_logic_vector(3 downto 0)
+    alpha                   : out std_logic
   );
 end entity bird;
 
@@ -42,7 +41,7 @@ begin
   alpha <= rgba(12);
 
   -- Get the pixel coordinates in terms of the row and column address
-  address : process (sprite_on, pixel_column, pixel_row, v_sync)
+  address : process (sprite_on, pixel_column, pixel_row)
     variable col_d, row_d   : unsigned(9 downto 0) := (others => '0');
     variable counter        : integer range 0 to scale;
     variable temp_c, temp_r : unsigned(9 downto 0) := (others => '0');

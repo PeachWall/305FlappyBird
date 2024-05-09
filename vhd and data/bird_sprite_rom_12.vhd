@@ -9,8 +9,8 @@ use altera_mf.all;
 entity bird_sprite_rom_12 is
   port
   (
+	 clock        : in std_logic;
     row, col     : in std_logic_vector(3 downto 0);
-    clock        : in std_logic;
     pixel_output : out std_logic_vector(12 downto 0)
   );
 end bird_sprite_rom_12;
