@@ -4,6 +4,7 @@ CLOCK_50 => pll:inst.refclk
 PS2_DAT <> MOUSE:inst7.mouse_data
 PS2_CLK <> MOUSE:inst7.mouse_clk
 VGA_VS <= V_SYNC.DB_MAX_OUTPUT_PORT_TYPE
+LEDR[0] <= collision:inst3.collided
 VGA_B[0] <= VGA_SYNC_12:inst13.blue_out[0]
 VGA_B[1] <= VGA_SYNC_12:inst13.blue_out[1]
 VGA_B[2] <= VGA_SYNC_12:inst13.blue_out[2]
@@ -1309,5 +1310,13 @@ blue[0] <= <VCC>
 blue[1] <= <VCC>
 blue[2] <= <VCC>
 blue[3] <= <VCC>
+
+
+|FlappyBird_305|collision:inst3
+bird_on => collided.IN0
+bird_on => collided.IN0
+pipe_on => collided.IN1
+floor_on => collided.IN1
+collided <= collided.DB_MAX_OUTPUT_PORT_TYPE
 
 

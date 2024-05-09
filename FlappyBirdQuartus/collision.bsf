@@ -20,9 +20,9 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 200 96)
+	(rect 16 16 176 128)
 	(text "collision" (rect 5 0 33 12)(font "Arial" ))
-	(text "inst" (rect 8 64 20 76)(font "Arial" ))
+	(text "inst" (rect 8 96 20 108)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -38,13 +38,20 @@ refer to the applicable agreement for further details.
 		(line (pt 0 48)(pt 16 48)(line_width 1))
 	)
 	(port
-		(pt 184 32)
+		(pt 0 64)
+		(input)
+		(text "floor_on" (rect 0 0 33 12)(font "Arial" ))
+		(text "floor_on" (rect 21 59 54 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 1))
+	)
+	(port
+		(pt 160 32)
 		(output)
-		(text "pipe_collided" (rect 0 0 48 12)(font "Arial" ))
-		(text "pipe_collided" (rect 115 27 163 39)(font "Arial" ))
-		(line (pt 184 32)(pt 168 32)(line_width 1))
+		(text "collided" (rect 0 0 27 12)(font "Arial" ))
+		(text "collided" (rect 112 27 139 39)(font "Arial" ))
+		(line (pt 160 32)(pt 144 32)(line_width 1))
 	)
 	(drawing
-		(rectangle (rect 16 16 168 64)(line_width 1))
+		(rectangle (rect 16 16 144 96)(line_width 1))
 	)
 )
