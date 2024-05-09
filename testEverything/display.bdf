@@ -23,7 +23,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 376 88 560 104)
 	(text "INPUT" (rect 141 0 183 15)(font "Arial" (font_size 6)))
-	(text "CLOCK_50" (rect 5 0 90 16)(font "Arial" ))
+	(text "CLOCK_50" (rect 5 0 89 16)(font "Arial" ))
 	(pt 184 8)
 	(drawing
 		(line (pt 100 12)(pt 125 12))
@@ -40,7 +40,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect -624 80 -456 96)
 	(text "INPUT" (rect 125 0 167 15)(font "Arial" (font_size 6)))
-	(text "KEY[0]" (rect 5 0 56 16)(font "Arial" ))
+	(text "KEY[0]" (rect 5 0 55 16)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -57,7 +57,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect -816 104 -648 120)
 	(text "INPUT" (rect 125 0 167 15)(font "Arial" (font_size 6)))
-	(text "KEY[1]" (rect 5 0 57 21)(font "Intel Clear" ))
+	(text "KEY[1]" (rect 5 0 56 21)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -136,6 +136,7 @@ refer to the applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 1360 264 1432 288))
 )
 (pin
 	(output)
@@ -152,6 +153,7 @@ refer to the applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 1648 352 1720 376))
 )
 (pin
 	(bidir)
@@ -972,7 +974,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "<<__$DEF_ALIAS26>>" (rect 528 664 693 685)(font "Intel Clear" )(invisible))
 	(pt 696 688)
 	(pt 520 688)
 )
