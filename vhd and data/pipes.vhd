@@ -28,7 +28,7 @@ architecture rtl of pipes is
   constant screen_width  : integer := 639;
   constant half_height   : integer := 239;
   constant gap_size      : integer := 64;
-  constant x_speed       : integer := 1;
+  constant x_speed       : integer := 2;
   constant distance      : integer := 319;
 
   constant scale : integer                               := 2;
@@ -83,7 +83,7 @@ begin
       pipe1_x_pos <= pipe1_x_pos - x_speed;
       pipe2_x_pos <= pipe2_x_pos - x_speed;
 
-      if (pipe1_x_pos =- to_integer(size) * scale) then
+      if (pipe1_x_pos <= - to_integer(size) * scale) then
         y_pos1 := to_integer(random_num) + half_height;
         pipe1_x_pos <= conv_std_logic_vector(screen_width, 11);
 
@@ -94,7 +94,7 @@ begin
         end if;
       end if;
 
-      if (pipe2_x_pos =- to_integer(size) * scale) then
+      if (pipe2_x_pos <= - to_integer(size) * scale) then
         y_pos2 := to_integer(random_num) + half_height;
 
         if (y_pos2 > half_height + 100) then
