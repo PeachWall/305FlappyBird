@@ -9,6 +9,7 @@ ENTITY moveBird IS
 		(
 		  clk, vert_sync	: IN std_logic;
         mouse                     : IN std_logic;
+		  collided						 : IN std_logic;
 		  move_x   : OUT std_logic_vector(9 DOWNTO 0);
 		  move_y			: OUT std_logic_vector(9 DOWNTO 0)
 		);
@@ -30,6 +31,8 @@ ball_x_pos <= CONV_STD_LOGIC_VECTOR(120,10);
 
 move_x <= ball_x_pos;
 move_y <= ball_y_pos;
+--move_y <= CONV_STD_LOGIC_VECTOR(480,10) when (collided = '1') else
+--			 ball_y_pos; -- COOL SHADOW THINGY
 
 Move_Ball: process (vert_sync)  
 variable y_velocity : std_logic_vector (9 downto 0);
@@ -38,6 +41,7 @@ begin
    -- Move ball once every vertical sync
 	if (rising_edge(vert_sync)) then
       -- if mouse clicked
+
       if (mouse = '1' and hold = '0') then
 			hold := '1';
 			y_velocity := -CONV_STD_LOGIC_VECTOR(10,10);
@@ -48,13 +52,17 @@ begin
 			    y_velocity := signed(y_velocity) + 1;
 			end if;
       end if;
+		
       ball_y_motion <= y_velocity;
-      ball_y_pos <= ball_y_pos + ball_y_motion;
+      ball_y_pos <= ball_y_pos + ball_y_motion;	
+		
 		  
 		if (mouse = '0') then
 			hold := '0';
 		end if;
+		
 	end if;
+	
 end process Move_Ball;
 
 END behavior;
