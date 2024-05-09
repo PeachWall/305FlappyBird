@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(5CEBA4F23) Path("C:/Users/lachl/OneDrive/Desktop/2024/CompSys305/flappybird/305FlappyBird/FlappyBirdQuartus/output_files/") File("FlappyBird_305.sof") MfrSpec(OpMask(1));
+		Device PartName(5CEBA4F23) Path("C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/output_files/") File("FlappyBird_305.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

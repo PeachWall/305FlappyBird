@@ -88,7 +88,7 @@ begin
       end if;
 
       if (pipe2_x_pos =- to_integer(size) * scale) then
-        pipe2_y_pos <= to_integer(random_num + half_width);
+        pipe2_y_pos <= to_integer(random_num) + half_width;
         pipe2_x_pos <= conv_std_logic_vector(screen_width, 11);
       end if;
     end if;
