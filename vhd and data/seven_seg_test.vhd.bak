@@ -1,0 +1,80 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity seven_seg_test is
+end entity seven_seg_test;
+
+architecture test of seven_seg_test is
+    signal t_number : std_logic_vector(9 downto 0);
+    signal t_ones : std_logic_vector(6 downto 0);
+    signal t_tens : std_logic_vector(6 downto 0);
+    signal t_hundreds : std_logic_vector(6 downto 0);
+
+    component threedigit_seg is 
+        port(input                : in std_logic_vector(9 downto 0);
+             ones, tens, hundreds : out std_logic_vector(6 downto 0)); 
+    end component;
+
+begin
+    uut : threedigit_seg
+        port map(t_number, t_ones, t_tens, t_hundreds);
+
+    process
+    begin
+        t_number <= "0000000000"; --1
+        wait for 10 ns;
+        t_number <= "0000000001"; --2
+        wait for 10 ns;
+        t_number <= "0000000010"; --3 
+        wait for 10 ns;
+        t_number <= "0000000011"; --4
+        wait for 10 ns;
+        t_number <= "0000000100"; --5
+        wait for 10 ns;
+        t_number <= "0000000101"; --6
+        wait for 10 ns;
+        t_number <= "0000000110"; --7
+        wait for 10 ns;
+        t_number <= "0000000111"; --8
+        wait for 10 ns;
+        t_number <= "0000001000"; --9
+        wait for 10 ns; 
+        t_number <= "0000001001"; --10
+        wait for 10 ns;
+        t_number <= "0000001010"; --11
+        wait for 10 ns;
+        t_number <= "0000001011"; --12
+        wait for 10 ns;
+        t_number <= "0000001100"; --13
+        wait for 10 ns;
+        t_number <= "0000001101"; --14
+        wait for 10 ns;
+        t_number <= "0000001110"; --15
+        wait for 10 ns;
+        t_number <= "0000001111"; --16
+        wait for 10 ns;
+        t_number <= "0000010000"; --17
+        wait for 10 ns;
+        t_number <= "0000010001"; --18
+        wait for 10 ns;
+        t_number <= "0000010010"; --19
+        wait for 10 ns;
+        t_number <= "0000010011"; --20
+        wait for 10 ns;
+        t_number <= "1111110100"; -- 
+        wait for 10 ns;
+        t_number <= "0000010101";
+        wait for 10 ns;
+        t_number <= "0000010110";
+        wait for 10 ns;
+        t_number <= "0000010111";
+        wait for 10 ns;
+        t_number <= "0010011000";
+        wait for 10 ns;
+        t_number <= "0000011001";
+        wait for 10 ns;
+        t_number <= "1100011010";
+        wait for 10 ns;
+    end process;
+end architecture test;
