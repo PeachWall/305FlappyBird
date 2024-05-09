@@ -11,26 +11,30 @@ entity display_controller is
     bird_a                 : std_logic;
     pipe_r, pipe_g, pipe_b : in std_logic_vector(3 downto 0); -- to be added when we have pipe
     pipe_on                : std_logic;
+	 floor_r, floor_g, floor_b : in std_logic_vector(3 downto 0); -- floor
+    floor_on                : std_logic;
     r_out, g_out, b_out    : out std_logic_vector(3 downto 0)
   );
 end entity display_controller;
 
 architecture beh of display_controller is
 
-  function get_color(color1, color2, color3 : std_logic_vector(3 downto 0);
-    set1, set2                                : std_logic) return std_logic_vector is
+  function get_color(c_Bird, c_pipes, c_bg, c_floor : std_logic_vector(3 downto 0);
+    s_bird, s_pipes, s_floor                                  : std_logic) return std_logic_vector is
   begin
-    if (set1 = '1') then
-      return color1;
-    elsif (set2 = '1') then
-      return color2;
+    if (s_bird = '1') then
+      return c_Bird;
+    elsif (s_floor = '1') then
+      return c_floor;
+    elsif (s_pipes = '1') then
+      return c_pipes;
     else
-      return color3;
+      return c_bg;
     end if;
   end function;
 begin
   -- r_out <= bird_r when bird_a = '1' else
-  --   pipe_r when pipe_on = '1' else
+--   pipe_r when pipe_on = '1' else
   --   bg_r;
 
   -- g_out <= bird_r when bird_a = '1' else
@@ -41,7 +45,7 @@ begin
   --   pipe_r when pipe_on = '1' else
   --   bg_r;
 
-  r_out <= get_color(bird_r, pipe_r, bg_r, bird_a, pipe_on);
-  g_out <= get_color(bird_g, pipe_g, bg_g, bird_a, pipe_on);
-  b_out <= get_color(bird_b, pipe_b, bg_b, bird_a, pipe_on);
+  r_out <= get_color(bird_r, pipe_r, bg_r, floor_r, bird_a, pipe_on, floor_on);
+  g_out <= get_color(bird_g, pipe_g, bg_g, floor_g, bird_a, pipe_on, floor_on);
+  b_out <= get_color(bird_b, pipe_b, bg_b, floor_b, bird_a, pipe_on, floor_on);
 end architecture;

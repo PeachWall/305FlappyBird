@@ -51,20 +51,6 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name VHDL_FILE "../vhd and data/moveBird.vhd"
-set_global_assignment -name VHDL_FILE "../vhd and data/mouse.vhd"
-set_global_assignment -name MIF_FILE "../vhd and data/bird_data_v2.mif"
-set_global_assignment -name VHDL_FILE "../vhd and data/vga_sync_12.vhd"
-set_global_assignment -name VHDL_FILE "../vhd and data/random_gen.vhd"
-set_global_assignment -name VHDL_FILE "../vhd and data/pipes.vhd"
-set_global_assignment -name VHDL_FILE "../vhd and data/display_controller.vhd"
-set_global_assignment -name VHDL_FILE "../vhd and data/collision.vhd"
-set_global_assignment -name VHDL_FILE "../vhd and data/bird_sprite_rom_12.vhd"
-set_global_assignment -name VHDL_FILE "../vhd and data/bird.vhd"
-set_global_assignment -name VHDL_FILE "../vhd and data/background.vhd"
-set_global_assignment -name QIP_FILE pll.qip
-set_global_assignment -name SIP_FILE pll.sip
-set_global_assignment -name BDF_FILE FlappyBird_305.bdf
 set_location_assignment PIN_H13 -to CLOCK2_50
 set_location_assignment PIN_E10 -to CLOCK3_50
 set_location_assignment PIN_V15 -to CLOCK4_50
@@ -275,4 +261,19 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -entity DE0_CV_Default
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -entity DE0_CV_Default -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -entity DE0_CV_Default -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -entity DE0_CV_Default -section_id Top
+set_global_assignment -name VHDL_FILE "../vhd and data/floor.vhd"
+set_global_assignment -name VHDL_FILE "../vhd and data/moveBird.vhd"
+set_global_assignment -name VHDL_FILE "../vhd and data/mouse.vhd"
+set_global_assignment -name MIF_FILE "../vhd and data/bird_data_v2.mif"
+set_global_assignment -name VHDL_FILE "../vhd and data/vga_sync_12.vhd"
+set_global_assignment -name VHDL_FILE "../vhd and data/random_gen.vhd"
+set_global_assignment -name VHDL_FILE "../vhd and data/pipes.vhd"
+set_global_assignment -name VHDL_FILE "../vhd and data/display_controller.vhd"
+set_global_assignment -name VHDL_FILE "../vhd and data/collision.vhd"
+set_global_assignment -name VHDL_FILE "../vhd and data/bird_sprite_rom_12.vhd"
+set_global_assignment -name VHDL_FILE "../vhd and data/bird.vhd"
+set_global_assignment -name VHDL_FILE "../vhd and data/background.vhd"
+set_global_assignment -name QIP_FILE pll.qip
+set_global_assignment -name SIP_FILE pll.sip
+set_global_assignment -name BDF_FILE FlappyBird_305.bdf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
