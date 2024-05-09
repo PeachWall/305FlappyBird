@@ -42,8 +42,8 @@ begin
 			hold := '1';
 			y_velocity := -CONV_STD_LOGIC_VECTOR(10,10);
       else
-			if (y_velocity = "0000001010") then
-			    y_velocity := CONV_STD_LOGIC_VECTOR(10,10);
+			if (y_velocity = CONV_STD_LOGIC_VECTOR(8,10)) then
+			    y_velocity := CONV_STD_LOGIC_VECTOR(8,10);
 			else 
 			    y_velocity := signed(y_velocity) + 1;
 			end if;
