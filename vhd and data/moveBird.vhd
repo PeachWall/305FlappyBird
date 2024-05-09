@@ -7,13 +7,13 @@ entity moveBird is
   (
     clk, vert_sync : in std_logic;
     mouse          : in std_logic;
+    collided       : in std_logic;
     move_x         : out std_logic_vector(9 downto 0);
     move_y         : out std_logic_vector(9 downto 0)
   );
 end moveBird;
 
 architecture behavior of moveBird is
-
   signal ball_on    : std_logic;
   signal size       : std_logic_vector(9 downto 0);
   signal ball_y_pos : std_logic_vector(9 downto 0);
@@ -22,7 +22,6 @@ architecture behavior of moveBird is
   constant gravity : integer := 2;
 
 begin
-
   size <= CONV_STD_LOGIC_VECTOR(10, 10);
   -- ball_x_pos and ball_y_pos show the (x,y) for the centre of ball
   ball_x_pos <= CONV_STD_LOGIC_VECTOR(120, 10);
@@ -54,5 +53,4 @@ begin
       end if;
     end if;
   end process Move_Ball;
-
 end behavior;
