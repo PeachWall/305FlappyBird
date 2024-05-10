@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FlappyBird_305
-Fri May 10 15:54:24 2024
+Fri May 10 18:47:57 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -56,7 +56,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri May 10 15:54:24 2024       ;
+; Analysis & Synthesis Status     ; Successful - Fri May 10 18:47:57 2024       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; FlappyBird_305                              ;
 ; Top-level Entity Name           ; FlappyBird_305                              ;
@@ -365,16 +365,17 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; pipes:inst22|pipe1_x_pos[5]             ; 4       ;
 ; pipes:inst22|pipe1_x_pos[6]             ; 8       ;
 ; pipes:inst22|pipe1_x_pos[9]             ; 7       ;
-; pipes:inst22|\PER_FRAME:y_pos1[5]       ; 5       ;
+; pipes:inst22|\MOVEMENT:y_pos1[5]        ; 5       ;
 ; pipes:inst22|pipe2_x_pos[2]             ; 14      ;
 ; pipes:inst22|pipe2_x_pos[1]             ; 14      ;
 ; pipes:inst22|pipe2_x_pos[3]             ; 4       ;
 ; pipes:inst22|pipe2_x_pos[4]             ; 5       ;
 ; pipes:inst22|pipe2_x_pos[5]             ; 5       ;
+; pipes:inst22|pipe2_x_pos[6]             ; 9       ;
 ; pipes:inst22|pipe2_x_pos[7]             ; 9       ;
 ; pipes:inst22|pipe2_x_pos[8]             ; 7       ;
 ; pipes:inst22|pipe2_x_pos[9]             ; 7       ;
-; pipes:inst22|\PER_FRAME:y_pos2[5]       ; 4       ;
+; pipes:inst22|\MOVEMENT:y_pos2[5]        ; 4       ;
 ; pipes:inst22|random_gen:RNG|s_Q[0]      ; 2       ;
 ; MOUSE:inst7|send_char                   ; 3       ;
 ; MOUSE:inst7|SHIFTOUT[3]                 ; 1       ;
@@ -382,7 +383,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; MOUSE:inst7|SHIFTOUT[6]                 ; 1       ;
 ; MOUSE:inst7|SHIFTOUT[7]                 ; 1       ;
 ; MOUSE:inst7|SHIFTOUT[8]                 ; 1       ;
-; Total number of inverted registers = 24 ;         ;
+; Total number of inverted registers = 25 ;         ;
 +-----------------------------------------+---------+
 
 
@@ -391,7 +392,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                        ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 0 LEs                ; 20 LEs                 ; Yes        ; |FlappyBird_305|VGA_SYNC_12:inst13|v_count[4]     ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 0 LEs                ; 20 LEs                 ; Yes        ; |FlappyBird_305|VGA_SYNC_12:inst13|v_count[3]     ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |FlappyBird_305|pipes:inst22|Add9                 ;
 ; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; No         ; |FlappyBird_305|pipes:inst22|pipe_sprite_col[4]   ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |FlappyBird_305|pipes:inst22|y_pos1               ;
@@ -887,7 +888,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Fri May 10 15:54:16 2024
+    Info: Processing started: Fri May 10 18:47:49 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FlappyBird_305 -c FlappyBird_305
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
@@ -1039,23 +1040,23 @@ Warning (10492): VHDL Process Statement warning at mouse.vhd(157): signal "CHARO
 Info (12128): Elaborating entity "collision" for hierarchy "collision:inst3"
 Info (12128): Elaborating entity "pipes" for hierarchy "pipes:inst22"
 Warning (10541): VHDL Signal Declaration warning at pipes.vhd(18): used implicit default value for signal "invert_pipe" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 18
-Warning (10492): VHDL Process Statement warning at pipes.vhd(136): signal "pipe1_bottom_on" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 136
-Warning (10492): VHDL Process Statement warning at pipes.vhd(138): signal "pipe1_x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 138
-Warning (10492): VHDL Process Statement warning at pipes.vhd(139): signal "pipe1_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 139
-Warning (10492): VHDL Process Statement warning at pipes.vhd(146): signal "pipe2_bottom_on" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 146
-Warning (10492): VHDL Process Statement warning at pipes.vhd(148): signal "pipe2_x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 148
-Warning (10492): VHDL Process Statement warning at pipes.vhd(149): signal "pipe2_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 149
-Warning (10492): VHDL Process Statement warning at pipes.vhd(158): signal "pipe1_top_on" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 158
-Warning (10492): VHDL Process Statement warning at pipes.vhd(159): signal "pipe1_x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 159
-Warning (10492): VHDL Process Statement warning at pipes.vhd(160): signal "pipe1_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 160
-Warning (10492): VHDL Process Statement warning at pipes.vhd(162): signal "pipe1_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 162
-Warning (10492): VHDL Process Statement warning at pipes.vhd(169): signal "pipe2_top_on" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 169
-Warning (10492): VHDL Process Statement warning at pipes.vhd(170): signal "pipe2_x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 170
-Warning (10492): VHDL Process Statement warning at pipes.vhd(171): signal "pipe2_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 171
-Warning (10492): VHDL Process Statement warning at pipes.vhd(173): signal "pipe2_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 173
-Warning (10631): VHDL Process Statement warning at pipes.vhd(125): inferring latch(es) for signal or variable "invert", which holds its previous value in one or more paths through the process File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 125
-Info (10041): Inferred latch for "SPRITE:invert" at pipes.vhd(136) File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 136
-Info (12128): Elaborating entity "random_gen" for hierarchy "pipes:inst22|random_gen:RNG" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 195
+Warning (10492): VHDL Process Statement warning at pipes.vhd(142): signal "pipe1_bottom_on" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 142
+Warning (10492): VHDL Process Statement warning at pipes.vhd(144): signal "pipe1_x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 144
+Warning (10492): VHDL Process Statement warning at pipes.vhd(145): signal "pipe1_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 145
+Warning (10492): VHDL Process Statement warning at pipes.vhd(152): signal "pipe2_bottom_on" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 152
+Warning (10492): VHDL Process Statement warning at pipes.vhd(154): signal "pipe2_x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 154
+Warning (10492): VHDL Process Statement warning at pipes.vhd(155): signal "pipe2_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 155
+Warning (10492): VHDL Process Statement warning at pipes.vhd(164): signal "pipe1_top_on" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 164
+Warning (10492): VHDL Process Statement warning at pipes.vhd(165): signal "pipe1_x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 165
+Warning (10492): VHDL Process Statement warning at pipes.vhd(166): signal "pipe1_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 166
+Warning (10492): VHDL Process Statement warning at pipes.vhd(168): signal "pipe1_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 168
+Warning (10492): VHDL Process Statement warning at pipes.vhd(175): signal "pipe2_top_on" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 175
+Warning (10492): VHDL Process Statement warning at pipes.vhd(176): signal "pipe2_x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 176
+Warning (10492): VHDL Process Statement warning at pipes.vhd(177): signal "pipe2_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 177
+Warning (10492): VHDL Process Statement warning at pipes.vhd(179): signal "pipe2_y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 179
+Warning (10631): VHDL Process Statement warning at pipes.vhd(131): inferring latch(es) for signal or variable "invert", which holds its previous value in one or more paths through the process File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 131
+Info (10041): Inferred latch for "SPRITE:invert" at pipes.vhd(142) File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 142
+Info (12128): Elaborating entity "random_gen" for hierarchy "pipes:inst22|random_gen:RNG" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 202
 Info (12128): Elaborating entity "pipe_sprite_rom" for hierarchy "pipe_sprite_rom:inst4"
 Info (12128): Elaborating entity "altsyncram" for hierarchy "pipe_sprite_rom:inst4|altsyncram:altsyncram_component" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipe_sprite_rom.vhd Line: 52
 Info (12130): Elaborated megafunction instantiation "pipe_sprite_rom:inst4|altsyncram:altsyncram_component" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipe_sprite_rom.vhd Line: 52
@@ -1090,7 +1091,7 @@ Warning (14284): Synthesized away the following node(s):
         Warning (14320): Synthesized away node "bird_sprite_rom_12:inst15|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|q_a[15]" File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_0pg1.tdf Line: 349
 Warning (13012): Latch pipes:inst22|\SPRITE:invert has unsafe behavior
     Warning (13013): Ports D and ENA on the latch are fed by the same signal pipes:inst22|pipe1_top_on File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipes.vhd Line: 42
-    Warning (13013): Ports ENA and CLR on the latch are fed by the same signal pipes:inst22|\PER_FRAME:y_pos1[8]
+    Warning (13013): Ports ENA and CLR on the latch are fed by the same signal pipes:inst22|\MOVEMENT:y_pos1[8]
 Info (13000): Registers with preset signals will power-up high File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/mouse.vhd Line: 146
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Info (286030): Timing-Driven Synthesis is running
@@ -1131,9 +1132,9 @@ Info (21057): Implemented 473 device resources after synthesis - the final resou
     Info (21064): Implemented 26 RAM segments
     Info (21065): Implemented 1 PLLs
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 64 warnings
-    Info: Peak virtual memory: 4958 megabytes
-    Info: Processing ended: Fri May 10 15:54:24 2024
+    Info: Peak virtual memory: 4943 megabytes
+    Info: Processing ended: Fri May 10 18:47:57 2024
     Info: Elapsed time: 00:00:08
-    Info: Total CPU time (on all processors): 00:00:04
+    Info: Total CPU time (on all processors): 00:00:03
 
 

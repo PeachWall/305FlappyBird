@@ -27,16 +27,16 @@ architecture rtl of pipes is
       Q                  : out ieee.numeric_std.signed(7 downto 0)
     );
   end component;
+  constant scale     : integer                               := 2;
+  constant size      : integer                               := 32;
+  constant pipe_size : ieee.numeric_std.unsigned(7 downto 0) := shift_left(to_unsigned(size, 8), scale - 1);
+
   constant screen_height : integer := 479;
   constant screen_width  : integer := 639;
   constant half_height   : integer := 239;
   constant gap_size      : integer := 64;
   constant x_speed       : integer := 2;
-  constant distance      : integer := 319;
-
-  constant scale     : integer                               := 2;
-  constant size      : integer                               := 32;
-  constant pipe_size : ieee.numeric_std.unsigned(7 downto 0) := shift_left(to_unsigned(size, 8), scale - 1);
+  constant distance      : integer := 319 + to_integer(pipe_size);
 
   -- Top and Bottom pipes
   signal pipe1_top_on, pipe1_bottom_on : std_logic;
