@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FlappyBird_305
-Fri May 10 18:47:57 2024
+Fri May 10 20:09:51 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -18,19 +18,22 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
  10. State Machine - |FlappyBird_305|MOUSE:inst7|mouse_state
  11. User-Specified and Inferred Latches
  12. Registers Removed During Synthesis
- 13. General Register Statistics
- 14. Inverted Register Statistics
- 15. Multiplexer Restructuring Statistics (Restructuring Performed)
- 16. Source assignments for bird_sprite_rom_12:inst15|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated
- 17. Source assignments for pipe_sprite_rom:inst4|altsyncram:altsyncram_component|altsyncram_plg1:auto_generated
- 18. Parameter Settings for User Entity Instance: pll:inst|pll_0002:pll_inst|altera_pll:altera_pll_i
- 19. Parameter Settings for User Entity Instance: bird_sprite_rom_12:inst15|altsyncram:altsyncram_component
- 20. Parameter Settings for User Entity Instance: pipe_sprite_rom:inst4|altsyncram:altsyncram_component
- 21. altsyncram Parameter Settings by Entity Instance
- 22. Port Connectivity Checks: "pipes:inst22|random_gen:RNG"
- 23. Post-Synthesis Netlist Statistics for Top Partition
- 24. Elapsed Time Per Partition
- 25. Analysis & Synthesis Messages
+ 13. Removed Registers Triggering Further Register Optimizations
+ 14. General Register Statistics
+ 15. Inverted Register Statistics
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Source assignments for bird_sprite_rom_12:inst15|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated
+ 18. Source assignments for pipe_sprite_rom:inst4|altsyncram:altsyncram_component|altsyncram_plg1:auto_generated
+ 19. Source assignments for floor_sprite_rom:inst5|altsyncram:altsyncram_component|altsyncram_ukg1:auto_generated
+ 20. Parameter Settings for User Entity Instance: pll:inst|pll_0002:pll_inst|altera_pll:altera_pll_i
+ 21. Parameter Settings for User Entity Instance: bird_sprite_rom_12:inst15|altsyncram:altsyncram_component
+ 22. Parameter Settings for User Entity Instance: pipe_sprite_rom:inst4|altsyncram:altsyncram_component
+ 23. Parameter Settings for User Entity Instance: floor_sprite_rom:inst5|altsyncram:altsyncram_component
+ 24. altsyncram Parameter Settings by Entity Instance
+ 25. Port Connectivity Checks: "pipes:inst22|random_gen:RNG"
+ 26. Post-Synthesis Netlist Statistics for Top Partition
+ 27. Elapsed Time Per Partition
+ 28. Analysis & Synthesis Messages
 
 
 
@@ -56,16 +59,16 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri May 10 18:47:57 2024       ;
+; Analysis & Synthesis Status     ; Successful - Fri May 10 20:09:51 2024       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; FlappyBird_305                              ;
 ; Top-level Entity Name           ; FlappyBird_305                              ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 187                                         ;
+; Total registers                 ; 191                                         ;
 ; Total pins                      ; 18                                          ;
 ; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 16,640                                      ;
+; Total block memory bits         ; 19,712                                      ;
 ; Total DSP Blocks                ; 0                                           ;
 ; Total HSSI RX PCSs              ; 0                                           ;
 ; Total HSSI PMA RX Deserializers ; 0                                           ;
@@ -186,6 +189,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------+-----------------+------------------------------------+-------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path       ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                                  ; Library ;
 +----------------------------------------+-----------------+------------------------------------+-------------------------------------------------------------------------------+---------+
+; ../vhd and data/floor_sprite_rom.vhd   ; yes             ; User VHDL File                     ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor_sprite_rom.vhd        ;         ;
 ; ../vhd and data/pipe_sprite_rom.vhd    ; yes             ; User VHDL File                     ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipe_sprite_rom.vhd         ;         ;
 ; ../vhd and data/floor.vhd              ; yes             ; User VHDL File                     ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor.vhd                   ;         ;
 ; ../vhd and data/moveBird.vhd           ; yes             ; User VHDL File                     ; C:/Users/juane/Desktop/305FlappyBird/vhd and data/moveBird.vhd                ;         ;
@@ -213,6 +217,7 @@ refer to the applicable agreement for further details.
 ; altdpram.inc                           ; yes             ; Megafunction                       ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altdpram.inc           ;         ;
 ; db/altsyncram_0pg1.tdf                 ; yes             ; Auto-Generated Megafunction        ; C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_0pg1.tdf ;         ;
 ; db/altsyncram_plg1.tdf                 ; yes             ; Auto-Generated Megafunction        ; C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_plg1.tdf ;         ;
+; db/altsyncram_ukg1.tdf                 ; yes             ; Auto-Generated Megafunction        ; C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_ukg1.tdf ;         ;
 +----------------------------------------+-----------------+------------------------------------+-------------------------------------------------------------------------------+---------+
 
 
@@ -221,20 +226,20 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                             ;
 +---------------------------------------------+-------------------------------------------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 228                                                               ;
+; Estimate of Logic utilization (ALMs needed) ; 251                                                               ;
 ;                                             ;                                                                   ;
-; Combinational ALUT usage for logic          ; 357                                                               ;
-;     -- 7 input functions                    ; 6                                                                 ;
-;     -- 6 input functions                    ; 85                                                                ;
-;     -- 5 input functions                    ; 63                                                                ;
-;     -- 4 input functions                    ; 44                                                                ;
-;     -- <=3 input functions                  ; 159                                                               ;
+; Combinational ALUT usage for logic          ; 394                                                               ;
+;     -- 7 input functions                    ; 1                                                                 ;
+;     -- 6 input functions                    ; 99                                                                ;
+;     -- 5 input functions                    ; 56                                                                ;
+;     -- 4 input functions                    ; 43                                                                ;
+;     -- <=3 input functions                  ; 195                                                               ;
 ;                                             ;                                                                   ;
-; Dedicated logic registers                   ; 187                                                               ;
+; Dedicated logic registers                   ; 191                                                               ;
 ;                                             ;                                                                   ;
 ; I/O pins                                    ; 18                                                                ;
 ; Total MLAB memory bits                      ; 0                                                                 ;
-; Total block memory bits                     ; 16640                                                             ;
+; Total block memory bits                     ; 19712                                                             ;
 ;                                             ;                                                                   ;
 ; Total DSP Blocks                            ; 0                                                                 ;
 ;                                             ;                                                                   ;
@@ -242,9 +247,9 @@ refer to the applicable agreement for further details.
 ;     -- PLLs                                 ; 1                                                                 ;
 ;                                             ;                                                                   ;
 ; Maximum fan-out node                        ; pll:inst|pll_0002:pll_inst|altera_pll:altera_pll_i|outclk_wire[0] ;
-; Maximum fan-out                             ; 120                                                               ;
-; Total fan-out                               ; 2202                                                              ;
-; Average fan-out                             ; 3.62                                                              ;
+; Maximum fan-out                             ; 132                                                               ;
+; Total fan-out                               ; 2406                                                              ;
+; Average fan-out                             ; 3.63                                                              ;
 +---------------------------------------------+-------------------------------------------------------------------+
 
 
@@ -253,7 +258,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                      ; Entity Name        ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |FlappyBird_305                           ; 357 (0)             ; 187 (0)                   ; 16640             ; 0          ; 18   ; 0            ; |FlappyBird_305                                                                                          ; FlappyBird_305     ; work         ;
+; |FlappyBird_305                           ; 394 (0)             ; 191 (0)                   ; 19712             ; 0          ; 18   ; 0            ; |FlappyBird_305                                                                                          ; FlappyBird_305     ; work         ;
 ;    |MOUSE:inst7|                          ; 50 (50)             ; 63 (63)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|MOUSE:inst7                                                                              ; MOUSE              ; work         ;
 ;    |VGA_SYNC_12:inst13|                   ; 50 (50)             ; 57 (57)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|VGA_SYNC_12:inst13                                                                       ; VGA_SYNC_12        ; work         ;
 ;    |bird:inst17|                          ; 28 (28)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|bird:inst17                                                                              ; bird               ; work         ;
@@ -261,13 +266,16 @@ refer to the applicable agreement for further details.
 ;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 3328              ; 0          ; 0    ; 0            ; |FlappyBird_305|bird_sprite_rom_12:inst15|altsyncram:altsyncram_component                                ; altsyncram         ; work         ;
 ;          |altsyncram_0pg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 3328              ; 0          ; 0    ; 0            ; |FlappyBird_305|bird_sprite_rom_12:inst15|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated ; altsyncram_0pg1    ; work         ;
 ;    |collision:inst3|                      ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|collision:inst3                                                                          ; collision          ; work         ;
-;    |display_controller:inst1|             ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|display_controller:inst1                                                                 ; display_controller ; work         ;
-;    |floor:inst2|                          ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|floor:inst2                                                                              ; floor              ; work         ;
+;    |display_controller:inst1|             ; 26 (26)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|display_controller:inst1                                                                 ; display_controller ; work         ;
+;    |floor:inst2|                          ; 22 (22)             ; 4 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|floor:inst2                                                                              ; floor              ; work         ;
+;    |floor_sprite_rom:inst5|               ; 0 (0)               ; 0 (0)                     ; 3072              ; 0          ; 0    ; 0            ; |FlappyBird_305|floor_sprite_rom:inst5                                                                   ; floor_sprite_rom   ; work         ;
+;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 3072              ; 0          ; 0    ; 0            ; |FlappyBird_305|floor_sprite_rom:inst5|altsyncram:altsyncram_component                                   ; altsyncram         ; work         ;
+;          |altsyncram_ukg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 3072              ; 0          ; 0    ; 0            ; |FlappyBird_305|floor_sprite_rom:inst5|altsyncram:altsyncram_component|altsyncram_ukg1:auto_generated    ; altsyncram_ukg1    ; work         ;
 ;    |moveBird:inst20|                      ; 31 (31)             ; 20 (20)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|moveBird:inst20                                                                          ; moveBird           ; work         ;
 ;    |pipe_sprite_rom:inst4|                ; 0 (0)               ; 0 (0)                     ; 13312             ; 0          ; 0    ; 0            ; |FlappyBird_305|pipe_sprite_rom:inst4                                                                    ; pipe_sprite_rom    ; work         ;
 ;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 13312             ; 0          ; 0    ; 0            ; |FlappyBird_305|pipe_sprite_rom:inst4|altsyncram:altsyncram_component                                    ; altsyncram         ; work         ;
 ;          |altsyncram_plg1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 13312             ; 0          ; 0    ; 0            ; |FlappyBird_305|pipe_sprite_rom:inst4|altsyncram:altsyncram_component|altsyncram_plg1:auto_generated     ; altsyncram_plg1    ; work         ;
-;    |pipes:inst22|                         ; 187 (185)           ; 47 (39)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|pipes:inst22                                                                             ; pipes              ; work         ;
+;    |pipes:inst22|                         ; 186 (184)           ; 47 (39)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|pipes:inst22                                                                             ; pipes              ; work         ;
 ;       |random_gen:RNG|                    ; 2 (2)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|pipes:inst22|random_gen:RNG                                                              ; random_gen         ; work         ;
 ;    |pll:inst|                             ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|pll:inst                                                                                 ; pll                ; pll          ;
 ;       |pll_0002:pll_inst|                 ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird_305|pll:inst|pll_0002:pll_inst                                                               ; pll_0002           ; pll          ;
@@ -282,6 +290,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                                                                                ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF              ;
 +-----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+-------+------------------+
 ; bird_sprite_rom_12:inst15|altsyncram:altsyncram_component|altsyncram_0pg1:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 256          ; 16           ; --           ; --           ; 4096  ; bird_data_v2.mif ;
+; floor_sprite_rom:inst5|altsyncram:altsyncram_component|altsyncram_ukg1:auto_generated|ALTSYNCRAM    ; AUTO ; ROM  ; 256          ; 16           ; --           ; --           ; 4096  ; floor_data.mif   ;
 ; pipe_sprite_rom:inst4|altsyncram:altsyncram_component|altsyncram_plg1:auto_generated|ALTSYNCRAM     ; AUTO ; ROM  ; 1024         ; 16           ; --           ; --           ; 16384 ; pipe32_data.mif  ;
 +-----------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+-------+------------------+
 
@@ -326,6 +335,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +------------------------------------------+----------------------------------------+
 ; Register name                            ; Reason for Removal                     ;
 +------------------------------------------+----------------------------------------+
+; floor:inst2|x_pos[0]                     ; Stuck at VCC due to stuck port data_in ;
 ; pipes:inst22|pipe1_x_pos[0]              ; Stuck at VCC due to stuck port data_in ;
 ; MOUSE:inst7|CHAROUT[4..7]                ; Stuck at VCC due to stuck port data_in ;
 ; MOUSE:inst7|CHAROUT[3]                   ; Stuck at GND due to stuck port data_in ;
@@ -334,8 +344,19 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; MOUSE:inst7|SHIFTOUT[10]                 ; Stuck at VCC due to stuck port data_in ;
 ; moveBird:inst20|\Move_Ball:y_velocity[0] ; Stuck at GND due to stuck port data_in ;
 ; VGA_SYNC_12:inst13|pixel_row[9]          ; Stuck at GND due to stuck port data_in ;
-; Total Number of Removed Registers = 12   ;                                        ;
+; floor:inst2|x_pos[5..9]                  ; Lost fanout                            ;
+; Total Number of Removed Registers = 18   ;                                        ;
 +------------------------------------------+----------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                ;
++----------------------+---------------------------+-----------------------------------------------------------------------------------------+
+; Register name        ; Reason for Removal        ; Registers Removed due to This Register                                                  ;
++----------------------+---------------------------+-----------------------------------------------------------------------------------------+
+; floor:inst2|x_pos[0] ; Stuck at VCC              ; floor:inst2|x_pos[5], floor:inst2|x_pos[6], floor:inst2|x_pos[7], floor:inst2|x_pos[8], ;
+;                      ; due to stuck port data_in ; floor:inst2|x_pos[9]                                                                    ;
++----------------------+---------------------------+-----------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -343,7 +364,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 187   ;
+; Total registers                              ; 191   ;
 ; Number of registers using Synchronous Clear  ; 20    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 16    ;
@@ -377,13 +398,17 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; pipes:inst22|pipe2_x_pos[9]             ; 7       ;
 ; pipes:inst22|\MOVEMENT:y_pos2[5]        ; 4       ;
 ; pipes:inst22|random_gen:RNG|s_Q[0]      ; 2       ;
+; floor:inst2|x_pos[1]                    ; 2       ;
+; floor:inst2|x_pos[2]                    ; 2       ;
+; floor:inst2|x_pos[3]                    ; 2       ;
+; floor:inst2|x_pos[4]                    ; 2       ;
 ; MOUSE:inst7|send_char                   ; 3       ;
 ; MOUSE:inst7|SHIFTOUT[3]                 ; 1       ;
 ; MOUSE:inst7|SHIFTOUT[5]                 ; 1       ;
 ; MOUSE:inst7|SHIFTOUT[6]                 ; 1       ;
 ; MOUSE:inst7|SHIFTOUT[7]                 ; 1       ;
 ; MOUSE:inst7|SHIFTOUT[8]                 ; 1       ;
-; Total number of inverted registers = 25 ;         ;
+; Total number of inverted registers = 29 ;         ;
 +-----------------------------------------+---------+
 
 
@@ -392,15 +417,15 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                        ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 0 LEs                ; 20 LEs                 ; Yes        ; |FlappyBird_305|VGA_SYNC_12:inst13|v_count[3]     ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 0 LEs                ; 20 LEs                 ; Yes        ; |FlappyBird_305|VGA_SYNC_12:inst13|v_count[4]     ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |FlappyBird_305|pipes:inst22|Add9                 ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; No         ; |FlappyBird_305|pipes:inst22|pipe_sprite_col[4]   ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; No         ; |FlappyBird_305|pipes:inst22|pipe_sprite_col[0]   ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |FlappyBird_305|pipes:inst22|y_pos1               ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |FlappyBird_305|pipes:inst22|y_pos1               ;
 ; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |FlappyBird_305|moveBird:inst20|y_velocity        ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |FlappyBird_305|moveBird:inst20|y_velocity        ;
-; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |FlappyBird_305|display_controller:inst1|r_out[0] ;
-; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |FlappyBird_305|pipes:inst22|pipe_sprite_row[1]   ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |FlappyBird_305|display_controller:inst1|b_out[3] ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |FlappyBird_305|pipes:inst22|pipe_sprite_row[0]   ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
 
 
@@ -420,6 +445,15 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +---------------------------------+--------------------+------+-----------------------------------------------+
 ; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                             ;
 +---------------------------------+--------------------+------+-----------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Source assignments for floor_sprite_rom:inst5|altsyncram:altsyncram_component|altsyncram_ukg1:auto_generated ;
++---------------------------------+--------------------+------+------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                             ;
++---------------------------------+--------------------+------+------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                              ;
++---------------------------------+--------------------+------+------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------+
@@ -791,12 +825,73 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: floor_sprite_rom:inst5|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+-----------------------------------------+
+; Parameter Name                     ; Value                ; Type                                    ;
++------------------------------------+----------------------+-----------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                 ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                              ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                            ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                            ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                          ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                 ;
+; OPERATION_MODE                     ; ROM                  ; Untyped                                 ;
+; WIDTH_A                            ; 16                   ; Signed Integer                          ;
+; WIDTHAD_A                          ; 16                   ; Signed Integer                          ;
+; NUMWORDS_A                         ; 256                  ; Signed Integer                          ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                 ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                 ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                 ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                 ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                 ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                 ;
+; WIDTH_B                            ; 1                    ; Untyped                                 ;
+; WIDTHAD_B                          ; 1                    ; Untyped                                 ;
+; NUMWORDS_B                         ; 1                    ; Untyped                                 ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                 ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                 ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                 ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                 ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                 ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                 ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                 ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                 ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                 ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                 ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                 ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                 ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                          ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                 ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                 ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                 ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                 ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                 ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                 ;
+; INIT_FILE                          ; floor_data.mif       ; Untyped                                 ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                 ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                 ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                 ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                 ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                 ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                 ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                 ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                 ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                 ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                 ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                 ;
+; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                 ;
+; CBXI_PARAMETER                     ; altsyncram_ukg1      ; Untyped                                 ;
++------------------------------------+----------------------+-----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +-------------------------------------------------------------------------------------------------------+
 ; altsyncram Parameter Settings by Entity Instance                                                      ;
 +-------------------------------------------+-----------------------------------------------------------+
 ; Name                                      ; Value                                                     ;
 +-------------------------------------------+-----------------------------------------------------------+
-; Number of entity instances                ; 2                                                         ;
+; Number of entity instances                ; 3                                                         ;
 ; Entity Instance                           ; bird_sprite_rom_12:inst15|altsyncram:altsyncram_component ;
 ;     -- OPERATION_MODE                     ; ROM                                                       ;
 ;     -- WIDTH_A                            ; 16                                                        ;
@@ -812,6 +907,17 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- OPERATION_MODE                     ; ROM                                                       ;
 ;     -- WIDTH_A                            ; 16                                                        ;
 ;     -- NUMWORDS_A                         ; 1024                                                      ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                              ;
+;     -- WIDTH_B                            ; 1                                                         ;
+;     -- NUMWORDS_B                         ; 1                                                         ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                    ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                              ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                      ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                 ;
+; Entity Instance                           ; floor_sprite_rom:inst5|altsyncram:altsyncram_component    ;
+;     -- OPERATION_MODE                     ; ROM                                                       ;
+;     -- WIDTH_A                            ; 16                                                        ;
+;     -- NUMWORDS_A                         ; 256                                                       ;
 ;     -- OUTDATA_REG_A                      ; UNREGISTERED                                              ;
 ;     -- WIDTH_B                            ; 1                                                         ;
 ;     -- NUMWORDS_B                         ; 1                                                         ;
@@ -837,39 +943,39 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 187                         ;
+; arriav_ff             ; 191                         ;
 ;     CLR               ; 1                           ;
 ;     ENA               ; 65                          ;
 ;     ENA CLR           ; 15                          ;
 ;     ENA SCLR          ; 10                          ;
 ;     SCLR              ; 10                          ;
-;     plain             ; 86                          ;
+;     plain             ; 90                          ;
 ; arriav_io_obuf        ; 2                           ;
-; arriav_lcell_comb     ; 357                         ;
-;     arith             ; 87                          ;
-;         1 data inputs ; 69                          ;
-;         2 data inputs ; 1                           ;
+; arriav_lcell_comb     ; 394                         ;
+;     arith             ; 96                          ;
+;         1 data inputs ; 74                          ;
+;         2 data inputs ; 5                           ;
 ;         3 data inputs ; 1                           ;
 ;         4 data inputs ; 1                           ;
 ;         5 data inputs ; 15                          ;
-;     extend            ; 6                           ;
-;         7 data inputs ; 6                           ;
-;     normal            ; 239                         ;
-;         1 data inputs ; 8                           ;
-;         2 data inputs ; 33                          ;
-;         3 data inputs ; 22                          ;
-;         4 data inputs ; 43                          ;
-;         5 data inputs ; 48                          ;
-;         6 data inputs ; 85                          ;
+;     extend            ; 1                           ;
+;         7 data inputs ; 1                           ;
+;     normal            ; 272                         ;
+;         1 data inputs ; 12                          ;
+;         2 data inputs ; 48                          ;
+;         3 data inputs ; 30                          ;
+;         4 data inputs ; 42                          ;
+;         5 data inputs ; 41                          ;
+;         6 data inputs ; 99                          ;
 ;     shared            ; 25                          ;
 ;         0 data inputs ; 2                           ;
 ;         2 data inputs ; 23                          ;
 ; boundary_port         ; 18                          ;
 ; generic_pll           ; 1                           ;
-; stratixv_ram_block    ; 26                          ;
+; stratixv_ram_block    ; 38                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 6.60                        ;
-; Average LUT depth     ; 3.32                        ;
+; Average LUT depth     ; 3.45                        ;
 +-----------------------+-----------------------------+
 
 
@@ -888,16 +994,19 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Fri May 10 18:47:49 2024
+    Info: Processing started: Fri May 10 20:09:44 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FlappyBird_305 -c FlappyBird_305
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file /users/juane/desktop/305flappybird/vhd and data/floor_sprite_rom.vhd
+    Info (12022): Found design unit 1: floor_sprite_rom-SYN File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor_sprite_rom.vhd Line: 17
+    Info (12023): Found entity 1: floor_sprite_rom File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor_sprite_rom.vhd Line: 9
 Info (12021): Found 2 design units, including 1 entities, in source file /users/juane/desktop/305flappybird/vhd and data/pipe_sprite_rom.vhd
     Info (12022): Found design unit 1: pipe_sprite_rom-SYN File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipe_sprite_rom.vhd Line: 17
     Info (12023): Found entity 1: pipe_sprite_rom File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/pipe_sprite_rom.vhd Line: 9
 Info (12021): Found 2 design units, including 1 entities, in source file /users/juane/desktop/305flappybird/vhd and data/floor.vhd
-    Info (12022): Found design unit 1: floor-behavior File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor.vhd Line: 15
-    Info (12023): Found entity 1: floor File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor.vhd Line: 7
+    Info (12022): Found design unit 1: floor-behavior File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor.vhd Line: 21
+    Info (12023): Found entity 1: floor File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor.vhd Line: 9
 Info (12021): Found 2 design units, including 1 entities, in source file /users/juane/desktop/305flappybird/vhd and data/movebird.vhd
     Info (12022): Found design unit 1: moveBird-behavior File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/moveBird.vhd Line: 16
     Info (12023): Found entity 1: moveBird File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/moveBird.vhd Line: 5
@@ -1080,9 +1189,38 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/alts
     Info (12023): Found entity 1: altsyncram_plg1 File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_plg1.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_plg1" for hierarchy "pipe_sprite_rom:inst4|altsyncram:altsyncram_component|altsyncram_plg1:auto_generated" File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
 Info (12128): Elaborating entity "floor" for hierarchy "floor:inst2"
+Warning (10492): VHDL Process Statement warning at floor.vhd(62): signal "f_on" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor.vhd Line: 62
+Warning (10492): VHDL Process Statement warning at floor.vhd(64): signal "x_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor.vhd Line: 64
+Warning (10492): VHDL Process Statement warning at floor.vhd(65): signal "y_pos" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor.vhd Line: 65
+Info (12128): Elaborating entity "floor_sprite_rom" for hierarchy "floor_sprite_rom:inst5"
+Info (12128): Elaborating entity "altsyncram" for hierarchy "floor_sprite_rom:inst5|altsyncram:altsyncram_component" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor_sprite_rom.vhd Line: 50
+Info (12130): Elaborated megafunction instantiation "floor_sprite_rom:inst5|altsyncram:altsyncram_component" File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor_sprite_rom.vhd Line: 50
+Info (12133): Instantiated megafunction "floor_sprite_rom:inst5|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/floor_sprite_rom.vhd Line: 50
+    Info (12134): Parameter "address_aclr_a" = "NONE"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "init_file" = "floor_data.mif"
+    Info (12134): Parameter "intended_device_family" = "Cyclone III"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+    Info (12134): Parameter "numwords_a" = "256"
+    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info (12134): Parameter "widthad_a" = "16"
+    Info (12134): Parameter "width_a" = "16"
+    Info (12134): Parameter "width_byteena_a" = "1"
+Warning (287001): Assertion warning: Not using extra address lines in altsyncram megafunction design -- 256 memory words in side A specified but total number of address lines is 16 File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_ukg1.tdf Line: 378
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ukg1.tdf
+    Info (12023): Found entity 1: altsyncram_ukg1 File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_ukg1.tdf Line: 27
+Info (12128): Elaborating entity "altsyncram_ukg1" for hierarchy "floor_sprite_rom:inst5|altsyncram:altsyncram_component|altsyncram_ukg1:auto_generated" File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
 Info (12128): Elaborating entity "background" for hierarchy "background:inst10"
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following RAM node(s):
+        Warning (14320): Synthesized away node "floor_sprite_rom:inst5|altsyncram:altsyncram_component|altsyncram_ukg1:auto_generated|q_a[12]" File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_ukg1.tdf Line: 286
+        Warning (14320): Synthesized away node "floor_sprite_rom:inst5|altsyncram:altsyncram_component|altsyncram_ukg1:auto_generated|q_a[13]" File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_ukg1.tdf Line: 307
+        Warning (14320): Synthesized away node "floor_sprite_rom:inst5|altsyncram:altsyncram_component|altsyncram_ukg1:auto_generated|q_a[14]" File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_ukg1.tdf Line: 328
+        Warning (14320): Synthesized away node "floor_sprite_rom:inst5|altsyncram:altsyncram_component|altsyncram_ukg1:auto_generated|q_a[15]" File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_ukg1.tdf Line: 349
         Warning (14320): Synthesized away node "pipe_sprite_rom:inst4|altsyncram:altsyncram_component|altsyncram_plg1:auto_generated|q_a[13]" File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_plg1.tdf Line: 307
         Warning (14320): Synthesized away node "pipe_sprite_rom:inst4|altsyncram:altsyncram_component|altsyncram_plg1:auto_generated|q_a[14]" File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_plg1.tdf Line: 328
         Warning (14320): Synthesized away node "pipe_sprite_rom:inst4|altsyncram:altsyncram_component|altsyncram_plg1:auto_generated|q_a[15]" File: C:/Users/juane/Desktop/305FlappyBird/FlappyBirdQuartus/db/altsyncram_plg1.tdf Line: 349
@@ -1095,6 +1233,7 @@ Warning (13012): Latch pipes:inst22|\SPRITE:invert has unsafe behavior
 Info (13000): Registers with preset signals will power-up high File: C:/Users/juane/Desktop/305FlappyBird/vhd and data/mouse.vhd Line: 146
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Info (286030): Timing-Driven Synthesis is running
+Info (17049): 5 registers lost all their fanouts during netlist optimizations.
 Warning (20013): Ignored 24 assignments for entity "DE0_CV_Default" -- entity does not exist in design
     Warning (20014): Assignment for entity set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -entity DE0_CV_Default -section_id Top was ignored
     Warning (20014): Assignment for entity set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -entity DE0_CV_Default -section_id Top was ignored
@@ -1124,17 +1263,17 @@ Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 3 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
 Warning: RST port on the PLL is not properly connected on instance pll:inst|pll_0002:pll_inst|altera_pll:altera_pll_i|general[0].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altera_pll.v Line: 748
     Info: Must be connected
-Info (21057): Implemented 473 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 522 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 1 input pins
     Info (21059): Implemented 15 output pins
     Info (21060): Implemented 2 bidirectional pins
-    Info (21061): Implemented 428 logic cells
-    Info (21064): Implemented 26 RAM segments
+    Info (21061): Implemented 465 logic cells
+    Info (21064): Implemented 38 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 64 warnings
-    Info: Peak virtual memory: 4943 megabytes
-    Info: Processing ended: Fri May 10 18:47:57 2024
-    Info: Elapsed time: 00:00:08
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 72 warnings
+    Info: Peak virtual memory: 4962 megabytes
+    Info: Processing ended: Fri May 10 20:09:51 2024
+    Info: Elapsed time: 00:00:07
     Info: Total CPU time (on all processors): 00:00:03
 
 

@@ -43,7 +43,7 @@ architecture rtl of pipes is
   signal pipe2_top_on, pipe2_bottom_on : std_logic;
 
   -- x and y position for pipes
-  signal pipe1_y_pos, pipe2_y_pos : integer range 120 to 360 := 240;
+  signal pipe1_y_pos, pipe2_y_pos : integer range 120 to 360 := 360;
 
   signal pipe1_x_pos : std_logic_vector(10 downto 0) := conv_std_logic_vector(screen_width, 11);
   signal pipe2_x_pos : std_logic_vector(10 downto 0) := conv_std_logic_vector(screen_width + distance, 11);
