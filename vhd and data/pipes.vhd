@@ -12,6 +12,7 @@ entity pipes is
     rgba                             : in std_logic_vector(12 downto 0);
     v_sync                           : in std_logic;
     pixel_row, pixel_column          : in std_logic_vector(9 downto 0);
+    speed                            : in std_logic_vector(1 downto 0);
     pipe_sprite_row, pipe_sprite_col : out std_logic_vector(4 downto 0);
     red_out, green_out, blue_out     : out std_logic_vector(3 downto 0);
     pipe_on                          : out std_logic;
@@ -43,7 +44,7 @@ architecture rtl of pipes is
   signal pipe2_top_on, pipe2_bottom_on : std_logic;
 
   -- x and y position for pipes
-  signal pipe1_y_pos, pipe2_y_pos : integer range 120 to 360 := 240;
+  signal pipe1_y_pos, pipe2_y_pos : integer range 120 to 360 := 360;
 
   signal pipe1_x_pos : std_logic_vector(10 downto 0) := conv_std_logic_vector(screen_width, 11);
   signal pipe2_x_pos : std_logic_vector(10 downto 0) := conv_std_logic_vector(screen_width + distance, 11);
@@ -91,8 +92,8 @@ begin
 
   begin
     if (rising_edge(v_sync)) then
-      pipe1_x_pos <= pipe1_x_pos - x_speed;
-      pipe2_x_pos <= pipe2_x_pos - x_speed;
+      pipe1_x_pos <= pipe1_x_pos - to_integer(ieee.numeric_std.unsigned(speed));
+      pipe2_x_pos <= pipe2_x_pos - to_integer(ieee.numeric_std.unsigned(speed));
 
       -- PIPE 1
       if (pipe1_x_pos <= - to_integer(pipe_size) * scale) then
