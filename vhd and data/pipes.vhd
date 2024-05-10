@@ -14,7 +14,8 @@ entity pipes is
     pixel_row, pixel_column          : in std_logic_vector(9 downto 0);
     pipe_sprite_row, pipe_sprite_col : out std_logic_vector(4 downto 0);
     red_out, green_out, blue_out     : out std_logic_vector(3 downto 0);
-    pipe_on                          : out std_logic
+    pipe_on                          : out std_logic;
+    invert_pipe                      : out std_logic
   );
 end entity pipes;
 
@@ -79,12 +80,13 @@ begin
     and (pixel_row  <= screen_height) and (pixel_row > pipe2_y_pos + gap_size) else
     '0';
 
+  -- Set RGBA values of sprite
   red_out   <= rgba(11 downto 8) and pipe_on_mask;
   green_out <= rgba(7 downto 4) and pipe_on_mask;
   blue_out  <= rgba(3 downto 0) and pipe_on_mask;
-  pipe_on   <= s_pipe_on;
+  pipe_on   <= rgba(12);
 
-  PER_FRAME : process (v_sync)
+  MOVEMENT : process (v_sync)
     variable y_pos1, y_pos2 : integer range -480 to 480;
 
   begin
@@ -92,10 +94,12 @@ begin
       pipe1_x_pos <= pipe1_x_pos - x_speed;
       pipe2_x_pos <= pipe2_x_pos - x_speed;
 
+      -- PIPE 1
       if (pipe1_x_pos <= - to_integer(pipe_size) * scale) then
         y_pos1 := to_integer(random_num) + half_height;
         pipe1_x_pos <= conv_std_logic_vector(screen_width, 11);
 
+        -- LIMIT HEIGHT
         if (y_pos1 > half_height + 100) then
           y_pos1 := half_height + 100;
         elsif (y_pos1 < half_height - 100) then
@@ -103,9 +107,11 @@ begin
         end if;
       end if;
 
+      -- PIPE 2
       if (pipe2_x_pos <= - to_integer(pipe_size) * scale) then
         y_pos2 := to_integer(random_num) + half_height;
 
+        -- LIMIT HEIGHT
         if (y_pos2 > half_height + 100) then
           y_pos2 := half_height + 100;
         elsif (y_pos2 < half_height - 100) then
@@ -116,6 +122,7 @@ begin
       end if;
     end if;
 
+    -- GET NEW POSITION
     pipe1_y_pos <= y_pos1;
     pipe2_y_pos <= y_pos2;
   end process;
@@ -125,16 +132,54 @@ begin
     variable col_d, temp_c : ieee.numeric_std.unsigned(10 downto 0) := (others => '0');
     variable row_d, temp_r : ieee.numeric_std.unsigned(9 downto 0)  := (others => '0');
 
-    variable pipe1_bottom_top : std_logic               := '1';
-    variable counter          : integer range 0 to size := 0;
+    variable invert : std_logic;
 
   begin
 
+    -- BOTTOM PIPES
+
+    -- Pipe 1 bottom
     if (pipe1_bottom_on = '1') then
+      invert := '0';
       temp_c := ieee.numeric_std.unsigned(pixel_column - pipe1_x_pos);
       temp_r := ieee.numeric_std.unsigned(pixel_row - pipe1_y_pos - gap_size); -- This gave me pain
 
       if (temp_r(9 downto 5) /= "00000") then
+        temp_r := temp_r mod size + size;
+      end if;
+
+      -- Pipe 2 bottom
+    elsif (pipe2_bottom_on = '1') then
+      invert := '0';
+      temp_c := ieee.numeric_std.unsigned(pixel_column - pipe2_x_pos);
+      temp_r := ieee.numeric_std.unsigned(pixel_row - pipe2_y_pos - gap_size); -- This gave me pain
+
+      if (temp_r(9 downto 5) /= "00000") then
+        temp_r := temp_r mod size + size;
+      end if;
+
+      -- TOP PIPES
+
+      -- Pipe 1
+    elsif (pipe1_top_on = '1') then
+      temp_c := ieee.numeric_std.unsigned(pixel_column - pipe1_x_pos);
+      temp_r := ieee.numeric_std.unsigned(pixel_row - pipe1_y_pos - gap_size); -- This gave me pain
+
+      if (pixel_row > pipe1_y_pos - to_integer(pipe_size) - gap_size and pixel_row <= pipe1_y_pos - gap_size) then
+        invert := '1';
+      else
+        invert := '0';
+        temp_r := temp_r mod size + size;
+      end if;
+
+    elsif (pipe2_top_on = '1') then
+      temp_c := ieee.numeric_std.unsigned(pixel_column - pipe2_x_pos);
+      temp_r := ieee.numeric_std.unsigned(pixel_row - pipe2_y_pos - gap_size); -- This gave me pain
+
+      if (pixel_row > pipe2_y_pos - to_integer(pipe_size) - gap_size and pixel_row <= pipe2_y_pos - gap_size) then
+        invert := '1';
+      else
+        invert := '0';
         temp_r := temp_r mod size + size;
       end if;
     else
@@ -142,10 +187,15 @@ begin
       temp_r := (others => '0');
     end if;
 
-    col_d := shift_right(temp_c, scale - 1); -- divide be powers of 2 to change size
+    -- SCALES SPRITES BY ORDER 2
+    col_d := shift_right(temp_c, scale - 1);
     row_d := shift_right(temp_r, scale - 1);
 
-    pipe_sprite_row <= std_logic_vector(row_d(4 downto 0));
+    if (invert = '0') then
+      pipe_sprite_row <= std_logic_vector(row_d(4 downto 0));
+    else
+      pipe_sprite_row <= 31 - std_logic_vector(row_d(4 downto 0));
+    end if;
     pipe_sprite_col <= std_logic_vector(col_d(4 downto 0));
   end process;
 
