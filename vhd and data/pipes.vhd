@@ -12,6 +12,7 @@ entity pipes is
     rgba                             : in std_logic_vector(12 downto 0);
     v_sync                           : in std_logic;
     pixel_row, pixel_column          : in std_logic_vector(9 downto 0);
+    speed                            : in std_logic_vector(1 downto 0);
     pipe_sprite_row, pipe_sprite_col : out std_logic_vector(4 downto 0);
     red_out, green_out, blue_out     : out std_logic_vector(3 downto 0);
     pipe_on                          : out std_logic;
@@ -35,7 +36,6 @@ architecture rtl of pipes is
   constant screen_width  : integer := 639;
   constant half_height   : integer := 239;
   constant gap_size      : integer := 64;
-  constant x_speed       : integer := 2;
   constant distance      : integer := 319 + to_integer(pipe_size);
 
   -- Top and Bottom pipes
@@ -91,8 +91,8 @@ begin
 
   begin
     if (rising_edge(v_sync)) then
-      pipe1_x_pos <= pipe1_x_pos - x_speed;
-      pipe2_x_pos <= pipe2_x_pos - x_speed;
+      pipe1_x_pos <= pipe1_x_pos - speed;
+      pipe2_x_pos <= pipe2_x_pos - speed;
 
       -- PIPE 1
       if (pipe1_x_pos <= - to_integer(pipe_size) * scale) then

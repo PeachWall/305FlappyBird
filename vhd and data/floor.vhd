@@ -12,8 +12,9 @@ entity floor is
     v_sync                             : in std_logic;
     rgba                               : in std_logic_vector(12 downto 0);
     pixel_row, pixel_column            : in std_logic_vector(9 downto 0);
-    floor_sprite_row, floor_sprite_col : out std_logic_vector(3 downto 0);
+    speed                              : in std_logic_vector(1 downto 0);
     floor_sprite_tile                  : out std_logic;
+    floor_sprite_row, floor_sprite_col : out std_logic_vector(3 downto 0);
     red, green, blue                   : out std_logic_vector(3 downto 0);
     floor_on                           : out std_logic);
 end floor;
@@ -22,7 +23,6 @@ architecture behavior of floor is
 
   constant size         : integer := 16;
   constant scale        : integer := 2;
-  constant speed        : integer := 2;
   constant screen_width : integer := 639;
 
   signal f_on          : std_logic;
@@ -73,11 +73,7 @@ begin
     floor_sprite_row <= std_logic_vector(row_d(3 downto 0));
     floor_sprite_col <= std_logic_vector(col_d(3 downto 0));
 
-    if (row_d > 0) then
-      floor_sprite_tile <= '1';
-    else
-      floor_sprite_tile <= '0';
-    end if;
+    floor_sprite_tile <= or_reduce(std_logic_vector(row_d(9 downto 4)));
   end process;
 
 end behavior;

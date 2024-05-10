@@ -993,23 +993,23 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 256 32)
 		(output)
-		(text "floor_sprite_row[3..0]" (rect 0 0 156 16)(font "Arial" ))
-		(text "floor_sprite_row[3..0]" (rect 103 27 235 43)(font "Arial" ))
-		(line (pt 256 32)(pt 240 32)(line_width 3))
+		(text "floor_sprite_tile" (rect 0 0 114 16)(font "Arial" ))
+		(text "floor_sprite_tile" (rect 139 27 235 43)(font "Arial" ))
+		(line (pt 256 32)(pt 240 32))
 	)
 	(port
 		(pt 256 48)
 		(output)
-		(text "floor_sprite_col[3..0]" (rect 0 0 152 16)(font "Arial" ))
-		(text "floor_sprite_col[3..0]" (rect 107 43 235 59)(font "Arial" ))
+		(text "floor_sprite_row[3..0]" (rect 0 0 156 16)(font "Arial" ))
+		(text "floor_sprite_row[3..0]" (rect 103 43 235 59)(font "Arial" ))
 		(line (pt 256 48)(pt 240 48)(line_width 3))
 	)
 	(port
 		(pt 256 64)
 		(output)
-		(text "floor_sprite_tile" (rect 0 0 114 16)(font "Arial" ))
-		(text "floor_sprite_tile" (rect 139 59 235 75)(font "Arial" ))
-		(line (pt 256 64)(pt 240 64))
+		(text "floor_sprite_col[3..0]" (rect 0 0 152 16)(font "Arial" ))
+		(text "floor_sprite_col[3..0]" (rect 107 59 235 75)(font "Arial" ))
+		(line (pt 256 64)(pt 240 64)(line_width 3))
 	)
 	(port
 		(pt 256 80)
@@ -1795,41 +1795,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 640 968)
-	(pt 648 968)
-	(bus)
-)
-(connector
-	(pt 648 968)
-	(pt 648 936)
-	(bus)
-)
-(connector
-	(pt 648 936)
-	(pt 344 936)
-	(bus)
-)
-(connector
-	(pt 344 936)
-	(pt 344 872)
-	(bus)
-)
-(connector
-	(pt 344 872)
-	(pt 400 872)
-	(bus)
-)
-(connector
-	(pt 664 984)
-	(pt 640 984)
-	(bus)
-)
-(connector
-	(pt 664 920)
-	(pt 664 984)
-	(bus)
-)
-(connector
 	(pt 664 920)
 	(pt 368 920)
 	(bus)
@@ -1871,8 +1836,68 @@ refer to the applicable agreement for further details.
 	(pt 384 968)
 	(pt 344 968)
 )
+(connector
+	(pt 664 920)
+	(pt 664 1000)
+	(bus)
+)
+(connector
+	(pt 640 1000)
+	(pt 664 1000)
+	(bus)
+)
+(connector
+	(pt 640 984)
+	(pt 656 984)
+	(bus)
+)
+(connector
+	(pt 656 984)
+	(pt 656 928)
+	(bus)
+)
+(connector
+	(pt 640 968)
+	(pt 648 968)
+)
+(connector
+	(pt 648 968)
+	(pt 648 936)
+)
+(connector
+	(pt 648 936)
+	(pt 336 936)
+)
+(connector
+	(pt 336 936)
+	(pt 336 856)
+)
+(connector
+	(pt 336 856)
+	(pt 400 856)
+)
+(connector
+	(pt 400 856)
+	(pt 408 856)
+)
+(connector
+	(pt 400 872)
+	(pt 352 872)
+	(bus)
+)
+(connector
+	(pt 352 872)
+	(pt 352 928)
+	(bus)
+)
+(connector
+	(pt 656 928)
+	(pt 352 928)
+	(bus)
+)
 (junction (pt 704 -136))
 (junction (pt 1544 576))
 (junction (pt 752 472))
 (junction (pt 760 1000))
 (junction (pt 312 784))
+(junction (pt 400 856))
