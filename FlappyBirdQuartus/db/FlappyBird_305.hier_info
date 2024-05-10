@@ -1310,6 +1310,10 @@ pixel_column[9] => Add9.IN12
 pixel_column[9] => Add9.IN13
 pixel_column[9] => Add13.IN12
 pixel_column[9] => Add13.IN13
+speed[0] => Add5.IN11
+speed[0] => Add4.IN11
+speed[1] => Add5.IN10
+speed[1] => Add4.IN10
 pipe_sprite_row[0] <= pipe_sprite_row.DB_MAX_OUTPUT_PORT_TYPE
 pipe_sprite_row[1] <= pipe_sprite_row.DB_MAX_OUTPUT_PORT_TYPE
 pipe_sprite_row[2] <= pipe_sprite_row.DB_MAX_OUTPUT_PORT_TYPE
@@ -1665,6 +1669,11 @@ q_a[14] <= ram_block1a14.PORTADATAOUT
 q_a[15] <= ram_block1a15.PORTADATAOUT
 
 
+|FlappyBird_305|speed_controller:inst6
+speed_out[0] <= <GND>
+speed_out[1] <= <VCC>
+
+
 |FlappyBird_305|floor:inst2
 v_sync => x_pos[0].CLK
 v_sync => x_pos[1].CLK
@@ -1719,7 +1728,9 @@ pixel_column[6] => Add1.IN14
 pixel_column[7] => Add1.IN13
 pixel_column[8] => Add1.IN12
 pixel_column[9] => Add1.IN11
-floor_sprite_tile <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+speed[0] => Add0.IN10
+speed[1] => Add0.IN9
+floor_frame <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
 floor_sprite_row[0] <= temp_r.DB_MAX_OUTPUT_PORT_TYPE
 floor_sprite_row[1] <= temp_r.DB_MAX_OUTPUT_PORT_TYPE
 floor_sprite_row[2] <= temp_r.DB_MAX_OUTPUT_PORT_TYPE
@@ -1745,7 +1756,7 @@ floor_on <= LessThan0.DB_MAX_OUTPUT_PORT_TYPE
 
 |FlappyBird_305|floor_sprite_rom:inst5
 clock => altsyncram:altsyncram_component.clock0
-tile => altsyncram:altsyncram_component.address_a[8]
+frame => altsyncram:altsyncram_component.address_a[8]
 row[0] => altsyncram:altsyncram_component.address_a[4]
 row[1] => altsyncram:altsyncram_component.address_a[5]
 row[2] => altsyncram:altsyncram_component.address_a[6]

@@ -52,10 +52,17 @@ refer to the applicable agreement for further details.
 		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
+		(pt 0 96)
+		(input)
+		(text "speed[1..0]" (rect 0 0 42 12)(font "Arial" ))
+		(text "speed[1..0]" (rect 21 91 63 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
 		(pt 256 32)
 		(output)
-		(text "floor_sprite_tile" (rect 0 0 60 12)(font "Arial" ))
-		(text "floor_sprite_tile" (rect 175 27 235 39)(font "Arial" ))
+		(text "floor_frame" (rect 0 0 48 12)(font "Arial" ))
+		(text "floor_frame" (rect 187 27 235 39)(font "Arial" ))
 		(line (pt 256 32)(pt 240 32)(line_width 1))
 	)
 	(port

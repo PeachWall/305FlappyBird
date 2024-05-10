@@ -36,6 +36,7 @@ architecture rtl of pipes is
   constant screen_width  : integer := 639;
   constant half_height   : integer := 239;
   constant gap_size      : integer := 64;
+  constant x_speed       : integer := 2;
   constant distance      : integer := 319 + to_integer(pipe_size);
 
   -- Top and Bottom pipes
@@ -91,8 +92,8 @@ begin
 
   begin
     if (rising_edge(v_sync)) then
-      pipe1_x_pos <= pipe1_x_pos - speed;
-      pipe2_x_pos <= pipe2_x_pos - speed;
+      pipe1_x_pos <= pipe1_x_pos - to_integer(ieee.numeric_std.unsigned(speed));
+      pipe2_x_pos <= pipe2_x_pos - to_integer(ieee.numeric_std.unsigned(speed));
 
       -- PIPE 1
       if (pipe1_x_pos <= - to_integer(pipe_size) * scale) then

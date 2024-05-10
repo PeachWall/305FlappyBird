@@ -9,7 +9,7 @@ use altera_mf.all;
 entity floor_sprite_rom is
   port
   (
-    clock, tile  : in std_logic;
+    clock, frame : in std_logic;
     row, col     : in std_logic_vector(3 downto 0);
     pixel_output : out std_logic_vector(12 downto 0)
   );
@@ -72,7 +72,7 @@ begin
     q_a       => rom_data
   );
 
-  rom_address  <= tile & row & col;
+  rom_address  <= frame & row & col;
   pixel_output <= rom_data(12 downto 0);
 
 end SYN;
