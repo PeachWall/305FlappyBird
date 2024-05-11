@@ -2167,13 +2167,13 @@ r[1] <= char_rom:text_welcome.rom_mux_output
 r[2] <= char_rom:text_welcome.rom_mux_output
 r[3] <= char_rom:text_welcome.rom_mux_output
 g[0] <= char_rom:text_welcome.rom_mux_output
-g[1] <= char_rom:text_welcome.rom_mux_output
-g[2] <= char_rom:text_welcome.rom_mux_output
+g[1] <= <GND>
+g[2] <= <GND>
 g[3] <= char_rom:text_welcome.rom_mux_output
-b[0] <= char_rom:text_welcome.rom_mux_output
-b[1] <= char_rom:text_welcome.rom_mux_output
-b[2] <= char_rom:text_welcome.rom_mux_output
-b[3] <= char_rom:text_welcome.rom_mux_output
+b[0] <= <GND>
+b[1] <= <GND>
+b[2] <= <GND>
+b[3] <= <GND>
 text_on <= char_rom:text_welcome.rom_mux_output
 
 

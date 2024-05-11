@@ -51,8 +51,8 @@ char_add <= "100000" when empty_space = '1' else
 
 text_on <= s_text_on;
 r <= ((s_text_on & s_text_on & s_text_on & s_text_on) and "1111");
-g <= ((s_text_on & s_text_on & s_text_on & s_text_on) and "1111");
-b <= ((s_text_on & s_text_on & s_text_on & s_text_on) and "1111");
+g <= ((s_text_on & s_text_on & s_text_on & s_text_on) and "1001");
+b <= ((s_text_on & s_text_on & s_text_on & s_text_on) and "0000");
 
 
 text_welcome : char_rom 
