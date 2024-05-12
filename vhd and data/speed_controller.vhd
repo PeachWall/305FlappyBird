@@ -16,6 +16,7 @@ architecture rtl of speed_controller is
 begin
 
   speed_out <= "10" when switches = CONV_STD_LOGIC_VECTOR(0,10) else
-					"11" when switches = CONV_STD_LOGIC_VECTOR(1,10) else
+					"01" when switches = CONV_STD_LOGIC_VECTOR(1,10) else -- slow down
+					"11" when switches = CONV_STD_LOGIC_VECTOR(2,10) else -- speed up
 					"10";
 end architecture;
