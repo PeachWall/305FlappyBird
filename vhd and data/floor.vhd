@@ -9,17 +9,24 @@ use ieee.std_logic_misc.all;
 entity floor is
   port
   (
-    v_sync                             : in std_logic;
-    rgba                               : in std_logic_vector(12 downto 0);
-    pixel_row, pixel_column            : in std_logic_vector(9 downto 0);
-    speed                              : in std_logic_vector(1 downto 0);
-    floor_frame                        : out std_logic;
-    floor_sprite_row, floor_sprite_col : out std_logic_vector(3 downto 0);
-    red, green, blue                   : out std_logic_vector(3 downto 0);
-    floor_on                           : out std_logic);
+    clk                     : in std_logic;
+    v_sync                  : in std_logic;
+    enable_point_collision  : in std_logic;
+    pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+    speed                   : in std_logic_vector(1 downto 0);
+    red, green, blue        : out std_logic_vector(3 downto 0);
+    floor_on                : out std_logic);
 end floor;
 
 architecture behavior of floor is
+  component floor_sprite_rom is
+    port
+    (
+      clock, frame : in std_logic;
+      row, col     : in std_logic_vector(3 downto 0);
+      pixel_output : out std_logic_vector(12 downto 0)
+    );
+  end component;
 
   constant size         : integer := 16;
   constant scale        : integer := 2;
@@ -29,6 +36,12 @@ architecture behavior of floor is
   signal x_pos         : std_logic_vector(9 downto 0) := CONV_STD_LOGIC_VECTOR(screen_width, 10);
   signal y_pos         : std_logic_vector(9 downto 0);
   signal floor_on_mask : std_logic_vector(3 downto 0);
+
+  signal rgba                               : std_logic_vector(12 downto 0);
+  signal floor_frame                        : std_logic;
+  signal floor_sprite_row, floor_sprite_col : std_logic_vector(3 downto 0);
+
+  signal enable_points : std_logic;
 begin
 
   floor_on_mask <= (others => f_on);
@@ -75,5 +88,15 @@ begin
 
     floor_frame <= or_reduce(std_logic_vector(row_d(9 downto 4)));
   end process;
+
+  SPRITE_ROM : floor_sprite_rom
+  port map
+  (
+    clock        => clk,
+    frame        => floor_frame,
+    row          => floor_sprite_row,
+    col          => floor_sprite_col,
+    pixel_output => rgba
+  );
 
 end behavior;
