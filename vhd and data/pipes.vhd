@@ -110,7 +110,7 @@ begin
   red_out       <= rgba(11 downto 8) and pipe_on_mask;
   green_out     <= rgba(7 downto 4) and pipe_on_mask;
   blue_out      <= rgba(3 downto 0) and pipe_on_mask;
-  pipe_on       <= rgba(12) or point_area1_on or point_area2_on;
+  pipe_on       <= rgba(12);
   point_area_on <= (point_area1_on or point_area2_on);
 
   MOVEMENT : process (v_sync, point_collided)
