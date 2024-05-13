@@ -11,7 +11,6 @@ entity floor is
   (
     clk                     : in std_logic;
     v_sync                  : in std_logic;
-    enable_point_collision  : in std_logic;
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     speed                   : in std_logic_vector(1 downto 0);
     red, green, blue        : out std_logic_vector(3 downto 0);
