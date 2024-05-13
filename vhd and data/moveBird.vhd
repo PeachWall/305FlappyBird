@@ -15,17 +15,12 @@ end moveBird;
 
 architecture behavior of moveBird is
   signal ball_on    : std_logic;
-  signal size       : std_logic_vector(9 downto 0);
   signal ball_y_pos : std_logic_vector(9 downto 0);
   signal ball_x_pos : std_logic_vector(9 downto 0);
 
   constant gravity : integer := 2;
 
 begin
-  size <= CONV_STD_LOGIC_VECTOR(10, 10);
-  -- ball_x_pos and ball_y_pos show the (x,y) for the centre of ball
-  ball_x_pos <= CONV_STD_LOGIC_VECTOR(120, 10);
-
   move_x <= ball_x_pos;
   move_y <= ball_y_pos;
 
@@ -47,6 +42,14 @@ begin
         end if;
       end if;
       ball_y_pos <= ball_y_pos + y_velocity(9 downto 2);
+
+      -- check if ball is at the floor or at ceiling
+      if( ball_y_pos >= CONV_STD_LOGIC_VECTOR(440, 10)) then
+        ball_y_pos := CONV_STD_LOGIC_VECTOR(472, 10);
+      elsei if (ball_y_pos <= CONV_STD_LOGIC_VECTOR(0, 10)) then
+        ball_y_pos := CONV_STD_LOGIC_VECTOR(0, 10);
+        y_velocity := 0;
+      end if;
 
       if (mouse = '0') then
         hold := '0';
