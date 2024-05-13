@@ -46,6 +46,7 @@ begin
       -- check if ball is at the floor or at ceiling
       if( ball_y_pos >= CONV_STD_LOGIC_VECTOR(440, 10)) then
         ball_y_pos := CONV_STD_LOGIC_VECTOR(472, 10);
+        y_velocity := 0;
       elsei if (ball_y_pos <= CONV_STD_LOGIC_VECTOR(0, 10)) then
         ball_y_pos := CONV_STD_LOGIC_VECTOR(0, 10);
         y_velocity := 0;
