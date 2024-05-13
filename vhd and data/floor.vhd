@@ -62,9 +62,9 @@ begin
     if (ieee.std_logic_1164.rising_edge(v_sync)) then
       x_pos <= x_pos - speed;
 
-      if (x_pos <= 0) then
-        x_pos     <= CONV_STD_LOGIC_VECTOR(screen_width, 10);
-      end if;
+      -- if (x_pos <= 0) then
+      --   x_pos     <= CONV_STD_LOGIC_VECTOR(screen_width, 10);
+      -- end if;
     end if;
   end process;
 

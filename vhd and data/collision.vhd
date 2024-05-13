@@ -32,7 +32,7 @@ begin
 
   begin
     if (rising_edge(s_point_collided)) then
-      if (count /= 254) then
+      if (count /= 253) then
         count := count + 1;
       else
         count := 0;
