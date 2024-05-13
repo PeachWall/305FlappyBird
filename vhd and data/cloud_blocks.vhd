@@ -14,8 +14,8 @@ entity cloud_blocks is
     speed                        : in std_logic_vector(1 downto 0);
     pixel_row, pixel_column      : in std_logic_vector(9 downto 0);
     rgba                         : in std_logic_vector(12 downto 0);
-    sprite_row, sprite_col        : out std_logic_vector(3 downto 0);
-    cloud_frame                  : out std_logic;
+	 cloud_frame                  : out std_logic;
+    sprite_row, sprite_col       : out std_logic_vector(3 downto 0);
     red, green, blue             : out std_logic_vector(3 downto 0);
     cloud_on                     : out std_logic
   );

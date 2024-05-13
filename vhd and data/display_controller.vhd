@@ -15,14 +15,16 @@ entity display_controller is
     floor_on                : std_logic;
     score_r, score_g, score_b : in std_logic_vector(3 downto 0);
     score_on                : std_logic;
+	 cloud_r, cloud_g, cloud_b : in std_logic_vector(3 downto 0);
+    cloud_on                : std_logic;
     r_out, g_out, b_out    : out std_logic_vector(3 downto 0)
   );
 end entity display_controller;
 
 architecture beh of display_controller is
 
-  function get_color(c_Bird, c_pipes, c_bg, c_floor, c_score : std_logic_vector(3 downto 0);
-    s_bird, s_pipes, s_floor, s_score                                  : std_logic) return std_logic_vector is
+  function get_color(c_Bird, c_pipes, c_bg, c_floor, c_score, c_cloud: std_logic_vector(3 downto 0);
+    s_bird, s_pipes, s_floor, s_score, s_cloud                                  : std_logic) return std_logic_vector is
   begin
     if (s_score = '1') then
       return c_score;
@@ -32,6 +34,8 @@ architecture beh of display_controller is
       return c_floor;
     elsif (s_pipes = '1') then
       return c_pipes;
+	 elsif (s_cloud = '1') then
+      return c_cloud;
     else
       return c_bg;
     end if;
@@ -49,7 +53,7 @@ begin
   --   pipe_r when pipe_on = '1' else
   --   bg_r;
 
-  r_out <= get_color(bird_r, pipe_r, bg_r, floor_r, score_r, bird_a, pipe_on, floor_on, score_on);
-  g_out <= get_color(bird_g, pipe_g, bg_g, floor_g, score_g, bird_a, pipe_on, floor_on, score_on);
-  b_out <= get_color(bird_b, pipe_b, bg_b, floor_b, score_b, bird_a, pipe_on, floor_on, score_on);
+  r_out <= get_color(bird_r, pipe_r, bg_r, floor_r, score_r, cloud_r, bird_a, pipe_on, floor_on, score_on, cloud_on);
+  g_out <= get_color(bird_g, pipe_g, bg_g, floor_g, score_g, cloud_r, bird_a, pipe_on, floor_on, score_on, cloud_on);
+  b_out <= get_color(bird_b, pipe_b, bg_b, floor_b, score_b, cloud_r, bird_a, pipe_on, floor_on, score_on, cloud_on);
 end architecture;
