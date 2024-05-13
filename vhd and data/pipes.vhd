@@ -91,7 +91,7 @@ begin
     and (pixel_row  <= screen_height) and (pixel_row > pipe1_y_pos + gap_size) else
     '0';
 
-  point_area1_on <= '1' when ('0' & pixel_column >= pipe1_x_pos + to_integer(pipe_size) - 4) and ('0' & pixel_column <= pipe1_x_pos + to_integer(pipe_size)) and can_collide_point = '1' else
+  point_area1_on <= '1' when ('0' & pixel_column >= pipe1_x_pos + to_integer(pipe_size) - 4) and ('0' & pixel_column <= pipe1_x_pos + to_integer(pipe_size)) else
     '0';
 
   -- Pipe2 : TOP AND BOTTOM
@@ -103,16 +103,15 @@ begin
     and (pixel_row  <= screen_height) and (pixel_row > pipe2_y_pos + gap_size) else
     '0';
 
-  -- TODO: PLS FIX. COLLIDING EARLY
-  point_area2_on <= '1' when ('0' & pixel_column >= pipe2_x_pos + to_integer(pipe_size) - 4) and ('0' & pixel_column <= pipe2_x_pos + to_integer(pipe_size)) and can_collide_point = '1' else
+  point_area2_on <= '1' when ('0' & pixel_column >= pipe2_x_pos + to_integer(pipe_size) - 4) and ('0' & pixel_column <= pipe2_x_pos + to_integer(pipe_size)) else
     '0';
 
   -- Set RGBA values of sprite
   red_out       <= rgba(11 downto 8) and pipe_on_mask;
   green_out     <= rgba(7 downto 4) and pipe_on_mask;
   blue_out      <= rgba(3 downto 0) and pipe_on_mask;
-  pipe_on       <= rgba(12) or point_area1_on or point_area2_on;
-  point_area_on <= point_area1_on or point_area2_on;
+  pipe_on       <= rgba(12);
+  point_area_on <= (point_area1_on or point_area2_on) and can_collide_point;
 
   MOVEMENT : process (v_sync, point_collided)
     variable y_pos1, y_pos2 : integer range -480 to 480 := 360;

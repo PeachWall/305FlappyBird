@@ -45,12 +45,11 @@ begin
 
 
                         -- WORD STARTS AT COL 254 AND ENDS AT COL 380 AND HAS A HEIGHT OF 16 PIXELS BETWEEN ROW 208 AND 222     MAYBE 350 ??
-empty_space <= '1' when (pixel_column <= CONV_STD_LOGIC_VECTOR((text_start - char_width),10) or pixel_column >= CONV_STD_LOGIC_VECTOR(334,10)) or ((pixel_row >= CONV_STD_LOGIC_VECTOR(64,10) or pixel_row <= CONV_STD_LOGIC_VECTOR(47,10))) else
- 			   '0';
+empty_space <= '1' when (pixel_column <= CONV_STD_LOGIC_VECTOR((text_start - char_width),10) or pixel_column >= CONV_STD_LOGIC_VECTOR(382,10)) or ((pixel_row >= CONV_STD_LOGIC_VECTOR(64,10) or pixel_row <= CONV_STD_LOGIC_VECTOR(47,10))) else
+			   '0';
 
-empty_space2 <= '1' when (pixel_column <= CONV_STD_LOGIC_VECTOR((text_start2 - char_width2),10) or pixel_column >= CONV_STD_LOGIC_VECTOR(92,10)) or ((pixel_row >= CONV_STD_LOGIC_VECTOR(55,10) or pixel_row <= CONV_STD_LOGIC_VECTOR(47,10))) else
-			   	'0';
--- empty_space2 <= '0';
+empty_space2 <= '1' when (pixel_column <= CONV_STD_LOGIC_VECTOR((text_start2 - char_width),10) or pixel_column >= CONV_STD_LOGIC_VECTOR(84,10)) or ((pixel_row >= CONV_STD_LOGIC_VECTOR(55,10) or pixel_row <= CONV_STD_LOGIC_VECTOR(47,10))) else
+			   '0';
 
 char_add <= "100000" when empty_space = '1' else
  				CONV_STD_LOGIC_VECTOR(19,6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start ,10) and empty_space = '0' else --"S"
@@ -58,6 +57,9 @@ char_add <= "100000" when empty_space = '1' else
 				CONV_STD_LOGIC_VECTOR(15,6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start + 32,10) and empty_space = '0' else --"O"
 				CONV_STD_LOGIC_VECTOR(18,6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start + 48,10) and empty_space = '0' else --"R"
 				CONV_STD_LOGIC_VECTOR(5,6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start + 64,10) and empty_space = '0' else --"E"
+				CONV_STD_LOGIC_VECTOR(58,6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start + 80,10) and empty_space = '0' else --":"
+				CONV_STD_LOGIC_VECTOR(48,6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start + 96,10) and empty_space = '0' else --"0"
+				CONV_STD_LOGIC_VECTOR(48,6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start + 112,10) and empty_space = '0' else --"0"
 				"100000"; --CONV_STD_LOGIC_VECTOR(29,6); --" ", IS A BLANK SPACE
 
 char_add2 <= "100000" when empty_space2 = '1' else
