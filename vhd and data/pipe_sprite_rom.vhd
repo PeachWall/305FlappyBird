@@ -9,7 +9,7 @@ use altera_mf.all;
 entity pipe_sprite_rom is
   port
   (
-    clock        : in std_logic;
+    clock          : in std_logic;
     row, col     : in std_logic_vector(4 downto 0);
     pixel_output : out std_logic_vector(12 downto 0)
   );
