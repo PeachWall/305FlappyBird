@@ -8,16 +8,22 @@ entity bird is
   port
   (
     clk                     : in std_logic;
-    rgba                    : in std_logic_vector(12 downto 0);
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     x_pos, y_pos            : in std_logic_vector(9 downto 0);
-    sprite_row, sprite_col  : out std_logic_vector(3 downto 0);
     red, green, blue        : out std_logic_vector(3 downto 0);
-    alpha                   : out std_logic
+    bird_on                 : out std_logic
   );
 end entity bird;
 
 architecture rtl of bird is
+  component bird_sprite_rom_12 is
+    port
+    (
+      clock        : in std_logic;
+      row, col     : in std_logic_vector(3 downto 0);
+      pixel_output : out std_logic_vector(12 downto 0)
+    );
+  end component;
   constant scale : integer              := 2;
   constant size  : unsigned(7 downto 0) := shift_left("00010000", scale - 1); -- 16 * 2^(scale - 1)
 
@@ -25,8 +31,11 @@ architecture rtl of bird is
   signal sprite_on              : std_logic;
   signal rom_address, rom_pixel : std_logic_vector (9 downto 0);
   signal prev_row               : std_logic_vector(9 downto 0);
+  signal rgba                   : std_logic_vector(12 downto 0);
 
   signal vec_sprite_on : std_logic_vector(3 downto 0);
+
+  signal sprite_row, sprite_col : std_logic_vector(3 downto 0);
 begin
 
   sprite_on <= '1' when (('0' & pixel_column >= x_pos) and ('0' & pixel_column < x_pos + to_integer(size)) -- x_pos - size <= pixel_column <= x_pos + size
@@ -35,10 +44,10 @@ begin
 
   vec_sprite_on <= (others => sprite_on);
 
-  red   <= rgba(11 downto 8) and vec_sprite_on;
-  green <= rgba(7 downto 4) and vec_sprite_on;
-  blue  <= rgba(3 downto 0) and vec_sprite_on;
-  alpha <= rgba(12);
+  red     <= rgba(11 downto 8) and vec_sprite_on;
+  green   <= rgba(7 downto 4) and vec_sprite_on;
+  blue    <= rgba(3 downto 0) and vec_sprite_on;
+  bird_on <= rgba(12);
 
   -- Get the pixel coordinates in terms of the row and column address
   address : process (sprite_on, pixel_column, pixel_row)
@@ -59,4 +68,13 @@ begin
     sprite_row <= std_logic_vector(row_d(3 downto 0));
     sprite_col <= std_logic_vector(col_d(3 downto 0));
   end process;
+
+  SPRITE_ROM : bird_sprite_rom_12
+  port map
+  (
+    clock        => clk,
+    row          => sprite_row,
+    col          => sprite_col,
+    pixel_output => rgba
+  );
 end architecture;
