@@ -12,10 +12,11 @@ entity pipes is
     v_sync                       : in std_logic;
     point_collided               : in std_logic;
     pixel_row, pixel_column      : in std_logic_vector(9 downto 0);
+    bird_x_pos                   : in std_logic_vector(9 downto 0);
     speed                        : in std_logic_vector(1 downto 0);
     red_out, green_out, blue_out : out std_logic_vector(3 downto 0);
     pipe_on                      : out std_logic;
-    point_area_on                : out std_logic
+    pipe_passed                  : out std_logic := '0'
   );
 end entity pipes;
 
@@ -69,7 +70,6 @@ architecture rtl of pipes is
   signal rgba                             : std_logic_vector(12 downto 0);
 
   signal point_area1_on, point_area2_on : std_logic;
-  signal can_collide_point              : std_logic := '1';
 begin
 
   -- Output either top or bottom pipe is being drawn
@@ -79,9 +79,6 @@ begin
 
   pipe_on_mask <= (others => s_pipe_on);
 
-  can_collide_point <= '0' when point_collided = '1' else
-    '1' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
-
   -- Pipe1 : TOP AND BOTTOM
   pipe1_top_on <= '1' when ('0' & pixel_column >= pipe1_x_pos) and ('0' & pixel_column < pipe1_x_pos + to_integer(pipe_size))
     and (pixel_row >= 0) and (pixel_row < pipe1_y_pos - gap_size) else
@@ -89,9 +86,6 @@ begin
 
   pipe1_bottom_on <= '1' when ('0' & pixel_column >= pipe1_x_pos) and ('0' & pixel_column < pipe1_x_pos + to_integer(pipe_size))
     and (pixel_row  <= screen_height) and (pixel_row > pipe1_y_pos + gap_size) else
-    '0';
-
-  point_area1_on <= '1' when ('0' & pixel_column >= pipe1_x_pos + to_integer(pipe_size) - 4) and ('0' & pixel_column <= pipe1_x_pos + to_integer(pipe_size)) and can_collide_point = '1' else
     '0';
 
   -- Pipe2 : TOP AND BOTTOM
@@ -103,17 +97,17 @@ begin
     and (pixel_row  <= screen_height) and (pixel_row > pipe2_y_pos + gap_size) else
     '0';
 
-  point_area2_on <= '1' when ('0' & pixel_column >= pipe2_x_pos + to_integer(pipe_size) - 4) and ('0' & pixel_column <= pipe2_x_pos + to_integer(pipe_size)) and can_collide_point = '1' else
-    '0';
-
   -- Set RGBA values of sprite
-  red_out       <= rgba(11 downto 8) and pipe_on_mask;
-  green_out     <= rgba(7 downto 4) and pipe_on_mask;
-  blue_out      <= rgba(3 downto 0) and pipe_on_mask;
-  pipe_on       <= rgba(12) or point_area1_on or point_area2_on;
-  point_area_on <= (point_area1_on or point_area2_on);
+  red_out   <= rgba(11 downto 8) and pipe_on_mask;
+  green_out <= rgba(7 downto 4) and pipe_on_mask;
+  blue_out  <= rgba(3 downto 0) and pipe_on_mask;
+  pipe_on   <= rgba(12);
 
-  MOVEMENT : process (v_sync, point_collided)
+  pipe_passed <=
+    '1' when pipe1_x_pos + to_integer(half_pipe_size) < bird_x_pos or pipe2_x_pos + to_integer(half_pipe_size) < bird_x_pos else
+    '0' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
+
+  MOVEMENT : process (v_sync)
     variable y_pos1, y_pos2 : integer range -480 to 480 := 360;
 
   begin
