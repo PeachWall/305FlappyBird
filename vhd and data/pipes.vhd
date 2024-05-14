@@ -8,15 +8,14 @@ use IEEE.STD_LOGIC_ARITH.all;
 entity pipes is
   port
   (
-    clk                              : in std_logic;
-    rgba                             : in std_logic_vector(12 downto 0);
-    v_sync                           : in std_logic;
-    pixel_row, pixel_column          : in std_logic_vector(9 downto 0);
-    speed                            : in std_logic_vector(1 downto 0);
-    pipe_sprite_row, pipe_sprite_col : out std_logic_vector(4 downto 0);
-    red_out, green_out, blue_out     : out std_logic_vector(3 downto 0);
-    pipe_on                          : out std_logic;
-    invert_pipe                      : out std_logic
+    clk                          : in std_logic;
+    v_sync                       : in std_logic;
+    point_collided               : in std_logic;
+    pixel_row, pixel_column      : in std_logic_vector(9 downto 0);
+    speed                        : in std_logic_vector(1 downto 0);
+    red_out, green_out, blue_out : out std_logic_vector(3 downto 0);
+    pipe_on                      : out std_logic;
+    point_area_on                : out std_logic
   );
 end entity pipes;
 
@@ -28,9 +27,20 @@ architecture rtl of pipes is
       Q                  : out ieee.numeric_std.signed(7 downto 0)
     );
   end component;
-  constant scale     : integer                               := 2;
-  constant size      : integer                               := 32;
-  constant pipe_size : ieee.numeric_std.unsigned(7 downto 0) := shift_left(to_unsigned(size, 8), scale - 1);
+
+  component pipe_sprite_rom is
+    port
+    (
+      clock        : in std_logic;
+      row, col     : in std_logic_vector(4 downto 0);
+      pixel_output : out std_logic_vector(12 downto 0)
+    );
+  end component;
+
+  constant scale          : integer                               := 2;
+  constant size           : integer                               := 32;
+  constant pipe_size      : ieee.numeric_std.unsigned(7 downto 0) := shift_left(to_unsigned(size, 8), scale - 1);
+  constant half_pipe_size : ieee.numeric_std.unsigned(7 downto 0) := shift_right(pipe_size, 1);
 
   constant screen_height : integer := 479;
   constant screen_width  : integer := 639;
@@ -54,6 +64,12 @@ architecture rtl of pipes is
 
   signal random_num   : ieee.numeric_std.signed(7 downto 0);
   signal pipe_on_mask : std_logic_vector(3 downto 0);
+
+  signal pipe_sprite_row, pipe_sprite_col : std_logic_vector(4 downto 0);
+  signal rgba                             : std_logic_vector(12 downto 0);
+
+  signal point_area1_on, point_area2_on : std_logic;
+  signal can_collide_point              : std_logic := '1';
 begin
 
   -- Output either top or bottom pipe is being drawn
@@ -63,6 +79,9 @@ begin
 
   pipe_on_mask <= (others => s_pipe_on);
 
+  can_collide_point <= '0' when point_collided = '1' else
+    '1' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
+
   -- Pipe1 : TOP AND BOTTOM
   pipe1_top_on <= '1' when ('0' & pixel_column >= pipe1_x_pos) and ('0' & pixel_column < pipe1_x_pos + to_integer(pipe_size))
     and (pixel_row >= 0) and (pixel_row < pipe1_y_pos - gap_size) else
@@ -70,6 +89,9 @@ begin
 
   pipe1_bottom_on <= '1' when ('0' & pixel_column >= pipe1_x_pos) and ('0' & pixel_column < pipe1_x_pos + to_integer(pipe_size))
     and (pixel_row  <= screen_height) and (pixel_row > pipe1_y_pos + gap_size) else
+    '0';
+
+  point_area1_on <= '1' when ('0' & pixel_column >= pipe1_x_pos + to_integer(pipe_size) - 4) and ('0' & pixel_column <= pipe1_x_pos + to_integer(pipe_size)) else
     '0';
 
   -- Pipe2 : TOP AND BOTTOM
@@ -81,14 +103,18 @@ begin
     and (pixel_row  <= screen_height) and (pixel_row > pipe2_y_pos + gap_size) else
     '0';
 
-  -- Set RGBA values of sprite
-  red_out   <= rgba(11 downto 8) and pipe_on_mask;
-  green_out <= rgba(7 downto 4) and pipe_on_mask;
-  blue_out  <= rgba(3 downto 0) and pipe_on_mask;
-  pipe_on   <= rgba(12);
+  point_area2_on <= '1' when ('0' & pixel_column >= pipe2_x_pos + to_integer(pipe_size) - 4) and ('0' & pixel_column <= pipe2_x_pos + to_integer(pipe_size)) else
+    '0';
 
-  MOVEMENT : process (v_sync)
-    variable y_pos1, y_pos2 : integer range -480 to 480;
+  -- Set RGBA values of sprite
+  red_out       <= rgba(11 downto 8) and pipe_on_mask;
+  green_out     <= rgba(7 downto 4) and pipe_on_mask;
+  blue_out      <= rgba(3 downto 0) and pipe_on_mask;
+  pipe_on       <= rgba(12);
+  point_area_on <= (point_area1_on or point_area2_on) and can_collide_point;
+
+  MOVEMENT : process (v_sync, point_collided)
+    variable y_pos1, y_pos2 : integer range -480 to 480 := 360;
 
   begin
     if (rising_edge(v_sync)) then
@@ -99,7 +125,6 @@ begin
       if (pipe1_x_pos <= - to_integer(pipe_size) * scale) then
         y_pos1 := to_integer(random_num) + half_height;
         pipe1_x_pos <= conv_std_logic_vector(screen_width, 11);
-
         -- LIMIT HEIGHT
         if (y_pos1 > half_height + 100) then
           y_pos1 := half_height + 100;
@@ -111,15 +136,13 @@ begin
       -- PIPE 2
       if (pipe2_x_pos <= - to_integer(pipe_size) * scale) then
         y_pos2 := to_integer(random_num) + half_height;
-
+        pipe2_x_pos <= conv_std_logic_vector(screen_width, 11);
         -- LIMIT HEIGHT
         if (y_pos2 > half_height + 100) then
           y_pos2 := half_height + 100;
         elsif (y_pos2 < half_height - 100) then
           y_pos2 := half_height - 100;
         end if;
-
-        pipe2_x_pos <= conv_std_logic_vector(screen_width, 11);
       end if;
     end if;
 
@@ -207,5 +230,14 @@ begin
     reset  => '0',
     enable => '1',
     Q      => random_num
+  );
+
+  SPRITE_ROM : pipe_sprite_rom
+  port
+  map(
+  clock        => clk,
+  row          => pipe_sprite_row,
+  col          => pipe_sprite_col,
+  pixel_output => rgba
   );
 end architecture;
