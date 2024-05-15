@@ -9,7 +9,7 @@ use altera_mf.all;
 entity bird_sprite_rom_12 is
   port
   (
-    clock        : in std_logic;
+    clock, frame : in std_logic;
     row, col     : in std_logic_vector(3 downto 0);
     pixel_output : out std_logic_vector(12 downto 0)
   );
@@ -17,7 +17,7 @@ end bird_sprite_rom_12;
 architecture SYN of bird_sprite_rom_12 is
 
   signal rom_data    : std_logic_vector (12 downto 0);
-  signal rom_address : std_logic_vector (7 downto 0);
+  signal rom_address : std_logic_vector (8 downto 0);
 
   component altsyncram
     generic
@@ -40,7 +40,7 @@ architecture SYN of bird_sprite_rom_12 is
     port
     (
       clock0    : in std_logic;
-      address_a : in std_logic_vector (7 downto 0);
+      address_a : in std_logic_vector (8 downto 0);
       q_a       : out std_logic_vector (12 downto 0)
     );
   end component;
@@ -53,11 +53,11 @@ begin
   address_aclr_a         => "NONE",
   clock_enable_input_a   => "BYPASS",
   clock_enable_output_a  => "BYPASS",
-  init_file              => "bird_data_v2.mif",
+  init_file              => "bird_data_v3.mif",
   intended_device_family => "Cyclone III",
   lpm_hint               => "ENABLE_RUNTIME_MOD=NO",
   lpm_type               => "altsyncram",
-  numwords_a             => 256,
+  numwords_a             => 512,
   operation_mode         => "ROM",
   outdata_aclr_a         => "NONE",
   outdata_reg_a          => "UNREGISTERED",
@@ -72,7 +72,7 @@ begin
     q_a       => rom_data
   );
 
-  rom_address  <= row & col;
+  rom_address  <= frame & row & col;
   pixel_output <= rom_data;
 
 end SYN;
