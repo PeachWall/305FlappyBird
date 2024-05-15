@@ -10,7 +10,7 @@ entity cloud_blocks is
   (
     clk                     : in std_logic;
     v_sync                  : in std_logic;
-    speed                   : in std_logic_vector(1 downto 0);
+    speed                   : in std_logic_vector(2 downto 0);
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     red, green, blue        : out std_logic_vector(3 downto 0);
     cloud_on                : out std_logic
@@ -21,7 +21,6 @@ architecture rtl of cloud_blocks is
   constant screen_height : integer := 479;
   constant screen_width  : integer := 639;
   constant half_width    : integer := 239;
-  constant s_speed       : integer := 1;
 
   constant sprite_width  : integer := 240;
   constant sprite_height : integer := 80;
@@ -56,7 +55,7 @@ begin
 
   -- cloud on when pixel is within the cloud_blocks
   c_on <= '1' when ('0' & pixel_row >= '0' & y_pos) else
-    '0';
+  '0';
 
   -- Set RGBA values of sprite
   red      <= rgba(11 downto 8) and cloud_on_mask;
@@ -65,10 +64,13 @@ begin
   cloud_on <= rgba(12) and c_on;
 
   MOVE : process (v_sync)
+    variable temp_speed : std_logic_vector(11 downto 0) := "00" & x_pos;
   begin
     if (rising_edge(v_sync)) then
-      x_pos <= x_pos - s_speed;
+      temp_speed := temp_speed - speed;
     end if;
+
+    x_pos <= temp_speed(11 downto 2);
   end process;
 
   SPRITE : process (pixel_row, pixel_column)
@@ -79,7 +81,7 @@ begin
     if (c_on = '1') then
       temp_c := unsigned(pixel_column - x_pos);
       temp_r := unsigned(pixel_row - y_pos);
-    else
+      else
       temp_c := (others => '0');
       temp_r := (others => '0');
     end if;

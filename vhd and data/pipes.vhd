@@ -13,7 +13,7 @@ entity pipes is
     point_collided               : in std_logic;
     pixel_row, pixel_column      : in std_logic_vector(9 downto 0);
     bird_x_pos                   : in std_logic_vector(9 downto 0);
-    speed                        : in std_logic_vector(1 downto 0);
+    speed                        : in std_logic_vector(2 downto 0);
     red_out, green_out, blue_out : out std_logic_vector(3 downto 0);
     pipe_on                      : out std_logic;
     pipe_passed                  : out std_logic := '0'
@@ -79,21 +79,21 @@ begin
 
   -- Pipe1 : TOP AND BOTTOM
   pipe1_top_on <= '1' when ('0' & pixel_column >= pipe1_x_pos) and ('0' & pixel_column < pipe1_x_pos + to_integer(pipe_size))
-    and (pixel_row >= 0) and (pixel_row < pipe1_y_pos - gap_size) else
-    '0';
+  and (pixel_row >= 0) and (pixel_row < pipe1_y_pos - gap_size) else
+  '0';
 
   pipe1_bottom_on <= '1' when ('0' & pixel_column >= pipe1_x_pos) and ('0' & pixel_column < pipe1_x_pos + to_integer(pipe_size))
-    and (pixel_row  <= screen_height) and (pixel_row > pipe1_y_pos + gap_size) else
-    '0';
+  and (pixel_row  <= screen_height) and (pixel_row > pipe1_y_pos + gap_size) else
+  '0';
 
   -- Pipe2 : TOP AND BOTTOM
   pipe2_top_on <= '1' when ('0' & pixel_column >= pipe2_x_pos) and ('0' & pixel_column < pipe2_x_pos + to_integer(pipe_size))
-    and (pixel_row >= 0) and (pixel_row < pipe2_y_pos - gap_size) else
-    '0';
+  and (pixel_row >= 0) and (pixel_row < pipe2_y_pos - gap_size) else
+  '0';
 
   pipe2_bottom_on <= '1' when ('0' & pixel_column >= pipe2_x_pos) and ('0' & pixel_column < pipe2_x_pos + to_integer(pipe_size))
-    and (pixel_row  <= screen_height) and (pixel_row > pipe2_y_pos + gap_size) else
-    '0';
+  and (pixel_row  <= screen_height) and (pixel_row > pipe2_y_pos + gap_size) else
+  '0';
 
   -- Set RGBA values of sprite
   red_out   <= rgba(11 downto 8) and pipe_on_mask;
@@ -102,8 +102,8 @@ begin
   pipe_on   <= rgba(12);
 
   pipe_passed <=
-    '1' when pipe1_x_pos + to_integer(half_pipe_size) < bird_x_pos or pipe2_x_pos + to_integer(half_pipe_size) < bird_x_pos else
-    '0' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
+  '1' when pipe1_x_pos + to_integer(half_pipe_size) < bird_x_pos or pipe2_x_pos + to_integer(half_pipe_size) < bird_x_pos else
+  '0' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
 
   MOVEMENT : process (v_sync)
     variable y_pos1, y_pos2 : integer range -480 to 480 := 360;
@@ -120,7 +120,7 @@ begin
         -- LIMIT HEIGHT
         if (y_pos1 > half_height + 100) then
           y_pos1 := half_height + 100;
-        elsif (y_pos1 < half_height - 100) then
+          elsif (y_pos1 < half_height - 100) then
           y_pos1 := half_height - 100;
         end if;
       end if;
@@ -132,7 +132,7 @@ begin
         -- LIMIT HEIGHT
         if (y_pos2 > half_height + 100) then
           y_pos2 := half_height + 100;
-        elsif (y_pos2 < half_height - 100) then
+          elsif (y_pos2 < half_height - 100) then
           y_pos2 := half_height - 100;
         end if;
       end if;
@@ -165,7 +165,7 @@ begin
       end if;
 
       -- Pipe 2 bottom
-    elsif (pipe2_bottom_on = '1') then
+      elsif (pipe2_bottom_on = '1') then
       invert := '0';
       temp_c := ieee.numeric_std.unsigned(pixel_column - pipe2_x_pos);
       temp_r := ieee.numeric_std.unsigned(pixel_row - pipe2_y_pos - gap_size); -- This gave me pain
@@ -177,28 +177,28 @@ begin
       -- TOP PIPES
 
       -- Pipe 1
-    elsif (pipe1_top_on = '1') then
+      elsif (pipe1_top_on = '1') then
       temp_c := ieee.numeric_std.unsigned(pixel_column - pipe1_x_pos);
       temp_r := ieee.numeric_std.unsigned(pixel_row - pipe1_y_pos - gap_size); -- This gave me pain
 
       if (pixel_row > pipe1_y_pos - to_integer(pipe_size) - gap_size and pixel_row <= pipe1_y_pos - gap_size) then
         invert := '1';
-      else
+        else
         invert := '0';
         temp_r := temp_r mod size + size;
       end if;
 
-    elsif (pipe2_top_on = '1') then
+      elsif (pipe2_top_on = '1') then
       temp_c := ieee.numeric_std.unsigned(pixel_column - pipe2_x_pos);
       temp_r := ieee.numeric_std.unsigned(pixel_row - pipe2_y_pos - gap_size); -- This gave me pain
 
       if (pixel_row > pipe2_y_pos - to_integer(pipe_size) - gap_size and pixel_row <= pipe2_y_pos - gap_size) then
         invert := '1';
-      else
+        else
         invert := '0';
         temp_r := temp_r mod size + size;
       end if;
-    else
+      else
       temp_c := (others => '0');
       temp_r := (others => '0');
     end if;
@@ -209,7 +209,7 @@ begin
 
     if (invert = '0') then
       pipe_sprite_row <= std_logic_vector(row_d(4 downto 0));
-    else
+      else
       pipe_sprite_row <= 31 - std_logic_vector(row_d(4 downto 0));
     end if;
     pipe_sprite_col <= std_logic_vector(col_d(4 downto 0));

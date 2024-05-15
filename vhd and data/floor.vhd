@@ -12,7 +12,7 @@ entity floor is
     clk                     : in std_logic;
     v_sync                  : in std_logic;
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-    speed                   : in std_logic_vector(1 downto 0);
+    speed                   : in std_logic_vector(2 downto 0);
     red, green, blue        : out std_logic_vector(3 downto 0);
     floor_on                : out std_logic);
 end floor;
@@ -48,7 +48,7 @@ begin
   y_pos <= CONV_STD_LOGIC_VECTOR(440, 10);
 
   f_on <= '1' when ('0' & pixel_row >= '0' & y_pos) else
-    '0';
+  '0';
 
   -- Set RGBA values of sprite
   red      <= rgba(11 downto 8) and floor_on_mask;
@@ -75,7 +75,7 @@ begin
       --temp_c := ieee.numeric_std.unsigned(pixel_column - x_pos); -- Gets the pixels from 0 - size
       temp_c := ieee.numeric_std.unsigned(pixel_column - x_pos);
       temp_r := ieee.numeric_std.unsigned(pixel_row - y_pos);
-    else
+      else
       temp_c := (others => '0');
       temp_r := (others => '0');
     end if;

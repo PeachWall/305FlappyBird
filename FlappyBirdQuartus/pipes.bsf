@@ -68,8 +68,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 0 128)
 		(input)
-		(text "speed[1..0]" (rect 0 0 42 12)(font "Arial" ))
-		(text "speed[1..0]" (rect 21 123 63 135)(font "Arial" ))
+		(text "speed[2..0]" (rect 0 0 43 12)(font "Arial" ))
+		(text "speed[2..0]" (rect 21 123 64 135)(font "Arial" ))
 		(line (pt 0 128)(pt 16 128)(line_width 3))
 	)
 	(port
