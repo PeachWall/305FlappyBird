@@ -22,10 +22,10 @@ architecture rtl of cloud_blocks is
   constant screen_width  : integer := 639;
   constant half_width    : integer := 239;
 
-  constant sprite_width  : integer := 240;
-  constant sprite_height : integer := 80;
-
   constant scale : integer := 2;
+
+  constant sprite_width  : integer := 240 * scale;
+  constant sprite_height : integer := 80 * scale;
 
   -- x and y position for cloud_blocks
   signal c_on          : std_logic;
@@ -55,7 +55,7 @@ begin
 
   -- cloud on when pixel is within the cloud_blocks
   c_on <= '1' when ('0' & pixel_row >= '0' & y_pos) else
-  '0';
+    '0';
 
   -- Set RGBA values of sprite
   red      <= rgba(11 downto 8) and cloud_on_mask;
@@ -81,13 +81,12 @@ begin
     if (c_on = '1') then
       temp_c := unsigned(pixel_column - x_pos);
       temp_r := unsigned(pixel_row - y_pos);
-      else
+    else
       temp_c := (others => '0');
       temp_r := (others => '0');
     end if;
-
-    col_d := shift_right(temp_c, scale - 1); -- divide be powers of 2 to change size
-    row_d := shift_right(temp_r, scale - 1);
+    col_d := temp_c / scale; -- divide be powers of 2 to change size
+    row_d := temp_r / scale;
 
     sprite_row <= std_logic_vector(row_d(5 downto 0));
     sprite_col <= std_logic_vector(col_d(6 downto 0));
