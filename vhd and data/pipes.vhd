@@ -68,8 +68,6 @@ architecture rtl of pipes is
 
   signal pipe_sprite_row, pipe_sprite_col : std_logic_vector(4 downto 0);
   signal rgba                             : std_logic_vector(12 downto 0);
-
-  signal point_area1_on, point_area2_on : std_logic;
 begin
 
   -- Output either top or bottom pipe is being drawn
