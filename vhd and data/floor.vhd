@@ -5,6 +5,7 @@ use ieee.math_real.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 use IEEE.STD_LOGIC_ARITH.all;
 use ieee.std_logic_misc.all;
+use work.util.all;
 
 entity floor is
   port
@@ -28,7 +29,6 @@ architecture behavior of floor is
   end component;
 
   constant size         : integer := 16;
-  constant scale        : integer := 2;
   constant screen_width : integer := 639;
 
   signal f_on          : std_logic;
@@ -40,6 +40,8 @@ architecture behavior of floor is
   signal floor_frame                        : std_logic;
   signal floor_sprite_row, floor_sprite_col : std_logic_vector(3 downto 0);
 
+  signal alpha_on : std_logic;
+
   signal enable_points : std_logic;
 begin
 
@@ -48,22 +50,18 @@ begin
   y_pos <= CONV_STD_LOGIC_VECTOR(440, 10);
 
   f_on <= '1' when ('0' & pixel_row >= '0' & y_pos) else
-  '0';
+    '0';
 
   -- Set RGBA values of sprite
   red      <= rgba(11 downto 8) and floor_on_mask;
   green    <= rgba(7 downto 4) and floor_on_mask;
   blue     <= rgba(3 downto 0) and floor_on_mask;
-  floor_on <= f_on;
+  floor_on <= alpha_on;
 
   MOVEMENT : process (v_sync)
   begin
     if (ieee.std_logic_1164.rising_edge(v_sync)) then
       x_pos <= x_pos - speed;
-
-      -- if (x_pos <= 0) then
-      --   x_pos     <= CONV_STD_LOGIC_VECTOR(screen_width, 10);
-      -- end if;
     end if;
   end process;
 
@@ -75,9 +73,11 @@ begin
       --temp_c := ieee.numeric_std.unsigned(pixel_column - x_pos); -- Gets the pixels from 0 - size
       temp_c := ieee.numeric_std.unsigned(pixel_column - x_pos);
       temp_r := ieee.numeric_std.unsigned(pixel_row - y_pos);
-      else
+      alpha_on <= rgba(12);
+    else
       temp_c := (others => '0');
       temp_r := (others => '0');
+      alpha_on <= '0';
     end if;
     col_d := shift_right(temp_c, scale - 1); -- divide be powers of 2 to change size
     row_d := shift_right(temp_r, scale - 1);
@@ -85,6 +85,7 @@ begin
     floor_sprite_row <= std_logic_vector(row_d(3 downto 0));
     floor_sprite_col <= std_logic_vector(col_d(3 downto 0));
 
+    -- Get next frame when first row is done
     floor_frame <= or_reduce(std_logic_vector(row_d(9 downto 4)));
   end process;
 

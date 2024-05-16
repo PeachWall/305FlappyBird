@@ -52,7 +52,7 @@ architecture behavioural of player is
   signal state : player_state;
 begin
 
-  state <= std_logic_vector_to_player_state(bird_state);
+  state <= player_state'val(to_integer(unsigned(bird_state)));
   size  <= shift_left("00010000", scale - 1); -- 16 * 2^(scale - 1)
 
   scale <=
@@ -66,6 +66,13 @@ begin
   sprite_on <= '1' when (('0' & pixel_column >= move_x - (to_integer(size) / 2)) and ('0' & pixel_column < move_x + (to_integer(size) / 2)) -- x_pos - size <= pixel_column <= x_pos + size
     and ('0' & pixel_row >= move_y - (to_integer(size) / 2)) and ('0' & pixel_row < move_y + (to_integer(size) / 2))) else -- y_pos - size <= pixel_row <= y_pos + size
     '0';
+
+  vec_sprite_on <= (others => sprite_on);
+
+  red     <= rgba(11 downto 8) and vec_sprite_on;
+  green   <= rgba(7 downto 4) and vec_sprite_on;
+  blue    <= rgba(3 downto 0) and vec_sprite_on;
+  bird_on <= rgba(12);
 
   Move_Player : process (vert_sync)
     variable y_velocity  : signed(9 downto 0);
@@ -115,15 +122,8 @@ begin
     end if;
   end process Move_Player;
 
-  vec_sprite_on <= (others => sprite_on);
-
-  red     <= rgba(11 downto 8) and vec_sprite_on;
-  green   <= rgba(7 downto 4) and vec_sprite_on;
-  blue    <= rgba(3 downto 0) and vec_sprite_on;
-  bird_on <= rgba(12);
-
   -- Get the pixel coordinates in terms of the row and column address
-  address : process (sprite_on, pixel_column, pixel_row)
+  SPRITE : process (sprite_on, pixel_column, pixel_row)
     variable col_d, row_d   : unsigned(9 downto 0) := (others => '0');
     variable temp_c, temp_r : unsigned(9 downto 0) := (others => '0');
   begin
@@ -139,10 +139,6 @@ begin
 
     sprite_row <= std_logic_vector(row_d(3 downto 0));
     sprite_col <= std_logic_vector(col_d(3 downto 0));
-  end process;
-
-  STATE_MACHINE : process (bird_state)
-  begin
   end process;
 
   SPRITE_ROM : bird_sprite_rom_12

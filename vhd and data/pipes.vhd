@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 use IEEE.STD_LOGIC_SIGNED.all;
+use work.util.all;
 
 entity pipes is
   port
@@ -37,7 +38,6 @@ architecture rtl of pipes is
     );
   end component;
 
-  constant scale          : integer              := 2;
   constant size           : integer              := 32;
   constant pipe_size      : unsigned(7 downto 0) := to_unsigned(size * scale, 8);
   constant half_pipe_size : unsigned(7 downto 0) := shift_right(pipe_size, 1);

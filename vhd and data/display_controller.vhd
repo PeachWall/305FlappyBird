@@ -53,6 +53,7 @@ begin
   --   pipe_r when pipe_on = '1' else
   --   bg_r;
 
+  -- TODO: RESTRUCTURE HOW THIS IS DONE.
   r_out <= get_color(bird_r, pipe_r, bg_r, floor_r, score_r, cloud_r, bird_a, pipe_on, floor_on, score_on, cloud_on);
   g_out <= get_color(bird_g, pipe_g, bg_g, floor_g, score_g, cloud_g, bird_a, pipe_on, floor_on, score_on, cloud_on);
   b_out <= get_color(bird_b, pipe_b, bg_b, floor_b, score_b, cloud_b, bird_a, pipe_on, floor_on, score_on, cloud_on);

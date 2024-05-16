@@ -4,6 +4,7 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 use ieee.std_logic_misc.all;
+use work.util.all;
 
 entity cloud_blocks is
   port
@@ -21,8 +22,6 @@ architecture rtl of cloud_blocks is
   constant screen_height : integer := 479;
   constant screen_width  : integer := 639;
   constant half_width    : integer := 239;
-
-  constant scale : integer := 2;
 
   constant sprite_width  : integer := 240 * scale;
   constant sprite_height : integer := 80 * scale;
@@ -61,12 +60,13 @@ begin
   red      <= rgba(11 downto 8) and cloud_on_mask;
   green    <= rgba(7 downto 4) and cloud_on_mask;
   blue     <= rgba(3 downto 0) and cloud_on_mask;
-  cloud_on <= rgba(12) and c_on;
+  cloud_on <= rgba(12);
 
   MOVE : process (v_sync)
     variable temp_speed : std_logic_vector(11 downto 0) := "00" & x_pos;
   begin
     if (rising_edge(v_sync)) then
+      -- Sub-pixelling for slower movement
       temp_speed := temp_speed - speed;
     end if;
 

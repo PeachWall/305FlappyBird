@@ -44,7 +44,7 @@ begin
       timer_enable   <= '0';
     end if;
 
-    bird_state <= player_state_to_std_logic_vector(cur_bird_state);
+    bird_state <= std_logic_vector(to_unsigned(player_state'pos(cur_bird_state), 3));
   end process;
 
   TIMER : timer_25
