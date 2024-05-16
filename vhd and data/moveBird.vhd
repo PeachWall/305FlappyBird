@@ -6,11 +6,10 @@ use IEEE.STD_LOGIC_UNSIGNED.all;
 entity moveBird is
   port
   (
-    clk, vert_sync : in std_logic;
-    mouse          : in std_logic;
-    collided       : in std_logic;
-    move_x         : out std_logic_vector(9 downto 0);
-    move_y         : out std_logic_vector(9 downto 0)
+    clk, vert_sync     : in std_logic;
+    mouse              : in std_logic;
+    collided           : in std_logic;
+    move_x, move_y     : out std_logic_vector(9 downto 0);
   );
 end moveBird;
 
