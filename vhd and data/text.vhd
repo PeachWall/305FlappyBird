@@ -36,9 +36,11 @@ architecture beh of text is
   constant text_start     : integer := 270; -- welcom begins from pixel row 270
   constant char_width_big : integer := 16; -- width and height of each pixel (16 x 16 because of font_row and font_col)
 
-  signal s_text_on2         : std_logic;
-  signal char_add2          : std_logic_vector(5 downto 0);
-  signal empty_space2       : std_logic;
+  signal s_text_on2   : std_logic;
+  signal char_add2    : std_logic_vector(5 downto 0);
+  signal empty_space2 : std_logic;
+
+  signal black_line         : std_logic;
   constant text_start2      : integer := 23; -- welcom begins from pixel row 20 -- MUST BE A MULTIPLE OF THE CHAR WIDTH
   constant char_width_small : integer := 8; -- width and height of each pixel (8 x 8 because of font_row and font_col)
   -- SIGNAL box_col_start:
@@ -82,15 +84,17 @@ begin
     CONV_STD_LOGIC_VECTOR(5, 6) when ((pixel_column  <= CONV_STD_LOGIC_VECTOR(text_start2 + 40, 10) and empty_space2 = '0')) else --"E"
     "100000"; --CONV_STD_LOGIC_VECTOR(29,6); --" ", IS A BLANK SPACE
 
+  black_line <= '1' when pixel_column = 0 else
+    '0';
   -- text_on <= s_text_on2;
   -- r <= (((s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111");
   -- g <= (((s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111");
   -- b <= (((s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111");
 
-  text_on <= s_text_on or s_text_on2;
-  r       <= (((s_text_on & s_text_on & s_text_on & s_text_on) or (s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111");
-  g       <= (((s_text_on & s_text_on & s_text_on & s_text_on) or (s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111");
-  b       <= (((s_text_on & s_text_on & s_text_on & s_text_on) or (s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111");
+  text_on <= s_text_on or s_text_on2 or black_line;
+  r       <= (((s_text_on & s_text_on & s_text_on & s_text_on) or (s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111") or (not black_line & not black_line & not black_line & not black_line);
+  g       <= (((s_text_on & s_text_on & s_text_on & s_text_on) or (s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111") or (not black_line & not black_line & not black_line & not black_line);
+  b       <= (((s_text_on & s_text_on & s_text_on & s_text_on) or (s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111") or (not black_line & not black_line & not black_line & not black_line);
   text_SCORE : char_rom
   port map
   (

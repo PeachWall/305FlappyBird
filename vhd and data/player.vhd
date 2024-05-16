@@ -1,9 +1,11 @@
 library ieee;
+
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 use IEEE.STD_LOGIC_SIGNED.all;
 use ieee.STD_LOGIC_ARITH.CONV_STD_LOGIC_VECTOR;
+use work.util.all;
 
 entity player is
   port
@@ -11,6 +13,7 @@ entity player is
     clk, vert_sync, mouse   : in std_logic;
     collided                : in std_logic;
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+    bird_state              : in std_logic_vector(2 downto 0);
     red, green, blue        : out std_logic_vector(3 downto 0);
     bird_on                 : out std_logic;
     x_pos                   : out std_logic_vector(9 downto 0)
@@ -26,8 +29,8 @@ architecture behavioural of player is
       pixel_output : out std_logic_vector(12 downto 0)
     );
   end component;
-  constant scale : integer              := 2;
-  constant size  : unsigned(7 downto 0) := shift_left("00010000", scale - 1); -- 16 * 2^(scale - 1)
+  signal scale : integer range 1 to 3 := 2;
+  signal size  : unsigned(7 downto 0);
 
   -- Data related to Movement
   signal player_y_pos   : signed(9 downto 0);
@@ -43,20 +46,26 @@ architecture behavioural of player is
   signal prev_row               : std_logic_vector(9 downto 0);
   signal rgba                   : std_logic_vector(12 downto 0);
   signal frame                  : std_logic := '0';
-
-  signal vec_sprite_on : std_logic_vector(3 downto 0);
-
+  signal vec_sprite_on          : std_logic_vector(3 downto 0);
   signal sprite_row, sprite_col : std_logic_vector(3 downto 0);
 
+  signal state : player_state;
 begin
+
+  state <= std_logic_vector_to_player_state(bird_state);
+  size  <= shift_left("00010000", scale - 1); -- 16 * 2^(scale - 1)
+
+  scale <=
+    3 when state = BIG else
+    2;
 
   move_x <= std_logic_vector(to_unsigned(120, move_x'length));
   move_y <= std_logic_vector(player_y_pos);
 
   x_pos     <= move_x;
-  sprite_on <= '1' when (('0' & pixel_column >= move_x) and ('0' & pixel_column < move_x + to_integer(size)) -- x_pos - size <= pixel_column <= x_pos + size
-  and ('0' & pixel_row >= move_y) and ('0' & pixel_row < move_y + to_integer(size))) else -- y_pos - size <= pixel_row <= y_pos + size
-  '0';
+  sprite_on <= '1' when (('0' & pixel_column >= move_x - (to_integer(size) / 2)) and ('0' & pixel_column < move_x + (to_integer(size) / 2)) -- x_pos - size <= pixel_column <= x_pos + size
+    and ('0' & pixel_row >= move_y - (to_integer(size) / 2)) and ('0' & pixel_row < move_y + (to_integer(size) / 2))) else -- y_pos - size <= pixel_row <= y_pos + size
+    '0';
 
   Move_Player : process (vert_sync)
     variable y_velocity  : signed(9 downto 0);
@@ -72,20 +81,20 @@ begin
           frame <= '0';
           frame_count := 0;
           start_anim  := '0';
-          else
+        else
           frame_count := frame_count + 1;
         end if;
       end if;
 
       if (mouse = '1' and hold = '0') then
         hold       := '1';
-        y_velocity := - to_signed(32, 10);
+        y_velocity := - to_signed(32 / (scale - 1), 10);
         frame <= '1';
         start_anim := '1';
-        else
+      else
         if (y_velocity >= (to_signed(16 * gravity, 10))) then
           y_velocity := (to_signed(16 * gravity, 10));
-          else
+        else
           y_velocity := y_velocity + gravity;
         end if;
       end if;
@@ -93,11 +102,11 @@ begin
       player_y_pos <= signed(player_y_pos) + y_velocity(9 downto 2);
 
       -- check if ball is at the floor or at ceiling
-      if (player_y_pos >= to_signed(440 - to_integer(size), 10)) then
+      if (player_y_pos >= to_signed(440 - (to_integer(size) / 2), 10)) then
         player_y_pos <= to_signed(200, 10);
         y_velocity := to_signed(0, 10);
-        elsif (player_y_pos < to_signed(0, 10)) then
-        player_y_pos <= to_signed(0, 10);
+      elsif (player_y_pos < to_signed(to_integer(size) / 2, 10)) then
+        player_y_pos <= to_signed((to_integer(size) / 2), 10);
         y_velocity := to_signed(0, 10);
       end if;
       if (mouse = '0') then
@@ -119,9 +128,9 @@ begin
     variable temp_c, temp_r : unsigned(9 downto 0) := (others => '0');
   begin
     if (sprite_on = '1') then
-      temp_c := unsigned(pixel_column - move_x); -- Gets the pixels from 0 - size
-      temp_r := unsigned(pixel_row - move_y);
-      else
+      temp_c := unsigned(pixel_column - move_x - (to_integer(size) / 2)); -- Gets the pixels from 0 - size
+      temp_r := unsigned(pixel_row - move_y - (to_integer(size) / 2));
+    else
       temp_c := (others => '0');
       temp_r := (others => '0');
     end if;
@@ -130,6 +139,10 @@ begin
 
     sprite_row <= std_logic_vector(row_d(3 downto 0));
     sprite_col <= std_logic_vector(col_d(3 downto 0));
+  end process;
+
+  STATE_MACHINE : process (bird_state)
+  begin
   end process;
 
   SPRITE_ROM : bird_sprite_rom_12
