@@ -14,7 +14,7 @@ entity floor is
     v_sync                  : in std_logic;
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     speed                   : in std_logic_vector(2 downto 0);
-    red, green, blue        : out std_logic_vector(3 downto 0);
+    floor_rgb_out           : out std_logic_vector(11 downto 0);
     floor_on                : out std_logic);
 end floor;
 
@@ -36,7 +36,7 @@ architecture behavior of floor is
   signal y_pos         : std_logic_vector(9 downto 0);
   signal floor_on_mask : std_logic_vector(3 downto 0);
 
-  signal rgba                               : std_logic_vector(12 downto 0);
+  signal argb                               : std_logic_vector(12 downto 0);
   signal floor_frame                        : std_logic;
   signal floor_sprite_row, floor_sprite_col : std_logic_vector(3 downto 0);
 
@@ -52,11 +52,9 @@ begin
   f_on <= '1' when ('0' & pixel_row >= '0' & y_pos) else
     '0';
 
-  -- Set RGBA values of sprite
-  red      <= rgba(11 downto 8) and floor_on_mask;
-  green    <= rgba(7 downto 4) and floor_on_mask;
-  blue     <= rgba(3 downto 0) and floor_on_mask;
-  floor_on <= alpha_on;
+  -- Set argb values of sprite
+  floor_rgb_out <= argb(11 downto 0);
+  floor_on      <= alpha_on;
 
   MOVEMENT : process (v_sync)
   begin
@@ -73,7 +71,7 @@ begin
       --temp_c := ieee.numeric_std.unsigned(pixel_column - x_pos); -- Gets the pixels from 0 - size
       temp_c := ieee.numeric_std.unsigned(pixel_column - x_pos);
       temp_r := ieee.numeric_std.unsigned(pixel_row - y_pos);
-      alpha_on <= rgba(12);
+      alpha_on <= argb(12);
     else
       temp_c := (others => '0');
       temp_r := (others => '0');
@@ -96,7 +94,7 @@ begin
     frame        => floor_frame,
     row          => floor_sprite_row,
     col          => floor_sprite_col,
-    pixel_output => rgba
+    pixel_output => argb
   );
 
 end behavior;
