@@ -15,7 +15,9 @@ entity pipes is
     speed                        : in std_logic_vector(2 downto 0);
     red_out, green_out, blue_out : out std_logic_vector(3 downto 0);
     pipe_on                      : out std_logic;
-    pipe_passed                  : out std_logic := '0'
+    pipe_passed                  : out std_logic := '0';
+	 pipe1_x_out						: out std_logic_vector(10 downto 0);
+	 pipe2_x_out						: out std_logic_vector(10 downto 0)
   );
 end entity pipes;
 
@@ -108,6 +110,11 @@ begin
     variable y_pos1, y_pos2 : integer range -480 to 480 := 360;
 
   begin
+  
+  -- getting the x pos of pipes for abilities
+  pipe1_x_out <= pipe1_x_pos;
+  pipe2_x_out <= pipe2_x_pos;
+  
     if (rising_edge(v_sync)) then
       pipe1_x_pos <= pipe1_x_pos - to_integer(unsigned(speed));
       pipe2_x_pos <= pipe2_x_pos - to_integer(unsigned(speed));
