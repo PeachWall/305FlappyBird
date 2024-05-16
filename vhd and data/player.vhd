@@ -14,7 +14,7 @@ entity player is
     collided                : in std_logic;
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     bird_state              : in std_logic_vector(2 downto 0);
-    red, green, blue        : out std_logic_vector(3 downto 0);
+    bird_rgb_out            : out std_logic_vector(11 downto 0);
     bird_on                 : out std_logic;
     x_pos                   : out std_logic_vector(9 downto 0)
   );
@@ -40,11 +40,11 @@ architecture behavioural of player is
   constant gravity : integer := 2;
 
   -- Data related to ROM
-  signal pixel_rgba             : std_logic_vector(3 downto 0);
+  signal pixel_argb             : std_logic_vector(3 downto 0);
   signal sprite_on              : std_logic;
   signal rom_address, rom_pixel : std_logic_vector (9 downto 0);
   signal prev_row               : std_logic_vector(9 downto 0);
-  signal rgba                   : std_logic_vector(12 downto 0);
+  signal argb                   : std_logic_vector(12 downto 0);
   signal frame                  : std_logic := '0';
   signal vec_sprite_on          : std_logic_vector(3 downto 0);
   signal sprite_row, sprite_col : std_logic_vector(3 downto 0);
@@ -69,10 +69,9 @@ begin
 
   vec_sprite_on <= (others => sprite_on);
 
-  red     <= rgba(11 downto 8) and vec_sprite_on;
-  green   <= rgba(7 downto 4) and vec_sprite_on;
-  blue    <= rgba(3 downto 0) and vec_sprite_on;
-  bird_on <= rgba(12);
+  -- Set rgb of sprite
+  bird_rgb_out <= argb(11 downto 0);
+  bird_on      <= argb(12);
 
   Move_Player : process (vert_sync)
     variable y_velocity  : signed(9 downto 0);
@@ -148,6 +147,6 @@ begin
     frame        => frame,
     row          => sprite_row,
     col          => sprite_col,
-    pixel_output => rgba
+    pixel_output => argb
   );
 end architecture;

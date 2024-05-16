@@ -13,7 +13,7 @@ entity cloud_blocks is
     v_sync                  : in std_logic;
     speed                   : in std_logic_vector(2 downto 0);
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-    red, green, blue        : out std_logic_vector(3 downto 0);
+    clouds_rgb_out          : out std_logic_vector(11 downto 0);
     cloud_on                : out std_logic
   );
 end entity cloud_blocks;
@@ -34,7 +34,7 @@ architecture rtl of cloud_blocks is
 
   signal sprite_row : std_logic_vector(5 downto 0);
   signal sprite_col : std_logic_vector(6 downto 0);
-  signal rgba       : std_logic_vector(12 downto 0);
+  signal argb       : std_logic_vector(12 downto 0);
 
   component cloud_rom is
     port
@@ -56,11 +56,9 @@ begin
   c_on <= '1' when ('0' & pixel_row >= '0' & y_pos) else
     '0';
 
-  -- Set RGBA values of sprite
-  red      <= rgba(11 downto 8) and cloud_on_mask;
-  green    <= rgba(7 downto 4) and cloud_on_mask;
-  blue     <= rgba(3 downto 0) and cloud_on_mask;
-  cloud_on <= rgba(12);
+  -- Set argb values of sprite
+  clouds_rgb_out <= argb(11 downto 0);
+  cloud_on       <= argb(12);
 
   MOVE : process (v_sync)
     variable temp_speed : std_logic_vector(11 downto 0) := "00" & x_pos;
@@ -98,6 +96,6 @@ begin
     clock        => clk,
     row          => sprite_row,
     col          => sprite_col,
-    pixel_output => rgba
+    pixel_output => argb
   );
 end architecture;
