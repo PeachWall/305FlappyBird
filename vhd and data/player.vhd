@@ -29,8 +29,8 @@ architecture behavioural of player is
       pixel_output : out std_logic_vector(12 downto 0)
     );
   end component;
-  signal scale : integer range 1 to 3 := 2;
-  signal size  : unsigned(7 downto 0);
+  signal bird_scale : integer range 1 to 3 := 2;
+  signal size       : unsigned(7 downto 0);
 
   -- Data related to Movement
   signal player_y_pos   : signed(9 downto 0);
@@ -53,11 +53,11 @@ architecture behavioural of player is
 begin
 
   state <= player_state'val(to_integer(unsigned(bird_state)));
-  size  <= shift_left("00010000", scale - 1); -- 16 * 2^(scale - 1)
+  size  <= shift_left("00010000", bird_scale - 1); -- 16 * 2^(bird_scale - 1)
 
-  scale <=
-    3 when state = BIG else
-    2;
+  bird_scale <=
+    scale - 1 when state = BIG and scale > 1 else
+    scale;
 
   move_x <= std_logic_vector(to_unsigned(120, move_x'length));
   move_y <= std_logic_vector(player_y_pos);
@@ -78,6 +78,7 @@ begin
     variable hold        : std_logic := '0';
     variable frame_count : integer range 0 to 16;
     variable start_anim  : std_logic := '0';
+    variable flap        : std_logic;
   begin
     -- Move ball once every vertical sync
     if (rising_edge(vert_sync)) then
@@ -94,7 +95,8 @@ begin
 
       if (mouse = '1' and hold = '0') then
         hold       := '1';
-        y_velocity := - to_signed(32 / (scale - 1), 10);
+        flap       := '1';
+        y_velocity := - to_signed(32 / (bird_scale - 1), 10);
         frame <= '1';
         start_anim := '1';
       else
@@ -108,8 +110,8 @@ begin
       player_y_pos <= signed(player_y_pos) + y_velocity(9 downto 2);
 
       -- check if ball is at the floor or at ceiling
-      if (player_y_pos >= to_signed(440 - (to_integer(size) / 2), 10)) then
-        player_y_pos <= to_signed(200, 10);
+      if (player_y_pos >= to_signed(440 - (to_integer(size) / 2), 10) and flap = '0') then
+        player_y_pos <= to_signed(440 - (to_integer(size) / 2), 10);
         y_velocity := to_signed(0, 10);
       elsif (player_y_pos < to_signed(to_integer(size) / 2, 10)) then
         player_y_pos <= to_signed((to_integer(size) / 2), 10);
@@ -118,6 +120,8 @@ begin
       if (mouse = '0') then
         hold := '0';
       end if;
+
+      flap := '0';
     end if;
   end process Move_Player;
 
@@ -133,8 +137,8 @@ begin
       temp_c := (others => '0');
       temp_r := (others => '0');
     end if;
-    col_d := shift_right(temp_c, scale - 1); -- divide be powers of 2 to change size
-    row_d := shift_right(temp_r, scale - 1);
+    col_d := shift_right(temp_c, bird_scale - 1); -- divide be powers of 2 to change size
+    row_d := shift_right(temp_r, bird_scale - 1);
 
     sprite_row <= std_logic_vector(row_d(3 downto 0));
     sprite_col <= std_logic_vector(col_d(3 downto 0));

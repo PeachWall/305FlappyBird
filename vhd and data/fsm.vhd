@@ -10,7 +10,9 @@ entity fsm is
     clk        : in std_logic;
     reset      : in std_logic;
     button     : in std_logic; -- test for fsm
-    bird_state : out std_logic_vector(2 downto 0)
+    bird_state : out std_logic_vector(2 downto 0);
+    pipe_state : out std_logic_vector(2 downto 0);
+    game_state : out std_logic_vector(2 downto 0)
   );
 end entity fsm;
 
@@ -29,7 +31,7 @@ architecture rtl of fsm is
   signal s_button       : std_logic;
 begin
 
-  process (button, timer_seconds)
+  BIRD_FSM : process (button, timer_seconds)
   begin
     if (button = '0') then
       cur_bird_state <= BIG;
