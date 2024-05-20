@@ -16,6 +16,7 @@ entity pipes is
     red_out, green_out, blue_out : out std_logic_vector(3 downto 0);
     pipe_on                      : out std_logic;
     pipe_passed                  : out std_logic := '0';
+    pipe_reset                  : out std_logic;
 	 pipe1_x_out						: out std_logic_vector(10 downto 0);
 	 pipe2_x_out						: out std_logic_vector(10 downto 0)
   );
@@ -106,15 +107,15 @@ begin
     '1' when pipe1_x_pos + to_integer(half_pipe_size) < bird_x_pos or pipe2_x_pos + to_integer(half_pipe_size) < bird_x_pos else
     '0' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
 
+  -- getting the x pos of pipes for abilities
+  pipe1_x_out <= pipe1_x_pos;
+  pipe2_x_out <= pipe2_x_pos;
+
   MOVEMENT : process (v_sync)
     variable y_pos1, y_pos2 : integer range -480 to 480 := 360;
 
   begin
-  
-  -- getting the x pos of pipes for abilities
-  pipe1_x_out <= pipe1_x_pos;
-  pipe2_x_out <= pipe2_x_pos;
-  
+  pipe_reseet <= '0';
     if (rising_edge(v_sync)) then
       pipe1_x_pos <= pipe1_x_pos - to_integer(unsigned(speed));
       pipe2_x_pos <= pipe2_x_pos - to_integer(unsigned(speed));
@@ -135,6 +136,9 @@ begin
       if (pipe2_x_pos <= - to_integer(pipe_size) * scale) then
         y_pos2 := to_integer(random_num) + half_height;
         pipe2_x_pos <= std_logic_vector(to_unsigned(screen_width, 11));
+
+        pipe_reset <= '1';
+
         -- LIMIT HEIGHT
         if (y_pos2 > half_height + 100) then
           y_pos2 := half_height + 100;
