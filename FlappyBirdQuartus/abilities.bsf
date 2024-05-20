@@ -61,8 +61,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 232 32)
 		(output)
-		(text "ability_type[1..0]" (rect 0 0 63 12)(font "Arial" ))
-		(text "ability_type[1..0]" (rect 148 27 211 39)(font "Arial" ))
+		(text "item_type[1..0]" (rect 0 0 59 12)(font "Arial" ))
+		(text "item_type[1..0]" (rect 152 27 211 39)(font "Arial" ))
 		(line (pt 232 32)(pt 216 32)(line_width 3))
 	)
 	(port

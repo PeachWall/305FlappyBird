@@ -7,7 +7,7 @@ package util is
   type player_states is (NORMAL, DEAD, PAUSED, INVINCIBLE, FAST, SLOW, BIG, SMALL);
   type pipe_states is (FAST, SLOW);
   type game_states is (MENU, TRAINING, EASY, MEDIUM, HARD, FINISH);
-  type ability_type is(LIFE, MONEY, BIG, SMALL);
+  type ability_types is(MONEY, LIFE, BIG, SMALL);
 
   -- SCALING FACTOR FOR GAME EXCEPT FOR BIRD
   constant scale         : integer := 2;
