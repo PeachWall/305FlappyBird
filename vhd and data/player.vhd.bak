@@ -81,6 +81,7 @@ begin
     variable start_anim   : std_logic := '0';
     variable flap         : std_logic;
     variable v_bird_scale : integer range 0 to 1;
+    ;
   begin
     -- Move ball once every vertical sync
     if (rising_edge(vert_sync)) then
