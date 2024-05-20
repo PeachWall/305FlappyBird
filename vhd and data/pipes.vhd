@@ -42,12 +42,9 @@ architecture rtl of pipes is
   constant pipe_size      : unsigned(7 downto 0) := to_unsigned(size * scale, 8);
   constant half_pipe_size : unsigned(7 downto 0) := shift_right(pipe_size, 1);
 
-  constant screen_height : integer := 479;
-  constant screen_width  : integer := 639;
-  constant half_height   : integer := 239;
-  constant gap_size      : integer := 64;
-  constant x_speed       : integer := 2;
-  constant distance      : integer := 319 + to_integer(pipe_size);
+  constant gap_size : integer := 64;
+  constant x_speed  : integer := 2;
+  constant distance : integer := 319 + to_integer(pipe_size - half_pipe_size);
 
   -- Top and Bottom pipes
   signal pipe1_top_on, pipe1_bottom_on : std_logic;
@@ -99,7 +96,7 @@ begin
   pipe_on      <= argb(12);
 
   pipe_passed <=
-    '1' when pipe1_x_pos + to_integer(half_pipe_size) < bird_x_pos or pipe2_x_pos + to_integer(half_pipe_size) < bird_x_pos else
+    '1' when '0' & pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or '0' & pipe2_x_pos + to_integer(pipe_size) < bird_x_pos else
     '0' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
 
   MOVEMENT : process (v_sync)
@@ -111,7 +108,7 @@ begin
       pipe2_x_pos <= pipe2_x_pos - to_integer(unsigned(speed));
 
       -- PIPE 1
-      if (pipe1_x_pos <= - to_integer(pipe_size) * scale) then
+      if (pipe1_x_pos <= - to_integer(pipe_size)) then
         y_pos1 := to_integer(random_num) + half_height;
         pipe1_x_pos <= std_logic_vector(to_unsigned(screen_width, 11));
         -- LIMIT HEIGHT
@@ -123,7 +120,7 @@ begin
       end if;
 
       -- PIPE 2
-      if (pipe2_x_pos <= - to_integer(pipe_size) * scale) then
+      if (pipe2_x_pos <= - to_integer(pipe_size)) then
         y_pos2 := to_integer(random_num) + half_height;
         pipe2_x_pos <= std_logic_vector(to_unsigned(screen_width, 11));
         -- LIMIT HEIGHT
