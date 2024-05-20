@@ -20,9 +20,9 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 200 128)
+	(rect 16 16 208 160)
 	(text "fsm" (rect 5 0 21 12)(font "Arial" ))
-	(text "inst" (rect 8 96 20 108)(font "Arial" ))
+	(text "inst" (rect 8 128 20 140)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -45,13 +45,41 @@ refer to the applicable agreement for further details.
 		(line (pt 0 64)(pt 16 64)(line_width 1))
 	)
 	(port
-		(pt 184 32)
+		(pt 192 32)
 		(output)
 		(text "bird_state[2..0]" (rect 0 0 59 12)(font "Arial" ))
-		(text "bird_state[2..0]" (rect 104 27 163 39)(font "Arial" ))
-		(line (pt 184 32)(pt 168 32)(line_width 3))
+		(text "bird_state[2..0]" (rect 112 27 171 39)(font "Arial" ))
+		(line (pt 192 32)(pt 176 32)(line_width 3))
+	)
+	(port
+		(pt 192 48)
+		(output)
+		(text "pipe_state[2..0]" (rect 0 0 60 12)(font "Arial" ))
+		(text "pipe_state[2..0]" (rect 111 43 171 55)(font "Arial" ))
+		(line (pt 192 48)(pt 176 48)(line_width 3))
+	)
+	(port
+		(pt 192 64)
+		(output)
+		(text "game_state[2..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "game_state[2..0]" (rect 104 59 171 71)(font "Arial" ))
+		(line (pt 192 64)(pt 176 64)(line_width 3))
+	)
+	(port
+		(pt 192 80)
+		(output)
+		(text "timer_on" (rect 0 0 35 12)(font "Arial" ))
+		(text "timer_on" (rect 136 75 171 87)(font "Arial" ))
+		(line (pt 192 80)(pt 176 80)(line_width 1))
+	)
+	(port
+		(pt 192 96)
+		(output)
+		(text "timer_time[4..0]" (rect 0 0 63 12)(font "Arial" ))
+		(text "timer_time[4..0]" (rect 108 91 171 103)(font "Arial" ))
+		(line (pt 192 96)(pt 176 96)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 168 96)(line_width 1))
+		(rectangle (rect 16 16 176 128)(line_width 1))
 	)
 )

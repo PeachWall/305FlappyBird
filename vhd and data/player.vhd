@@ -56,8 +56,9 @@ begin
   size  <= shift_left("00010000", bird_scale - 1); -- 16 * 2^(bird_scale - 1)
 
   bird_scale <=
-    scale - 1 when state = BIG and scale > 1 else
-    scale;
+    3 when state = BIG else
+    1 when state = SMALL else
+    2;
 
   move_x <= std_logic_vector(to_unsigned(120, move_x'length));
   move_y <= std_logic_vector(player_y_pos);

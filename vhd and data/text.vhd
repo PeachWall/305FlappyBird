@@ -41,13 +41,23 @@ architecture beh of text is
   signal char_add2    : std_logic_vector(5 downto 0);
   signal empty_space2 : std_logic;
 
+  signal s_text_on3    : std_logic;
+  signal char_add3     : std_logic_vector(5 downto 0);
+  signal empty_space3  : std_logic;
+  constant text_start3 : integer := 270;
+
   signal black_line         : std_logic;
   constant text_start2      : integer := 23; -- welcom begins from pixel row 20 -- MUST BE A MULTIPLE OF THE CHAR WIDTH
   constant char_width_small : integer := 8; -- width and height of each pixel (8 x 8 because of font_row and font_col)
   -- SIGNAL box_col_start:
   -- SIGNAL char_on 	 : STD_LOGIC := '1';
 
+  signal timer_text_on : std_logic;
+  signal timer_time    : integer range 0 to 9;
+
   signal score_ones, score_tens, score_hundreds : integer range 0 to 9;
+
+  signal s_text_on_rgb : std_logic_vector(3 downto 0);
 
 begin
 
@@ -59,6 +69,9 @@ begin
     '0';
 
   empty_space2 <= '1' when (pixel_column <= CONV_STD_LOGIC_VECTOR((text_start2 - char_width_small), 10) or pixel_column >= CONV_STD_LOGIC_VECTOR(84, 10)) or ((pixel_row >= CONV_STD_LOGIC_VECTOR(55, 10) or pixel_row <= CONV_STD_LOGIC_VECTOR(47, 10))) else
+    '0';
+
+  empty_space3 <= '1' when (pixel_column <= CONV_STD_LOGIC_VECTOR((text_start3 - char_width_big), 10) or pixel_column >= CONV_STD_LOGIC_VECTOR(400, 10)) or ((pixel_row >= CONV_STD_LOGIC_VECTOR(80, 10) or pixel_row <= CONV_STD_LOGIC_VECTOR(96, 10))) else
     '0';
 
   char_add                                                        <= "100000" when empty_space = '1' else
@@ -85,6 +98,18 @@ begin
     CONV_STD_LOGIC_VECTOR(5, 6) when ((pixel_column  <= CONV_STD_LOGIC_VECTOR(text_start2 + 40, 10) and empty_space2 = '0')) else --"E"
     "100000"; --CONV_STD_LOGIC_VECTOR(29,6); --" ", IS A BLANK SPACE
 
+  char_add3                                                       <= "100000" when empty_space3 = '1' else
+    CONV_STD_LOGIC_VECTOR(19, 6) when pixel_column                  <= CONV_STD_LOGIC_VECTOR(text_start3, 10) and empty_space3 = '0' else --"S"
+    CONV_STD_LOGIC_VECTOR(3, 6) when pixel_column                   <= CONV_STD_LOGIC_VECTOR(text_start3 + 16, 10) and empty_space3 = '0' else --"C"
+    CONV_STD_LOGIC_VECTOR(15, 6) when pixel_column                  <= CONV_STD_LOGIC_VECTOR(text_start3 + 32, 10) and empty_space3 = '0' else --"O"
+    CONV_STD_LOGIC_VECTOR(18, 6) when pixel_column                  <= CONV_STD_LOGIC_VECTOR(text_start3 + 48, 10) and empty_space = '0' else --"R"
+    CONV_STD_LOGIC_VECTOR(5, 6) when pixel_column                   <= CONV_STD_LOGIC_VECTOR(text_start3 + 64, 10) and empty_space = '0' else --"E"
+    CONV_STD_LOGIC_VECTOR(58, 6) when pixel_column                  <= CONV_STD_LOGIC_VECTOR(text_start3 + 80, 10) and empty_space3 = '0' else --":"
+    CONV_STD_LOGIC_VECTOR(score_hundreds + 48, 6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start3 + 96, 10) and empty_space3 = '0' else --"HUNDREDS"
+    CONV_STD_LOGIC_VECTOR(score_tens + 48, 6) when pixel_column     <= CONV_STD_LOGIC_VECTOR(text_start3 + 112, 10) and empty_space3 = '0' else --"TENS"
+    CONV_STD_LOGIC_VECTOR(score_ones + 48, 6) when pixel_column     <= CONV_STD_LOGIC_VECTOR(text_start3 + 128, 10) and empty_space3 = '0' else --"ONES"
+    "100000"; --CONV_STD_LOGIC_VECTOR(29,6); --" ", IS A BLANK SPACE
+
   black_line <= '1' when pixel_column = 0 else
     '0';
   -- text_on <= s_text_on2;
@@ -92,11 +117,13 @@ begin
   -- g <= (((s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111");
   -- b <= (((s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111");
 
-  text_on      <= s_text_on or s_text_on2 or black_line;
+  text_on      <= s_text_on or s_text_on2 or black_line or s_text_on3;
   text_rgb_out <= r & g & b;
-  r            <= (((s_text_on & s_text_on & s_text_on & s_text_on) or (s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111") or (not black_line & not black_line & not black_line & not black_line);
-  g            <= (((s_text_on & s_text_on & s_text_on & s_text_on) or (s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111") or (not black_line & not black_line & not black_line & not black_line);
-  b            <= (((s_text_on & s_text_on & s_text_on & s_text_on) or (s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2)) and "1111") or (not black_line & not black_line & not black_line & not black_line);
+
+  s_text_on_rgb <= (s_text_on & s_text_on & s_text_on & s_text_on) or (s_text_on2 & s_text_on2 & s_text_on2 & s_text_on2) or (s_text_on3 & s_text_on3 & s_text_on3 & s_text_on3);
+  r             <= (s_text_on_rgb and "1111") or (not black_line & not black_line & not black_line & not black_line);
+  g             <= (s_text_on_rgb and "1111") or (not black_line & not black_line & not black_line & not black_line);
+  b             <= (s_text_on_rgb and "1111") or (not black_line & not black_line & not black_line & not black_line);
   text_SCORE : char_rom
   port map
   (
@@ -116,6 +143,17 @@ begin
   font_col          => pixel_column(2 downto 0),
   clock             => clk,
   rom_mux_output    => s_text_on2
+  );
+
+  text_timer : char_rom
+  port
+  map
+  (
+  character_address => char_add3,
+  font_row          => pixel_row(2 downto 0),
+  font_col          => pixel_column(2 downto 0),
+  clock             => clk,
+  rom_mux_output    => s_text_on3
   );
 
 end architecture beh;
