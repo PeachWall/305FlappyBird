@@ -11,6 +11,7 @@ entity abilities is
     vsync                   : in std_logic;
     speed                   : in std_logic_vector(2 downto 0);
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+    collided                : in std_logic;
     item_type               : out std_logic_vector(1 downto 0);
     rgb_out                 : out std_logic_vector(11 downto 0);
     ability_on              : out std_logic
@@ -28,6 +29,8 @@ architecture beh of abilities is
 
   signal random_num   : signed(7 downto 0);
   signal ability_type : ability_types := MONEY;
+
+  signal ability_draw : std_logic;
 
   component random_gen is
     port
@@ -76,7 +79,10 @@ begin
     y_pos <= v_y_pos;
   end process;
 
-  ability_on <= '1' when (pixel_row >= y_pos and pixel_row < y_pos + ability_size) and ('0' & pixel_column >= x_pos and '0' & pixel_column < x_pos + ability_size) else
+  ability_draw <= '0' when collided = '1' else
+    '1' when x_pos = std_logic_vector(to_unsigned(639, 11));
+
+  ability_on <= '1' when (pixel_row >= y_pos and pixel_row < y_pos + ability_size) and ('0' & pixel_column >= x_pos and '0' & pixel_column < x_pos + ability_size) and ability_draw = '1' else
     '0';
   rgb_out <=
     "111100000000" when ability_type = LIFE else

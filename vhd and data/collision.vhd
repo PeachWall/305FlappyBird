@@ -2,13 +2,16 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
+use work.util.all;
 
 entity collision is
   port
   (
-    bird_on, pipe_on, floor_on : in std_logic;
+    clk                                    : in std_logic;
+    bird_on, pipe_on, floor_on, ability_on : in std_logic;
     -- add powerup collisions
-    collided : out std_logic
+    collided         : out std_logic;
+    ability_collided : out std_logic
   );
 end entity collision;
 
@@ -17,6 +20,18 @@ end entity collision;
 architecture beh of collision is
   signal s_point_collided : std_logic;
 begin
-  collided <= '1' when ((bird_on = '1' and pipe_on = '1') or (bird_on = '1' and floor_on = '1')) else
-    '0';
+
+  process (clk)
+  begin
+    if (rising_edge(clk)) then
+      if ((bird_on = '1' and pipe_on = '1') or (bird_on = '1' and floor_on = '1')) then
+        collided <= '1';
+      elsif (bird_on = '1' and ability_on = '1') then
+        ability_collided <= '1';
+      else
+        collided         <= '0';
+        ability_collided <= '0';
+      end if;
+    end if;
+  end process;
 end architecture;

@@ -82,7 +82,7 @@ begin
 
   -- Set rgb of sprite
   bird_rgb_out <= argb(11 downto 0);
-  bird_on      <= argb(12) and draw_bird;
+  bird_on      <= argb(12) and draw_bird and sprite_on;
 
   Move_Player : process (vert_sync, reset)
     variable y_velocity      : signed(9 downto 0);
