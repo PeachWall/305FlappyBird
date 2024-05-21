@@ -54,6 +54,8 @@ architecture behavioural of player is
   signal pipe_collide : std_logic := '0';
 
   signal cur_game_state : game_states;
+
+  signal draw_bird : std_logic;
 begin
 
   state          <= player_states'val(to_integer(unsigned(bird_state)));
@@ -66,6 +68,8 @@ begin
     1 when state = SMALL else
     2;
 
+  draw_bird <= '0' when cur_game_state = MENU else
+    '1';
   move_x <= std_logic_vector(to_unsigned(120, move_x'length));
   move_y <= std_logic_vector(player_y_pos);
 
@@ -78,15 +82,16 @@ begin
 
   -- Set rgb of sprite
   bird_rgb_out <= argb(11 downto 0);
-  bird_on      <= argb(12);
+  bird_on      <= argb(12) and draw_bird;
 
   Move_Player : process (vert_sync, reset)
-    variable y_velocity   : signed(9 downto 0);
-    variable hold         : std_logic := '0';
-    variable frame_count  : integer range 0 to 16;
-    variable start_anim   : std_logic := '0';
-    variable flap         : std_logic;
-    variable v_bird_scale : integer range 0 to 1;
+    variable y_velocity      : signed(9 downto 0);
+    variable hold            : std_logic := '0';
+    variable frame_count     : integer range 0 to 16;
+    variable start_anim      : std_logic := '0';
+    variable flap            : std_logic;
+    variable v_bird_scale    : integer range 0 to 1;
+    variable prev_game_state : game_states;
   begin
     -- Move ball once every vertical sync
     if (reset = '1') then
@@ -123,13 +128,8 @@ begin
           end if;
         end if;
 
-        player_y_pos <= signed(player_y_pos) + y_velocity(9 downto 2);
-
         -- check if ball is at the floor or at ceiling
-        if (player_y_pos >= to_signed(440 - (to_integer(size) / 2), 10) and flap = '0') then
-          player_y_pos <= to_signed(440 - (to_integer(size) / 2), 10);
-          y_velocity := to_signed(0, 10);
-        elsif (player_y_pos < to_signed(to_integer(size) / 2, 10)) then
+        if (player_y_pos < to_signed(to_integer(size) / 2, 10)) then
           player_y_pos <= to_signed((to_integer(size) / 2), 10);
           y_velocity := to_signed(0, 10);
         end if;
@@ -138,7 +138,24 @@ begin
         end if;
 
         flap := '0';
+      elsif (cur_game_state = COLLIDE or cur_game_state = FINISH) then
+        if (cur_game_state /= prev_game_state) then
+          y_velocity := - to_signed(32 / (v_bird_scale + 1), 10);
+        else
+          if (y_velocity >= (to_signed(16 * gravity, 10))) then
+            y_velocity := (to_signed(16 * gravity, 10));
+          else
+            y_velocity := y_velocity + gravity;
+          end if;
+
+          if (player_y_pos >= to_signed(440 - (to_integer(size) / 2), 10) and flap = '0') then
+            player_y_pos <= to_signed(440 - (to_integer(size) / 2), 10);
+            y_velocity := to_signed(0, 10);
+          end if;
+        end if;
       end if;
+      player_y_pos <= signed(player_y_pos) + y_velocity(9 downto 2);
+      prev_game_state := cur_game_state;
     end if;
   end process Move_Player;
 

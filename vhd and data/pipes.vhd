@@ -14,6 +14,7 @@ entity pipes is
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     bird_x_pos              : in std_logic_vector(9 downto 0);
     speed                   : in std_logic_vector(2 downto 0);
+    game_state              : in std_logic_vector(2 downto 0);
     pipe_rgb_out            : out std_logic_vector(11 downto 0);
     pipe_on                 : out std_logic;
     pipe_passed             : out std_logic := '0'
@@ -64,7 +65,11 @@ architecture rtl of pipes is
 
   signal pipe_sprite_row, pipe_sprite_col : std_logic_vector(4 downto 0);
   signal argb                             : std_logic_vector(12 downto 0);
+
+  signal cur_game_state : game_states;
 begin
+
+  cur_game_state <= game_states'val(to_integer(unsigned(game_state)));
 
   -- Output either top or bottom pipe is being drawn
   pipe1_on  <= pipe1_bottom_on or pipe1_top_on;
@@ -96,12 +101,11 @@ begin
   pipe_on      <= argb(12);
 
   pipe_passed <=
-    '1' when '0' & pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or '0' & pipe2_x_pos + to_integer(pipe_size) < bird_x_pos else
+    '1' when ('0' & pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or '0' & pipe2_x_pos + to_integer(pipe_size) < bird_x_pos) and cur_game_state = PLAY else
     '0' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
 
   MOVEMENT : process (v_sync, reset)
     variable y_pos1, y_pos2 : integer range -480 to 480 := 360;
-
   begin
     if (reset = '1') then
       pipe1_x_pos <= std_logic_vector(to_unsigned(screen_width, 11));

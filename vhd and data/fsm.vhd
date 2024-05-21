@@ -42,34 +42,40 @@ architecture rtl of fsm is
   signal timer_init_val : std_logic_vector(4 downto 0) := "00000";
   signal timer_timout   : std_logic;
   signal lives          : std_logic_vector(2 downto 0) := "011";
+
+  signal bird_reset : std_logic;
 begin
 
   timer_on   <= timer_enable;
   timer_time <= timer_seconds;
 
-  BIRD_FSM : process (button1, button2, timer_seconds)
+  BIRD_FSM : process (clk, button1, button2, timer_seconds)
   begin
-    if (button1 = '0') then
-      cur_bird_state <= BIG;
-      timer_init_val <= "00101";
-      timer_reset    <= '1';
-      timer_enable   <= '1';
-    elsif (button2 = '0') then
-      cur_bird_state <= SMALL;
-      timer_init_val <= "00101";
-      timer_reset    <= '1';
-      timer_enable   <= '1';
-      timer_reset    <= '0';
-    else
-      timer_reset <= '0';
-    end if;
+    if (rising_edge(clk)) then
+      if (bird_reset = '1') then
+        cur_bird_state <= NORMAL;
+      elsif (button1 = '0') then
+        cur_bird_state <= BIG;
+        timer_init_val <= "00101";
+        timer_reset    <= '1';
+        timer_enable   <= '1';
+      elsif (button2 = '0') then
+        cur_bird_state <= SMALL;
+        timer_init_val <= "00101";
+        timer_reset    <= '1';
+        timer_enable   <= '1';
+        timer_reset    <= '0';
+      else
+        timer_reset <= '0';
+      end if;
 
-    if (timer_enable = '1' and timer_timout = '1' and (cur_bird_state = BIG or cur_bird_state = SMALL)) then
-      cur_bird_state <= NORMAL;
-      timer_enable   <= '0';
-      timer_reset    <= '1';
-    else
-      timer_reset <= '0';
+      if (timer_enable = '1' and timer_timout = '1' and (cur_bird_state = BIG or cur_bird_state = SMALL)) then
+        cur_bird_state <= NORMAL;
+        timer_enable   <= '0';
+        timer_reset    <= '1';
+      else
+        timer_reset <= '0';
+      end if;
     end if;
 
     bird_state <= std_logic_vector(to_unsigned(player_states'pos(cur_bird_state), 3));
@@ -78,26 +84,28 @@ begin
   GAME_FSM : process (clk, obst_collided, mouse, button1)
     variable hold : std_logic := '0';
   begin
-    if(rising_edge(clk)) then
-      if(cur_game_state = MENU) then
-        if(button1 = '0') then
-          cur_game_state <= FINISH;
+    if (rising_edge(clk)) then
+      if (cur_game_state = MENU) then
+        if (button1 = '0') then
+          cur_game_state <= PLAY;
+          reset_out      <= '1';
         end if;
+      elsif (obst_collided = '1' and cur_game_state = PLAY) then
+        cur_game_state <= COLLIDE;
+      elsif (mouse = '0' and hold = '0' and cur_game_state = COLLIDE) then
+        cur_game_state <= PLAY;
+        bird_reset     <= '1';
+        lives          <= lives - 1;
+        hold := '1';
+        reset_out <= '1';
+      else
+        reset_out  <= '0';
+        bird_reset <= '0';
       end if;
-    -- elsif (obst_collided = '1' and cur_game_state = PLAY) then
-    --   cur_game_state <= COLLIDE;
-    -- elsif (mouse = '0' and hold = '0' and cur_game_state = COLLIDE) then
-    --   cur_game_state <= PLAY;
-    --   lives          <= lives - 1;
-    --   hold := '1';
-    --   reset_out <= '1';
-    -- else
-    --   reset_out <= '0';
-    -- end if;
 
-    if (mouse = '0') then
-      hold := '0';
-    end if;
+      if (mouse = '0') then
+        hold := '0';
+      end if;
     end if;
     game_state <= std_logic_vector(to_unsigned(game_states'pos(cur_game_state), 3));
   end process;
