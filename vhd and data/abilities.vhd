@@ -7,7 +7,7 @@ use work.util.all;
 entity abilities is
   port
   (
-    clock                   : in std_logic;
+    clock, reset            : in std_logic;
     vsync                   : in std_logic;
     speed                   : in std_logic_vector(2 downto 0);
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
@@ -39,12 +39,14 @@ architecture beh of abilities is
 
 begin
   item_type <= std_logic_vector(to_unsigned(ability_types'pos(ability_type), 2));
-  MOVEMENT : process (vsync)
+  MOVEMENT : process (vsync, reset)
     variable v_y_pos    : integer range -480 to 480 := 360;
     variable abs_random : signed(7 downto 0);
 
   begin
-    if rising_edge(vsync) then
+    if (reset = '1') then
+      x_pos <= std_logic_vector(to_unsigned(832, 11));
+    elsif rising_edge(vsync) then
       x_pos <= x_pos - to_integer(unsigned(speed));
 
       if (x_pos <= - (64)) then
@@ -77,11 +79,10 @@ begin
   ability_on <= '1' when (pixel_row >= y_pos and pixel_row < y_pos + ability_size) and ('0' & pixel_column >= x_pos and '0' & pixel_column < x_pos + ability_size) else
     '0';
   rgb_out <=
-    "111111110000" when ability_type = MONEY else
     "111100000000" when ability_type = LIFE else
     "000011110000" when ability_type = BIG else
     "000000001111" when ability_type = SMALL else
-    "000000000000"; -- MONEY
+    "111111110000"; -- MONEY
 
   RNG : random_gen
   port map

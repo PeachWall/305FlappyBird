@@ -10,13 +10,14 @@ use work.util.all;
 entity player is
   port
   (
-    clk, vert_sync, mouse   : in std_logic;
-    collided                : in std_logic;
-    pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-    bird_state              : in std_logic_vector(2 downto 0);
-    bird_rgb_out            : out std_logic_vector(11 downto 0);
-    bird_on                 : out std_logic;
-    x_pos                   : out std_logic_vector(9 downto 0)
+    clk, reset, vert_sync, mouse : in std_logic;
+    collided                     : in std_logic;
+    pixel_row, pixel_column      : in std_logic_vector(9 downto 0);
+    bird_state                   : in std_logic_vector(2 downto 0);
+    game_state                   : in std_logic_vector(2 downto 0);
+    bird_rgb_out                 : out std_logic_vector(11 downto 0);
+    bird_on                      : out std_logic;
+    x_pos                        : out std_logic_vector(9 downto 0)
   );
 end entity player;
 
@@ -33,7 +34,7 @@ architecture behavioural of player is
   signal size       : unsigned(7 downto 0);
 
   -- Data related to Movement
-  signal player_y_pos   : signed(9 downto 0);
+  signal player_y_pos   : signed(9 downto 0) := to_signed(300, 10);
   signal player_x_pos   : std_logic_vector(9 downto 0);
   signal move_x, move_y : std_logic_vector(9 downto 0);
 
@@ -49,11 +50,16 @@ architecture behavioural of player is
   signal vec_sprite_on          : std_logic_vector(3 downto 0);
   signal sprite_row, sprite_col : std_logic_vector(3 downto 0);
 
-  signal state : player_states;
+  signal state        : player_states;
+  signal pipe_collide : std_logic := '0';
+
+  signal cur_game_state : game_states;
 begin
 
-  state <= player_states'val(to_integer(unsigned(bird_state)));
-  size  <= shift_left("00010000", bird_scale - 1); -- 16 * 2^(bird_scale - 1)
+  state          <= player_states'val(to_integer(unsigned(bird_state)));
+  cur_game_state <= game_states'val(to_integer(unsigned(game_state)));
+
+  size <= shift_left("00010000", bird_scale - 1); -- 16 * 2^(bird_scale - 1)
 
   bird_scale <=
     3 when state = BIG else
@@ -74,7 +80,7 @@ begin
   bird_rgb_out <= argb(11 downto 0);
   bird_on      <= argb(12);
 
-  Move_Player : process (vert_sync)
+  Move_Player : process (vert_sync, reset)
     variable y_velocity   : signed(9 downto 0);
     variable hold         : std_logic := '0';
     variable frame_count  : integer range 0 to 16;
@@ -83,52 +89,56 @@ begin
     variable v_bird_scale : integer range 0 to 1;
   begin
     -- Move ball once every vertical sync
-    if (rising_edge(vert_sync)) then
+    if (reset = '1') then
+      player_y_pos <= to_signed(300, 10);
+    elsif (rising_edge(vert_sync)) then
       -- if mouse clicked
-      if (start_anim = '1') then
-        if (frame_count = 16) then
-          frame <= '0';
-          frame_count := 0;
-          start_anim  := '0';
-        else
-          frame_count := frame_count + 1;
+      if (cur_game_state = PLAY) then
+        if (start_anim = '1') then
+          if (frame_count = 16) then
+            frame <= '0';
+            frame_count := 0;
+            start_anim  := '0';
+          else
+            frame_count := frame_count + 1;
+          end if;
         end if;
-      end if;
 
-      if (mouse = '1' and hold = '0') then
-        hold := '1';
-        flap := '1';
-        if (bird_scale <= 2) then
-          v_bird_scale := 0;
+        if (mouse = '1' and hold = '0') then
+          hold := '1';
+          flap := '1';
+          if (bird_scale <= 2) then
+            v_bird_scale := 0;
+          else
+            v_bird_scale := 1;
+          end if;
+          y_velocity := - to_signed(32 / (v_bird_scale + 1), 10);
+          frame <= '1';
+          start_anim := '1';
         else
-          v_bird_scale := 1;
+          if (y_velocity >= (to_signed(16 * gravity, 10))) then
+            y_velocity := (to_signed(16 * gravity, 10));
+          else
+            y_velocity := y_velocity + gravity;
+          end if;
         end if;
-        y_velocity := - to_signed(32 / (v_bird_scale + 1), 10);
-        frame <= '1';
-        start_anim := '1';
-      else
-        if (y_velocity >= (to_signed(16 * gravity, 10))) then
-          y_velocity := (to_signed(16 * gravity, 10));
-        else
-          y_velocity := y_velocity + gravity;
+
+        player_y_pos <= signed(player_y_pos) + y_velocity(9 downto 2);
+
+        -- check if ball is at the floor or at ceiling
+        if (player_y_pos >= to_signed(440 - (to_integer(size) / 2), 10) and flap = '0') then
+          player_y_pos <= to_signed(440 - (to_integer(size) / 2), 10);
+          y_velocity := to_signed(0, 10);
+        elsif (player_y_pos < to_signed(to_integer(size) / 2, 10)) then
+          player_y_pos <= to_signed((to_integer(size) / 2), 10);
+          y_velocity := to_signed(0, 10);
         end if;
-      end if;
+        if (mouse = '0') then
+          hold := '0';
+        end if;
 
-      player_y_pos <= signed(player_y_pos) + y_velocity(9 downto 2);
-
-      -- check if ball is at the floor or at ceiling
-      if (player_y_pos >= to_signed(440 - (to_integer(size) / 2), 10) and flap = '0') then
-        player_y_pos <= to_signed(440 - (to_integer(size) / 2), 10);
-        y_velocity := to_signed(0, 10);
-      elsif (player_y_pos < to_signed(to_integer(size) / 2, 10)) then
-        player_y_pos <= to_signed((to_integer(size) / 2), 10);
-        y_velocity := to_signed(0, 10);
+        flap := '0';
       end if;
-      if (mouse = '0') then
-        hold := '0';
-      end if;
-
-      flap := '0';
     end if;
   end process Move_Player;
 
