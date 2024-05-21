@@ -17,7 +17,8 @@ entity pipes is
     game_state              : in std_logic_vector(2 downto 0);
     pipe_rgb_out            : out std_logic_vector(11 downto 0);
     pipe_on                 : out std_logic;
-    pipe_passed             : out std_logic := '0'
+    point_box_on            : out std_logic;
+    point_increment         : out std_logic := '0'
   );
 end entity pipes;
 
@@ -60,6 +61,8 @@ architecture rtl of pipes is
   signal pipe1_on, pipe2_on : std_logic;
   signal s_pipe_on          : std_logic;
 
+  signal point_box_draw : std_logic;
+
   signal random_num   : ieee.numeric_std.signed(7 downto 0);
   signal pipe_on_mask : std_logic_vector(3 downto 0);
 
@@ -77,6 +80,9 @@ begin
   s_pipe_on <= pipe1_on or pipe2_on;
 
   pipe_on_mask <= (others => s_pipe_on);
+
+  point_increment <= '1' when point_collided = '1' else
+    '0' when pipe1_x_pos = std_logic_vector(to_unsigned(screen_width, 11)) or pipe2_x_pos = std_logic_vector(to_unsigned(screen_width, 11));
 
   -- Pipe1 : TOP AND BOTTOM
   pipe1_top_on <= '1' when ('0' & pixel_column >= pipe1_x_pos) and ('0' & pixel_column < pipe1_x_pos + to_integer(pipe_size))
@@ -96,23 +102,27 @@ begin
     and (pixel_row  <= screen_height) and (pixel_row > pipe2_y_pos + gap_size) else
     '0';
 
+  point_box_on <= '1' when ('0' & pixel_column >= pipe1_x_pos + to_integer(pipe_size) - 8 and '0' & pixel_column < pipe1_x_pos + to_integer(pipe_size)) or
+    ('0' & pixel_column >= pipe2_x_pos + to_integer(pipe_size) - 8 and '0' & pixel_column < pipe2_x_pos + to_integer(pipe_size)) else
+    '0';
+
   -- Set argb values of sprite
   pipe_rgb_out <= argb(11 downto 0);
   pipe_on      <= argb(12);
 
   -- pipe_passed <=
-  --   '1' when ('0' & pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or '0' & pipe2_x_pos + to_integer(pipe_size) < bird_x_pos) and cur_game_state = PLAY else
+  --   '1' when (pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or pipe2_x_pos + to_integer(pipe_size) < bird_x_pos) and cur_game_state = PLAY else
   --   '0' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
 
   -- PLS FIX --
-  process (clk)
-  begin
-    if (('0' & pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or '0' & pipe2_x_pos + to_integer(pipe_size) < bird_x_pos) and cur_game_state = PLAY) then
-      pipe_passed <= '1';
-    elsif (pipe1_x_pos = screen_width or pipe2_x_pos = screen_width) then
-      pipe_passed <= '0';
-    end if;
-  end process;
+  -- process (clk)
+  -- begin
+  --   if (('0' & pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or '0' & pipe2_x_pos + to_integer(pipe_size) < bird_x_pos) and cur_game_state = PLAY) then
+  --     pipe_passed <= '1';
+  --   elsif (pipe1_x_pos = screen_width or pipe2_x_pos = screen_width) then
+  --     pipe_passed <= '0';
+  --   end if;
+  -- end process;
 
   MOVEMENT : process (v_sync, reset)
     variable y_pos1, y_pos2 : integer range -480 to 480 := 360;

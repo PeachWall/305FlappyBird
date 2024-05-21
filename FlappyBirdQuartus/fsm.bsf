@@ -114,6 +114,13 @@ refer to the applicable agreement for further details.
 		(text "reset_out" (rect 174 107 211 119)(font "Arial" ))
 		(line (pt 232 112)(pt 216 112)(line_width 1))
 	)
+	(port
+		(pt 232 128)
+		(output)
+		(text "lives_out[2..0]" (rect 0 0 55 12)(font "Arial" ))
+		(text "lives_out[2..0]" (rect 156 123 211 135)(font "Arial" ))
+		(line (pt 232 128)(pt 216 128)(line_width 3))
+	)
 	(drawing
 		(rectangle (rect 16 16 216 160)(line_width 1))
 	)

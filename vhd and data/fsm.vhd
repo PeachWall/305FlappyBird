@@ -20,7 +20,8 @@ entity fsm is
     game_state       : out std_logic_vector(2 downto 0);
     timer_on         : out std_logic;
     timer_time       : out std_logic_vector(4 downto 0);
-    reset_out        : out std_logic
+    reset_out        : out std_logic;
+    lives_out        : out std_logic_vector(2 downto 0)
   );
 end entity fsm;
 
@@ -42,7 +43,6 @@ architecture rtl of fsm is
   signal s_button1      : std_logic;
   signal timer_init_val : std_logic_vector(4 downto 0) := "00000";
   signal timer_timout   : std_logic;
-  signal lives          : std_logic_vector(2 downto 0) := "011";
   signal cur_ability    : ability_types;
 
   signal bird_reset : std_logic;
@@ -85,7 +85,8 @@ begin
   end process;
 
   GAME_FSM : process (clk, obst_collided, mouse, start_button)
-    variable hold : std_logic := '0';
+    variable hold  : std_logic                    := '0';
+    variable lives : std_logic_vector(2 downto 0) := "011";
   begin
     if (rising_edge(clk)) then
       if (cur_game_state = MENU) then
@@ -98,8 +99,8 @@ begin
       elsif (mouse = '0' and hold = '0' and cur_game_state = COLLIDE) then
         cur_game_state <= PLAY;
         bird_reset     <= '1';
-        lives          <= lives - 1;
-        hold := '1';
+        lives := lives - 1;
+        hold  := '1';
         reset_out <= '1';
       else
         reset_out  <= '0';
@@ -111,6 +112,7 @@ begin
       end if;
     end if;
     game_state <= std_logic_vector(to_unsigned(game_states'pos(cur_game_state), 3));
+    lives_out  <= lives;
   end process;
   TIMER : timer_25
   port map
