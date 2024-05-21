@@ -18,7 +18,8 @@ entity fsm is
     pipe_state    : out std_logic_vector(2 downto 0);
     game_state    : out std_logic_vector(2 downto 0);
     timer_on      : out std_logic;
-    timer_time    : out std_logic_vector(4 downto 0)
+    timer_time    : out std_logic_vector(4 downto 0);
+    reset_out     : out std_logic
   );
 end entity fsm;
 
@@ -79,13 +80,16 @@ begin
   begin
     if (obst_collided = '1' and cur_game_state = PLAY) then
       cur_game_state <= COLLIDE;
-    elsif (mouse = '1' and hold = '0' and cur_game_state = COLLIDE) then
+    elsif (mouse = '0' and hold = '0' and cur_game_state = COLLIDE) then
       cur_game_state <= PLAY;
       lives          <= lives - 1;
       hold := '1';
+      reset_out <= '1';
+    else
+      reset_out <= '0';
     end if;
 
-    if (mouse = '0') then
+    if (mouse = '1') then
       hold := '0';
     end if;
     game_state <= std_logic_vector(to_unsigned(game_states'pos(cur_game_state), 3));

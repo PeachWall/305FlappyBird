@@ -5,7 +5,7 @@ use ieee.math_real.all;
 package util is
   -- STATE MACHINE DECLERATIONS
   type player_states is (NORMAL, BIG, SMALL);
-  type pipe_states is (FAST, SLOW);
+  type speed_states is (NORMAL, FAST, SLOW);
   type game_states is (MENU, PLAY, COLLIDE, PAUSED, FINISH);
   type ability_types is(MONEY, LIFE, BIG, SMALL);
 

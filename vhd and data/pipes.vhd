@@ -8,7 +8,7 @@ use work.util.all;
 entity pipes is
   port
   (
-    clk                     : in std_logic;
+    clk, reset              : in std_logic;
     v_sync                  : in std_logic;
     point_collided          : in std_logic;
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
@@ -99,11 +99,14 @@ begin
     '1' when '0' & pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or '0' & pipe2_x_pos + to_integer(pipe_size) < bird_x_pos else
     '0' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
 
-  MOVEMENT : process (v_sync)
+  MOVEMENT : process (v_sync, reset)
     variable y_pos1, y_pos2 : integer range -480 to 480 := 360;
 
   begin
-    if (rising_edge(v_sync)) then
+    if (reset = '1') then
+      pipe1_x_pos <= std_logic_vector(to_unsigned(screen_width, 11));
+      pipe2_x_pos <= std_logic_vector(to_unsigned(screen_width + distance, 11));
+    elsif (rising_edge(v_sync)) then
       pipe1_x_pos <= pipe1_x_pos - to_integer(unsigned(speed));
       pipe2_x_pos <= pipe2_x_pos - to_integer(unsigned(speed));
 
