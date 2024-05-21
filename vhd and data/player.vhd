@@ -87,7 +87,7 @@ begin
   Move_Player : process (vert_sync, reset)
     variable y_velocity      : signed(9 downto 0);
     variable hold            : std_logic := '0';
-    variable frame_count     : integer range 0 to 16;
+    variable frame_count     : integer range 0 to 15;
     variable start_anim      : std_logic := '0';
     variable flap            : std_logic;
     variable v_bird_scale    : integer range 0 to 1;
@@ -100,7 +100,7 @@ begin
       -- if mouse clicked
       if (cur_game_state = PLAY) then
         if (start_anim = '1') then
-          if (frame_count = 16) then
+          if (frame_count = 15) then
             frame <= '0';
             frame_count := 0;
             start_anim  := '0';

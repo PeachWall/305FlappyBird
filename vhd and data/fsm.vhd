@@ -65,7 +65,7 @@ begin
         cur_bird_state <= NORMAL;
         timer_reset    <= '1';
         timer_enable   <= '0';
-      elsif (ability_collided = '1' and cur_ability = MONEY) then
+      elsif (ability_collided = '1' and cur_ability = BIG) then
         cur_bird_state <= BIG;
         timer_init_val <= "00101";
         timer_reset    <= '1';
