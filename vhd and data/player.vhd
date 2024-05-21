@@ -49,7 +49,9 @@ architecture behavioural of player is
   signal vec_sprite_on          : std_logic_vector(3 downto 0);
   signal sprite_row, sprite_col : std_logic_vector(3 downto 0);
 
-  signal state : player_states;
+  signal state        : player_states;
+  signal pipe_collide : std_logic := '0';
+
 begin
 
   state <= player_states'val(to_integer(unsigned(bird_state)));

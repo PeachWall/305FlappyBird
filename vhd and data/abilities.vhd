@@ -77,11 +77,10 @@ begin
   ability_on <= '1' when (pixel_row >= y_pos and pixel_row < y_pos + ability_size) and ('0' & pixel_column >= x_pos and '0' & pixel_column < x_pos + ability_size) else
     '0';
   rgb_out <=
-    "111111110000" when ability_type = MONEY else
     "111100000000" when ability_type = LIFE else
     "000011110000" when ability_type = BIG else
     "000000001111" when ability_type = SMALL else
-    "000000000000"; -- MONEY
+    "111111110000"; -- MONEY
 
   RNG : random_gen
   port map

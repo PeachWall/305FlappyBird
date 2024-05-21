@@ -2,20 +2,23 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
+use ieee.STD_LOGIC_UNSIGNED.all;
 use work.util.all;
 
 entity fsm is
   port
   (
-    clk        : in std_logic;
-    reset      : in std_logic;
-    button1    : in std_logic; -- test for fsm
-    button2    : in std_logic; -- test for fsm
-    bird_state : out std_logic_vector(2 downto 0);
-    pipe_state : out std_logic_vector(2 downto 0);
-    game_state : out std_logic_vector(2 downto 0);
-    timer_on   : out std_logic;
-    timer_time : out std_logic_vector(4 downto 0)
+    clk           : in std_logic;
+    reset         : in std_logic;
+    button1       : in std_logic; -- test for fsm
+    button2       : in std_logic; -- test for fsm
+    obst_collided : in std_logic;
+    mouse         : in std_logic;
+    bird_state    : out std_logic_vector(2 downto 0);
+    pipe_state    : out std_logic_vector(2 downto 0);
+    game_state    : out std_logic_vector(2 downto 0);
+    timer_on      : out std_logic;
+    timer_time    : out std_logic_vector(4 downto 0)
   );
 end entity fsm;
 
@@ -30,13 +33,14 @@ architecture rtl of fsm is
     );
   end component;
   signal cur_bird_state : player_states := NORMAL;
-  signal cur_game_state : game_states   := MENU;
+  signal cur_game_state : game_states   := PLAY;
   signal timer_enable   : std_logic;
   signal timer_reset    : std_logic;
   signal timer_seconds  : std_logic_vector(4 downto 0);
   signal s_button1      : std_logic;
   signal timer_init_val : std_logic_vector(4 downto 0) := "00000";
   signal timer_timout   : std_logic;
+  signal lives          : std_logic_vector(2 downto 0) := "011";
 begin
 
   timer_on   <= timer_enable;
@@ -49,15 +53,12 @@ begin
       timer_init_val <= "00101";
       timer_reset    <= '1';
       timer_enable   <= '1';
-    else
-      timer_reset <= '0';
-    end if;
-
-    if (button2 = '0') then
+    elsif (button2 = '0') then
       cur_bird_state <= SMALL;
       timer_init_val <= "00101";
       timer_reset    <= '1';
       timer_enable   <= '1';
+      timer_reset    <= '0';
     else
       timer_reset <= '0';
     end if;
@@ -73,8 +74,21 @@ begin
     bird_state <= std_logic_vector(to_unsigned(player_states'pos(cur_bird_state), 3));
   end process;
 
-  GAME_FSM : process (cur_game_state)
+  GAME_FSM : process (obst_collided, mouse)
+    variable hold : std_logic := '0';
   begin
+    if (obst_collided = '1' and cur_game_state = PLAY) then
+      cur_game_state <= COLLIDE;
+    elsif (mouse = '1' and hold = '0' and cur_game_state = COLLIDE) then
+      cur_game_state <= PLAY;
+      lives          <= lives - 1;
+      hold := '1';
+    end if;
+
+    if (mouse = '0') then
+      hold := '0';
+    end if;
+    game_state <= std_logic_vector(to_unsigned(game_states'pos(cur_game_state), 3));
   end process;
   TIMER : timer_25
   port map

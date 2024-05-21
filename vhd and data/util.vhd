@@ -4,9 +4,9 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 package util is
   -- STATE MACHINE DECLERATIONS
-  type player_states is (NORMAL, DEAD, PAUSED, INVINCIBLE, FAST, SLOW, BIG, SMALL);
+  type player_states is (NORMAL, BIG, SMALL);
   type pipe_states is (FAST, SLOW);
-  type game_states is (MENU, TRAINING, EASY, MEDIUM, HARD, FINISH);
+  type game_states is (MENU, PLAY, COLLIDE, PAUSED, FINISH);
   type ability_types is(MONEY, LIFE, BIG, SMALL);
 
   -- SCALING FACTOR FOR GAME EXCEPT FOR BIRD
