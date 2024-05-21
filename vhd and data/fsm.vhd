@@ -10,7 +10,7 @@ entity fsm is
   (
     clk           : in std_logic;
     reset         : in std_logic;
-    button1       : in std_logic; -- test for fsm
+    button1       : in std_logic;
     button2       : in std_logic; -- test for fsm
     obst_collided : in std_logic;
     mouse         : in std_logic;
@@ -34,7 +34,7 @@ architecture rtl of fsm is
     );
   end component;
   signal cur_bird_state : player_states := NORMAL;
-  signal cur_game_state : game_states   := PLAY;
+  signal cur_game_state : game_states   := MENU;
   signal timer_enable   : std_logic;
   signal timer_reset    : std_logic;
   signal timer_seconds  : std_logic_vector(4 downto 0);
@@ -75,22 +75,29 @@ begin
     bird_state <= std_logic_vector(to_unsigned(player_states'pos(cur_bird_state), 3));
   end process;
 
-  GAME_FSM : process (obst_collided, mouse)
+  GAME_FSM : process (clk, obst_collided, mouse, button1)
     variable hold : std_logic := '0';
   begin
-    if (obst_collided = '1' and cur_game_state = PLAY) then
-      cur_game_state <= COLLIDE;
-    elsif (mouse = '0' and hold = '0' and cur_game_state = COLLIDE) then
-      cur_game_state <= PLAY;
-      lives          <= lives - 1;
-      hold := '1';
-      reset_out <= '1';
-    else
-      reset_out <= '0';
-    end if;
+    if(rising_edge(clk)) then
+      if(cur_game_state = MENU) then
+        if(button1 = '0') then
+          cur_game_state <= FINISH;
+        end if;
+      end if;
+    -- elsif (obst_collided = '1' and cur_game_state = PLAY) then
+    --   cur_game_state <= COLLIDE;
+    -- elsif (mouse = '0' and hold = '0' and cur_game_state = COLLIDE) then
+    --   cur_game_state <= PLAY;
+    --   lives          <= lives - 1;
+    --   hold := '1';
+    --   reset_out <= '1';
+    -- else
+    --   reset_out <= '0';
+    -- end if;
 
-    if (mouse = '1') then
+    if (mouse = '0') then
       hold := '0';
+    end if;
     end if;
     game_state <= std_logic_vector(to_unsigned(game_states'pos(cur_game_state), 3));
   end process;
