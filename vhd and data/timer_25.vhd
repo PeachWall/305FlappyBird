@@ -19,7 +19,7 @@ begin
   process (clk, reset)
     variable v_Q       : std_logic_vector(4 downto 0) := "00000";
     variable counter   : integer range 0 to 25000000;
-    variable v_timeout : std_logic;
+    variable v_timeout : std_logic := '0';
   begin
     if (reset = '1') then
       counter := 0;
@@ -28,16 +28,18 @@ begin
       v_timeout := '0';
     elsif (rising_edge(clk)) then
       if (enable = '1') then
-        counter := counter + 1;
+        if (v_timeout = '0') then
+          counter := counter + 1;
 
-        if (counter = 25000000) then
-          v_Q := v_Q - 1;
-          if (v_Q = "00000") then
-            v_timeout := '1';
-          else
-            v_timeout := '0';
+          if (counter = 25000000) then
+            v_Q := v_Q - 1;
+            if (v_Q = "00000") then
+              v_timeout := '1';
+            else
+              v_timeout := '0';
+            end if;
+            counter := 0;
           end if;
-          counter := 0;
         end if;
       end if;
     end if;

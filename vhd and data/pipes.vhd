@@ -100,9 +100,19 @@ begin
   pipe_rgb_out <= argb(11 downto 0);
   pipe_on      <= argb(12);
 
-  pipe_passed <=
-    '1' when ('0' & pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or '0' & pipe2_x_pos + to_integer(pipe_size) < bird_x_pos) and cur_game_state = PLAY else
-    '0' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
+  -- pipe_passed <=
+  --   '1' when ('0' & pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or '0' & pipe2_x_pos + to_integer(pipe_size) < bird_x_pos) and cur_game_state = PLAY else
+  --   '0' when pipe1_x_pos = screen_width or pipe2_x_pos = screen_width;
+
+  -- PLS FIX --
+  process (clk)
+  begin
+    if (('0' & pipe1_x_pos + to_integer(pipe_size) < bird_x_pos or '0' & pipe2_x_pos + to_integer(pipe_size) < bird_x_pos) and cur_game_state = PLAY) then
+      pipe_passed <= '1';
+    elsif (pipe1_x_pos = screen_width or pipe2_x_pos = screen_width) then
+      pipe_passed <= '0';
+    end if;
+  end process;
 
   MOVEMENT : process (v_sync, reset)
     variable y_pos1, y_pos2 : integer range -480 to 480 := 360;

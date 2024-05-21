@@ -12,7 +12,7 @@ entity abilities is
     speed                   : in std_logic_vector(2 downto 0);
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     collided                : in std_logic;
-    item_type               : out std_logic_vector(1 downto 0);
+    item_type               : out std_logic_vector(2 downto 0);
     rgb_out                 : out std_logic_vector(11 downto 0);
     ability_on              : out std_logic
   );
@@ -41,7 +41,7 @@ architecture beh of abilities is
   end component;
 
 begin
-  item_type <= std_logic_vector(to_unsigned(ability_types'pos(ability_type), 2));
+  item_type <= std_logic_vector(to_unsigned(ability_types'pos(ability_type), 3));
   MOVEMENT : process (vsync, reset)
     variable v_y_pos    : integer range -480 to 480 := 360;
     variable abs_random : signed(7 downto 0);
