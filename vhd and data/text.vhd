@@ -45,7 +45,7 @@ architecture beh of text is
   signal s_text_on3    : std_logic;
   signal char_add3     : std_logic_vector(5 downto 0);
   signal empty_space3  : std_logic;
-  constant text_start3 : integer := 300;
+  constant text_start3 : integer := 319;
 
   signal black_line         : std_logic;
   constant text_start2      : integer := 23; -- welcom begins from pixel row 20 -- MUST BE A MULTIPLE OF THE CHAR WIDTH
