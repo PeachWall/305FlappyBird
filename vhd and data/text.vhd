@@ -123,9 +123,9 @@ begin
   -- LIVES I TRIED BUT FAILED PLS HELP --
   ---------------------------------------
   char_add3                                      <= "100000" when empty_space3 = '1' else
-    CONV_STD_LOGIC_VECTOR(24, 6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start3, 10) and empty_space = '0' else --"X"
-    CONV_STD_LOGIC_VECTOR(48, 6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start3 + 8, 10) and empty_space = '0' else --"0"
-    CONV_STD_LOGIC_VECTOR(48, 6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start3 + 16, 10) and empty_space = '0' else --"0"
+    CONV_STD_LOGIC_VECTOR(24, 6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start3, 10) and empty_space3 = '0' else --"X"
+    CONV_STD_LOGIC_VECTOR(48, 6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start3 + 8, 10) and empty_space3 = '0' else --"0"
+    CONV_STD_LOGIC_VECTOR(48, 6) when pixel_column <= CONV_STD_LOGIC_VECTOR(text_start3 + 16, 10) and empty_space3 = '0' else --"0"
     "100000"; --CONV_STD_LOGIC_VECTOR(29,6); --" ", IS A BLANK SPACE
 
   black_line <= '1' when pixel_column = 0 else
