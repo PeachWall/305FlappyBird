@@ -12,6 +12,7 @@ entity abilities is
     speed                   : in std_logic_vector(2 downto 0);
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     collided                : in std_logic;
+    bird_state              : in std_logic_vector(2 downto 0);
     item_type               : out std_logic_vector(2 downto 0);
     rgb_out                 : out std_logic_vector(11 downto 0);
     ability_on              : out std_logic
@@ -38,6 +39,8 @@ architecture beh of abilities is
 
   signal sprite_on : std_logic;
 
+  signal cur_bird_state : player_states;
+
   component random_gen is
     port
     (
@@ -57,7 +60,8 @@ architecture beh of abilities is
   end component;
 
 begin
-  item_type <= std_logic_vector(to_unsigned(ability_types'pos(ability_type), 3));
+  item_type      <= std_logic_vector(to_unsigned(ability_types'pos(ability_type), 3));
+  cur_bird_state <= player_states'val(to_integer(unsigned(bird_state)));
 
   ability_draw <= '0' when collided = '1' else
     '1' when x_pos = std_logic_vector(to_unsigned(639, 11));
@@ -127,9 +131,9 @@ begin
         abs_random := abs(random_num);
         if (abs_random < 39 and abs_random >= 26) then
           ability_type <= LIFE;
-        elsif (abs_random < 26 and abs_random >= 13) then
+        elsif (abs_random < 26 and abs_random >= 13 and cur_bird_state = NORMAL) then
           ability_type <= BIG;
-        elsif (abs_random < 13 and abs_random >= 0) then
+        elsif (abs_random < 13 and abs_random >= 0 and cur_bird_state = NORMAL) then
           ability_type <= SMALL;
         else
           ability_type <= MONEY;

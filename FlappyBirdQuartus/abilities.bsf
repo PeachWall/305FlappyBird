@@ -73,6 +73,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 128)(pt 16 128)(line_width 1))
 	)
 	(port
+		(pt 0 144)
+		(input)
+		(text "bird_state[2..0]" (rect 0 0 59 12)(font "Arial" ))
+		(text "bird_state[2..0]" (rect 21 139 80 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
 		(pt 232 32)
 		(output)
 		(text "item_type[2..0]" (rect 0 0 60 12)(font "Arial" ))

@@ -128,11 +128,6 @@ begin
           end if;
         end if;
 
-        -- check if ball is at the floor or at ceiling
-        if (player_y_pos < to_signed(to_integer(size) / 2, 10)) then
-          player_y_pos <= to_signed((to_integer(size) / 2), 10);
-          y_velocity := to_signed(0, 10);
-        end if;
         if (mouse = '0') then
           hold := '0';
         end if;
@@ -156,6 +151,12 @@ begin
       end if;
       player_y_pos <= signed(player_y_pos) + y_velocity(9 downto 2);
       prev_game_state := cur_game_state;
+
+      -- check if ball is at the floor or at ceiling
+      if (player_y_pos < to_signed(to_integer(size) / 2, 10)) then
+        player_y_pos <= to_signed((to_integer(size) / 2) + 1, 10);
+        y_velocity := to_signed(0, 10);
+      end if;
     end if;
   end process Move_Player;
 

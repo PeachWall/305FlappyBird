@@ -41,7 +41,7 @@ architecture rtl of fsm is
   signal timer_reset    : std_logic;
   signal timer_seconds  : std_logic_vector(4 downto 0);
   signal s_button1      : std_logic;
-  signal timer_init_val : std_logic_vector(4 downto 0) := "00000";
+  signal timer_init_val : std_logic_vector(4 downto 0) := "01010";
   signal timer_timout   : std_logic;
   signal cur_ability    : ability_types;
 
@@ -67,12 +67,12 @@ begin
         timer_enable   <= '0';
       elsif (ability_collided = '1' and cur_ability = BIG) then
         cur_bird_state <= BIG;
-        timer_init_val <= "00101";
+        timer_init_val <= "01010";
         timer_reset    <= '1';
         timer_enable   <= '1';
       elsif (ability_collided = '1' and cur_ability = SMALL) then
         cur_bird_state <= SMALL;
-        timer_init_val <= "00101";
+        timer_init_val <= "01010";
         timer_reset    <= '1';
         timer_enable   <= '1';
         timer_reset    <= '0';
