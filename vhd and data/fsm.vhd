@@ -91,9 +91,13 @@ begin
     if (rising_edge(clk)) then
       if (cur_game_state = MENU) then
         if (start_button = '0') then
-          cur_game_state <= PLAY;
+          cur_game_state <= PAUSED;
           reset_out      <= '1';
+          bird_reset     <= '1';
         end if;
+      elsif (cur_game_state = PAUSED and mouse = '1' and hold = '0') then
+        cur_game_state <= PLAY;
+        hold := '1';
       elsif (obst_collided = '1' and cur_game_state = PLAY) then
         cur_game_state <= COLLIDE;
       elsif (mouse = '0' and hold = '0' and cur_game_state = COLLIDE) then
