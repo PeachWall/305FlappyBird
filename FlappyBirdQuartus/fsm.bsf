@@ -121,6 +121,13 @@ refer to the applicable agreement for further details.
 		(text "lives_out[2..0]" (rect 156 123 211 135)(font "Arial" ))
 		(line (pt 232 128)(pt 216 128)(line_width 3))
 	)
+	(port
+		(pt 232 144)
+		(output)
+		(text "money_out[7..0]" (rect 0 0 66 12)(font "Arial" ))
+		(text "money_out[7..0]" (rect 145 139 211 151)(font "Arial" ))
+		(line (pt 232 144)(pt 216 144)(line_width 3))
+	)
 	(drawing
 		(rectangle (rect 16 16 216 160)(line_width 1))
 	)

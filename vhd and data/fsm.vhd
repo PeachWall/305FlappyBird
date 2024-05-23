@@ -21,7 +21,8 @@ entity fsm is
     timer_on         : out std_logic;
     timer_time       : out std_logic_vector(4 downto 0);
     reset_out        : out std_logic;
-    lives_out        : out std_logic_vector(2 downto 0)
+    lives_out        : out std_logic_vector(2 downto 0);
+    money_out        : out std_logic_vector(7 downto 0) -- HOPING THEY DONT GO OVER 255 c:
   );
 end entity fsm;
 
@@ -35,6 +36,9 @@ architecture rtl of fsm is
       timeout            : out std_logic
     );
   end component;
+
+  -- Define a protected type
+
   signal cur_bird_state : player_states := NORMAL;
   signal cur_game_state : game_states   := MENU;
   signal timer_enable   : std_logic     := '0';
@@ -52,8 +56,15 @@ begin
   timer_time  <= timer_seconds;
   cur_ability <= ability_types'val(to_integer(unsigned(ability_type)));
 
-  BIRD_FSM : process (clk, timer_timout)
+  FSM : process (clk, obst_collided, mouse, start_button, timer_timout)
+    variable hold    : std_logic                    := '0';
+    variable lives   : std_logic_vector(2 downto 0) := "011";
+    variable v_money : std_logic_vector(7 downto 0) := (others => '0');
   begin
+    --------------------
+    -- BIRD FSM START --
+    --------------------
+
     if (timer_timout = '1') then
       timer_enable <= '0';
       if (cur_bird_state = BIG or cur_bird_state = SMALL) then
@@ -76,18 +87,26 @@ begin
         timer_reset    <= '1';
         timer_enable   <= '1';
         timer_reset    <= '0';
+      elsif (ability_collided = '1' and cur_ability = LIFE) then
+        if (lives /= 7) then
+          lives := lives + 1;
+        end if;
+      elsif (ability_collided = '1' and cur_ability = MONEY) then
+        v_money := v_money + 1;
       else
         timer_reset <= '0';
       end if;
     end if;
 
     bird_state <= std_logic_vector(to_unsigned(player_states'pos(cur_bird_state), 3));
-  end process;
+    money_out  <= v_money;
+    ------------------
+    -- BIRD FSM END --
+    ------------------
 
-  GAME_FSM : process (clk, obst_collided, mouse, start_button)
-    variable hold  : std_logic                    := '0';
-    variable lives : std_logic_vector(2 downto 0) := "011";
-  begin
+    --------------------
+    -- GAME FSM START --
+    --------------------
     if (rising_edge(clk)) then
       if (cur_game_state = MENU) then
         if (start_button = '0') then
@@ -95,7 +114,7 @@ begin
           reset_out      <= '1';
           bird_reset     <= '1';
         end if;
-      elsif (cur_game_state = PAUSED and mouse = '1' and hold = '0') then
+      elsif (cur_game_state = PAUSED and mouse = '0' and hold = '0') then
         cur_game_state <= PLAY;
         hold := '1';
       elsif (obst_collided = '1' and cur_game_state = PLAY) then
@@ -111,12 +130,17 @@ begin
         bird_reset <= '0';
       end if;
 
-      if (mouse = '0') then
+      if (mouse = '1') then
         hold := '0';
       end if;
     end if;
     game_state <= std_logic_vector(to_unsigned(game_states'pos(cur_game_state), 3));
-    lives_out  <= lives;
+
+    ------------------
+    -- GAME FSM END --
+    ------------------
+
+    lives_out <= lives;
   end process;
   TIMER : timer_25
   port map
