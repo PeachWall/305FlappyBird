@@ -16,7 +16,7 @@ entity fsm is
     ability_type     : in std_logic_vector(2 downto 0);
     mouse            : in std_logic;
     bird_state       : out std_logic_vector(2 downto 0);
-    pipe_state       : out std_logic_vector(2 downto 0);
+    speed_state      : out std_logic_vector(2 downto 0);
     game_state       : out std_logic_vector(2 downto 0);
     timer_on         : out std_logic;
     timer_time       : out std_logic_vector(4 downto 0);
@@ -39,15 +39,16 @@ architecture rtl of fsm is
 
   -- Define a protected type
 
-  signal cur_bird_state : player_states := NORMAL;
-  signal cur_game_state : game_states   := MENU;
-  signal timer_enable   : std_logic     := '0';
-  signal timer_reset    : std_logic;
-  signal timer_seconds  : std_logic_vector(4 downto 0);
-  signal s_button1      : std_logic;
-  signal timer_init_val : std_logic_vector(4 downto 0) := "01010";
-  signal timer_timout   : std_logic;
-  signal cur_ability    : ability_types;
+  signal cur_bird_state  : player_states := NORMAL;
+  signal cur_game_state  : game_states   := MENU;
+  signal cur_speed_state : speed_states  := NORMAL;
+  signal timer_enable    : std_logic     := '0';
+  signal timer_reset     : std_logic;
+  signal timer_seconds   : std_logic_vector(4 downto 0);
+  signal s_button1       : std_logic;
+  signal timer_init_val  : std_logic_vector(4 downto 0) := "01010";
+  signal timer_timout    : std_logic;
+  signal cur_ability     : ability_types;
 
   signal bird_reset : std_logic;
 begin
@@ -57,9 +58,10 @@ begin
   cur_ability <= ability_types'val(to_integer(unsigned(ability_type)));
 
   FSM : process (clk, obst_collided, mouse, start_button, timer_timout)
-    variable hold    : std_logic                    := '0';
-    variable lives   : std_logic_vector(2 downto 0) := "011";
-    variable v_money : std_logic_vector(7 downto 0) := (others => '0');
+    variable hold         : std_logic                    := '0';
+    variable lives        : std_logic_vector(2 downto 0) := "011";
+    variable v_money      : std_logic_vector(7 downto 0) := (others => '0');
+    variable timeout_type : std_logic                    := '0'; -- 1 = BIRD | 0 = PIPES
   begin
     --------------------
     -- BIRD FSM START --
@@ -67,39 +69,58 @@ begin
 
     if (timer_timout = '1') then
       timer_enable <= '0';
-      if (cur_bird_state = BIG or cur_bird_state = SMALL) then
+      if ((cur_bird_state = BIG or cur_bird_state = SMALL) and timeout_type = '1') then
         cur_bird_state <= NORMAL;
         timer_reset    <= '1';
+      elsif ((cur_speed_state = FAST or cur_speed_state = SLOW) and timeout_type = '0') then
+        cur_speed_state <= NORMAL;
+        timer_reset     <= '1';
       end if;
     elsif (rising_edge(clk)) then
       if (bird_reset = '1') then
-        cur_bird_state <= NORMAL;
-        timer_reset    <= '1';
-        timer_enable   <= '0';
+        cur_bird_state  <= NORMAL;
+        cur_speed_state <= NORMAL;
+        timer_reset     <= '1';
+        timer_enable    <= '0';
       elsif (ability_collided = '1' and cur_ability = BIG) then
         cur_bird_state <= BIG;
         timer_init_val <= "01010";
         timer_reset    <= '1';
         timer_enable   <= '1';
+        timeout_type := '1';
       elsif (ability_collided = '1' and cur_ability = SMALL) then
         cur_bird_state <= SMALL;
         timer_init_val <= "01010";
         timer_reset    <= '1';
         timer_enable   <= '1';
-        timer_reset    <= '0';
+        --timer_reset    <= '0'; -- DUNNO IF I NEED THIS.. PROBABLY NOT
+        timeout_type := '1';
       elsif (ability_collided = '1' and cur_ability = LIFE) then
         if (lives /= 7) then
           lives := lives + 1;
         end if;
       elsif (ability_collided = '1' and cur_ability = MONEY) then
         v_money := v_money + 1;
+      elsif (ability_collided = '1' and cur_ability = FAST) then
+        cur_speed_state <= FAST;
+        timer_init_val  <= "10100";
+        timer_reset     <= '1';
+        timer_enable    <= '1';
+        timeout_type := '0';
+      elsif (ability_collided = '1' and cur_ability = SLOW) then
+        cur_speed_state <= SLOW;
+        timer_init_val  <= "10100";
+        timer_reset     <= '1';
+        timer_enable    <= '1';
+        timeout_type := '0';
       else
         timer_reset <= '0';
       end if;
     end if;
 
-    bird_state <= std_logic_vector(to_unsigned(player_states'pos(cur_bird_state), 3));
-    money_out  <= v_money;
+    bird_state  <= std_logic_vector(to_unsigned(player_states'pos(cur_bird_state), 3));
+    speed_state <= std_logic_vector(to_unsigned(speed_states'pos(cur_speed_state), 3));
+    money_out   <= v_money;
     ------------------
     -- BIRD FSM END --
     ------------------
@@ -114,12 +135,12 @@ begin
           reset_out      <= '1';
           bird_reset     <= '1';
         end if;
-      elsif (cur_game_state = PAUSED and mouse = '0' and hold = '0') then
+      elsif (cur_game_state = PAUSED and mouse = '1' and hold = '0') then
         cur_game_state <= PLAY;
         hold := '1';
       elsif (obst_collided = '1' and cur_game_state = PLAY) then
         cur_game_state <= COLLIDE;
-      elsif (mouse = '0' and hold = '0' and cur_game_state = COLLIDE) then
+      elsif (mouse = '1' and hold = '0' and cur_game_state = COLLIDE) then
         cur_game_state <= PLAY;
         bird_reset     <= '1';
         lives := lives - 1;
@@ -130,7 +151,7 @@ begin
         bird_reset <= '0';
       end if;
 
-      if (mouse = '1') then
+      if (mouse = '0') then
         hold := '0';
       end if;
     end if;

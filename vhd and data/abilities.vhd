@@ -13,6 +13,7 @@ entity abilities is
     pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     collided                : in std_logic;
     bird_state              : in std_logic_vector(2 downto 0);
+    speed_state             : in std_logic_vector(2 downto 0);
     item_type               : out std_logic_vector(2 downto 0);
     rgb_out                 : out std_logic_vector(11 downto 0);
     ability_on              : out std_logic
@@ -39,7 +40,8 @@ architecture beh of abilities is
 
   signal sprite_on : std_logic;
 
-  signal cur_bird_state : player_states;
+  signal cur_bird_state  : player_states;
+  signal cur_speed_state : speed_states;
 
   component random_gen is
     port
@@ -60,8 +62,9 @@ architecture beh of abilities is
   end component;
 
 begin
-  item_type      <= std_logic_vector(to_unsigned(ability_types'pos(ability_type), 3));
-  cur_bird_state <= player_states'val(to_integer(unsigned(bird_state)));
+  item_type       <= std_logic_vector(to_unsigned(ability_types'pos(ability_type), 3));
+  cur_bird_state  <= player_states'val(to_integer(unsigned(bird_state)));
+  cur_speed_state <= speed_states'val(to_integer(unsigned(speed_state)));
 
   ability_draw <= '0' when collided = '1' else
     '1' when x_pos = std_logic_vector(to_unsigned(639, 11));
@@ -85,34 +88,25 @@ begin
     elsif rising_edge(vsync) then
       case ability_type is
         when MONEY =>
-          start_anim := '1';
 
-          if (start_anim = '1') then
-            if (prev_ability /= ability_type) then
-              frame <= std_logic_vector(to_unsigned(0, 4));
-            elsif (frame_count >= 8) then
-              if (frame <= 4) then
-                frame     <= frame + 1;
-              else
-                frame <= std_logic_vector(to_unsigned(0, 4));
-              end if;
-              frame_count := 0;
+          if (prev_ability /= ability_type) then
+            frame <= std_logic_vector(to_unsigned(0, 4));
+          elsif (frame_count >= 8) then
+            if (frame <= 4) then
+              frame     <= frame + 1;
             else
-              frame_count := frame_count + 1;
+              frame <= std_logic_vector(to_unsigned(0, 4));
             end if;
+            frame_count := 0;
+          else
+            frame_count := frame_count + 1;
           end if;
-        when LIFE =>
-          frame <= std_logic_vector(to_unsigned(8, 4));
-          start_anim := '0';
-        when BIG =>
-          frame <= std_logic_vector(to_unsigned(9, 4));
-          start_anim := '0';
-        when SMALL =>
-          frame <= std_logic_vector(to_unsigned(10, 4));
-          start_anim := '0';
-        when others =>
-          frame <= std_logic_vector(to_unsigned(0, 4));
-          start_anim := '0';
+        when LIFE   => frame   <= std_logic_vector(to_unsigned(8, 4));
+        when BIG    => frame    <= std_logic_vector(to_unsigned(9, 4));
+        when SMALL  => frame  <= std_logic_vector(to_unsigned(10, 4));
+        when SLOW   => frame   <= std_logic_vector(to_unsigned(11, 4));
+        when FAST   => frame   <= std_logic_vector(to_unsigned(12, 4));
+        when others => frame <= std_logic_vector(to_unsigned(13, 4));
       end case;
       x_pos <= x_pos - to_integer(unsigned(speed));
 
@@ -129,11 +123,15 @@ begin
 
         -- Random Ability
         abs_random := abs(random_num);
-        if (abs_random < 39 and abs_random >= 26) then
+        if (abs_random < 25 and abs_random >= 20) then
           ability_type <= LIFE;
-        elsif (abs_random < 26 and abs_random >= 13 and cur_bird_state = NORMAL) then
+        elsif (abs_random < 20 and abs_random >= 15 and cur_speed_state = NORMAL) then
+          ability_type <= SLOW;
+        elsif (abs_random < 15 and abs_random >= 10 and cur_speed_state = NORMAL) then
+          ability_type <= FAST;
+        elsif (abs_random < 10 and abs_random >= 5 and cur_bird_state = NORMAL) then
           ability_type <= BIG;
-        elsif (abs_random < 13 and abs_random >= 0 and cur_bird_state = NORMAL) then
+        elsif (abs_random < 5 and abs_random >= 0 and cur_bird_state = NORMAL) then
           ability_type <= SMALL;
         else
           ability_type <= MONEY;

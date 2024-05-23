@@ -92,6 +92,7 @@ begin
     variable flap            : std_logic;
     variable v_bird_scale    : integer range 0 to 1;
     variable prev_game_state : game_states;
+    variable clicked         : std_logic := '0';
   begin
     -- Move ball once every vertical sync
     if (reset = '1') then
@@ -109,9 +110,12 @@ begin
           end if;
         end if;
 
-        if (mouse = '1' and hold = '0') then
-          hold := '1';
-          flap := '1';
+        if (mouse = '1' and clicked = '0') then
+          clicked := '1';
+        elsif (mouse = '0' and hold = '0' and clicked = '1') then
+          hold    := '1';
+          flap    := '1';
+          clicked := '0';
           if (bird_scale <= 2) then
             v_bird_scale := 0;
           else
