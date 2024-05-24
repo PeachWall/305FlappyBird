@@ -34,15 +34,15 @@ architecture beh of abilities is
 
   signal ability_draw : std_logic;
 
-  signal frame                  : std_logic_vector(3 downto 0);
-  signal sprite_row, sprite_col : std_logic_vector(3 downto 0);
-  signal argb                   : std_logic_vector(12 downto 0);
+  signal frame : std_logic_vector(3 downto 0);
+  signal argb  : std_logic_vector(12 downto 0);
 
   signal sprite_on : std_logic;
 
   signal cur_bird_state  : player_states;
   signal cur_speed_state : speed_states;
 
+  signal sprite_row, sprite_col : std_logic_vector(10 downto 0);
   component random_gen is
     port
     (
@@ -143,27 +143,10 @@ begin
     y_pos <= v_y_pos;
 
   end process;
-
   -- Get the pixel coordinates in terms of the row and column address
-  SPRITE : process (vsync, sprite_on, pixel_column, pixel_row)
-    variable col_d  : unsigned(10 downto 0) := (others => '0');
-    variable row_d  : unsigned(9 downto 0)  := (others => '0');
-    variable temp_c : unsigned(10 downto 0) := (others => '0');
-    variable temp_r : unsigned(9 downto 0)  := (others => '0');
-  begin
-    if (sprite_on = '1') then
-      temp_c := unsigned(pixel_column - x_pos); -- Gets the pixels from 0 - size
-      temp_r := unsigned(pixel_row - y_pos);
-    else
-      temp_c := (others => '0');
-      temp_r := (others => '0');
-    end if;
-    col_d := temp_c / scale;
-    row_d := temp_r / scale;
+  sprite_row <= '0' & pixel_row - y_pos;
+  sprite_col <= '0' & pixel_column - x_pos;
 
-    sprite_row <= std_logic_vector(row_d(3 downto 0));
-    sprite_col <= std_logic_vector(col_d(3 downto 0));
-  end process;
   RNG : random_gen
   port map
   (
@@ -178,8 +161,8 @@ begin
   map(
   clock        => clock,
   frame        => frame,
-  row          => sprite_row,
-  col          => sprite_col,
+  row          => sprite_row(4 downto 1),
+  col          => sprite_col(4 downto 1),
   pixel_output => argb
   );
 end architecture;

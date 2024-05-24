@@ -15,6 +15,7 @@ entity fsm is
     ability_collided : in std_logic;
     ability_type     : in std_logic_vector(2 downto 0);
     mouse            : in std_logic;
+    right_click      : in std_logic;
     bird_state       : out std_logic_vector(2 downto 0);
     speed_state      : out std_logic_vector(2 downto 0);
     game_state       : out std_logic_vector(2 downto 0);
@@ -67,11 +68,11 @@ begin
     --------------------
 
     if (timer_timout = '1') then
-      timer_enable <= '0';
+      timer_enable    <= '0';
+      cur_speed_state <= NORMAL;
       if ((cur_bird_state = BIG or cur_bird_state = SMALL)) then
-        cur_bird_state  <= NORMAL;
-        cur_speed_state <= NORMAL;
-        timer_reset     <= '1';
+        cur_bird_state <= NORMAL;
+        timer_reset    <= '1';
       end if;
     elsif (rising_edge(clk)) then
       if (bird_reset = '1') then
@@ -133,17 +134,17 @@ begin
         cur_game_state <= PLAY;
         hold := '1';
       elsif (obst_collided = '1' and cur_game_state = PLAY) then
-        cur_game_state <= COLLIDE;
-      elsif (mouse = '1' and hold = '0' and cur_game_state = COLLIDE) then
         if (lives = 0) then
           cur_game_state <= FINISH;
         else
-          cur_game_state <= PLAY;
-          bird_reset     <= '1';
-          lives := lives - 1;
-          hold  := '1';
-          reset_out <= '1';
+          cur_game_state <= COLLIDE;
         end if;
+      elsif (mouse = '1' and hold = '0' and cur_game_state = COLLIDE) then
+        cur_game_state <= PLAY;
+        bird_reset     <= '1';
+        lives := lives - 1;
+        hold  := '1';
+        reset_out <= '1';
       elsif (mouse = '1' and hold = '0' and cur_game_state = FINISH) then
         cur_game_state <= MENU;
       else
