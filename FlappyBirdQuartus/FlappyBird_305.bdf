@@ -258,6 +258,22 @@ refer to the applicable agreement for further details.
 	(annotation_block (location)(rect 56 864 112 888))
 )
 (pin
+	(output)
+	(rect 248 536 425 552)
+	(text "OUTPUT" (rect 1 0 58 15)(font "Arial" (font_size 6)))
+	(text "LEDR[2..0]" (rect 90 0 171 16)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
 	(bidir)
 	(rect 72 264 248 280)
 	(text "BIDIR" (rect 1 0 38 15)(font "Arial" (font_size 6)))
@@ -2054,12 +2070,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "game_state[2..0]" (rect 129 528 213 546)(font "Intel Clear" (font_size 5)))
-	(pt 96 544)
-	(pt 184 544)
-	(bus)
-)
-(connector
 	(text "collided" (rect -363 552 -321 570)(font "Intel Clear" (font_size 5)))
 	(pt -320 560)
 	(pt -136 560)
@@ -2517,6 +2527,17 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 1200 624)
 	(pt 1280 624)
+	(bus)
+)
+(connector
+	(pt 248 544)
+	(pt 248 536)
+	(bus)
+)
+(connector
+	(text "game_state[2..0]" (rect 129 528 213 546)(font "Intel Clear" (font_size 5)))
+	(pt 96 544)
+	(pt 248 544)
 	(bus)
 )
 (junction (pt 704 -136))
