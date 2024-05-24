@@ -133,17 +133,17 @@ begin
         cur_game_state <= PLAY;
         hold := '1';
       elsif (obst_collided = '1' and cur_game_state = PLAY) then
+        cur_game_state <= COLLIDE;
+      elsif (mouse = '1' and hold = '0' and cur_game_state = COLLIDE) then
         if (lives = 0) then
           cur_game_state <= FINISH;
         else
-          cur_game_state <= COLLIDE;
+          cur_game_state <= PLAY;
+          bird_reset     <= '1';
+          lives := lives - 1;
+          hold  := '1';
+          reset_out <= '1';
         end if;
-      elsif (mouse = '1' and hold = '0' and cur_game_state = COLLIDE) then
-        cur_game_state <= PLAY;
-        bird_reset     <= '1';
-        lives := lives - 1;
-        hold  := '1';
-        reset_out <= '1';
       elsif (mouse = '1' and hold = '0' and cur_game_state = FINISH) then
         cur_game_state <= MENU;
       else

@@ -68,7 +68,8 @@ begin
   rom_address_big <= char_add when empty_space = '0' else
     "100000";
 
-  rom_address_small <= char_add2 when empty_space2 = '0' else
+  rom_address_small <=
+    char_add2 when empty_space2 = '0' else
     char_add3 when empty_space3 = '0' else
     "100000";
 
@@ -134,7 +135,7 @@ begin
   -- TODO: ADD s_small_text_on to menu on when cur_game_state = MENU
   -- FOR SOME REASON WHEN ADDING s_small_text_on IT MAKES THE WHOLE SCREEN BLACK
   -- PLS FIX
-  menu_on <= (s_big_text_on) when cur_game_state = MENU else
+  menu_on <= (s_small_text_on or s_big_text_on) when cur_game_state = MENU else
     '1' when cur_game_state = FINISH else
     (s_big_text_on) when cur_game_state = COLLIDE else
     '0';
