@@ -122,8 +122,12 @@ begin
 
   collided_state <= '0' when (cur_game_state = PLAY) else
     '1';
-  menu_on      <= (s_text_on or s_text_on2 or s_text_on3) and collided_state;
-  menu_rgb_out <= r & g & b;
+  menu_on <= (s_text_on or s_text_on2 or s_text_on3) when cur_game_state = FINISH else
+    '1' when cur_game_state = FINISH else
+    (s_text_on) when cur_game_state = COLLIDE else
+    '0' when cur_game_state = PAUSED;
+  menu_rgb_out <= r & g & b when cur_game_state = MENU else
+    "000000000000" when cur_game_state = FINISH;
 
   text_SCORE : char_rom
   port map

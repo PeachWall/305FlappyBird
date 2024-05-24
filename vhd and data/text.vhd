@@ -86,7 +86,11 @@ architecture beh of text is
   constant sprite_x : integer := text_start3 - char_width_small - sprite_size + 2;
   constant sprite_y : integer := 40;
   signal argb       : std_logic_vector(12 downto 0);
+
+  signal cur_game_state : game_states;
 begin
+
+  cur_game_state <= game_states'val(to_integer(unsigned(game_state)));
 
   -- INTEGERS FOR SCORE
   score_ones     <= to_integer(unsigned(score)) mod 10;
@@ -182,8 +186,9 @@ begin
     '0';
 
   -- text_on      <= s_text_on or (s_text_on2 and timer_on) or black_line or s_text_on3; -- or s_text_on2
-  s_text_on    <= text_big_out or text_small_out;
-  text_on      <= s_text_on or black_line or ((egg_on or coin_on) and argb(12));
+  s_text_on <= text_big_out or text_small_out or ((egg_on or coin_on) and argb(12));
+  text_on   <= s_text_on or black_line when cur_game_state = PLAY or cur_game_state = COLLIDE or cur_game_state = PAUSED else
+    '0' or black_line;
   text_rgb_out <= argb(11 downto 0) when (egg_on = '1' or coin_on = '1') else
     r & g & b;
 

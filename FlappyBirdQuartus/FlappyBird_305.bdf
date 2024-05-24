@@ -890,140 +890,6 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 984 560 1208 864)
-	(text "display_controller" (rect 5 0 135 16)(font "Arial" ))
-	(text "inst1" (rect 8 288 43 304)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "bg_rgb[11..0]" (rect 0 0 100 16)(font "Arial" ))
-		(text "bg_rgb[11..0]" (rect 21 27 121 43)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "bird_rgb[11..0]" (rect 0 0 109 16)(font "Arial" ))
-		(text "bird_rgb[11..0]" (rect 21 43 130 59)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "bird_on" (rect 0 0 56 16)(font "Arial" ))
-		(text "bird_on" (rect 21 59 77 75)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "pipe_rgb[11..0]" (rect 0 0 113 16)(font "Arial" ))
-		(text "pipe_rgb[11..0]" (rect 21 75 134 91)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "pipe_on" (rect 0 0 60 16)(font "Arial" ))
-		(text "pipe_on" (rect 21 91 81 107)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "floor_rgb[11..0]" (rect 0 0 114 16)(font "Arial" ))
-		(text "floor_rgb[11..0]" (rect 21 107 135 123)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112)(line_width 3))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "floor_on" (rect 0 0 61 16)(font "Arial" ))
-		(text "floor_on" (rect 21 123 82 139)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128))
-	)
-	(port
-		(pt 0 144)
-		(input)
-		(text "text_rgb[11..0]" (rect 0 0 107 16)(font "Arial" ))
-		(text "text_rgb[11..0]" (rect 21 139 128 155)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144)(line_width 3))
-	)
-	(port
-		(pt 0 160)
-		(input)
-		(text "text_on" (rect 0 0 54 16)(font "Arial" ))
-		(text "text_on" (rect 21 155 75 171)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160))
-	)
-	(port
-		(pt 0 176)
-		(input)
-		(text "cloud_rgb[11..0]" (rect 0 0 121 16)(font "Arial" ))
-		(text "cloud_rgb[11..0]" (rect 21 171 142 187)(font "Arial" ))
-		(line (pt 0 176)(pt 16 176)(line_width 3))
-	)
-	(port
-		(pt 0 192)
-		(input)
-		(text "cloud_on" (rect 0 0 68 16)(font "Arial" ))
-		(text "cloud_on" (rect 21 187 89 203)(font "Arial" ))
-		(line (pt 0 192)(pt 16 192))
-	)
-	(port
-		(pt 0 208)
-		(input)
-		(text "ability_rgb[11..0]" (rect 0 0 123 16)(font "Arial" ))
-		(text "ability_rgb[11..0]" (rect 21 203 144 219)(font "Arial" ))
-		(line (pt 0 208)(pt 16 208)(line_width 3))
-	)
-	(port
-		(pt 0 224)
-		(input)
-		(text "ability_on" (rect 0 0 70 16)(font "Arial" ))
-		(text "ability_on" (rect 21 219 91 235)(font "Arial" ))
-		(line (pt 0 224)(pt 16 224))
-	)
-	(port
-		(pt 0 240)
-		(input)
-		(text "menu_rgb[11..0]" (rect 0 0 122 16)(font "Arial" ))
-		(text "menu_rgb[11..0]" (rect 21 235 143 251)(font "Arial" ))
-		(line (pt 0 240)(pt 16 240)(line_width 3))
-	)
-	(port
-		(pt 0 256)
-		(input)
-		(text "menu_on" (rect 0 0 69 16)(font "Arial" ))
-		(text "menu_on" (rect 21 251 90 267)(font "Arial" ))
-		(line (pt 0 256)(pt 16 256))
-	)
-	(port
-		(pt 224 32)
-		(output)
-		(text "red_out[3..0]" (rect 0 0 95 16)(font "Arial" ))
-		(text "red_out[3..0]" (rect 123 27 218 43)(font "Arial" ))
-		(line (pt 224 32)(pt 208 32)(line_width 3))
-	)
-	(port
-		(pt 224 48)
-		(output)
-		(text "green_out[3..0]" (rect 0 0 114 16)(font "Arial" ))
-		(text "green_out[3..0]" (rect 107 43 221 59)(font "Arial" ))
-		(line (pt 224 48)(pt 208 48)(line_width 3))
-	)
-	(port
-		(pt 224 64)
-		(output)
-		(text "blue_out[3..0]" (rect 0 0 102 16)(font "Arial" ))
-		(text "blue_out[3..0]" (rect 117 59 219 75)(font "Arial" ))
-		(line (pt 224 64)(pt 208 64)(line_width 3))
-	)
-	(drawing
-		(rectangle (rect 16 16 208 288))
-	)
-)
-(symbol
 	(rect 448 1496 704 1640)
 	(text "menus" (rect 5 0 54 16)(font "Arial" ))
 	(text "inst19" (rect 8 128 52 144)(font "Arial" ))
@@ -1547,6 +1413,140 @@ refer to the applicable agreement for further details.
 		(rectangle (rect 16 16 216 192))
 	)
 )
+(symbol
+	(rect 976 560 1200 864)
+	(text "display_controller" (rect 5 0 135 16)(font "Arial" ))
+	(text "inst1" (rect 8 288 43 304)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "bg_rgb[11..0]" (rect 0 0 100 16)(font "Arial" ))
+		(text "bg_rgb[11..0]" (rect 21 27 121 43)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "bird_rgb[11..0]" (rect 0 0 109 16)(font "Arial" ))
+		(text "bird_rgb[11..0]" (rect 21 43 130 59)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "bird_on" (rect 0 0 56 16)(font "Arial" ))
+		(text "bird_on" (rect 21 59 77 75)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "pipe_rgb[11..0]" (rect 0 0 113 16)(font "Arial" ))
+		(text "pipe_rgb[11..0]" (rect 21 75 134 91)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "pipe_on" (rect 0 0 60 16)(font "Arial" ))
+		(text "pipe_on" (rect 21 91 81 107)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "floor_rgb[11..0]" (rect 0 0 114 16)(font "Arial" ))
+		(text "floor_rgb[11..0]" (rect 21 107 135 123)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "floor_on" (rect 0 0 61 16)(font "Arial" ))
+		(text "floor_on" (rect 21 123 82 139)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "text_rgb[11..0]" (rect 0 0 107 16)(font "Arial" ))
+		(text "text_rgb[11..0]" (rect 21 139 128 155)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "text_on" (rect 0 0 54 16)(font "Arial" ))
+		(text "text_on" (rect 21 155 75 171)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "cloud_rgb[11..0]" (rect 0 0 121 16)(font "Arial" ))
+		(text "cloud_rgb[11..0]" (rect 21 171 142 187)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 3))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "cloud_on" (rect 0 0 68 16)(font "Arial" ))
+		(text "cloud_on" (rect 21 187 89 203)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "ability_rgb[11..0]" (rect 0 0 123 16)(font "Arial" ))
+		(text "ability_rgb[11..0]" (rect 21 203 144 219)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208)(line_width 3))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "ability_on" (rect 0 0 70 16)(font "Arial" ))
+		(text "ability_on" (rect 21 219 91 235)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224))
+	)
+	(port
+		(pt 0 240)
+		(input)
+		(text "menu_rgb[11..0]" (rect 0 0 122 16)(font "Arial" ))
+		(text "menu_rgb[11..0]" (rect 21 235 143 251)(font "Arial" ))
+		(line (pt 0 240)(pt 16 240)(line_width 3))
+	)
+	(port
+		(pt 0 256)
+		(input)
+		(text "menu_on" (rect 0 0 69 16)(font "Arial" ))
+		(text "menu_on" (rect 21 251 90 267)(font "Arial" ))
+		(line (pt 0 256)(pt 16 256))
+	)
+	(port
+		(pt 224 32)
+		(output)
+		(text "red_out[3..0]" (rect 0 0 95 16)(font "Arial" ))
+		(text "red_out[3..0]" (rect 123 27 203 43)(font "Arial" ))
+		(line (pt 224 32)(pt 208 32)(line_width 3))
+	)
+	(port
+		(pt 224 48)
+		(output)
+		(text "green_out[3..0]" (rect 0 0 114 16)(font "Arial" ))
+		(text "green_out[3..0]" (rect 107 43 203 59)(font "Arial" ))
+		(line (pt 224 48)(pt 208 48)(line_width 3))
+	)
+	(port
+		(pt 224 64)
+		(output)
+		(text "blue_out[3..0]" (rect 0 0 102 16)(font "Arial" ))
+		(text "blue_out[3..0]" (rect 117 59 203 75)(font "Arial" ))
+		(line (pt 224 64)(pt 208 64)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 208 288))
+	)
+)
 (connector
 	(pt 680 -136)
 	(pt 704 -136)
@@ -1683,21 +1683,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1280 592)
-	(pt 1208 592)
-	(bus)
-)
-(connector
-	(pt 1280 608)
-	(pt 1208 608)
-	(bus)
-)
-(connector
-	(pt 1280 624)
-	(pt 1208 624)
-	(bus)
-)
-(connector
 	(pt 56 416)
 	(pt 72 416)
 	(bus)
@@ -1734,16 +1719,6 @@ refer to the applicable agreement for further details.
 	(pt -136 544)
 )
 (connector
-	(pt 984 640)
-	(pt 760 640)
-	(bus)
-)
-(connector
-	(text "pipe_on" (rect 751 656 793 674)(font "Intel Clear" (font_size 5)))
-	(pt 744 656)
-	(pt 984 656)
-)
-(connector
 	(pt -400 968)
 	(pt -400 960)
 )
@@ -1773,41 +1748,13 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 800 352)
-	(pt 800 608)
-	(bus)
-)
-(connector
-	(pt 984 608)
-	(pt 800 608)
-	(bus)
-)
-(connector
-	(pt 984 624)
-	(pt 776 624)
-)
-(connector
-	(pt 776 368)
-	(pt 776 624)
-)
-(connector
 	(text "bird_on" (rect 711 352 752 370)(font "Intel Clear" (font_size 5)))
 	(pt 688 368)
 	(pt 776 368)
 )
 (connector
-	(pt 984 592)
-	(pt 816 592)
-	(bus)
-)
-(connector
 	(pt 816 248)
 	(pt 688 248)
-	(bus)
-)
-(connector
-	(pt 816 592)
-	(pt 816 248)
 	(bus)
 )
 (connector
@@ -1966,80 +1913,17 @@ refer to the applicable agreement for further details.
 	(pt 352 368)
 )
 (connector
-	(pt 984 672)
-	(pt 768 672)
-	(bus)
-)
-(connector
-	(pt 984 688)
-	(pt 784 688)
-)
-(connector
-	(pt 984 736)
-	(pt 832 736)
-	(bus)
-)
-(connector
-	(pt 832 736)
-	(pt 832 1160)
-	(bus)
-)
-(connector
 	(pt 704 1160)
 	(pt 832 1160)
 	(bus)
-)
-(connector
-	(pt 984 752)
-	(pt 840 752)
-)
-(connector
-	(pt 840 752)
-	(pt 840 1176)
 )
 (connector
 	(pt 704 1176)
 	(pt 840 1176)
 )
 (connector
-	(pt 984 704)
-	(pt 808 704)
-	(bus)
-)
-(connector
-	(pt 984 720)
-	(pt 816 720)
-)
-(connector
-	(pt 984 768)
-	(pt 864 768)
-	(bus)
-)
-(connector
-	(pt 984 784)
-	(pt 872 784)
-)
-(connector
-	(pt 984 800)
-	(pt 888 800)
-	(bus)
-)
-(connector
-	(pt 984 816)
-	(pt 904 816)
-)
-(connector
 	(pt 744 584)
 	(pt 688 584)
-)
-(connector
-	(pt 744 656)
-	(pt 744 584)
-)
-(connector
-	(pt 760 640)
-	(pt 760 568)
-	(bus)
 )
 (connector
 	(pt 760 568)
@@ -2127,15 +2011,6 @@ refer to the applicable agreement for further details.
 	(pt 864 1328)
 	(pt 680 1328)
 	(bus)
-)
-(connector
-	(pt 864 768)
-	(pt 864 1328)
-	(bus)
-)
-(connector
-	(pt 872 784)
-	(pt 872 1344)
 )
 (connector
 	(text "ability_on" (rect 728 1352 778 1370)(font "Intel Clear" (font_size 5)))
@@ -2285,15 +2160,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 768 672)
-	(pt 768 776)
-	(bus)
-)
-(connector
-	(pt 784 688)
-	(pt 784 792)
-)
-(connector
 	(text "floor_on" (rect 703 792 749 810)(font "Intel Clear" (font_size 5)))
 	(pt 680 792)
 	(pt 784 792)
@@ -2420,17 +2286,8 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 808 704)
-	(pt 808 952)
-	(bus)
-)
-(connector
 	(pt 816 968)
 	(pt 688 968)
-)
-(connector
-	(pt 816 720)
-	(pt 816 968)
 )
 (connector
 	(text "points[9..0]" (rect -128 1016 -69 1034)(font "Intel Clear" (font_size 5)))
@@ -2468,17 +2325,8 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 888 800)
-	(pt 888 1528)
-	(bus)
-)
-(connector
 	(pt 904 1544)
 	(pt 704 1544)
-)
-(connector
-	(pt 904 816)
-	(pt 904 1544)
 )
 (connector
 	(text "game_state[3..0]" (rect 384 1576 468 1594)(font "Intel Clear" (font_size 5)))
@@ -2518,6 +2366,158 @@ refer to the applicable agreement for further details.
 	(text "left_mouse" (rect 158 384 217 402)(font "Intel Clear" (font_size 5)))
 	(pt 64 400)
 	(pt 440 400)
+)
+(connector
+	(pt 760 640)
+	(pt 976 640)
+	(bus)
+)
+(connector
+	(text "pipe_on" (rect 743 656 785 674)(font "Intel Clear" (font_size 5)))
+	(pt 744 656)
+	(pt 976 656)
+)
+(connector
+	(pt 800 352)
+	(pt 800 608)
+	(bus)
+)
+(connector
+	(pt 800 608)
+	(pt 976 608)
+	(bus)
+)
+(connector
+	(pt 776 624)
+	(pt 976 624)
+)
+(connector
+	(pt 776 368)
+	(pt 776 624)
+)
+(connector
+	(pt 816 592)
+	(pt 976 592)
+	(bus)
+)
+(connector
+	(pt 816 248)
+	(pt 816 592)
+	(bus)
+)
+(connector
+	(pt 768 672)
+	(pt 976 672)
+	(bus)
+)
+(connector
+	(pt 784 688)
+	(pt 976 688)
+)
+(connector
+	(pt 832 736)
+	(pt 976 736)
+	(bus)
+)
+(connector
+	(pt 832 1160)
+	(pt 832 736)
+	(bus)
+)
+(connector
+	(pt 840 752)
+	(pt 976 752)
+)
+(connector
+	(pt 840 1176)
+	(pt 840 752)
+)
+(connector
+	(pt 808 704)
+	(pt 976 704)
+	(bus)
+)
+(connector
+	(pt 816 720)
+	(pt 976 720)
+)
+(connector
+	(pt 864 768)
+	(pt 976 768)
+	(bus)
+)
+(connector
+	(pt 872 784)
+	(pt 976 784)
+)
+(connector
+	(pt 888 800)
+	(pt 976 800)
+	(bus)
+)
+(connector
+	(pt 904 816)
+	(pt 976 816)
+)
+(connector
+	(pt 744 584)
+	(pt 744 656)
+)
+(connector
+	(pt 760 568)
+	(pt 760 640)
+	(bus)
+)
+(connector
+	(pt 864 1328)
+	(pt 864 768)
+	(bus)
+)
+(connector
+	(pt 872 1344)
+	(pt 872 784)
+)
+(connector
+	(pt 768 776)
+	(pt 768 672)
+	(bus)
+)
+(connector
+	(pt 784 792)
+	(pt 784 688)
+)
+(connector
+	(pt 808 952)
+	(pt 808 704)
+	(bus)
+)
+(connector
+	(pt 816 968)
+	(pt 816 720)
+)
+(connector
+	(pt 888 1528)
+	(pt 888 800)
+	(bus)
+)
+(connector
+	(pt 904 1544)
+	(pt 904 816)
+)
+(connector
+	(pt 1200 592)
+	(pt 1280 592)
+	(bus)
+)
+(connector
+	(pt 1200 608)
+	(pt 1280 608)
+	(bus)
+)
+(connector
+	(pt 1200 624)
+	(pt 1280 624)
+	(bus)
 )
 (junction (pt 704 -136))
 (junction (pt 1544 576))
