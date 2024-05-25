@@ -45,17 +45,25 @@ architecture beh of menus is
   constant text_start     : integer := 191; -- welcom begins from pixel row 119
   constant char_width_big : integer := 16; -- width and height of each pixel (24 x 24 because of font_row and font_col)
 
-  signal s_small_text_on : std_logic;
   signal char_add2       : std_logic_vector(5 downto 0);
+  signal s_small_text_on : std_logic;
   signal empty_space2    : std_logic;
 
   signal black_line         : std_logic;
-  constant text_start2      : integer := 31; -- MUST BE A MULTIPLE OF THE CHAR WIDTH -1
+  constant text_start2      : integer := 271; -- MUST BE A MULTIPLE OF THE CHAR WIDTH -1
   constant char_width_small : integer := 8; -- width and height of each pixel (8 x 8 because of font_row and font_col)
 
   signal char_add3     : std_logic_vector(5 downto 0);
   signal empty_space3  : std_logic;
-  constant text_start3 : integer := 279;
+  constant text_start3 : integer := 271;
+
+  signal char_add4     : std_logic_vector(5 downto 0);
+  signal empty_space4  : std_logic;
+  constant text_start4 : integer := 271;
+
+  signal char_add5     : std_logic_vector(5 downto 0);
+  signal empty_space5  : std_logic;
+  constant text_start5 : integer := 271;
 
   signal s_text_on_rgb  : std_logic_vector(3 downto 0);
   signal cur_game_state : game_states;
@@ -73,11 +81,15 @@ begin
   cur_game_state <= game_states'val(to_integer(unsigned(game_state)));
   -- multiple of 16                                 -16 from other number
   -- WORD STARTS AT COL 254 AND ENDS AT COL 380 AND HAS A HEIGHT OF 16 PIXELS BETWEEN ROW 208 AND 222     MAYBE 350 ??
-  empty_space <= '1' when ((pixel_column <= std_logic_vector(to_unsigned((text_start - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(479, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(304, 10)) or pixel_row < std_logic_vector(to_unsigned(288, 10))))) else
+  empty_space <= '1' when ((pixel_column <= std_logic_vector(to_unsigned((text_start - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(479, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(272, 10)) or pixel_row < std_logic_vector(to_unsigned(256, 10))))) else
   '0';
-  empty_space2 <= '1' when (pixel_column <= std_logic_vector(to_unsigned(text_start2 - char_width_small, 10)) or pixel_column >= std_logic_vector(to_unsigned(111, 10))) or (pixel_row >= std_logic_vector(to_unsigned(400, 10)) or pixel_row < std_logic_vector(to_unsigned(392, 10))) else
+  empty_space2 <= '1' when (pixel_column <= std_logic_vector(to_unsigned(text_start2 - char_width_small, 10)) or pixel_column >= std_logic_vector(to_unsigned(351, 10))) or (pixel_row >= std_logic_vector(to_unsigned(304, 10)) or pixel_row < std_logic_vector(to_unsigned(296, 10))) else
   '0';
-  empty_space3 <= '1' when (pixel_column <= std_logic_vector(to_unsigned((text_start3 - char_width_small), 10)) or pixel_column >= std_logic_vector(to_unsigned(376, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(400, 10)) or pixel_row < std_logic_vector(to_unsigned(392, 10)))) else
+  empty_space3 <= '1' when (pixel_column <= std_logic_vector(to_unsigned((text_start3 - char_width_small), 10)) or pixel_column >= std_logic_vector(to_unsigned(368, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(296, 10)) or pixel_row < std_logic_vector(to_unsigned(288, 10)))) else
+  '0';
+  empty_space4 <= '1' when (pixel_column <= std_logic_vector(to_unsigned((text_start4 - char_width_small), 10)) or pixel_column >= std_logic_vector(to_unsigned(368, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(312, 10)) or pixel_row < std_logic_vector(to_unsigned(304, 10)))) else
+  '0';
+  empty_space5 <= '1' when (pixel_column <= std_logic_vector(to_unsigned((text_start5 - char_width_small), 10)) or pixel_column >= std_logic_vector(to_unsigned(368, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(320, 10)) or pixel_row < std_logic_vector(to_unsigned(312, 10)))) else
   '0';
 
   -- MUX TO CHOOSE THE ADDRESS
@@ -87,6 +99,8 @@ begin
   rom_address_small <=
   char_add2 when empty_space2 = '0' else
   char_add3 when empty_space3 = '0' else
+  char_add4 when empty_space4 = '0' else
+  char_add5 when empty_space5 = '0' else
   "100000";
 
   title_on <= '1' when pixel_column >= title_x_pos and pixel_column < title_x_pos + 256 and pixel_row >= title_y_pos and pixel_row < title_y_pos + 128 else
@@ -142,6 +156,38 @@ begin
   std_logic_vector(to_unsigned(9, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start3 + 80, 10)) else --"I"
   std_logic_vector(to_unsigned(14, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start3 + 88, 10)) else --"N"
   std_logic_vector(to_unsigned(7, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start3 + 96, 10)) else --"G"
+  "100000"; --std_logic_vector(to_unsigned(29,6)); --" ", IS A BLANK SPACE
+
+    char_add4                                              <=
+  std_logic_vector(to_unsigned(11, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start4, 10)) else --"K"
+  std_logic_vector(to_unsigned(5, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start4 + 8, 10)) else --"E"
+  std_logic_vector(to_unsigned(25, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start4 + 16, 10)) else --"Y"
+  std_logic_vector(to_unsigned(49, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start4 + 24, 10)) else --"2"
+  std_logic_vector(to_unsigned(45, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start4 + 32, 10)) else --"-"
+  std_logic_vector(to_unsigned(20, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start4 + 40, 10)) else --"T"
+  std_logic_vector(to_unsigned(18, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start4 + 48, 10)) else --"R"
+  std_logic_vector(to_unsigned(1, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start4 + 56, 10)) else --"A"
+  std_logic_vector(to_unsigned(9, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start4 + 64, 10)) else --"I"
+  std_logic_vector(to_unsigned(14, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start4 + 72, 10)) else --"N"
+  std_logic_vector(to_unsigned(9, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start4 + 80, 10)) else --"I"
+  std_logic_vector(to_unsigned(14, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start4 + 88, 10)) else --"N"
+  std_logic_vector(to_unsigned(7, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start4 + 96, 10)) else --"G"
+  "100000"; --std_logic_vector(to_unsigned(29,6)); --" ", IS A BLANK SPACE
+
+    char_add5                                              <=
+  std_logic_vector(to_unsigned(11, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start5, 10)) else --"K"
+  std_logic_vector(to_unsigned(5, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start5 + 8, 10)) else --"E"
+  std_logic_vector(to_unsigned(25, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start5 + 16, 10)) else --"Y"
+  std_logic_vector(to_unsigned(49, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start5 + 24, 10)) else --"3"
+  std_logic_vector(to_unsigned(45, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start5 + 32, 10)) else --"-"
+  std_logic_vector(to_unsigned(20, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start5 + 40, 10)) else --"T"
+  std_logic_vector(to_unsigned(18, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start5 + 48, 10)) else --"R"
+  std_logic_vector(to_unsigned(1, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start5 + 56, 10)) else --"A"
+  std_logic_vector(to_unsigned(9, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start5 + 64, 10)) else --"I"
+  std_logic_vector(to_unsigned(14, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start5 + 72, 10)) else --"N"
+  std_logic_vector(to_unsigned(9, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start5 + 80, 10)) else --"I"
+  std_logic_vector(to_unsigned(14, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start5 + 88, 10)) else --"N"
+  std_logic_vector(to_unsigned(7, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start5 + 96, 10)) else --"G"
   "100000"; --std_logic_vector(to_unsigned(29,6)); --" ", IS A BLANK SPACE
 
   -- BLACK LINE
