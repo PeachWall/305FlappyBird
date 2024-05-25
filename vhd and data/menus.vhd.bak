@@ -8,7 +8,6 @@ use work.util.all;
 entity menus is
   port
   (
-    signal lives                   : in std_logic_vector(2 downto 0);
     signal clk, vert_sync          : in std_logic;
     signal pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     signal game_state              : in std_logic_vector(3 downto 0);
@@ -42,9 +41,16 @@ architecture beh of menus is
   signal s_big_text_on    : std_logic;
   signal char_add         : std_logic_vector(5 downto 0);
   signal empty_space      : std_logic;
-  signal r, g, b, r_collided,g_collided,b_collided, r_finish, g_finish, b_finish   : std_logic_vector(3 downto 0);
+  signal r, g, b          : std_logic_vector(3 downto 0);
+  signal r_collided,g_collided,b_collided : std_logic_vector(3 downto 0);
   constant text_start     : integer := 191; -- welcom begins from pixel row 119
   constant char_width_big : integer := 16; -- width and height of each pixel (24 x 24 because of font_row and font_col)
+
+  signal s_try_again_on : std_logic;
+  signal char_add_try_again     : std_logic_vector(5 downto 0);
+  signal empty_space_try_again  : std_logic;
+  constant text_start_try_again    : integer := 191;
+ 
 
   signal char_add2       : std_logic_vector(5 downto 0);
   signal s_small_text_on : std_logic;
@@ -66,32 +72,15 @@ architecture beh of menus is
   signal empty_space5  : std_logic;
   constant text_start5 : integer := 271;
 
-  signal s_try_again_on : std_logic;
-  signal char_add_try_again     : std_logic_vector(5 downto 0);
-  signal empty_space_try_again  : std_logic;
-  constant text_start_try_again    : integer := 255;
-
-  signal s_lives_on : std_logic;
-  signal char_add_lives     : std_logic_vector(5 downto 0);
-  signal empty_space_lives  : std_logic;
-  constant text_start_lives    : integer := 175;
-
-  signal s_finish_on : std_logic;
-  signal char_add_game_over     : std_logic_vector(5 downto 0);
-  signal empty_space_game_over  : std_logic;
-  constant text_start_game_over    : integer := 255;
-
   signal s_text_on_rgb  : std_logic_vector(3 downto 0);
-  signal s_text_on_rgb_collide_state  : std_logic_vector(3 downto 0);
+  signal s_text_on_rgb_try_again  : std_logic_vector(3 downto 0);
   
-  signal cur_game_state : game_states;
-  signal collide_state : std_logic;
-  signal finish_state : std_logic;
+   signal cur_game_state : game_states;
+  signal collided_state : std_logic;
 
 
 
-
-  signal rom_address_big, rom_address_small, rom_address_collide_state, rom_address_finish_state : std_logic_vector(5 downto 0);
+  signal rom_address_big, rom_address_small : std_logic_vector(5 downto 0);
 
   signal title_row, title_col : std_logic_vector(9 downto 0);
   signal title_on             : std_logic;
@@ -103,7 +92,6 @@ begin
   cur_game_state <= game_states'val(to_integer(unsigned(game_state)));
   -- multiple of 16                                 -16 from other number
   -- WORD STARTS AT COL 254 AND ENDS AT COL 380 AND HAS A HEIGHT OF 16 PIXELS BETWEEN ROW 208 AND 222     MAYBE 350 ??
-
   empty_space <= '1' when ((pixel_column <= std_logic_vector(to_unsigned((text_start - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(479, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(272, 10)) or pixel_row < std_logic_vector(to_unsigned(256, 10))))) else
   '0';
   empty_space2 <= '1' when (pixel_column <= std_logic_vector(to_unsigned((text_start2 - char_width_small), 10)) or pixel_column >= std_logic_vector(to_unsigned(368, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(296, 10)) or pixel_row < std_logic_vector(to_unsigned(288, 10)))) else
@@ -115,24 +103,14 @@ begin
   empty_space5 <= '1' when (pixel_column <= std_logic_vector(to_unsigned((text_start5 - char_width_small), 10)) or pixel_column >= std_logic_vector(to_unsigned(335 , 10))) or ((pixel_row >= std_logic_vector(to_unsigned(320, 10)) or pixel_row < std_logic_vector(to_unsigned(312, 10)))) else
   '0';
 
-  empty_space_try_again <= '1' when ((pixel_column <= std_logic_vector(to_unsigned((text_start_try_again - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(383, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(272, 10)) or pixel_row < std_logic_vector(to_unsigned(256, 10))))) else
-  '0';
-  empty_space_lives <= '1' when ((pixel_column <= std_logic_vector(to_unsigned((text_start_lives - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(447, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(256, 10)) or pixel_row < std_logic_vector(to_unsigned(240, 10))))) else
-  '0';
-  empty_space_game_over <= '1' when ((pixel_column <= std_logic_vector(to_unsigned((text_start_game_over - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(383, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(256, 10)) or pixel_row < std_logic_vector(to_unsigned(240, 10))))) else
+  empty_space_try_again <= '1' when ((pixel_column <= std_logic_vector(to_unsigned((text_start_try_again - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(479, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(272, 10)) or pixel_row < std_logic_vector(to_unsigned(256, 10))))) else
   '0';
 
 
   -- MUX TO CHOOSE THE ADDRESS
   rom_address_big <= char_add when empty_space = '0' else
-                    --  char_add_try_again when empty_space_try_again = '0' else
-  "100000";
-
-  rom_address_collide_state <= char_add_try_again when empty_space_try_again = '0' else
-                           char_add_lives when empty_space_lives = '0' else
-  "100000";
-
-    rom_address_finish_state <= char_add_game_over when empty_space_game_over = '0' else
+                     char_add_try_again when empty_space_try_again = '0' else
+    
   "100000";
 
   rom_address_small <=
@@ -146,8 +124,8 @@ begin
   '0';
 
   -- MAIN MENU --
-  -- TODO: REALGIN THE DIFFICULTIES ON CENTER AND ADD EASY MEDIUM HARD. MAP IT TO A KEY.--------- done!!!!!!!
-  -- TODO: ADD MENU FOR COLLISION STATE. SHOW LIVES AND STUFF------------------------------- working on
+  -- TODO: REALGIN THE DIFFICULTIES ON CENTER AND ADD EASY MEDIUM HARD. MAP IT TO A KEY.
+  -- TODO: ADD MENU FOR COLLISION STATE. SHOW LIVES AND STUFF
   -- TODO: SHOW GAMEMOVER SCREEN on FINISH STATE. SHOW GAME OVER AND PRESS LEFT BUTTON TO GO BACK TO MENU
   char_add                                               <=
   std_logic_vector(to_unsigned(2, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start, 10)) else --"B"
@@ -227,85 +205,37 @@ begin
 
   -- COLLIDE STATE TEXT ------------------------------------------------------------------------------------------------------
 char_add_try_again                                               <=
-  std_logic_vector(to_unsigned(20, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_try_again, 10)) else --"T"
-  std_logic_vector(to_unsigned(18, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_try_again + 16, 10)) else --"R"
-  std_logic_vector(to_unsigned(25, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_try_again + 32, 10)) else --"Y"
-  std_logic_vector(to_unsigned(32, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_try_again + 48, 10)) else --" "
-  std_logic_vector(to_unsigned(1, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_try_again + 64, 10)) else --"A"
-  std_logic_vector(to_unsigned(7, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_try_again + 80, 10)) else --"G"
-  std_logic_vector(to_unsigned(1, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_try_again + 96, 10)) else --"A"
-  std_logic_vector(to_unsigned(9, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_try_again + 112, 10)) else --"I"
-  std_logic_vector(to_unsigned(14, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_try_again + 128, 10)) else --"N"
+  std_logic_vector(to_unsigned(2, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_try_again, 10)) else --"T"
+  std_logic_vector(to_unsigned(9, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_try_again + 16, 10)) else --"R"
+  std_logic_vector(to_unsigned(18, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_try_again + 32, 10)) else --"Y"
+  std_logic_vector(to_unsigned(4, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_try_again + 48, 10)) else --" "
+  std_logic_vector(to_unsigned(32, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_try_again + 64, 10)) else --"A"
+  std_logic_vector(to_unsigned(9, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_try_again + 80, 10)) else --"G"
+  std_logic_vector(to_unsigned(19, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_try_again + 96, 10)) else --"A"
+  std_logic_vector(to_unsigned(32, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_try_again + 112, 10)) else --"I"
+  std_logic_vector(to_unsigned(20, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_try_again + 128, 10)) else --"N"
   "100000"; --std_logic_vector(to_unsigned(29,6)); --" ", IS A BLANK SPACE
-
-  char_add_lives                                              <=
- std_logic_vector(to_unsigned(5, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_lives, 10)) else --"E"
-  std_logic_vector(to_unsigned(24, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_lives + 16, 10)) else --"X"
-  std_logic_vector(to_unsigned(20, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 32, 10)) else --"T"
-  std_logic_vector(to_unsigned(18, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_lives + 48, 10)) else --"R"
-  std_logic_vector(to_unsigned(1, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 64, 10)) else --"A"
-  std_logic_vector(to_unsigned(32, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 80, 10)) else --" "
-  std_logic_vector(to_unsigned(12, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 96, 10)) else --"L"
-  std_logic_vector(to_unsigned(9, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_lives + 112, 10)) else --"I"
-  std_logic_vector(to_unsigned(22, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 128, 10)) else --"V"
-  std_logic_vector(to_unsigned(5, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_lives + 144, 10)) else --"E"
-  std_logic_vector(to_unsigned(19, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 160, 10)) else --"S"
-  std_logic_vector(to_unsigned(32, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 176, 10)) else --" "
-  std_logic_vector(to_unsigned(12, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 192, 10)) else --"L"
-  std_logic_vector(to_unsigned(5, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_lives + 208, 10)) else --"E"
-  std_logic_vector(to_unsigned(6, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_lives + 224, 10)) else --"F"
-  std_logic_vector(to_unsigned(20, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 240, 10)) else --"T"
-  std_logic_vector(to_unsigned(58, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 256, 10)) else --":"
-  std_logic_vector(to_unsigned(48 + to_integer(unsigned(lives))-1, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 272, 10)) else --"0"
-  "100000"; --std_logic_vector(to_unsigned(29,6)); --" ", IS A BLANK SPACE
-
-    -- FINSIH STATE TEXT ----------------------------------------------------------------------------------------------------
-  char_add_game_over                                               <=
-  std_logic_vector(to_unsigned(7, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_game_over, 10)) else --"G"
-  std_logic_vector(to_unsigned(1, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_game_over + 16, 10)) else --"A"
-  std_logic_vector(to_unsigned(13, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_game_over + 32, 10)) else --"M"
-  std_logic_vector(to_unsigned(5, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_game_over + 48, 10)) else --"E"
-  std_logic_vector(to_unsigned(32, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_game_over + 64, 10)) else --" "
-  std_logic_vector(to_unsigned(15, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_game_over + 80, 10)) else --"O"
-  std_logic_vector(to_unsigned(22, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_game_over + 96, 10)) else --"V"
-  std_logic_vector(to_unsigned(5, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_game_over + 112, 10)) else --"E"
-  std_logic_vector(to_unsigned(18, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_game_over + 128, 10)) else --"R"
-  "100000"; --std_logic_vector(to_unsigned(29,6)); --" ", IS A BLANK SPACE
-
-  -- char_add_final_score                                               <=
-  -- std_logic_vector(to_unsigned(7, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_final_score, 10)) else --"G"
-  -- std_logic_vector(to_unsigned(1, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_final_score + 16, 10)) else --"A"
-  -- std_logic_vector(to_unsigned(13, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 32, 10)) else --"M"
-  -- std_logic_vector(to_unsigned(5, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_final_score + 48, 10)) else --"E"
-  -- std_logic_vector(to_unsigned(32, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 64, 10)) else --" "
-  -- std_logic_vector(to_unsigned(15, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_final_score + 80, 10)) else --"O"
-  -- std_logic_vector(to_unsigned(22, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 96, 10)) else --"V"
-  -- std_logic_vector(to_unsigned(5, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 112, 10)) else --"E"
-  -- std_logic_vector(to_unsigned(18, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 128, 10)) else --"R"
-  -- "100000"; --std_logic_vector(to_unsigned(29,6)); --" ", IS A BLANK SPACE
-
 
 
   s_text_on_rgb <= (s_big_text_on & s_big_text_on & s_big_text_on & s_big_text_on) or (s_small_text_on & s_small_text_on & s_small_text_on & s_small_text_on);
+
   r <= ((s_text_on_rgb or (black_line & black_line & black_line & black_line)) and "1111") or title_argb(11 downto 8);
   g <= ((s_text_on_rgb or (black_line & black_line & black_line & black_line)) and "1111") or title_argb(7 downto 4);
   b <= ((s_text_on_rgb or (black_line & black_line & black_line & black_line)) and "1111") or title_argb(3 downto 0);
 
-  s_text_on_rgb_collide_state <= (s_try_again_on & s_try_again_on & s_try_again_on & s_try_again_on) or  (s_lives_on & s_lives_on & s_lives_on & s_lives_on);
-  r_collided <= s_text_on_rgb_collide_state;
-  g_collided <= s_text_on_rgb_collide_state;
-  b_collided <= s_text_on_rgb_collide_state;
+  s_text_on_rgb_try_again <= (s_try_again_on & s_try_again_on & s_try_again_on & s_try_again_on);
+  r_collided <= s_text_on_rgb_try_again;
+  g_collided <= s_text_on_rgb_try_again;
+  b_collided <= s_text_on_rgb_try_again;
 
   menu_on <= (s_small_text_on or s_big_text_on or (title_on and title_argb(12))) when cur_game_state = MENU else
-  -- '1' when cur_game_state = FINISH else
-  s_finish_on when cur_game_state = FINISH else
-  s_try_again_on when cur_game_state = COLLIDE else
+  '1' when cur_game_state = FINISH else
+  (s_try_again_on) when cur_game_state = COLLIDE else
   '0';
 
-  menu_rgb_out <= r_collided & g_collided & b_collided when cur_game_state = COLLIDE else
-                  r & g & b when cur_game_state /= FINISH else
-                  r_collided & g_collided & b_collided;
-  -- "000000000000";
+  menu_rgb_out <= r & g & b when cur_game_state /= FINISH else
+  r_collided & g_collided & b_collided else
+  "000000000000";
 
   title_row <= pixel_row - title_y_pos;
   title_col <= pixel_column - title_x_pos;
@@ -339,26 +269,4 @@ char_add_try_again                                               <=
   col          => title_col(7 downto 1),
   pixel_output => title_argb
   );
-
-
-  TEXT_BIG_COLLIDE_STATE : char_rom
-  port map
-  (
-    character_address => rom_address_collide_state,
-    font_row          => pixel_row(3 downto 1),
-    font_col          => pixel_column(3 downto 1),
-    clock             => clk,
-    rom_mux_output    => s_try_again_on
-  );
-
-  TEXT_BIG_FINISH_STATE : char_rom
-  port map
-  (
-    character_address => rom_address_finish_state,
-    font_row          => pixel_row(3 downto 1),
-    font_col          => pixel_column(3 downto 1),
-    clock             => clk,
-    rom_mux_output    => s_finish_on
-  );
-
 end architecture beh;

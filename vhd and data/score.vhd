@@ -29,7 +29,7 @@ SIGNAL char_col  : STD_LOGIC_VECTOR(5 downto 0);
 SIGNAL char_add  : STD_LOGIC_VECTOR(5 downto 0);
 SIGNAL s_text_on : STD_LOGIC;
 SIGNAL empty_space : STD_LOGIC;
-SIGNAL text_start : integer := 270; -- welcom begins from pixel row 270
+SIGNAL text_start : integer := 255; -- welcom begins from pixel row 270
 SIGNAL char_width : integer := 16; -- width and height of each pixel (16 x 16 because of font_row and font_col)
 -- SIGNAL box_col_start:
 -- SIGNAL char_on 	 : STD_LOGIC := '1';
@@ -38,7 +38,7 @@ begin
 
 
                         -- WORD STARTS AT COL 254 AND ENDS AT COL 380 AND HAS A HEIGHT OF 16 PIXELS BETWEEN ROW 208 AND 222     MAYBE 350 ??
-empty_space <= '1' when (pixel_column <= CONV_STD_LOGIC_VECTOR((text_start - char_width),10) or pixel_column >= CONV_STD_LOGIC_VECTOR(334,10)) or ((pixel_row >= CONV_STD_LOGIC_VECTOR(64,10) or pixel_row <= CONV_STD_LOGIC_VECTOR(47,10))) else
+empty_space <= '1' when (pixel_column <= CONV_STD_LOGIC_VECTOR((text_start - char_width),10) or pixel_column >= CONV_STD_LOGIC_VECTOR(318,10)) or ((pixel_row >= CONV_STD_LOGIC_VECTOR(64,10) or pixel_row <= CONV_STD_LOGIC_VECTOR(47,10))) else
 			   '0';
 
 char_add <= "100000" when empty_space = '1' else
