@@ -72,8 +72,6 @@ architecture rtl of pipes is
 
   signal cur_game_state : game_states;
 
-  signal num : real;
-
 begin
 
   -- gap_size <=
@@ -90,9 +88,7 @@ begin
   s_pipe_on <= pipe1_on or pipe2_on;
 
   pipe_on_mask <= (others => s_pipe_on);
-
-  num <= sin(20.0);
-
+  
   point_increment <= '1' when point_collided = '1' else
     '0' when pipe1_x_pos = std_logic_vector(to_unsigned(screen_width, 11)) or pipe2_x_pos = std_logic_vector(to_unsigned(screen_width, 11));
 

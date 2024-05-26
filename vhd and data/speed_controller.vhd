@@ -23,7 +23,7 @@ begin
   cur_speed_state <= speed_states'val(to_integer(unsigned(speed_state)));
 
   speed_out <=
-    "000" when (cur_game_state = PAUSED or cur_game_state = COLLIDE) else
+    "000" when (cur_game_state = PAUSED or cur_game_state = COLLIDE or cur_game_state = FINISH) else
     "010" when cur_speed_state = NORMAL else
     "110" when cur_speed_state = FAST else
     "001" when cur_speed_state = SLOW else
