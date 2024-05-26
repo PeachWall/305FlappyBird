@@ -72,7 +72,6 @@ begin
   end process;
 
   SPRITE : process (pixel_row, pixel_column)
-    variable col_d, row_d   : unsigned(9 downto 0) := (others => '0');
     variable temp_c, temp_r : unsigned(9 downto 0) := (others => '0');
 
   begin
@@ -83,11 +82,9 @@ begin
       temp_c := (others => '0');
       temp_r := (others => '0');
     end if;
-    col_d := temp_c / scale; -- divide be powers of 2 to change size
-    row_d := temp_r / scale;
 
-    sprite_row <= std_logic_vector(row_d(5 downto 0));
-    sprite_col <= std_logic_vector(col_d(6 downto 0));
+    sprite_row <= std_logic_vector(temp_r(6 downto 1));
+    sprite_col <= std_logic_vector(temp_c(7 downto 1));
   end process;
 
   SPRITE_ROM : cloud_rom

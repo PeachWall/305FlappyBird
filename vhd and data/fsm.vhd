@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 use ieee.STD_LOGIC_UNSIGNED.all;
+use ieee.std_logic_misc.all;
 use work.util.all;
 
 entity fsm is
@@ -10,12 +11,11 @@ entity fsm is
   (
     clk              : in std_logic;
     reset            : in std_logic;
-    start_button     : in std_logic;
+    key              : in std_logic_vector(3 downto 0);
     obst_collided    : in std_logic;
     ability_collided : in std_logic;
     ability_type     : in std_logic_vector(2 downto 0);
     mouse            : in std_logic;
-    right_click      : in std_logic;
     bird_state       : out std_logic_vector(2 downto 0);
     speed_state      : out std_logic_vector(2 downto 0);
     game_state       : out std_logic_vector(2 downto 0);
@@ -23,7 +23,8 @@ entity fsm is
     timer_time       : out std_logic_vector(4 downto 0);
     reset_out        : out std_logic;
     lives_out        : out std_logic_vector(2 downto 0);
-    money_out        : out std_logic_vector(7 downto 0) -- HOPING THEY DONT GO OVER 255 c:
+    money_out        : out std_logic_vector(7 downto 0); -- HOPING THEY DONT GO OVER 255 c:
+    difficulty       : out std_logic_vector(1 downto 0)
   );
 end entity fsm;
 
@@ -58,10 +59,11 @@ begin
   timer_time  <= timer_seconds;
   cur_ability <= ability_types'val(to_integer(unsigned(ability_type)));
 
-  FSM : process (clk, obst_collided, mouse, start_button, timer_timout)
-    variable hold    : std_logic                    := '0';
-    variable lives   : std_logic_vector(2 downto 0) := "011";
-    variable v_money : std_logic_vector(7 downto 0) := (others => '0');
+  FSM : process (clk, obst_collided, mouse, key, timer_timout)
+    variable key_hold, hold : std_logic                    := '0';
+    variable lives          : std_logic_vector(2 downto 0) := "011";
+    variable v_money        : std_logic_vector(7 downto 0) := (others => '0');
+    variable v_difficulty   : std_logic_vector(1 downto 0) := (others => '0');
   begin
     --------------------
     -- BIRD FSM START --
@@ -96,8 +98,10 @@ begin
           lives := lives + 1;
         end if;
       elsif (ability_collided = '1' and cur_ability = MONEY) then
-        v_money := v_money + 1;
-      elsif(cur_game_state = MENU) then
+        if (v_money /= "11111111") then
+          v_money := v_money + 1;
+        end if;
+      elsif (cur_game_state = MENU) then
         v_money := (others => '0');
       elsif (ability_collided = '1' and cur_ability = FAST) then
         cur_speed_state <= FAST;
@@ -126,12 +130,21 @@ begin
     --------------------
     if (rising_edge(clk)) then
       if (cur_game_state = MENU) then
-        if (start_button = '0') then
+        if (and_reduce(key(1 downto 0)) = '0' and key_hold = '0') then
+          if (key(0) = '0') then
+            v_difficulty := "00";
+          elsif (key(1) = '0') then
+            v_difficulty := "01";
+          end if;
+          key_hold := '1';
           cur_game_state <= PAUSED;
           lives := "011";
           reset_out  <= '1';
           bird_reset <= '1';
         end if;
+      elsif (cur_game_state = PAUSED and key(0) = '0' and key_hold = '0') then
+        cur_game_state <= MENU;
+        key_hold := '1';
       elsif (cur_game_state = PAUSED and mouse = '1' and hold = '0') then
         cur_game_state <= PLAY;
         hold := '1';
@@ -139,13 +152,18 @@ begin
         if (lives = 0) then
           cur_game_state <= FINISH;
         else
+          if (v_difficulty /= "00") then
+            lives := lives - 1;
+          end if;
           cur_game_state <= COLLIDE;
         end if;
+      elsif (cur_game_state = PLAY and key(0) = '0' and key_hold = '0') then
+        cur_game_state <= PAUSED;
+        key_hold := '1';
       elsif (mouse = '1' and hold = '0' and cur_game_state = COLLIDE) then
         cur_game_state <= PLAY;
         bird_reset     <= '1';
-        lives := lives - 1;
-        hold  := '1';
+        hold := '1';
         reset_out <= '1';
       elsif (mouse = '1' and hold = '0' and cur_game_state = FINISH) then
         cur_game_state <= MENU;
@@ -157,8 +175,13 @@ begin
       if (mouse = '0') then
         hold := '0';
       end if;
+
+      if (and_reduce(key) = '1') then
+        key_hold := '0';
+      end if;
     end if;
     game_state <= std_logic_vector(to_unsigned(game_states'pos(cur_game_state), 3));
+    difficulty <= v_difficulty;
 
     ------------------
     -- GAME FSM END --

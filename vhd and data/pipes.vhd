@@ -8,7 +8,6 @@ use work.util.all;
 entity pipes is
   port
   (
-    difficulty              : in std_logic_vector(2 downto 0);  
     clk, reset              : in std_logic;
     v_sync                  : in std_logic;
     point_collided          : in std_logic;
@@ -16,6 +15,7 @@ entity pipes is
     bird_x_pos              : in std_logic_vector(9 downto 0);
     speed                   : in std_logic_vector(2 downto 0);
     game_state              : in std_logic_vector(2 downto 0);
+    difficulty              : in std_logic_vector(1 downto 0);
     pipe_rgb_out            : out std_logic_vector(11 downto 0);
     pipe_on                 : out std_logic;
     point_box_on            : out std_logic;
@@ -46,7 +46,7 @@ architecture rtl of pipes is
   constant half_pipe_size : unsigned(7 downto 0) := shift_right(pipe_size, 1);
 
   -- constant gap_size : integer := 64; -------------------------------------------------------------------------------------------------------- FSM CHANGES GAP SIZE
-  signal gap_size : integer := 64;
+  constant gap_size : integer := 64;
   constant x_speed  : integer := 2;
   constant distance : integer := 319 + to_integer(pipe_size - half_pipe_size);
 
@@ -55,9 +55,9 @@ architecture rtl of pipes is
   signal pipe2_top_on, pipe2_bottom_on : std_logic;
 
   -- x and y position for pipes
-  signal pipe1_y_pos, pipe2_y_pos : integer range 120 to 360 := 360;
-  signal pipe1_x_pos : std_logic_vector(10 downto 0) := std_logic_vector(to_unsigned(screen_width, 11));
-  signal pipe2_x_pos : std_logic_vector(10 downto 0) := std_logic_vector(to_unsigned(screen_width + distance, 11));
+  signal pipe1_y_pos, pipe2_y_pos : integer range 120 to 360      := 360;
+  signal pipe1_x_pos              : std_logic_vector(10 downto 0) := std_logic_vector(to_unsigned(screen_width, 11));
+  signal pipe2_x_pos              : std_logic_vector(10 downto 0) := std_logic_vector(to_unsigned(screen_width + distance, 11));
 
   signal pipe1_on, pipe2_on : std_logic;
   signal s_pipe_on          : std_logic;
@@ -73,25 +73,14 @@ architecture rtl of pipes is
   signal cur_game_state : game_states;
 
 begin
-
-gap_size <= 64;
-  --  80 when difficulty = "00" and cur_game_state = MENU else
-  --  80 when difficulty = "01" and cur_game_state = MENU else
-  --  72 when difficulty = "10" and cur_game_state = MENU else
-  --  64 when difficulty = "11" and cur_game_state = MENU else
-  --  80;
-
-
   cur_game_state <= game_states'val(to_integer(unsigned(game_state)));
-  
-
   -- Output either top or bottom pipe is being drawn
   pipe1_on  <= pipe1_bottom_on or pipe1_top_on;
   pipe2_on  <= pipe2_bottom_on or pipe2_top_on;
   s_pipe_on <= pipe1_on or pipe2_on;
 
   pipe_on_mask <= (others => s_pipe_on);
-  
+
   point_increment <= '1' when point_collided = '1' else
     '0' when pipe1_x_pos = std_logic_vector(to_unsigned(screen_width, 11)) or pipe2_x_pos = std_logic_vector(to_unsigned(screen_width, 11));
 
@@ -163,8 +152,8 @@ gap_size <= 64;
 
   -- USED TO GET SPRITE ADDRESS
   SPRITE : process (pixel_row, pixel_column)
-    variable col_d, temp_c : unsigned(10 downto 0) := (others => '0');
-    variable row_d, temp_r : unsigned(9 downto 0)  := (others => '0');
+    variable temp_c : unsigned(10 downto 0) := (others => '0');
+    variable temp_r : unsigned(9 downto 0)  := (others => '0');
 
     variable invert : std_logic;
 
@@ -172,6 +161,7 @@ gap_size <= 64;
 
     -- BOTTOM PIPES
 
+    -- THIS IS DONE HORRIBLY AND WOULD LIKE TO FIX BUT NO TIME
     -- Pipe 1 bottom
     if (pipe1_bottom_on = '1') then
       invert := '0';
@@ -220,18 +210,12 @@ gap_size <= 64;
       temp_r := (others => '0');
     end if;
 
-    -- SCALES SPRITES BY ORDER 2
-    -- col_d := shift_right(temp_c, scale - 1);
-    -- row_d := shift_right(temp_r, scale - 1);
-    col_d := temp_c / scale;
-    row_d := temp_r / scale;
-
     if (invert = '0') then
-      pipe_sprite_row <= std_logic_vector(row_d(4 downto 0));
+      pipe_sprite_row <= std_logic_vector(temp_r(5 downto 1));
     else
-      pipe_sprite_row <= 31 - std_logic_vector(row_d(4 downto 0));
+      pipe_sprite_row <= 31 - std_logic_vector(temp_r(5 downto 1));
     end if;
-    pipe_sprite_col <= std_logic_vector(col_d(4 downto 0));
+    pipe_sprite_col <= std_logic_vector(temp_c(5 downto 1));
   end process;
 
   RNG : random_gen

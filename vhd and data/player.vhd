@@ -152,6 +152,8 @@ begin
             y_velocity := to_signed(0, 10);
           end if;
         end if;
+      elsif (cur_game_state = PAUSED) then
+        y_velocity := (others => '0');
       end if;
       player_y_pos <= signed(player_y_pos) + y_velocity(9 downto 2);
       prev_game_state := cur_game_state;
@@ -166,7 +168,6 @@ begin
 
   -- Get the pixel coordinates in terms of the row and column address
   SPRITE : process (sprite_on, pixel_column, pixel_row)
-    variable col_d, row_d   : unsigned(9 downto 0) := (others => '0');
     variable temp_c, temp_r : unsigned(9 downto 0) := (others => '0');
   begin
     if (sprite_on = '1') then
@@ -176,11 +177,11 @@ begin
       temp_c := (others => '0');
       temp_r := (others => '0');
     end if;
-    col_d := shift_right(temp_c, bird_scale - 1); -- divide be powers of 2 to change size
-    row_d := shift_right(temp_r, bird_scale - 1);
+    temp_c := shift_right(temp_c, bird_scale - 1); -- divide be powers of 2 to change size
+    temp_r := shift_right(temp_r, bird_scale - 1);
 
-    sprite_row <= std_logic_vector(row_d(3 downto 0));
-    sprite_col <= std_logic_vector(col_d(3 downto 0));
+    sprite_row <= std_logic_vector(temp_r(3 downto 0));
+    sprite_col <= std_logic_vector(temp_c(3 downto 0));
   end process;
 
   SPRITE_ROM : bird_sprite_rom_12
