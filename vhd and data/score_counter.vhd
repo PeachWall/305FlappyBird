@@ -32,15 +32,14 @@ begin
 
   cur_game_state <= game_states'val(to_integer(unsigned(game_state)));
 
-  process (count)
+  process (count, cur_game_state)
     variable counter : integer range 0 to 999;
   begin
-    if rising_edge(count) then
+    if cur_game_state = MENU then
+      counter := 0; -- when we go to menu, want to reset the counter to zero for when we begin the game
+      elsif rising_edge(count) then
       if (counter /= 999) then
         counter := counter + 1;
-        elsif (cur_game_state = FINISH) then
-        points <= std_logic_vector(to_unsigned(counter, points'length));  
-        counter := 0;
       else
         counter := 0;
       end if;
