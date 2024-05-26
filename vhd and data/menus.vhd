@@ -95,6 +95,9 @@ architecture beh of menus is
   signal collide_state  : std_logic;
   signal finish_state   : std_logic;
 
+  signal empty_space_pause : std_logic;
+  signal char_add_pause    : std_logic_vector(5 downto 0);
+
   signal score_ones, score_tens, score_hundreds : integer range 0 to 9;
   signal money_ones, money_tens, money_hundreds : integer range 0 to 9;
 
@@ -139,6 +142,9 @@ begin
   empty_space_final_score <= '1' when ((pixel_column <= std_logic_vector(to_unsigned((text_start_final_score - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(383, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(272, 10)) or pixel_row < std_logic_vector(to_unsigned(256, 10))))) else
     '0';
 
+  empty_space_pause <= '1' when ((pixel_column <= std_logic_vector(to_unsigned((text_start_final_score - char_width_small), 10)) or pixel_column >= std_logic_vector(to_unsigned(text_start_final_score + 160, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(448, 10)) or pixel_row < std_logic_vector(to_unsigned(440, 10))))) else
+    '0';
+
   -- MUX TO CHOOSE THE ADDRESS
   rom_address_big <= char_add when empty_space = '0' else
     "100000";
@@ -154,8 +160,9 @@ begin
     "100000";
 
   rom_address_small <=
-    char_add2 when empty_space2 = '0' else
-    char_add3 when empty_space3 = '0' else
+    char_add2 when empty_space2 = '0' and cur_game_state = MENU else
+    char_add3 when empty_space3 = '0' and cur_game_state = MENU else
+    char_add_pause when empty_space_pause = '0' and cur_game_state = PAUSED else
     -- char_add4 when empty_space4 = '0' else
     -- char_add5 when empty_space5 = '0' else
     "100000";
@@ -277,6 +284,32 @@ begin
     std_logic_vector(to_unsigned(48 + to_integer(unsigned(lives)), 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_lives + 272, 10)) else --"0"
     "100000"; --std_logic_vector(to_unsigned(29,6)); --" ", IS A BLANK SPACE
 
+  -- PASUED STATE TEXT ----------------------------------------------------------------------------------------------------
+
+  char_add_pause                                         <=
+    std_logic_vector(to_unsigned(12, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score, 10)) else --"L"
+    std_logic_vector(to_unsigned(13, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 8, 10)) else --"M"
+    std_logic_vector(to_unsigned(2, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_final_score + 16, 10)) else --"B"
+    std_logic_vector(to_unsigned(45, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 24, 10)) else --"-"
+    std_logic_vector(to_unsigned(16, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 32, 10)) else --"P"
+    std_logic_vector(to_unsigned(12, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 40, 10)) else --"L"
+    std_logic_vector(to_unsigned(1, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_final_score + 48, 10)) else --"A"
+    std_logic_vector(to_unsigned(25, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 56, 10)) else --"Y"
+    std_logic_vector(to_unsigned(32, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 64, 10)) else --" "
+    std_logic_vector(to_unsigned(32, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 72, 10)) else --" "
+    std_logic_vector(to_unsigned(32, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 80, 10)) else --" "
+    std_logic_vector(to_unsigned(32, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 88, 10)) else --" "
+    std_logic_vector(to_unsigned(11, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 96, 10)) else --"K"
+    std_logic_vector(to_unsigned(5, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_final_score + 104, 10)) else --"E"
+    std_logic_vector(to_unsigned(25, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 112, 10)) else --"Y"
+    std_logic_vector(to_unsigned(48, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 120, 10)) else --"0"
+    std_logic_vector(to_unsigned(45, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 128, 10)) else --"-"
+    std_logic_vector(to_unsigned(13, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 136, 10)) else --"M"
+    std_logic_vector(to_unsigned(5, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_final_score + 144, 10)) else --"E"
+    std_logic_vector(to_unsigned(14, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 152, 10)) else --"N"
+    std_logic_vector(to_unsigned(21, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start_final_score + 160, 10)) else --"U"
+    "100000";
+
   -- FINSIH STATE TEXT ----------------------------------------------------------------------------------------------------
   char_add_game_over                                     <=
     std_logic_vector(to_unsigned(7, 6)) when pixel_column  <= std_logic_vector(to_unsigned(text_start_game_over, 10)) else --"G"
@@ -317,10 +350,11 @@ begin
     -- '1' when cur_game_state = FINISH else
     s_finish_on when cur_game_state = FINISH else
     s_try_again_on when cur_game_state = COLLIDE else
+    s_small_text_on when cur_game_state = PAUSED else
     '0';
 
   menu_rgb_out <= r_collided & g_collided & b_collided when cur_game_state = COLLIDE else
-    r & g & b when cur_game_state /= FINISH else
+    r & g & b when cur_game_state /= FINISH or cur_game_state = PAUSED else
     r_collided & g_collided & b_collided;
   -- "000000000000";
 

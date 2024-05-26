@@ -154,7 +154,7 @@ begin
   ---------------------------------------------
   rom_address_big <=
     char_add when empty_space = '0' else
-    char_add2 when empty_space2 = '0' and timer_on = '1' else
+    char_add2 when empty_space2 = '0' and timer_on = '1' and cur_game_state = PLAY else
     "100000";
 
   rom_address_small <=
