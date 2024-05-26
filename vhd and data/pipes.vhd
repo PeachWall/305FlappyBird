@@ -8,6 +8,7 @@ use work.util.all;
 entity pipes is
   port
   (
+    difficulty              : in std_logic_vector(2 downto 0);  
     clk, reset              : in std_logic;
     v_sync                  : in std_logic;
     point_collided          : in std_logic;
@@ -44,7 +45,8 @@ architecture rtl of pipes is
   constant pipe_size      : unsigned(7 downto 0) := to_unsigned(size * scale, 8);
   constant half_pipe_size : unsigned(7 downto 0) := shift_right(pipe_size, 1);
 
-  constant gap_size : integer := 64;
+  -- constant gap_size : integer := 64; -------------------------------------------------------------------------------------------------------- FSM CHANGES GAP SIZE
+  signal gap_size : integer := 64;
   constant x_speed  : integer := 2;
   constant distance : integer := 319 + to_integer(pipe_size - half_pipe_size);
 
@@ -54,7 +56,6 @@ architecture rtl of pipes is
 
   -- x and y position for pipes
   signal pipe1_y_pos, pipe2_y_pos : integer range 120 to 360 := 360;
-
   signal pipe1_x_pos : std_logic_vector(10 downto 0) := std_logic_vector(to_unsigned(screen_width, 11));
   signal pipe2_x_pos : std_logic_vector(10 downto 0) := std_logic_vector(to_unsigned(screen_width + distance, 11));
 
@@ -75,7 +76,13 @@ architecture rtl of pipes is
 
 begin
 
+  -- gap_size <=
+  --  128 when (cur_game_state = MENU) AND falling_edge(button[2]) else
+  --  64 when (cur_game_state = MENU) AND falling_edge(button[1]) else
+  --  32 when (cur_game_state = MENU) AND falling_edge(button[0]);
+
   cur_game_state <= game_states'val(to_integer(unsigned(game_state)));
+  
 
   -- Output either top or bottom pipe is being drawn
   pipe1_on  <= pipe1_bottom_on or pipe1_top_on;

@@ -97,6 +97,8 @@ begin
         end if;
       elsif (ability_collided = '1' and cur_ability = MONEY) then
         v_money := v_money + 1;
+      elsif(cur_game_state = MENU) then
+        v_money := (others => '0');
       elsif (ability_collided = '1' and cur_ability = FAST) then
         cur_speed_state <= FAST;
         timer_init_val  <= "10100";

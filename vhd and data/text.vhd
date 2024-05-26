@@ -48,7 +48,7 @@ architecture beh of text is
   signal char_add         : std_logic_vector(5 downto 0);
   signal empty_space      : std_logic;
   signal r, g, b          : std_logic_vector(3 downto 0);
-  constant text_start     : integer := 270; -- welcom begins from pixel row 270
+  constant text_start     : integer := 255; -- welcom begins from pixel row 270
   constant char_width_big : integer := 16; -- width and height of each pixel (16 x 16 because of font_row and font_col)
 
   signal s_text_on2   : std_logic; -- delete signal
@@ -107,7 +107,7 @@ begin
   timer_tens <= to_integer(unsigned(timer)) / 10 mod 10;
 
   -- WORD STARTS AT COL 254 AND ENDS AT COL 380 AND HAS A HEIGHT OF 16 PIXELS BETWEEN ROW 208 AND 222     MAYBE 350 ??
-  empty_space <= '1' when (pixel_column <= std_logic_vector(to_unsigned((text_start - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(400, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(64, 10)) or pixel_row <= std_logic_vector(to_unsigned(47, 10)))) else
+  empty_space <= '1' when (pixel_column <= std_logic_vector(to_unsigned((text_start - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(385, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(64, 10)) or pixel_row <= std_logic_vector(to_unsigned(47, 10)))) else
     '0';
 
   empty_space2 <= '1' when (pixel_column <= std_logic_vector(to_unsigned((text_start2 - char_width_big), 10)) or pixel_column >= std_logic_vector(to_unsigned(400, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(78, 10)) or pixel_row <= std_logic_vector(to_unsigned(61, 10)))) else
