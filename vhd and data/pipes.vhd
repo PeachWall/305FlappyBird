@@ -74,10 +74,13 @@ architecture rtl of pipes is
 
 begin
 
-  -- gap_size <=
-  --  128 when (cur_game_state = MENU) AND falling_edge(button[2]) else
-  --  64 when (cur_game_state = MENU) AND falling_edge(button[1]) else
-  --  32 when (cur_game_state = MENU) AND falling_edge(button[0]);
+gap_size <= 64;
+  --  80 when difficulty = "00" and cur_game_state = MENU else
+  --  80 when difficulty = "01" and cur_game_state = MENU else
+  --  72 when difficulty = "10" and cur_game_state = MENU else
+  --  64 when difficulty = "11" and cur_game_state = MENU else
+  --  80;
+
 
   cur_game_state <= game_states'val(to_integer(unsigned(game_state)));
   
