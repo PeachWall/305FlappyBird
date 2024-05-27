@@ -26,7 +26,7 @@ begin
   cur_game_state  <= game_states'val(to_integer(unsigned(game_state)));
   cur_speed_state <= speed_states'val(to_integer(unsigned(speed_state)));
 
-  base_speed <= "010" when difficulty /= "100" and points <= 10 else
+  base_speed <= "010" when difficulty /= "100" and points < 10 else
     "011";
 
   speed_out <=

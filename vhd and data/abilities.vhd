@@ -141,7 +141,7 @@ begin
           end if;
         else
           abs_random := abs(random_num);
-          if (abs_random < 80 and abs_random >= 25) then
+          if (abs_random < 100 and abs_random >= 25) then
             ability_type <= BOMB;
           elsif (abs_random < 25 and abs_random >= 20) then
             ability_type <= LIFE;
