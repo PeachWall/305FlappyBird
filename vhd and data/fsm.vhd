@@ -115,9 +115,17 @@ begin
         timer_reset     <= '1';
         timer_enable    <= '1';
       elsif (ability_collided = '1' and cur_ability = BOMB) then
-        cur_game_state <= COLLIDE;
-        if (v_difficulty /= "01") then
-          lives := lives - 1;
+        can_click := '0';
+        timer_init_val <= "00001";
+        timer_reset    <= '1';
+        timer_enable   <= '1';
+        if (lives = 0) then
+          cur_game_state <= FINISH;
+        else
+          if (v_difficulty /= "01") then
+            lives := lives - 1;
+          end if;
+          cur_game_state <= COLLIDE;
         end if;
       else
         timer_reset <= '0';
