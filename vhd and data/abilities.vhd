@@ -140,7 +140,22 @@ begin
             ability_type <= MONEY;
           end if;
         else
-          ability_type <= BOMB;
+          abs_random := abs(random_num);
+          if (abs_random < 80 and abs_random >= 25) then
+            ability_type <= BOMB;
+          elsif (abs_random < 25 and abs_random >= 20) then
+            ability_type <= LIFE;
+          elsif (abs_random < 20 and abs_random >= 15 and cur_speed_state = NORMAL) then
+            ability_type <= SLOW;
+          elsif (abs_random < 15 and abs_random >= 10 and cur_speed_state = NORMAL) then
+            ability_type <= FAST;
+          elsif (abs_random < 10 and abs_random >= 5 and cur_bird_state = NORMAL) then
+            ability_type <= BIG;
+          elsif (abs_random < 5 and abs_random >= 0 and cur_bird_state = NORMAL) then
+            ability_type <= SMALL;
+          else
+            ability_type <= MONEY;
+          end if;
         end if;
       end if;
 

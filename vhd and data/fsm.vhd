@@ -16,6 +16,7 @@ entity fsm is
     ability_collided : in std_logic;
     ability_type     : in std_logic_vector(2 downto 0);
     mouse            : in std_logic;
+    points           : in std_logic_vector(9 downto 0);
     bird_state       : out std_logic_vector(2 downto 0);
     speed_state      : out std_logic_vector(2 downto 0);
     game_state       : out std_logic_vector(2 downto 0);
@@ -59,7 +60,7 @@ begin
   timer_time  <= timer_seconds;
   cur_ability <= ability_types'val(to_integer(unsigned(ability_type)));
 
-  FSM : process (clk, obst_collided, mouse, key, timer_timout)
+  FSM : process (clk, obst_collided, mouse, key, timer_timout, points)
     variable key_hold, hold, can_click : std_logic                    := '0';
     variable lives                     : std_logic_vector(2 downto 0) := "011";
     variable v_money                   : std_logic_vector(7 downto 0) := (others => '0');
@@ -180,6 +181,10 @@ begin
         reset_out <= '1';
       elsif (mouse = '1' and hold = '0' and cur_game_state = FINISH and can_click = '1') then
         cur_game_state <= MENU;
+      elsif (cur_game_state = PLAY and points >= 10) then
+        v_difficulty := "100";
+        reset_out  <= '0';
+        bird_reset <= '0';
       else
         reset_out  <= '0';
         bird_reset <= '0';
