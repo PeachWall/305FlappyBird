@@ -179,6 +179,9 @@ begin
         bird_reset     <= '1';
         hold := '1';
         reset_out <= '1';
+      elsif (cur_game_state = COLLIDE and key(0) = '0' and key_hold = '0') then
+        cur_game_state <= MENU;
+        key_hold := '1';
       elsif (mouse = '1' and hold = '0' and cur_game_state = FINISH and can_click = '1') then
         cur_game_state <= MENU;
       elsif (cur_game_state = PLAY and points >= 20) then

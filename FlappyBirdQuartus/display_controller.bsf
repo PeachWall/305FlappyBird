@@ -143,6 +143,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 288)(pt 16 288)(line_width 3))
 	)
 	(port
+		(pt 0 304)
+		(input)
+		(text "switches[9..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "switches[9..0]" (rect 21 299 74 311)(font "Arial" ))
+		(line (pt 0 304)(pt 16 304)(line_width 3))
+	)
+	(port
 		(pt 224 32)
 		(output)
 		(text "red_out[3..0]" (rect 0 0 50 12)(font "Arial" ))
