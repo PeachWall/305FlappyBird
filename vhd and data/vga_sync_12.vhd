@@ -9,7 +9,7 @@ entity VGA_SYNC_12 is
   (
     clock_25Mhz                   : in std_logic;
     red, green, blue              : in std_logic_vector (3 downto 0);
-    horiz_sync_out, vert_sync_out : out std_logic;
+    vert_sync_out, horiz_sync_out : out std_logic;
     red_out, green_out, blue_out  : out std_logic_vector (3 downto 0);
     pixel_row, pixel_column       : out std_logic_vector(9 downto 0)
   );

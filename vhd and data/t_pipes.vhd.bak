@@ -1,0 +1,59 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.math_real.all;
+use IEEE.STD_LOGIC_SIGNED.all;
+use IEEE.STD_LOGIC_ARITH.all;
+
+entity t_pipes is
+end entity t_pipes;
+
+architecture rtl of t_pipes is
+  component pipes is
+    port
+    (
+      clk                              : in std_logic;
+      v_sync                           : in std_logic;
+      rgba                             : in std_logic_vector(12 downto 0);
+      pixel_row, pixel_column          : in std_logic_vector(9 downto 0);
+      pipe_sprite_row, pipe_sprite_col : out std_logic_vector(4 downto 0);
+      pipe_on                          : out std_logic
+    );
+  end component;
+
+  signal t_sync, t_pipe_on          : std_logic;
+  signal t_pixel_row                : std_logic_vector(9 downto 0) := (others => '0') := conv_std_logic_vector(640, 10);
+  signal t_pixel_column             : std_logic_vector(9 downto 0) := conv_std_logic_vector(640, 10);
+  signal t_sprite_row, t_sprite_col : std_logic_vector(4 downto 0);
+  signal t_rgba                     : std_logic_vector(12 downto 0) := (others => '0');
+
+begin
+
+  gen : process
+  begin
+    t_sync <= '1';
+    wait for 10 ns;
+    t_sync <= '0';
+    wait for 10 ns;
+  end process;
+
+  stuff : process
+  begin
+    t_pixel_row <= t_pixel_row + 1;
+    wait for 10 ns;
+  end process;
+
+  DUT : pipes
+  port map
+  (
+    clk             => t_sync,
+    v_sync          => t_sync,
+    rgba            => t_rgba,
+    pixel_row       => t_pixel_row,
+    pixel_column    => t_pixel_column,
+    pipe_sprite_row => t_sprite_row,
+    pipe_sprite_col => t_sprite_col,
+    pipe_on         => t_pipe_on
+  );
+
+end architecture;

@@ -1,0 +1,196 @@
+library ieee;
+
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.math_real.all;
+use IEEE.STD_LOGIC_SIGNED.all;
+use ieee.STD_LOGIC_ARITH.CONV_STD_LOGIC_VECTOR;
+use work.util.all;
+
+entity player is
+  port
+  (
+    clk, reset, vert_sync, mouse : in std_logic;
+    collided                     : in std_logic;
+    pixel_row, pixel_column      : in std_logic_vector(9 downto 0);
+    bird_state                   : in std_logic_vector(2 downto 0);
+    game_state                   : in std_logic_vector(2 downto 0);
+    bird_rgb_out                 : out std_logic_vector(11 downto 0);
+    bird_on                      : out std_logic;
+    x_pos                        : out std_logic_vector(9 downto 0)
+  );
+end entity player;
+
+architecture behavioural of player is
+  component bird_sprite_rom_12 is
+    port
+    (
+      clock, frame : in std_logic;
+      row, col     : in std_logic_vector(3 downto 0);
+      pixel_output : out std_logic_vector(12 downto 0)
+    );
+  end component;
+  signal bird_scale : integer range 1 to 3 := 2;
+  signal size       : unsigned(7 downto 0);
+
+  -- Data related to Movement
+  signal player_y_pos   : signed(9 downto 0) := to_signed(300, 10);
+  signal player_x_pos   : std_logic_vector(9 downto 0);
+  signal move_x, move_y : std_logic_vector(9 downto 0);
+
+  constant gravity : integer := 2;
+
+  -- Data related to ROM
+  signal pixel_argb             : std_logic_vector(3 downto 0);
+  signal sprite_on              : std_logic;
+  signal rom_address, rom_pixel : std_logic_vector (9 downto 0);
+  signal prev_row               : std_logic_vector(9 downto 0);
+  signal argb                   : std_logic_vector(12 downto 0);
+  signal frame                  : std_logic := '0';
+  signal vec_sprite_on          : std_logic_vector(3 downto 0);
+  signal sprite_row, sprite_col : std_logic_vector(3 downto 0);
+
+  signal state        : player_states;
+  signal pipe_collide : std_logic := '0';
+
+  signal cur_game_state : game_states;
+
+  signal draw_bird : std_logic;
+begin
+
+  state          <= player_states'val(to_integer(unsigned(bird_state)));
+  cur_game_state <= game_states'val(to_integer(unsigned(game_state)));
+
+  size <= shift_left("00010000", bird_scale - 1); -- 16 * 2^(bird_scale - 1)
+
+  bird_scale <=
+    3 when state = BIG else
+    1 when state = SMALL else
+    2;
+
+  draw_bird <= '0' when cur_game_state = MENU else
+    '1';
+  move_x <= std_logic_vector(to_unsigned(120, move_x'length));
+  move_y <= std_logic_vector(player_y_pos);
+
+  x_pos     <= move_x;
+  sprite_on <= '1' when (('0' & pixel_column >= move_x - (to_integer(size) / 2)) and ('0' & pixel_column < move_x + (to_integer(size) / 2)) -- x_pos - size <= pixel_column <= x_pos + size
+    and ('0' & pixel_row >= move_y - (to_integer(size) / 2)) and ('0' & pixel_row < move_y + (to_integer(size) / 2))) else -- y_pos - size <= pixel_row <= y_pos + size
+    '0';
+
+  vec_sprite_on <= (others => sprite_on);
+
+  -- Set rgb of sprite
+  bird_rgb_out <= argb(11 downto 0);
+  bird_on      <= argb(12) and draw_bird and sprite_on;
+
+  Move_Player : process (vert_sync, reset)
+    variable y_velocity      : signed(9 downto 0);
+    variable hold            : std_logic := '0';
+    variable frame_count     : integer range 0 to 15;
+    variable start_anim      : std_logic := '0';
+    variable flap            : std_logic;
+    variable v_bird_scale    : integer range 0 to 1;
+    variable prev_game_state : game_states;
+    variable clicked         : std_logic := '0';
+  begin
+    -- Move ball once every vertical sync
+    if (reset = '1') then
+      player_y_pos <= to_signed(300, 10);
+    elsif (rising_edge(vert_sync)) then
+      -- if mouse clicked
+      if (cur_game_state = PLAY) then
+        if (start_anim = '1') then
+          if (frame_count = 15) then
+            frame <= '0';
+            frame_count := 0;
+            start_anim  := '0';
+          else
+            frame_count := frame_count + 1;
+          end if;
+        end if;
+
+        if (mouse = '1' and clicked = '0') then
+          clicked := '1';
+        elsif (mouse = '0' and hold = '0' and clicked = '1') then
+          hold    := '1';
+          flap    := '1';
+          clicked := '0';
+          if (bird_scale <= 2) then
+            v_bird_scale := 0;
+          else
+            v_bird_scale := 1;
+          end if;
+          y_velocity := - to_signed(32 / (v_bird_scale + 1), 10);
+          frame <= '1';
+          start_anim := '1';
+        else
+          if (y_velocity >= (to_signed(16 * gravity, 10))) then
+            y_velocity := (to_signed(16 * gravity, 10));
+          else
+            y_velocity := y_velocity + gravity;
+          end if;
+        end if;
+
+        if (mouse = '0') then
+          hold := '0';
+        end if;
+
+        flap := '0';
+      elsif (cur_game_state = COLLIDE or cur_game_state = FINISH) then
+        if (cur_game_state /= prev_game_state) then
+          y_velocity := - to_signed(32 / (v_bird_scale + 1), 10);
+        else
+          if (y_velocity >= (to_signed(16 * gravity, 10))) then
+            y_velocity := (to_signed(16 * gravity, 10));
+          else
+            y_velocity := y_velocity + gravity;
+          end if;
+
+          if (player_y_pos >= to_signed(440 - (to_integer(size) / 2), 10) and flap = '0') then
+            player_y_pos <= to_signed(440 - (to_integer(size) / 2), 10);
+            y_velocity := to_signed(0, 10);
+          end if;
+        end if;
+      elsif (cur_game_state = PAUSED) then
+        y_velocity := (others => '0');
+      end if;
+      player_y_pos <= signed(player_y_pos) + y_velocity(9 downto 2);
+      prev_game_state := cur_game_state;
+
+      -- check if ball is at the floor or at ceiling
+      if (player_y_pos < to_signed(to_integer(size) / 2, 10)) then
+        player_y_pos <= to_signed((to_integer(size) / 2) + 1, 10);
+        y_velocity := to_signed(0, 10);
+      end if;
+    end if;
+  end process Move_Player;
+
+  -- Get the pixel coordinates in terms of the row and column address
+  SPRITE : process (sprite_on, pixel_column, pixel_row)
+    variable temp_c, temp_r : unsigned(9 downto 0) := (others => '0');
+  begin
+    if (sprite_on = '1') then
+      temp_c := unsigned(pixel_column - move_x - (to_integer(size) / 2)); -- Gets the pixels from 0 - size
+      temp_r := unsigned(pixel_row - move_y - (to_integer(size) / 2));
+    else
+      temp_c := (others => '0');
+      temp_r := (others => '0');
+    end if;
+    temp_c := shift_right(temp_c, bird_scale - 1); -- divide be powers of 2 to change size
+    temp_r := shift_right(temp_r, bird_scale - 1);
+
+    sprite_row <= std_logic_vector(temp_r(3 downto 0));
+    sprite_col <= std_logic_vector(temp_c(3 downto 0));
+  end process;
+
+  SPRITE_ROM : bird_sprite_rom_12
+  port map
+  (
+    clock        => clk,
+    frame        => frame,
+    row          => sprite_row,
+    col          => sprite_col,
+    pixel_output => argb
+  );
+end architecture;
