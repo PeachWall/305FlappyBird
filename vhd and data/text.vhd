@@ -15,6 +15,7 @@ entity text is
     signal game_state              : in std_logic_vector(3 downto 0);
     signal lives                   : in std_logic_vector(2 downto 0);
     signal money_in                : in std_logic_vector(7 downto 0);
+	 signal difficulty				  : in std_logic_vector(2 downto 0);
     signal text_rgb_out            : out std_logic_vector(11 downto 0);
     signal text_on                 : out std_logic
   );
@@ -172,7 +173,9 @@ begin
 
   char_add3                                                                            <= "100000" when empty_space3 = '1'else
     std_logic_vector(to_unsigned(24, 6)) when pixel_column                               <= std_logic_vector(to_unsigned(text_start3, 10)) else --"X"
+	     std_logic_vector(to_unsigned(39, 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start3 + 8, 10)) and difficulty = "001" else --"inifinity"
     std_logic_vector(to_unsigned(48 + to_integer(unsigned(lives)), 6)) when pixel_column <= std_logic_vector(to_unsigned(text_start3 + 8, 10))else --"0"
+
     "100000"; --std_logic_vector(to_unsigned(29,6)); --" ", IS A BLANK SPACE
 
   char_add4                                                               <= "100000" when empty_space4 = '1'else
