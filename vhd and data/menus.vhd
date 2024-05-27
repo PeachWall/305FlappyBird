@@ -141,6 +141,7 @@ signal empty_space_coins  : std_logic;
   constant title_y_pos        : std_logic_vector(9 downto 0) := std_logic_vector(to_unsigned(55, 10));
 begin
 
+  -- TIMER FOR THE MENU
   process (vert_sync, cur_game_state)
     variable counter : integer range 0 to 127 := 0;
   begin
