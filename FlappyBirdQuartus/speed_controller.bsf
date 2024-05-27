@@ -45,6 +45,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 64)(pt 16 64)(line_width 3))
 	)
 	(port
+		(pt 0 80)
+		(input)
+		(text "difficulty[2..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "difficulty[2..0]" (rect 21 75 74 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
 		(pt 232 32)
 		(output)
 		(text "speed_out[2..0]" (rect 0 0 61 12)(font "Arial" ))

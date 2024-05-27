@@ -129,6 +129,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 256)(pt 16 256)(line_width 1))
 	)
 	(port
+		(pt 0 272)
+		(input)
+		(text "difficulty[2..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "difficulty[2..0]" (rect 21 267 74 279)(font "Arial" ))
+		(line (pt 0 272)(pt 16 272)(line_width 3))
+	)
+	(port
 		(pt 224 32)
 		(output)
 		(text "red_out[3..0]" (rect 0 0 50 12)(font "Arial" ))

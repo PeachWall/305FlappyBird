@@ -22,6 +22,7 @@ entity display_controller is
     ability_on                   : in std_logic;
     menu_rgb                     : in std_logic_vector(11 downto 0);
     menu_on                      : in std_logic;
+    difficulty                   : in std_logic_vector(2 downto 0);
     red_out, green_out, blue_out : out std_logic_vector(3 downto 0)
   );
 end entity display_controller;
@@ -41,7 +42,9 @@ begin
     cloud_rgb when cloud_on = '1' else
     bg_rgb;
 
-  red_out   <= rgb(11 downto 8);
-  green_out <= rgb(7 downto 4);
-  blue_out  <= rgb(3 downto 0);
+  red_out <= rgb(7 downto 4) when difficulty = "100" and rgb = pipe_rgb else
+    rgb(11 downto 8);
+  green_out <= rgb(11 downto 8) when difficulty = "100" and rgb = pipe_rgb else
+    rgb(7 downto 4);
+  blue_out <= rgb(3 downto 0);
 end architecture;
