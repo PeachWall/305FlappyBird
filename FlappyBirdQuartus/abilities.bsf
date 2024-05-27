@@ -87,6 +87,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 160)(pt 16 160)(line_width 3))
 	)
 	(port
+		(pt 0 176)
+		(input)
+		(text "difficulty[2..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "difficulty[2..0]" (rect 21 171 74 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 3))
+	)
+	(port
 		(pt 232 32)
 		(output)
 		(text "item_type[2..0]" (rect 0 0 60 12)(font "Arial" ))

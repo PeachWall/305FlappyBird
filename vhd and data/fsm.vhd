@@ -24,7 +24,7 @@ entity fsm is
     reset_out        : out std_logic;
     lives_out        : out std_logic_vector(2 downto 0);
     money_out        : out std_logic_vector(7 downto 0); -- HOPING THEY DONT GO OVER 255 c:
-    difficulty       : out std_logic_vector(1 downto 0)
+    difficulty       : out std_logic_vector(2 downto 0)
   );
 end entity fsm;
 
@@ -63,7 +63,7 @@ begin
     variable key_hold, hold, can_click : std_logic                    := '0';
     variable lives                     : std_logic_vector(2 downto 0) := "011";
     variable v_money                   : std_logic_vector(7 downto 0) := (others => '0');
-    variable v_difficulty              : std_logic_vector(1 downto 0) := (others => '0');
+    variable v_difficulty              : std_logic_vector(2 downto 0) := "001";
   begin
     --------------------
     -- BIRD FSM START --
@@ -113,6 +113,11 @@ begin
         timer_init_val  <= "10100";
         timer_reset     <= '1';
         timer_enable    <= '1';
+      elsif (ability_collided = '1' and cur_ability = BOMB) then
+        cur_game_state <= COLLIDE;
+        if (v_difficulty /= "01") then
+          lives := lives - 1;
+        end if;
       else
         timer_reset <= '0';
       end if;
@@ -135,15 +140,16 @@ begin
       if (cur_game_state = MENU) then
         if (and_reduce(key(1 downto 0)) = '0' and key_hold = '0') then
           if (key(0) = '0') then
-            v_difficulty := "00";
+            cur_game_state <= PAUSED;
+            lives := "011";
+            reset_out  <= '1';
+            bird_reset <= '1';
+            --v_difficulty := "00";
           elsif (key(1) = '0') then
-            v_difficulty := "01";
+            --v_difficulty := "01";
+            v_difficulty := v_difficulty(1 downto 0) & v_difficulty(2);
           end if;
           key_hold := '1';
-          cur_game_state <= PAUSED;
-          lives := "011";
-          reset_out  <= '1';
-          bird_reset <= '1';
         end if;
       elsif (cur_game_state = PAUSED and key(0) = '0' and key_hold = '0') then
         cur_game_state <= MENU;
@@ -159,7 +165,7 @@ begin
         if (lives = 0) then
           cur_game_state <= FINISH;
         else
-          if (v_difficulty /= "00") then
+          if (v_difficulty /= "01") then
             lives := lives - 1;
           end if;
           cur_game_state <= COLLIDE;

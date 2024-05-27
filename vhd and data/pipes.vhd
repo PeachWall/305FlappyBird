@@ -15,7 +15,6 @@ entity pipes is
     bird_x_pos              : in std_logic_vector(9 downto 0);
     speed                   : in std_logic_vector(2 downto 0);
     game_state              : in std_logic_vector(2 downto 0);
-    difficulty              : in std_logic_vector(1 downto 0);
     pipe_rgb_out            : out std_logic_vector(11 downto 0);
     pipe_on                 : out std_logic;
     point_box_on            : out std_logic;

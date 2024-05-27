@@ -14,6 +14,7 @@ entity menus is
     signal clk, vert_sync          : in std_logic;
     signal pixel_row, pixel_column : in std_logic_vector(9 downto 0);
     signal game_state              : in std_logic_vector(3 downto 0);
+    signal difficulty              : in std_logic_vector(2 downto 0);
     signal menu_rgb_out            : out std_logic_vector(11 downto 0);
     signal menu_on                 : out std_logic
   );

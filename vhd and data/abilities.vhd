@@ -14,6 +14,7 @@ entity abilities is
     collided                : in std_logic;
     bird_state              : in std_logic_vector(2 downto 0);
     speed_state             : in std_logic_vector(2 downto 0);
+    difficulty              : in std_logic_vector(2 downto 0);
     item_type               : out std_logic_vector(2 downto 0);
     rgb_out                 : out std_logic_vector(11 downto 0);
     ability_on              : out std_logic
@@ -106,7 +107,8 @@ begin
         when SMALL  => frame  <= std_logic_vector(to_unsigned(10, 4));
         when SLOW   => frame   <= std_logic_vector(to_unsigned(11, 4));
         when FAST   => frame   <= std_logic_vector(to_unsigned(12, 4));
-        when others => frame <= std_logic_vector(to_unsigned(13, 4));
+        when BOMB   => frame   <= std_logic_vector(to_unsigned(13, 4));
+        when others => frame <= std_logic_vector(to_unsigned(14, 4));
       end case;
       x_pos <= x_pos - to_integer(unsigned(speed));
 
@@ -122,19 +124,23 @@ begin
         end if;
 
         -- Random Ability
-        abs_random := abs(random_num);
-        if (abs_random < 25 and abs_random >= 20) then
-          ability_type <= LIFE;
-        elsif (abs_random < 20 and abs_random >= 15 and cur_speed_state = NORMAL) then
-          ability_type <= SLOW;
-        elsif (abs_random < 15 and abs_random >= 10 and cur_speed_state = NORMAL) then
-          ability_type <= FAST;
-        elsif (abs_random < 10 and abs_random >= 5 and cur_bird_state = NORMAL) then
-          ability_type <= BIG;
-        elsif (abs_random < 5 and abs_random >= 0 and cur_bird_state = NORMAL) then
-          ability_type <= SMALL;
+        if (difficulty /= "100") then
+          abs_random := abs(random_num);
+          if (abs_random < 25 and abs_random >= 20) then
+            ability_type <= LIFE;
+          elsif (abs_random < 20 and abs_random >= 15 and cur_speed_state = NORMAL) then
+            ability_type <= SLOW;
+          elsif (abs_random < 15 and abs_random >= 10 and cur_speed_state = NORMAL) then
+            ability_type <= FAST;
+          elsif (abs_random < 10 and abs_random >= 5 and cur_bird_state = NORMAL) then
+            ability_type <= BIG;
+          elsif (abs_random < 5 and abs_random >= 0 and cur_bird_state = NORMAL) then
+            ability_type <= SMALL;
+          else
+            ability_type <= MONEY;
+          end if;
         else
-          ability_type <= MONEY;
+          ability_type <= BOMB;
         end if;
       end if;
 

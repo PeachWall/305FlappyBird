@@ -73,13 +73,6 @@ refer to the applicable agreement for further details.
 		(line (pt 0 128)(pt 16 128)(line_width 1))
 	)
 	(port
-		(pt 0 144)
-		(input)
-		(text "right_click" (rect 0 0 38 12)(font "Arial" ))
-		(text "right_click" (rect 21 139 59 151)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144)(line_width 1))
-	)
-	(port
 		(pt 232 32)
 		(output)
 		(text "bird_state[2..0]" (rect 0 0 59 12)(font "Arial" ))
@@ -138,8 +131,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 232 160)
 		(output)
-		(text "difficulty[1..0]" (rect 0 0 51 12)(font "Arial" ))
-		(text "difficulty[1..0]" (rect 160 155 211 167)(font "Arial" ))
+		(text "difficulty[2..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "difficulty[2..0]" (rect 158 155 211 167)(font "Arial" ))
 		(line (pt 232 160)(pt 216 160)(line_width 3))
 	)
 	(drawing
