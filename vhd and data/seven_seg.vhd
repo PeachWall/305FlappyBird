@@ -21,5 +21,6 @@ architecture arc1 of seven_seg  is
 				"0000000"  when BCD_digit = "1000"  else		-- 8
 				"0010000"  when BCD_digit = "1001"  else		-- 9
 				"1000000"  when BCD_digit = "0000"  else		-- 0
+				"1110001"  when BCD_digit = "1111"  else		-- L
 				"1111111";
 end architecture arc1; 
