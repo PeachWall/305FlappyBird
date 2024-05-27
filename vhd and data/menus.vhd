@@ -172,7 +172,6 @@ begin
   empty_space_pause <= '1' when ((pixel_column <= std_logic_vector(to_unsigned((text_start_final_score - char_width_small), 10)) or pixel_column >= std_logic_vector(to_unsigned(text_start_final_score + 160, 10))) or ((pixel_row >= std_logic_vector(to_unsigned(448, 10)) or pixel_row < std_logic_vector(to_unsigned(440, 10))))) else
     '0';
 
-    process()
   -- MUX TO CHOOSE THE ADDRESS
   rom_address_big <= char_add when empty_space = '0' else
     "100000";
