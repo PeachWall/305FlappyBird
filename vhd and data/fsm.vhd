@@ -61,10 +61,10 @@ begin
   cur_ability <= ability_types'val(to_integer(unsigned(ability_type)));
 
   FSM : process (clk, reset, obst_collided, mouse, key, timer_timout, points)
-    variable key_hold, hold, can_click : std_logic                    := '0';
-    variable lives                     : std_logic_vector(2 downto 0) := "011";
-    variable v_money                   : std_logic_vector(7 downto 0) := (others => '0');
-    variable v_difficulty              : std_logic_vector(2 downto 0) := "001";
+    variable key_hold, hold : std_logic                    := '0';
+    variable lives          : std_logic_vector(2 downto 0) := "011";
+    variable v_money        : std_logic_vector(7 downto 0) := (others => '0');
+    variable v_difficulty   : std_logic_vector(2 downto 0) := "001";
   begin
     --------------------
     -- BIRD FSM START --
@@ -73,9 +73,9 @@ begin
     if (timer_timout = '1') then
       timer_enable    <= '0';
       cur_speed_state <= NORMAL;
+      timer_reset     <= '1';
       if ((cur_bird_state = BIG or cur_bird_state = SMALL)) then
         cur_bird_state <= NORMAL;
-        timer_reset    <= '1';
       end if;
     elsif (rising_edge(clk)) then
       if (bird_reset = '1') then
@@ -115,10 +115,6 @@ begin
         timer_reset     <= '1';
         timer_enable    <= '1';
       elsif (ability_collided = '1' and cur_ability = BOMB) then
-        can_click := '0';
-        timer_init_val <= "00001";
-        timer_reset    <= '1';
-        timer_enable   <= '1';
         if (lives = 0) then
           cur_game_state <= FINISH;
         else
@@ -142,10 +138,7 @@ begin
     --------------------
     -- GAME FSM START --
     --------------------
-    if (timer_timout = '1') then
-      can_click := '1';
-      timer_reset <= '1';
-    elsif (rising_edge(clk)) then
+    if (rising_edge(clk)) then
       if (cur_game_state = MENU) then
         if (and_reduce(key(1 downto 0)) = '0' and key_hold = '0') then
           if (key(0) = '0') then
@@ -167,10 +160,6 @@ begin
         cur_game_state <= PLAY;
         hold := '1';
       elsif (obst_collided = '1' and cur_game_state = PLAY) then
-        can_click := '0';
-        timer_init_val <= "00001";
-        timer_reset    <= '1';
-        timer_enable   <= '1';
         if (lives = 0) then
           cur_game_state <= FINISH;
         else
@@ -182,7 +171,7 @@ begin
       elsif (cur_game_state = PLAY and key(0) = '0' and key_hold = '0') then
         cur_game_state <= PAUSED;
         key_hold := '1';
-      elsif (mouse = '1' and hold = '0' and cur_game_state = COLLIDE and can_click = '1') then
+      elsif (mouse = '1' and hold = '0' and cur_game_state = COLLIDE) then
         cur_game_state <= PLAY;
         bird_reset     <= '1';
         hold := '1';
@@ -190,16 +179,15 @@ begin
       elsif (cur_game_state = COLLIDE and key(0) = '0' and key_hold = '0') then
         cur_game_state <= MENU;
         key_hold := '1';
-      elsif (mouse = '1' and hold = '0' and cur_game_state = FINISH and can_click = '1') then
+      elsif (mouse = '1' and hold = '0' and cur_game_state = FINISH) then
         cur_game_state <= MENU;
       elsif (cur_game_state = PLAY and points >= 20) then
         v_difficulty := "100";
         reset_out  <= '0';
         bird_reset <= '0';
       else
-        reset_out   <= '0';
-        bird_reset  <= '0';
-        timer_reset <= '0';
+        reset_out  <= '0';
+        bird_reset <= '0';
       end if;
 
       if (mouse = '0') then

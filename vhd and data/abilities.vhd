@@ -122,10 +122,9 @@ begin
         elsif (v_y_pos < half_height - 100) then
           v_y_pos := half_height - 100;
         end if;
-
+        abs_random := abs(random_num);
         -- Random Ability
         if (difficulty /= "100") then
-          abs_random := abs(random_num);
           if (abs_random < 25 and abs_random >= 20) then
             ability_type <= LIFE;
           elsif (abs_random < 20 and abs_random >= 15 and cur_speed_state = NORMAL) then
@@ -140,8 +139,7 @@ begin
             ability_type <= MONEY;
           end if;
         else
-          abs_random := abs(random_num);
-          if (abs_random < 100 and abs_random >= 25) then
+          if (abs_random < 80 and abs_random >= 25) then
             ability_type <= BOMB;
           elsif (abs_random < 25 and abs_random >= 20) then
             ability_type <= LIFE;
